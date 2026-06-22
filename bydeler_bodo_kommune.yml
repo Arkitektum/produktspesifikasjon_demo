@@ -1,9 +1,0 @@
-metadataId: 1c817047-c8e3-4f6e-a793-0c4f4272fe24
-output_directory: produktspesifikasjon
-product_slug: bydeler_bodo_kommune
-updated: '2026-06-22'
-scopes:
-- name: Ogcfeatureserver
-  url: https://services-eu1.arcgis.com/bUDP8dxTEFYEUa8w/arcgis/rest/services/Bydeler_Bodo_kommune/OGCFeatureServer
-  generator: ogc_feature_api
-  description: OGC API-Features fra Bodø kommune
