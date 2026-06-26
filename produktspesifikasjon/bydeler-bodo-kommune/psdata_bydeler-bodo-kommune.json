@@ -1,0 +1,148 @@
+{
+  "overview": "Denne produktspesifikasjonen er autogenerert fra metadata i Geonorge og datamodell fra SOSI modellregister og/eller OGC API Features. Noe ekstra informasjon kan ha blitt lagt til gjennom manuell prosess. Produktspesifikasjonen er i henhold til standarden: 'Geografisk informasjon - Dataproduktspesifikasjoner' (ISO19131:2022)",
+  "title": "Bydeler Bodø kommune",
+  "format": "text/html",
+  "date": {
+    "creation": "2025-11-21",
+    "revision": "2025-11-21"
+  },
+  "contact": {
+    "individualName": "Mats Martinussen",
+    "organizationName": "Bodø kommune",
+    "logo": "https://register.geonorge.no/data/organizations/46px-Bodø_komm.svg.png",
+    "electronicMailAddress": "mats.martinussen@bodo.kommune.no",
+    "role": "owner"
+  },
+  "identificationSection": {
+    "title": "Bydeler Bodø kommune",
+    "abstract": "Byutviklingsområet i Bodø er delt inn i 7 bydeler.\n\n    Skivika og Løpsmarka\n    Rønvika\n    Sentrum\n    Hernes\n    Bodøsjøen, Alstad og Grønnåsen\n    Hunstad og Mørkved\n    Tverlandet.\n\nStort sett er bydelsinndeling og byutviklingsområdet  samanfallande. Unntaket er at Rønvikjordene og Fenes inngår i hhv Rønvika og Hunstad/Mørkved, men dei er ikkje med i Byutviklingsområdet.",
+    "purpose": {
+      "summary": "Geografisk inndeling av bydeler i Bodø",
+      "useCase": {
+        "name": "Bruksområde",
+        "summary": "Vise bydelsinndeling i Bodø kommune innafor byutviklingsområdet"
+      }
+    },
+    "uniqueId": "1c817047-c8e3-4f6e-a793-0c4f4272fe24",
+    "keyword": [
+      "Bydeler",
+      "Kommuneplanens arealdel",
+      "Bodø kommune",
+      "Administrative enheter",
+      "Plan"
+    ],
+    "restriction": {
+      "legalConstraints": {
+        "accessConstraints": "Åpne data",
+        "useConstraints": "Lisens",
+        "license": "No conditions apply to access and use",
+        "licenseUrl": "http://inspire.ec.europa.eu/metadata-codelist/ConditionsApplyingToAccessAndUse/noConditionsApply"
+      }
+    },
+    "contact": [
+      {
+        "individualName": "Mats Martinussen",
+        "organizationName": "Bodø kommune",
+        "electronicMailAddress": "mats.martinussen@bodo.kommune.no",
+        "role": "owner"
+      },
+      {
+        "individualName": "Sveinung Bertnes Råheim",
+        "organizationName": "Bodø kommune",
+        "electronicMailAddress": "sveinung.bertnes.raheim@bodo.kommune.no",
+        "role": "pointOfContact"
+      },
+      {
+        "individualName": "Sveinung Bertnes Råheim",
+        "organizationName": "Bodø kommune",
+        "electronicMailAddress": "sveinung.bertnes.raheim@bodo.kommune.no",
+        "role": "publisher"
+      }
+    ],
+    "maintenance": "Ujevnt",
+    "extent": {
+      "geographicElement": {
+        "westBoundLongitude": "12.729971",
+        "eastBoundLongitude": "15.364907",
+        "southBoundLatitude": "66.920554",
+        "northBoundLatitude": "67.699619"
+      },
+      "temporalElement": {
+        "timePeriod": {
+          "beginPosition": "2025-11-21",
+          "endPosition": "2025-11-21"
+        }
+      }
+    },
+    "date": {
+      "creation": "2025-11-21",
+      "publication": "2025-11-21",
+      "revision": "2025-11-21"
+    }
+  },
+  "scopeSection": [
+    {
+      "specificationScope": {
+        "scopeIdentification": "Hele datasettet",
+        "level": "dataset",
+        "levelDescription": "Gjelder hele datasettet. Hvis omfang ikke er oppgitt under en overskrift, gjelder teksten for hele datasettet og alle leveranser"
+      }
+    },
+    {
+      "specificationScope": {
+        "scopeIdentification": "Ogcfeatureserver",
+        "level": "dataset",
+        "levelDescription": "OGC API-Features fra Bodø kommune"
+      }
+    }
+  ],
+  "dataQualitySection": {
+    "scope": {
+      "level": "service"
+    }
+  },
+  "maintenanceSection": {
+    "maintenanceAndUpdateFrequency": "Ujevnt",
+    "maintenanceAndUpdateStatement": "Arkivert"
+  },
+  "deliverySection": [
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "OGC API-Features",
+          "deliveryService": {
+            "serviceEndpoint": "https://services-eu1.arcgis.com/bUDP8dxTEFYEUa8w/arcgis/rest/services/Bydeler_Bodo_kommune/OGCFeatureServer",
+            "serviceProperty": {
+              "type": "OGC API-Features",
+              "value": "OGC:API-Features"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "OGC-API"
+          }
+        ]
+      }
+    }
+  ],
+  "metadataSection": {
+    "metadataStandard": "ISO19115",
+    "metadataStandardVersion": "2003",
+    "metadataDate": "2025-12-19",
+    "language": "nor",
+    "contact": {
+      "organizationName": "Bodø kommune",
+      "individualName": "Sveinung Bertnes Råheim",
+      "logo": "https://register.geonorge.no/data/organizations/46px-Bodø_komm.svg.png",
+      "electronicMailAddress": "sveinung.bertnes.raheim@bodo.kommune.no",
+      "role": "pointOfContact"
+    },
+    "metadataIdentifier": {
+      "authority": "Geonorge",
+      "code": "1c817047-c8e3-4f6e-a793-0c4f4272fe24",
+      "codeSpace": "https://kartkatalog.geonorge.no/metadata/",
+      "metadataLinkage": "https://kartkatalog.geonorge.no/metadata/1c817047-c8e3-4f6e-a793-0c4f4272fe24"
+    }
+  }
+}
