@@ -108,6 +108,13 @@
         "level": "dataset",
         "levelDescription": "OGC API-Features fra Direktoratet for byggkvalitet"
       }
+    },
+    {
+      "specificationScope": {
+        "scopeIdentification": "Datafangst",
+        "level": "dataset",
+        "levelDescription": "Datamodellen brukes for å legge ved gml filer for planområdet som brukes i tjenesten for varsel om planoppstart."
+      }
     }
   ],
   "referenceSystemSection": {
