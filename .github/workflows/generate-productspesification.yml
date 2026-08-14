@@ -274,6 +274,9 @@ jobs:
                       + "\n"
                   )
               gh_out.write(f"geopackage-output={geopackage_output}\n")
+              # Normalisert slug — produkttreet ligger under denne (samme som
+              # prepare-action-en bruker). Skjema-katalogen henger på her.
+              gh_out.write(f"product-slug-normalized={_pslug}\n")
               gh_out.write(f"run-shapechange={run_shapechange}\n")
               gh_out.write(f"shapechange-targets={shapechange_targets}\n")
               gh_out.write(f"shapechange-namespace={sc_namespace}\n")
@@ -315,7 +318,8 @@ jobs:
         with:
           # Skriv skjemaene inn i produktspesifikasjon-treet slik at de blir
           # committet i PR-en (dekkes av add-paths under) og kan lastes ned i web.
-          output-directory: ${{ steps.config.outputs.output-directory }}/${{ steps.config.outputs.product-slug }}/schema
+          # Normalisert slug så stien matcher resten av produkttreet.
+          output-directory: ${{ steps.config.outputs.output-directory }}/${{ steps.config.outputs.product-slug-normalized }}/schema
           feature-catalogue-json: ${{ steps.prepare.outputs.feature-catalogue-json || steps.config.outputs.shapechange-feature-catalogue }}
           targets: ${{ steps.config.outputs.shapechange-targets }}
           target-namespace: ${{ steps.config.outputs.shapechange-namespace }}
