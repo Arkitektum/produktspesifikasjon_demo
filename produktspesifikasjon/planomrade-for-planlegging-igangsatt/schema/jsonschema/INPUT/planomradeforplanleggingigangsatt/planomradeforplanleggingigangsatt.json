@@ -1,0 +1,136 @@
+{
+  "$comment": "JSON Schema document created by ShapeChange - https://shapechange.net/",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planomradeforplanleggingigangsatt/planomradeforplanleggingigangsatt.json",
+  "definitions": {
+    "Arealplan": {
+      "$id": "#Arealplan",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "objid": {
+              "type": "integer"
+            },
+            "nasjonalArealplanId": {
+              "$ref": "#NasjonalArealplanId"
+            },
+            "plannavn": {
+              "type": "string"
+            },
+            "plantype": {
+              "type": "string"
+            },
+            "kunngjøringsdatoVarselOmPlanoppstart": {
+              "type": "string",
+              "format": "date"
+            },
+            "forslagsstillertype": {
+              "type": "string"
+            },
+            "lovreferanse": {
+              "type": "string"
+            },
+            "identifikasjon": {
+              "$ref": "#Identifikasjon"
+            },
+            "forsteDigitaliseringsdato": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "oppdateringsdato": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "link": {
+              "type": "string"
+            },
+            "planomrade": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "Identifikasjon": {
+      "$id": "#Identifikasjon",
+      "type": "object",
+      "properties": {
+        "lokalId": {
+          "type": "string"
+        },
+        "navnerom": {
+          "type": "string"
+        },
+        "versjonId": {
+          "type": "string"
+        }
+      }
+    },
+    "NasjonalArealplanId": {
+      "$id": "#NasjonalArealplanId",
+      "type": "object",
+      "properties": {
+        "planid": {
+          "type": "string"
+        },
+        "kommunenummer": {
+          "type": "string"
+        }
+      }
+    },
+    "Planområde": {
+      "$id": "#Planområde",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "objid": {
+              "type": "integer"
+            },
+            "identifikasjon": {
+              "$ref": "#Identifikasjon"
+            },
+            "arealplan": {
+              "type": "string",
+              "format": "uri"
+            },
+            "førsteDigitaliseringsdato": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "nasjonalArealplanId": {
+              "$ref": "#NasjonalArealplanId"
+            },
+            "plannavn": {
+              "type": "string"
+            },
+            "plantype": {
+              "type": "string"
+            },
+            "kunngjøringsdatoVarselOmPlanoppstart": {
+              "type": "string",
+              "format": "date"
+            },
+            "forslagsstillertype": {
+              "type": "string"
+            },
+            "lovreferanse": {
+              "type": "string"
+            },
+            "oppdateringsdato": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "link": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
