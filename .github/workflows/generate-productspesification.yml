@@ -349,9 +349,12 @@ jobs:
 
       - name: Run ShapeChange
         if: steps.config.outputs.run-shapechange == 'true'
-        working-directory: ~/shapechange
         run: |
           set -euo pipefail
+          # cd i skriptet: GitHub ekspanderer IKKE «~» i working-directory, men bash
+          # gjør det her. ShapeChange trenger distribusjonsroten som arbeidskatalog
+          # (bundled xi:include-referanser er relative til den).
+          cd ~/shapechange
           java -Dfile.encoding=UTF-8 -jar ShapeChange-4.0.0.jar \
             -c "${{ steps.schema-model.outputs.shapechange-config }}"
 
