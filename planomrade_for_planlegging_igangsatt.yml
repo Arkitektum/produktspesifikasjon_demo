@@ -2,7 +2,7 @@ metadataId: 779a554b-fc3e-48a6-b202-561b07e9d4c2
 output_directory: produktspesifikasjon
 product_slug: planomrade_for_planlegging_igangsatt
 updated: '2026-06-22'
-outputs: geopackage
+outputs: jsonschema
 scopes:
 - name: Planleggingigangsatt
   url: https://plandata.ft.dibk.no/services/rest/planleggingigangsatt
