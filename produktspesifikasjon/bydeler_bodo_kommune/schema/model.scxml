@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sc:Model xmlns:sc="http://shapechange.net/model" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" encoding="UTF-8" scxmlProducer="ps.editor.actions" scxmlProducerVersion="1.0" xsi:schemaLocation="http://shapechange.net/model http://shapechange.net/resources/schema/ShapeChangeExportedModel.xsd">
+ <sc:packages>
+  <sc:Package>
+   <sc:name>DyrkbarJord</sc:name>
+   <sc:id>P1</sc:id>
+   <sc:stereotypes>
+    <sc:Stereotype>application schema</sc:Stereotype>
+   </sc:stereotypes>
+   <sc:taggedValues>
+    <sc:TaggedValue>
+     <sc:name>targetNamespace</sc:name>
+     <sc:values>
+      <sc:Value>https://skjema.geonorge.no/SOSI/produktspesifikasjon/DyrkbarJord/1.0</sc:Value>
+     </sc:values>
+    </sc:TaggedValue>
+    <sc:TaggedValue>
+     <sc:name>xmlns</sc:name>
+     <sc:values>
+      <sc:Value>app</sc:Value>
+     </sc:values>
+    </sc:TaggedValue>
+    <sc:TaggedValue>
+     <sc:name>version</sc:name>
+     <sc:values>
+      <sc:Value>1.0</sc:Value>
+     </sc:values>
+    </sc:TaggedValue>
+    <sc:TaggedValue>
+     <sc:name>xsdDocument</sc:name>
+     <sc:values>
+      <sc:Value>DyrkbarJord.xsd</sc:Value>
+     </sc:values>
+    </sc:TaggedValue>
+    <sc:TaggedValue>
+     <sc:name>jsonDocument</sc:name>
+     <sc:values>
+      <sc:Value>DyrkbarJord.json</sc:Value>
+     </sc:values>
+    </sc:TaggedValue>
+   </sc:taggedValues>
+  </sc:Package>
+ </sc:packages>
+</sc:Model>
