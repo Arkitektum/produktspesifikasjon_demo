@@ -1,0 +1,152 @@
+{
+  "$comment": "JSON Schema document created by ShapeChange - https://shapechange.net/",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst/datafangst/datafangst.json",
+  "definitions": {
+    "Arealplan": {
+      "$id": "#Arealplan",
+      "allOf": [
+        {
+          "$ref": "#Fellesegenskaper"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "nasjonalArealplanId": {
+                  "$ref": "#NasjonalArealplanId"
+                },
+                "plantype": {
+                  "$ref": "#RpPlantype"
+                },
+                "plannavn": {
+                  "type": "string"
+                },
+                "lovreferanse": {
+                  "$ref": "#Lovreferanse"
+                },
+                "planleggingIgangsatt": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "lovreferanse",
+                "nasjonalArealplanId",
+                "planleggingIgangsatt",
+                "plantype"
+              ]
+            }
+          },
+          "required": [
+            "properties"
+          ]
+        }
+      ]
+    },
+    "Fellesegenskaper": {
+      "$id": "#Fellesegenskaper",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "identifikasjon": {
+              "$ref": "#Identifikasjon"
+            },
+            "oppdateringsdato": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          "required": [
+            "identifikasjon",
+            "oppdateringsdato"
+          ]
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "Identifikasjon": {
+      "$id": "#Identifikasjon",
+      "type": "object",
+      "properties": {
+        "lokalId": {
+          "type": "string"
+        },
+        "navnerom": {
+          "type": "string"
+        },
+        "versjonId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "lokalId",
+        "navnerom"
+      ]
+    },
+    "Kommunenummer": {
+      "$id": "#Kommunenummer",
+      "type": "string"
+    },
+    "Landkode": {
+      "$id": "#Landkode",
+      "type": "string",
+      "enum": [
+        "NO"
+      ]
+    },
+    "Lovreferanse": {
+      "$id": "#Lovreferanse",
+      "type": "string"
+    },
+    "NasjonalArealplanId": {
+      "$id": "#NasjonalArealplanId",
+      "type": "object",
+      "properties": {
+        "kommunenummer": {
+          "$ref": "#Kommunenummer"
+        },
+        "landkode": {
+          "$ref": "#Landkode"
+        },
+        "planid": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "planid"
+      ]
+    },
+    "Planområde": {
+      "$id": "#Planområde",
+      "allOf": [
+        {
+          "$ref": "#Fellesegenskaper"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "geometry": {
+              "$ref": "https://geojson.org/schema/Polygon.json"
+            }
+          }
+        }
+      ]
+    },
+    "RpPlantype": {
+      "$id": "#RpPlantype",
+      "type": "string"
+    }
+  }
+}

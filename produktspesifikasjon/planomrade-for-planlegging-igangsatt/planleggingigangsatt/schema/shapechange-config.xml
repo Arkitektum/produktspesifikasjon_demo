@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ShapeChangeConfiguration xmlns="http://www.interactive-instruments.de/ShapeChange/Configuration/1.1" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.interactive-instruments.de/ShapeChange/Configuration/1.1 https://shapechange.net/resources/schema/ShapeChangeConfiguration.xsd">
+ <input id="INPUT">
+  <parameter name="inputModelType" value="SCXML" />
+  <parameter name="inputFile" value="/home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/schema/model.scxml" />
+  <parameter name="appSchemaNameRegex" value="^planleggingigangsatt$" />
+  <parameter name="publicOnly" value="true" />
+  <parameter name="checkingConstraints" value="disabled" />
+  <parameter name="sortedSchemaOutput" value="true" />
+  <parameter name="addTaggedValues" value="*" />
+  <xi:include href="https://shapechange.net/resources/config/StandardAliases.xml" />
+ </input>
+ <log>
+  <parameter name="reportLevel" value="INFO" />
+  <parameter name="logFile" value="/home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/schema/log.xml" />
+ </log>
+ <targets>
+  <TargetXmlSchema class="de.interactive_instruments.shapechange.core.target.xmlschema.XmlSchema" mode="enabled" inputs="INPUT">
+   <targetParameter name="outputDirectory" value="/home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/schema/xsd" />
+   <targetParameter name="sortedOutput" value="true" />
+   <targetParameter name="defaultEncodingRule" value="iso19136_2007" />
+   <xi:include href="https://shapechange.net/resources/config/StandardRules.xml" />
+   <xi:include href="https://shapechange.net/resources/config/StandardNamespaces.xml" />
+   <xi:include href="https://shapechange.net/resources/config/StandardMapEntries.xml" />
+  </TargetXmlSchema>
+  <Target class="de.interactive_instruments.shapechange.core.target.json.JsonSchemaTarget" mode="enabled" inputs="INPUT">
+   <targetParameter name="outputDirectory" value="/home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/schema/jsonschema" />
+   <targetParameter name="sortedOutput" value="true" />
+   <targetParameter name="jsonSchemaVersion" value="draft-07" />
+   <targetParameter name="jsonBaseUri" value="https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt" />
+   <targetParameter name="entityTypeName" value="@type" />
+   <targetParameter name="defaultEncodingRule" value="defaultGeoJson" />
+   <xi:include href="https://shapechange.net/resources/config/StandardMapEntries_JSON.xml" />
+  </Target>
+ </targets>
+</ShapeChangeConfiguration>
