@@ -313,6 +313,9 @@ jobs:
         if: steps.config.outputs.run-shapechange == 'true'
         uses: arkitektum/ps.editor.actions/shapechange@main
         with:
+          # Skriv skjemaene inn i produktspesifikasjon-treet slik at de blir
+          # committet i PR-en (dekkes av add-paths under) og kan lastes ned i web.
+          output-directory: ${{ steps.config.outputs.output-directory }}/${{ steps.config.outputs.product-slug }}/schema
           feature-catalogue-json: ${{ steps.prepare.outputs.feature-catalogue-json || steps.config.outputs.shapechange-feature-catalogue }}
           targets: ${{ steps.config.outputs.shapechange-targets }}
           target-namespace: ${{ steps.config.outputs.shapechange-namespace }}
@@ -364,6 +367,20 @@ jobs:
         with:
           mode: check
           output-directory: ${{ steps.schema-model.outputs.output-directory }}
+          # Ikke stopp jobben på modellfeil: skjemaene ShapeChange rakk å lage skal
+          # likevel committes. Feil og advarsler vises som annotasjoner + i
+          # jobb-sammendraget, og telles i outputs under.
+          fail-on-error: "false"
+
+      - id: schema-note
+        if: steps.config.outputs.run-shapechange == 'true'
+        run: |
+          {
+            echo "text<<SCEOF"
+            echo "- ShapeChange-skjemaer: \`${{ steps.schema-model.outputs.xsd-directory }}\` / \`${{ steps.schema-model.outputs.json-schema-directory }}\`"
+            echo "- ShapeChange-resultat: ${{ steps.schemas.outputs.error-count }} feil, ${{ steps.schemas.outputs.warning-count }} advarsler (se jobb-sammendraget for detaljer)"
+            echo "SCEOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Render UML to PNG
         run: |
@@ -449,3 +466,4 @@ jobs:
             - Config file: `${{ matrix.config_path }}`
             - Generated markdown: `${{ steps.prepare.outputs.spec-markdown }}`
             - Generated psdata: `${{ steps.prepare.outputs.psdata-path }}`
+            ${{ steps.schema-note.outputs.text }}
