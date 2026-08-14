@@ -15,6 +15,14 @@
   <parameter name="logFile" value="/home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/produktspesifikasjon/planomrade-for-planlegging-igangsatt/schema/log.xml" />
  </log>
  <targets>
+  <TargetXmlSchema class="de.interactive_instruments.shapechange.core.target.xmlschema.XmlSchema" mode="enabled" inputs="INPUT">
+   <targetParameter name="outputDirectory" value="/home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/produktspesifikasjon/planomrade-for-planlegging-igangsatt/schema/xsd" />
+   <targetParameter name="sortedOutput" value="true" />
+   <targetParameter name="defaultEncodingRule" value="iso19136_2007" />
+   <xi:include href="https://shapechange.net/resources/config/StandardRules.xml" />
+   <xi:include href="https://shapechange.net/resources/config/StandardNamespaces.xml" />
+   <xi:include href="https://shapechange.net/resources/config/StandardMapEntries.xml" />
+  </TargetXmlSchema>
   <Target class="de.interactive_instruments.shapechange.core.target.json.JsonSchemaTarget" mode="enabled" inputs="INPUT">
    <targetParameter name="outputDirectory" value="/home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/produktspesifikasjon/planomrade-for-planlegging-igangsatt/schema/jsonschema" />
    <targetParameter name="sortedOutput" value="true" />

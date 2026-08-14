@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:planomradeforplanleggingigangsatt="https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/1.0" elementFormDefault="qualified" targetNamespace="https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/1.0" version="1.0">
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Arealplan" substitutionGroup="gml:AbstractFeature" type="planomradeforplanleggingigangsatt:ArealplanType"/>
+  <complexType name="ArealplanType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element minOccurs="0" name="objid" type="integer"/>
+          <element minOccurs="0" name="nasjonalArealplanId" type="planomradeforplanleggingigangsatt:NasjonalArealplanIdPropertyType"/>
+          <element minOccurs="0" name="plannavn" type="string"/>
+          <element minOccurs="0" name="plantype" type="string"/>
+          <element minOccurs="0" name="kunngjøringsdatoVarselOmPlanoppstart" type="date"/>
+          <element minOccurs="0" name="forslagsstillertype" type="string"/>
+          <element minOccurs="0" name="lovreferanse" type="string"/>
+          <element minOccurs="0" name="identifikasjon" type="planomradeforplanleggingigangsatt:IdentifikasjonPropertyType"/>
+          <element minOccurs="0" name="forsteDigitaliseringsdato" type="dateTime"/>
+          <element minOccurs="0" name="oppdateringsdato" type="dateTime"/>
+          <element minOccurs="0" name="link" type="string"/>
+          <element minOccurs="0" name="planomrade" type="planomradeforplanleggingigangsatt:PlanområdePropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ArealplanPropertyType">
+    <sequence minOccurs="0">
+      <element ref="planomradeforplanleggingigangsatt:Arealplan"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Identifikasjon" substitutionGroup="gml:AbstractObject" type="planomradeforplanleggingigangsatt:IdentifikasjonType"/>
+  <complexType name="IdentifikasjonType">
+    <sequence>
+      <element minOccurs="0" name="lokalId" type="string"/>
+      <element minOccurs="0" name="navnerom" type="string"/>
+      <element minOccurs="0" name="versjonId" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="IdentifikasjonPropertyType">
+    <sequence>
+      <element ref="planomradeforplanleggingigangsatt:Identifikasjon"/>
+    </sequence>
+  </complexType>
+  <element name="NasjonalArealplanId" substitutionGroup="gml:AbstractObject" type="planomradeforplanleggingigangsatt:NasjonalArealplanIdType"/>
+  <complexType name="NasjonalArealplanIdType">
+    <sequence>
+      <element minOccurs="0" name="planid" type="string"/>
+      <element minOccurs="0" name="kommunenummer" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="NasjonalArealplanIdPropertyType">
+    <sequence>
+      <element ref="planomradeforplanleggingigangsatt:NasjonalArealplanId"/>
+    </sequence>
+  </complexType>
+  <element name="Planområde" substitutionGroup="gml:AbstractFeature" type="planomradeforplanleggingigangsatt:PlanområdeType"/>
+  <complexType name="PlanområdeType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="geometry" type="gml:GeometryPropertyType"/>
+          <element minOccurs="0" name="objid" type="integer"/>
+          <element minOccurs="0" name="identifikasjon" type="planomradeforplanleggingigangsatt:IdentifikasjonPropertyType"/>
+          <element minOccurs="0" name="arealplan" type="integer"/>
+          <element minOccurs="0" name="førsteDigitaliseringsdato" type="dateTime"/>
+          <element minOccurs="0" name="nasjonalArealplanId" type="planomradeforplanleggingigangsatt:NasjonalArealplanIdPropertyType"/>
+          <element minOccurs="0" name="plannavn" type="string"/>
+          <element minOccurs="0" name="plantype" type="string"/>
+          <element minOccurs="0" name="kunngjøringsdatoVarselOmPlanoppstart" type="date"/>
+          <element minOccurs="0" name="forslagsstillertype" type="string"/>
+          <element minOccurs="0" name="lovreferanse" type="string"/>
+          <element minOccurs="0" name="oppdateringsdato" type="dateTime"/>
+          <element minOccurs="0" name="link" type="string"/>
+          <element minOccurs="0" name="arealplan" type="planomradeforplanleggingigangsatt:ArealplanPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="PlanområdePropertyType">
+    <sequence minOccurs="0">
+      <element ref="planomradeforplanleggingigangsatt:Planområde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>
