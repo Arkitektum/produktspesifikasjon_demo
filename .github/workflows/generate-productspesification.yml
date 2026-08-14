@@ -193,6 +193,48 @@ jobs:
           ]
           geopackage_output = "true" if "geopackage" in selected_outputs else "false"
 
+          # ShapeChange-leveranser: outputs `xsd`/`jsonschema` → ShapeChange-targets
+          # (`xsd`/`json`). Syntetiser namespace fra product_slug (ShapeChange krever
+          # target-namespace — ingen kilde bærer en).
+          import re
+          import unicodedata
+
+          def _slug(text):
+              norm = unicodedata.normalize("NFKD", str(text or ""))
+              ascii_text = norm.encode("ascii", "ignore").decode("ascii")
+              return re.sub(r"[^a-z0-9]+", "-", ascii_text.lower()).strip("-")
+
+          sc_targets = []
+          if "xsd" in selected_outputs:
+              sc_targets.append("xsd")
+          if "jsonschema" in selected_outputs:
+              sc_targets.append("json")
+          shapechange_targets = ",".join(sc_targets)
+          run_shapechange = "true" if shapechange_targets else "false"
+
+          # Foretrekk eksplisitte skjema-felt fra config; ellers syntetiser fra slug.
+          product_slug = values.get("product_slug", "")
+          _pslug = _slug(product_slug)
+          sc_schema_version = values.get("schema_version") or "1.0"
+          sc_namespace = values.get("target_namespace") or (
+              f"https://skjema.geonorge.no/SOSI/produktspesifikasjon/{_pslug}/{sc_schema_version}"
+          )
+          sc_json_base = values.get("json_base_uri") or re.sub(
+              r"/[^/]*$", "", sc_namespace
+          )
+          sc_xmlns = values.get("xmlns_prefix") or (_pslug.replace("-", "") or "app")
+          sc_schema_name = values.get("schema_name") or product_slug or _pslug
+
+          # For scope-config er prepare sin top-level feature-catalogue tom; pek
+          # ShapeChange på primær-scopens katalog som fallback.
+          sc_feature_catalogue = ""
+          if run_shapechange == "true" and scopes:
+              _out_dir = values.get("output_directory", "produktspesifikasjon")
+              _scope_slug = _slug(scopes[0].get("name", "")) or "scope-1"
+              sc_feature_catalogue = (
+                  f"{_out_dir}/{_pslug}/{_scope_slug}/{_scope_slug}_feature_catalogue.json"
+              )
+
           # OGC-pålogging: les kun secret-NAVNene fra config (fra den første
           # OGC-kilden som har dem). Selve verdien slås opp trygt med secrets[...]
           # i action-steget under — vi rører ALDRI secret-verdier her, så
@@ -232,6 +274,15 @@ jobs:
                       + "\n"
                   )
               gh_out.write(f"geopackage-output={geopackage_output}\n")
+              gh_out.write(f"run-shapechange={run_shapechange}\n")
+              gh_out.write(f"shapechange-targets={shapechange_targets}\n")
+              gh_out.write(f"shapechange-namespace={sc_namespace}\n")
+              gh_out.write(f"shapechange-json-base={sc_json_base}\n")
+              gh_out.write(f"shapechange-xmlns={sc_xmlns}\n")
+              gh_out.write(f"shapechange-schema-name={sc_schema_name}\n")
+              gh_out.write(f"shapechange-schema-version={sc_schema_version}\n")
+              if sc_feature_catalogue:
+                  gh_out.write(f"shapechange-feature-catalogue={sc_feature_catalogue}\n")
               if scopes:
                   gh_out.write("scopes=" + json.dumps(scopes) + "\n")
           PY
@@ -254,6 +305,62 @@ jobs:
           xmi-model: ${{ steps.config.outputs.xmi-model }}
           # Skriv også en tom GeoPackage av datamodellen når config har outputs: geopackage.
           geopackage-output: ${{ steps.config.outputs.geopackage-output }}
+
+      # ShapeChange: generer GML/XSD- og/eller JSON Schema når config har
+      # outputs: xsd / jsonschema. ShapeChange-JAR-en kjøres av workflowen (som
+      # PlantUML); selve SCXML-modellen og config-en lages av shapechange-action-en.
+      - id: schema-model
+        if: steps.config.outputs.run-shapechange == 'true'
+        uses: arkitektum/ps.editor.actions/shapechange@main
+        with:
+          feature-catalogue-json: ${{ steps.prepare.outputs.feature-catalogue-json || steps.config.outputs.shapechange-feature-catalogue }}
+          targets: ${{ steps.config.outputs.shapechange-targets }}
+          target-namespace: ${{ steps.config.outputs.shapechange-namespace }}
+          xmlns-prefix: ${{ steps.config.outputs.shapechange-xmlns }}
+          schema-name: ${{ steps.config.outputs.shapechange-schema-name }}
+          schema-version: ${{ steps.config.outputs.shapechange-schema-version }}
+          json-base-uri: ${{ steps.config.outputs.shapechange-json-base }}
+          # draft-07: SOSI-klasser har ofte norske navn (f.eks. «Målemetode») som gir
+          # ugyldig $anchor i 2019-09/2020-12. draft-07 unngår det.
+          json-schema-version: draft-07
+
+      - uses: actions/setup-java@v4
+        if: steps.config.outputs.run-shapechange == 'true'
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Cache ShapeChange
+        id: shapechange-cache
+        if: steps.config.outputs.run-shapechange == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/shapechange
+          key: shapechange-4.0.0
+
+      - name: Download ShapeChange
+        if: steps.config.outputs.run-shapechange == 'true' && steps.shapechange-cache.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          mkdir -p ~/shapechange
+          curl -sSL -o /tmp/shapechange.zip \
+            https://github.com/ShapeChange/ShapeChange/releases/download/4.0.0/ShapeChange-4.0.0.zip
+          unzip -q /tmp/shapechange.zip -d ~/shapechange
+
+      - name: Run ShapeChange
+        if: steps.config.outputs.run-shapechange == 'true'
+        working-directory: ~/shapechange
+        run: |
+          set -euo pipefail
+          java -Dfile.encoding=UTF-8 -jar ShapeChange-4.0.0.jar \
+            -c "${{ steps.schema-model.outputs.shapechange-config }}"
+
+      - id: schemas
+        if: steps.config.outputs.run-shapechange == 'true'
+        uses: arkitektum/ps.editor.actions/shapechange@main
+        with:
+          mode: check
+          output-directory: ${{ steps.schema-model.outputs.output-directory }}
 
       - name: Render UML to PNG
         run: |
