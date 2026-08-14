@@ -210,30 +210,62 @@ jobs:
           if "jsonschema" in selected_outputs:
               sc_targets.append("json")
           shapechange_targets = ",".join(sc_targets)
-          run_shapechange = "true" if shapechange_targets else "false"
+          run_shapechange = "true" if shapechange_targets and scopes else "false"
 
-          # Foretrekk eksplisitte skjema-felt fra config; ellers syntetiser fra slug.
           product_slug = values.get("product_slug", "")
           _pslug = _slug(product_slug)
-          sc_schema_version = values.get("schema_version") or "1.0"
-          sc_namespace = values.get("target_namespace") or (
-              f"https://skjema.geonorge.no/SOSI/produktspesifikasjon/{_pslug}/{sc_schema_version}"
-          )
-          sc_json_base = values.get("json_base_uri") or re.sub(
-              r"/[^/]*$", "", sc_namespace
-          )
-          sc_xmlns = values.get("xmlns_prefix") or (_pslug.replace("-", "") or "app")
-          sc_schema_name = values.get("schema_name") or product_slug or _pslug
 
-          # For scope-config er prepare sin top-level feature-catalogue tom; pek
-          # ShapeChange på primær-scopens katalog som fallback.
-          sc_feature_catalogue = ""
-          if run_shapechange == "true" and scopes:
-              _out_dir = values.get("output_directory", "produktspesifikasjon")
-              _scope_slug = _slug(scopes[0].get("name", "")) or "scope-1"
-              sc_feature_catalogue = (
-                  f"{_out_dir}/{_pslug}/{_scope_slug}/{_scope_slug}_feature_catalogue.json"
-              )
+          # ShapeChange kjøres én gang per datakilde (scope) i workflowen — bygg en
+          # deskriptor per scope: hvilken feature-katalog, hvor skjemaet skal, og
+          # skjema-identiteten. Filnavnene ({scope}.xsd/.json) matcher {scope}.gpkg.
+          import json as _json
+
+          _out_dir = values.get("output_directory", "produktspesifikasjon")
+          _ver = values.get("schema_version") or "1.0"
+          _single = len(scopes) == 1
+          _user_ns = values.get("target_namespace")
+          _user_schema = values.get("schema_name")
+          _user_xmlns = values.get("xmlns_prefix")
+          _user_jbase = values.get("json_base_uri")
+
+          shapechange_scopes = []
+          if run_shapechange == "true":
+              for _i, _scope in enumerate(scopes, start=1):
+                  _sslug = _slug(_scope.get("name", "")) or f"scope_{_i}"
+                  # Én datakilde med eksplisitt namespace i config → bruk den; ellers
+                  # (og alltid ved flere kilder) syntetiser per scope så de blir unike.
+                  if _single and _user_ns:
+                      _ns = _user_ns
+                  else:
+                      _ns = (
+                          "https://skjema.geonorge.no/SOSI/produktspesifikasjon/"
+                          f"{_pslug}/{_sslug}/{_ver}"
+                      )
+                  _jbase = (
+                      _user_jbase if _single and _user_jbase
+                      else re.sub(r"/[^/]*$", "", _ns)
+                  )
+                  _sname = _user_schema if _single and _user_schema else _sslug
+                  _xmlns = (
+                      _user_xmlns if _single and _user_xmlns
+                      else (_sslug.replace("-", "") or "app")
+                  )
+                  shapechange_scopes.append(
+                      {
+                          "scope_slug": _sslug,
+                          "feature_catalogue": (
+                              f"{_out_dir}/{_pslug}/{_sslug}/{_sslug}_feature_catalogue.json"
+                          ),
+                          "output_dir": f"{_out_dir}/{_pslug}/{_sslug}/schema",
+                          "schema_name": _sname,
+                          "target_namespace": _ns,
+                          "xmlns_prefix": _xmlns,
+                          "schema_version": _ver,
+                          "xsd_document": f"{_sslug}.xsd",
+                          "json_document": f"{_sslug}.json",
+                          "json_base_uri": _jbase,
+                      }
+                  )
 
           # OGC-pålogging: les kun secret-NAVNene fra config (fra den første
           # OGC-kilden som har dem). Selve verdien slås opp trygt med secrets[...]
@@ -279,13 +311,13 @@ jobs:
               gh_out.write(f"product-slug-normalized={_pslug}\n")
               gh_out.write(f"run-shapechange={run_shapechange}\n")
               gh_out.write(f"shapechange-targets={shapechange_targets}\n")
-              gh_out.write(f"shapechange-namespace={sc_namespace}\n")
-              gh_out.write(f"shapechange-json-base={sc_json_base}\n")
-              gh_out.write(f"shapechange-xmlns={sc_xmlns}\n")
-              gh_out.write(f"shapechange-schema-name={sc_schema_name}\n")
-              gh_out.write(f"shapechange-schema-version={sc_schema_version}\n")
-              if sc_feature_catalogue:
-                  gh_out.write(f"shapechange-feature-catalogue={sc_feature_catalogue}\n")
+              # Per-scope deskriptorer som JSON (kompakt, én linje) — workflowen
+              # looper over disse og kjører ShapeChange én gang per datakilde.
+              gh_out.write(
+                  "shapechange-scopes="
+                  + _json.dumps(shapechange_scopes, ensure_ascii=False)
+                  + "\n"
+              )
               if scopes:
                   gh_out.write("scopes=" + json.dumps(scopes) + "\n")
           PY
@@ -310,26 +342,25 @@ jobs:
           geopackage-output: ${{ steps.config.outputs.geopackage-output }}
 
       # ShapeChange: generer GML/XSD- og/eller JSON Schema når config har
-      # outputs: xsd / jsonschema. ShapeChange-JAR-en kjøres av workflowen (som
-      # PlantUML); selve SCXML-modellen og config-en lages av shapechange-action-en.
-      - id: schema-model
+      # outputs: xsd / jsonschema. Kjøres én gang PER datakilde (scope) i en
+      # bash-løkke — GitHub kan ikke loope et action-steg dynamisk. SCXML-modell +
+      # config lages av run_shapechange.py (scope-agnostisk), JAR-en kjøres her.
+      - name: Checkout ps.editor.actions (ShapeChange-skript)
         if: steps.config.outputs.run-shapechange == 'true'
-        uses: arkitektum/ps.editor.actions/shapechange@main
+        uses: actions/checkout@v4
         with:
-          # Skriv skjemaene inn i produktspesifikasjon-treet slik at de blir
-          # committet i PR-en (dekkes av add-paths under) og kan lastes ned i web.
-          # Normalisert slug så stien matcher resten av produkttreet.
-          output-directory: ${{ steps.config.outputs.output-directory }}/${{ steps.config.outputs.product-slug-normalized }}/schema
-          feature-catalogue-json: ${{ steps.prepare.outputs.feature-catalogue-json || steps.config.outputs.shapechange-feature-catalogue }}
-          targets: ${{ steps.config.outputs.shapechange-targets }}
-          target-namespace: ${{ steps.config.outputs.shapechange-namespace }}
-          xmlns-prefix: ${{ steps.config.outputs.shapechange-xmlns }}
-          schema-name: ${{ steps.config.outputs.shapechange-schema-name }}
-          schema-version: ${{ steps.config.outputs.shapechange-schema-version }}
-          json-base-uri: ${{ steps.config.outputs.shapechange-json-base }}
-          # draft-07: SOSI-klasser har ofte norske navn (f.eks. «Målemetode») som gir
-          # ugyldig $anchor i 2019-09/2020-12. draft-07 unngår det.
-          json-schema-version: draft-07
+          repository: arkitektum/ps.editor.actions
+          ref: main
+          path: .psactions
+
+      - uses: actions/setup-python@v6
+        if: steps.config.outputs.run-shapechange == 'true'
+        with:
+          python-version: "3.11"
+
+      - name: Install ShapeChange-skript-avhengigheter
+        if: steps.config.outputs.run-shapechange == 'true'
+        run: pip install requests PyYAML
 
       - uses: actions/setup-java@v4
         if: steps.config.outputs.run-shapechange == 'true'
@@ -354,35 +385,61 @@ jobs:
             https://github.com/ShapeChange/ShapeChange/releases/download/4.0.0/ShapeChange-4.0.0.zip
           unzip -q /tmp/shapechange.zip -d ~/shapechange
 
-      - name: Run ShapeChange
+      - id: shapechange
+        name: Run ShapeChange per datakilde
         if: steps.config.outputs.run-shapechange == 'true'
+        env:
+          SCOPES_JSON: ${{ steps.config.outputs.shapechange-scopes }}
+          TARGETS: ${{ steps.config.outputs.shapechange-targets }}
         run: |
-          set -euo pipefail
-          # cd i skriptet: GitHub ekspanderer IKKE «~» i working-directory, men bash
-          # gjør det her. ShapeChange trenger distribusjonsroten som arbeidskatalog
-          # (bundled xi:include-referanser er relative til den).
-          cd ~/shapechange
-          java -Dfile.encoding=UTF-8 -jar ShapeChange-4.0.0.jar \
-            -c "${{ steps.schema-model.outputs.shapechange-config }}"
-
-      - id: schemas
-        if: steps.config.outputs.run-shapechange == 'true'
-        uses: arkitektum/ps.editor.actions/shapechange@main
-        with:
-          mode: check
-          output-directory: ${{ steps.schema-model.outputs.output-directory }}
-          # Ikke stopp jobben på modellfeil: skjemaene ShapeChange rakk å lage skal
-          # likevel committes. Feil og advarsler vises som annotasjoner + i
-          # jobb-sammendraget, og telles i outputs under.
-          fail-on-error: "false"
-
-      - id: schema-note
-        if: steps.config.outputs.run-shapechange == 'true'
-        run: |
+          set -uo pipefail
+          echo "$SCOPES_JSON" > /tmp/sc_scopes.json
+          run_sc="$GITHUB_WORKSPACE/.psactions/scripts/run_shapechange.py"
+          count=$(jq 'length' /tmp/sc_scopes.json)
+          echo "ShapeChange: $count datakilde(r)"
+          note=""
+          for i in $(seq 0 $((count - 1))); do
+            row=$(jq -c ".[$i]" /tmp/sc_scopes.json)
+            get() { echo "$row" | jq -r "$1"; }
+            sslug=$(get '.scope_slug'); cat=$(get '.feature_catalogue')
+            outdir=$(get '.output_dir'); sname=$(get '.schema_name')
+            ns=$(get '.target_namespace'); xmlns=$(get '.xmlns_prefix')
+            ver=$(get '.schema_version'); xsddoc=$(get '.xsd_document')
+            jsondoc=$(get '.json_document'); jbase=$(get '.json_base_uri')
+            if [ ! -f "$cat" ]; then
+              echo "::warning::ShapeChange: mangler feature-katalog for '$sslug' ($cat) — hopper over"
+              note+="- \`$sslug\`: ingen feature-katalog (hoppet over)"$'\n'
+              continue
+            fi
+            echo "::group::ShapeChange – $sslug"
+            # draft-07: SOSI-klasser har ofte norske navn (f.eks. «Målemetode») som gir
+            # ugyldig $anchor i 2019-09/2020-12. draft-07 unngår det.
+            if ! python "$run_sc" --mode generate \
+                --feature-catalogue "$cat" --output-dir "$outdir" \
+                --schema-name "$sname" --target-namespace "$ns" \
+                --xmlns-prefix "$xmlns" --schema-version "$ver" \
+                --xsd-document "$xsddoc" --json-document "$jsondoc" \
+                --json-base-uri "$jbase" --json-schema-version draft-07 \
+                --targets "$TARGETS"; then
+              echo "::warning::ShapeChange: klarte ikke å bygge modell for '$sslug' — hopper over"
+              note+="- \`$sslug\`: modell-bygging feilet"$'\n'
+              echo "::endgroup::"; continue
+            fi
+            cfg="$GITHUB_WORKSPACE/$outdir/shapechange-config.xml"
+            # JAR-en må kjøres fra distribusjonsroten (bundled include-referanser).
+            ( cd ~/shapechange && java -Dfile.encoding=UTF-8 -jar ShapeChange-4.0.0.jar -c "$cfg" ) \
+              || echo "::warning::ShapeChange: JAR avbrøt for '$sslug'"
+            python "$run_sc" --mode check --output-dir "$outdir" --fail-on-error false \
+              | tee /tmp/sc_check.txt
+            errs=$(grep -oE 'with [0-9]+ error' /tmp/sc_check.txt | grep -oE '[0-9]+' || echo 0)
+            warns=$(grep -oE '[0-9]+ warning' /tmp/sc_check.txt | grep -oE '[0-9]+' || echo 0)
+            note+="- \`$sslug\`: ${errs:-0} feil, ${warns:-0} advarsler"$'\n'
+            echo "::endgroup::"
+          done
           {
             echo "text<<SCEOF"
-            echo "- ShapeChange-skjemaer: \`${{ steps.schema-model.outputs.xsd-directory }}\` / \`${{ steps.schema-model.outputs.json-schema-directory }}\`"
-            echo "- ShapeChange-resultat: ${{ steps.schemas.outputs.error-count }} feil, ${{ steps.schemas.outputs.warning-count }} advarsler (se jobb-sammendraget for detaljer)"
+            echo "**ShapeChange-skjemaer (per datakilde):**"
+            printf '%s' "$note"
             echo "SCEOF"
           } >> "$GITHUB_OUTPUT"
 
@@ -470,4 +527,4 @@ jobs:
             - Config file: `${{ matrix.config_path }}`
             - Generated markdown: `${{ steps.prepare.outputs.spec-markdown }}`
             - Generated psdata: `${{ steps.prepare.outputs.psdata-path }}`
-            ${{ steps.schema-note.outputs.text }}
+            ${{ steps.shapechange.outputs.text }}
