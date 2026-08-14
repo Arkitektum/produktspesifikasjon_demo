@@ -23,5 +23,14 @@
    <xi:include href="https://shapechange.net/resources/config/StandardNamespaces.xml" />
    <xi:include href="https://shapechange.net/resources/config/StandardMapEntries.xml" />
   </TargetXmlSchema>
+  <Target class="de.interactive_instruments.shapechange.core.target.json.JsonSchemaTarget" mode="enabled" inputs="INPUT">
+   <targetParameter name="outputDirectory" value="/home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/produktspesifikasjon/bydeler-bodo-kommune/schema/jsonschema" />
+   <targetParameter name="sortedOutput" value="true" />
+   <targetParameter name="jsonSchemaVersion" value="draft-07" />
+   <targetParameter name="jsonBaseUri" value="https://skjema.geonorge.no/SOSI/produktspesifikasjon/DyrkbarJord" />
+   <targetParameter name="entityTypeName" value="@type" />
+   <targetParameter name="defaultEncodingRule" value="defaultGeoJson" />
+   <xi:include href="https://shapechange.net/resources/config/StandardMapEntries_JSON.xml" />
+  </Target>
  </targets>
 </ShapeChangeConfiguration>
