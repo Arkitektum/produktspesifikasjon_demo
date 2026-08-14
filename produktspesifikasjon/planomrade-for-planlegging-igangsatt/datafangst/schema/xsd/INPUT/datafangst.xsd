@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:datafangst="https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" elementFormDefault="qualified" targetNamespace="https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst/1.0" version="1.0">
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Arealplan" substitutionGroup="datafangst:Fellesegenskaper" type="datafangst:ArealplanType"/>
+  <complexType name="ArealplanType">
+    <complexContent>
+      <extension base="datafangst:FellesegenskaperType">
+        <sequence>
+          <element name="nasjonalArealplanId" type="datafangst:NasjonalArealplanIdPropertyType"/>
+          <element name="plantype" type="gml:CodeType"/>
+          <element minOccurs="0" name="plannavn" type="string"/>
+          <element name="lovreferanse" type="gml:CodeType"/>
+          <element maxOccurs="unbounded" name="planleggingIgangsatt" type="datafangst:PlanområdePropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ArealplanPropertyType">
+    <sequence minOccurs="0">
+      <element ref="datafangst:Arealplan"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="Fellesegenskaper" substitutionGroup="gml:AbstractFeature" type="datafangst:FellesegenskaperType"/>
+  <complexType abstract="true" name="FellesegenskaperType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="identifikasjon" type="datafangst:IdentifikasjonPropertyType"/>
+          <element name="oppdateringsdato" type="date"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FellesegenskaperPropertyType">
+    <sequence minOccurs="0">
+      <element ref="datafangst:Fellesegenskaper"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Identifikasjon" substitutionGroup="gml:AbstractObject" type="datafangst:IdentifikasjonType"/>
+  <complexType name="IdentifikasjonType">
+    <sequence>
+      <element name="lokalId" type="string"/>
+      <element name="navnerom" type="string"/>
+      <element minOccurs="0" name="versjonId" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="IdentifikasjonPropertyType">
+    <sequence>
+      <element ref="datafangst:Identifikasjon"/>
+    </sequence>
+  </complexType>
+  <simpleType name="LandkodeType">
+    <restriction base="string">
+      <enumeration value="NO"/>
+    </restriction>
+  </simpleType>
+  <element name="NasjonalArealplanId" substitutionGroup="gml:AbstractObject" type="datafangst:NasjonalArealplanIdType"/>
+  <complexType name="NasjonalArealplanIdType">
+    <sequence>
+      <element minOccurs="0" name="kommunenummer" type="gml:CodeType"/>
+      <element minOccurs="0" name="landkode" type="datafangst:LandkodeType"/>
+      <element name="planid" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="NasjonalArealplanIdPropertyType">
+    <sequence>
+      <element ref="datafangst:NasjonalArealplanId"/>
+    </sequence>
+  </complexType>
+  <element name="Planområde" substitutionGroup="datafangst:Fellesegenskaper" type="datafangst:PlanområdeType"/>
+  <complexType name="PlanområdeType">
+    <complexContent>
+      <extension base="datafangst:FellesegenskaperType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="PlanområdePropertyType">
+    <sequence minOccurs="0">
+      <element ref="datafangst:Planområde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>
