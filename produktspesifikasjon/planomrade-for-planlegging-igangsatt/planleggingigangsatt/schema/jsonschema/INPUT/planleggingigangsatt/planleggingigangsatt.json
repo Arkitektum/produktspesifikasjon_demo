@@ -4,58 +4,60 @@
   "$id": "https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/planleggingigangsatt/planleggingigangsatt.json",
   "definitions": {
     "Arealplan": {
-      "$id": "#Arealplan",
       "type": "object",
       "properties": {
-        "properties": {
-          "type": "object",
-          "properties": {
-            "objid": {
-              "type": "integer"
-            },
-            "nasjonalArealplanId": {
-              "$ref": "#NasjonalArealplanId"
-            },
-            "plannavn": {
-              "type": "string"
-            },
-            "plantype": {
-              "type": "string"
-            },
-            "kunngjøringsdatoVarselOmPlanoppstart": {
-              "type": "string",
-              "format": "date"
-            },
-            "forslagsstillertype": {
-              "type": "string"
-            },
-            "lovreferanse": {
-              "type": "string"
-            },
-            "identifikasjon": {
-              "$ref": "#Identifikasjon"
-            },
-            "forsteDigitaliseringsdato": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "oppdateringsdato": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "link": {
-              "type": "string"
-            },
-            "planomrade": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
+        "@type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "objid": {
+          "type": "integer"
+        },
+        "nasjonalArealplanId": {
+          "$ref": "#/definitions/NasjonalArealplanId"
+        },
+        "plannavn": {
+          "type": "string"
+        },
+        "plantype": {
+          "type": "string"
+        },
+        "kunngjøringsdatoVarselOmPlanoppstart": {
+          "type": "string",
+          "format": "date"
+        },
+        "forslagsstillertype": {
+          "type": "string"
+        },
+        "lovreferanse": {
+          "type": "string"
+        },
+        "identifikasjon": {
+          "$ref": "#/definitions/Identifikasjon"
+        },
+        "forsteDigitaliseringsdato": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "oppdateringsdato": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "link": {
+          "type": "string"
+        },
+        "planomrade": {
+          "type": "string",
+          "format": "uri"
         }
-      }
+      },
+      "required": [
+        "@type"
+      ]
     },
     "Identifikasjon": {
-      "$id": "#Identifikasjon",
       "type": "object",
       "properties": {
         "lokalId": {
@@ -70,7 +72,6 @@
       }
     },
     "NasjonalArealplanId": {
-      "$id": "#NasjonalArealplanId",
       "type": "object",
       "properties": {
         "planid": {
@@ -82,55 +83,58 @@
       }
     },
     "Planområde": {
-      "$id": "#Planområde",
       "type": "object",
       "properties": {
-        "properties": {
-          "type": "object",
-          "properties": {
-            "objid": {
-              "type": "integer"
-            },
-            "identifikasjon": {
-              "$ref": "#Identifikasjon"
-            },
-            "arealplan": {
-              "type": "string",
-              "format": "uri"
-            },
-            "førsteDigitaliseringsdato": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "nasjonalArealplanId": {
-              "$ref": "#NasjonalArealplanId"
-            },
-            "plannavn": {
-              "type": "string"
-            },
-            "plantype": {
-              "type": "string"
-            },
-            "kunngjøringsdatoVarselOmPlanoppstart": {
-              "type": "string",
-              "format": "date"
-            },
-            "forslagsstillertype": {
-              "type": "string"
-            },
-            "lovreferanse": {
-              "type": "string"
-            },
-            "oppdateringsdato": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "link": {
-              "type": "string"
-            }
-          }
+        "@type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "objid": {
+          "type": "integer"
+        },
+        "identifikasjon": {
+          "$ref": "#/definitions/Identifikasjon"
+        },
+        "arealplan": {
+          "type": "string",
+          "format": "uri"
+        },
+        "førsteDigitaliseringsdato": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "nasjonalArealplanId": {
+          "$ref": "#/definitions/NasjonalArealplanId"
+        },
+        "plannavn": {
+          "type": "string"
+        },
+        "plantype": {
+          "type": "string"
+        },
+        "kunngjøringsdatoVarselOmPlanoppstart": {
+          "type": "string",
+          "format": "date"
+        },
+        "forslagsstillertype": {
+          "type": "string"
+        },
+        "lovreferanse": {
+          "type": "string"
+        },
+        "oppdateringsdato": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "link": {
+          "type": "string"
         }
-      }
+      },
+      "required": [
+        "@type"
+      ]
     }
   }
 }

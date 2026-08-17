@@ -350,7 +350,7 @@
        <sc:descriptors>
         <sc:documentation>
          <sc:descriptorValues>
-          <sc:DescriptorValue>kunngjøringsdatoVarselOmPlanoppstart</sc:DescriptorValue>
+          <sc:DescriptorValue>når planinitiativet har varsel oppstart til berørte parter som naboer, sektormyndigheter og lag/foreninger med interresser i planen</sc:DescriptorValue>
          </sc:descriptorValues>
         </sc:documentation>
        </sc:descriptors>

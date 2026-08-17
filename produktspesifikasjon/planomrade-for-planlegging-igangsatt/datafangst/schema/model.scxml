@@ -59,6 +59,14 @@ Skal være en uuid, slik at den er unik, uavhengig av navnerommet</sc:Descriptor
          </sc:descriptorValues>
         </sc:documentation>
        </sc:descriptors>
+       <sc:taggedValues>
+        <sc:TaggedValue>
+         <sc:name>SOSI_navn</sc:name>
+         <sc:values>
+          <sc:Value>LOKALID</sc:Value>
+         </sc:values>
+        </sc:TaggedValue>
+       </sc:taggedValues>
        <sc:cardinality>1</sc:cardinality>
        <sc:sequenceNumber>1</sc:sequenceNumber>
        <sc:typeName>CharacterString</sc:typeName>
@@ -76,6 +84,14 @@ For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</sc:DescriptorV
          </sc:descriptorValues>
         </sc:documentation>
        </sc:descriptors>
+       <sc:taggedValues>
+        <sc:TaggedValue>
+         <sc:name>SOSI_navn</sc:name>
+         <sc:values>
+          <sc:Value>NAVNEROM</sc:Value>
+         </sc:values>
+        </sc:TaggedValue>
+       </sc:taggedValues>
        <sc:cardinality>1</sc:cardinality>
        <sc:sequenceNumber>2</sc:sequenceNumber>
        <sc:typeName>CharacterString</sc:typeName>
@@ -90,6 +106,14 @@ For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</sc:DescriptorV
          </sc:descriptorValues>
         </sc:documentation>
        </sc:descriptors>
+       <sc:taggedValues>
+        <sc:TaggedValue>
+         <sc:name>SOSI_navn</sc:name>
+         <sc:values>
+          <sc:Value>VERSJONID</sc:Value>
+         </sc:values>
+        </sc:TaggedValue>
+       </sc:taggedValues>
        <sc:cardinality>0..1</sc:cardinality>
        <sc:sequenceNumber>3</sc:sequenceNumber>
        <sc:typeName>CharacterString</sc:typeName>
@@ -115,6 +139,14 @@ Merknad: Det presiseres at kommunenummer alltid skal ha 4 siffer, dvs. eventuelt
          </sc:descriptorValues>
         </sc:documentation>
        </sc:descriptors>
+       <sc:taggedValues>
+        <sc:TaggedValue>
+         <sc:name>SOSI_navn</sc:name>
+         <sc:values>
+          <sc:Value>KOMM</sc:Value>
+         </sc:values>
+        </sc:TaggedValue>
+       </sc:taggedValues>
        <sc:cardinality>0..1</sc:cardinality>
        <sc:sequenceNumber>1</sc:sequenceNumber>
        <sc:typeId>C6</sc:typeId>
@@ -130,6 +162,14 @@ Merknad: Det presiseres at kommunenummer alltid skal ha 4 siffer, dvs. eventuelt
          </sc:descriptorValues>
         </sc:documentation>
        </sc:descriptors>
+       <sc:taggedValues>
+        <sc:TaggedValue>
+         <sc:name>SOSI_navn</sc:name>
+         <sc:values>
+          <sc:Value>LANDKODE</sc:Value>
+         </sc:values>
+        </sc:TaggedValue>
+       </sc:taggedValues>
        <sc:cardinality>0..1</sc:cardinality>
        <sc:sequenceNumber>2</sc:sequenceNumber>
        <sc:typeId>C7</sc:typeId>
@@ -145,6 +185,14 @@ Merknad: Det presiseres at kommunenummer alltid skal ha 4 siffer, dvs. eventuelt
          </sc:descriptorValues>
         </sc:documentation>
        </sc:descriptors>
+       <sc:taggedValues>
+        <sc:TaggedValue>
+         <sc:name>SOSI_navn</sc:name>
+         <sc:values>
+          <sc:Value>PLANID</sc:Value>
+         </sc:values>
+        </sc:TaggedValue>
+       </sc:taggedValues>
        <sc:cardinality>1</sc:cardinality>
        <sc:sequenceNumber>3</sc:sequenceNumber>
        <sc:typeName>CharacterString</sc:typeName>
@@ -299,6 +347,14 @@ Følger dataobjektet og identifiserer det i hele dets levetid.</sc:DescriptorVal
            </sc:descriptorValues>
           </sc:documentation>
          </sc:descriptors>
+         <sc:taggedValues>
+          <sc:TaggedValue>
+           <sc:name>SOSI_navn</sc:name>
+           <sc:values>
+            <sc:Value>IDENT</sc:Value>
+           </sc:values>
+          </sc:TaggedValue>
+         </sc:taggedValues>
          <sc:cardinality>1</sc:cardinality>
          <sc:sequenceNumber>1</sc:sequenceNumber>
          <sc:typeId>C4</sc:typeId>
@@ -314,6 +370,14 @@ Følger dataobjektet og identifiserer det i hele dets levetid.</sc:DescriptorVal
            </sc:descriptorValues>
           </sc:documentation>
          </sc:descriptors>
+         <sc:taggedValues>
+          <sc:TaggedValue>
+           <sc:name>SOSI_navn</sc:name>
+           <sc:values>
+            <sc:Value>OPPDATERINGSDATO</sc:Value>
+           </sc:values>
+          </sc:TaggedValue>
+         </sc:taggedValues>
          <sc:cardinality>1</sc:cardinality>
          <sc:sequenceNumber>2</sc:sequenceNumber>
          <sc:typeName>Date</sc:typeName>
@@ -355,6 +419,14 @@ Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikk
            </sc:descriptorValues>
           </sc:documentation>
          </sc:descriptors>
+         <sc:taggedValues>
+          <sc:TaggedValue>
+           <sc:name>SOSI_navn</sc:name>
+           <sc:values>
+            <sc:Value>NASJONALAREALPLANID</sc:Value>
+           </sc:values>
+          </sc:TaggedValue>
+         </sc:taggedValues>
          <sc:cardinality>1</sc:cardinality>
          <sc:sequenceNumber>1</sc:sequenceNumber>
          <sc:typeId>C5</sc:typeId>
@@ -370,6 +442,14 @@ Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikk
            </sc:descriptorValues>
           </sc:documentation>
          </sc:descriptors>
+         <sc:taggedValues>
+          <sc:TaggedValue>
+           <sc:name>SOSI_navn</sc:name>
+           <sc:values>
+            <sc:Value>PLANTYPE</sc:Value>
+           </sc:values>
+          </sc:TaggedValue>
+         </sc:taggedValues>
          <sc:cardinality>1</sc:cardinality>
          <sc:sequenceNumber>2</sc:sequenceNumber>
          <sc:typeId>C8</sc:typeId>
@@ -385,6 +465,14 @@ Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikk
            </sc:descriptorValues>
           </sc:documentation>
          </sc:descriptors>
+         <sc:taggedValues>
+          <sc:TaggedValue>
+           <sc:name>SOSI_navn</sc:name>
+           <sc:values>
+            <sc:Value>PLANNAVN</sc:Value>
+           </sc:values>
+          </sc:TaggedValue>
+         </sc:taggedValues>
          <sc:cardinality>0..1</sc:cardinality>
          <sc:sequenceNumber>3</sc:sequenceNumber>
          <sc:typeName>CharacterString</sc:typeName>
@@ -401,6 +489,14 @@ For reguleringsplanforslag og planlegging igangsatt skal lovreferanse = 6 (pbl 2
            </sc:descriptorValues>
           </sc:documentation>
          </sc:descriptors>
+         <sc:taggedValues>
+          <sc:TaggedValue>
+           <sc:name>SOSI_navn</sc:name>
+           <sc:values>
+            <sc:Value>LOVREFERANSE</sc:Value>
+           </sc:values>
+          </sc:TaggedValue>
+         </sc:taggedValues>
          <sc:cardinality>1</sc:cardinality>
          <sc:sequenceNumber>4</sc:sequenceNumber>
          <sc:typeId>C9</sc:typeId>

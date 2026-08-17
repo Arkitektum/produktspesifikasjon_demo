@@ -733,7 +733,7 @@ Egenskaper
     </tr>
     <tr>
       <th scope="row">Definisjon:</th>
-      <td>kunngjøringsdatoVarselOmPlanoppstart</td>
+      <td>når planinitiativet har varsel oppstart til berørte parter som naboer, sektormyndigheter og lag/foreninger med interresser i planen</td>
     </tr>
     <tr>
       <th scope="row">Multiplisitet:</th>

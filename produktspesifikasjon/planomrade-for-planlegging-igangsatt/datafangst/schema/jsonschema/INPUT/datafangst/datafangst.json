@@ -4,80 +4,68 @@
   "$id": "https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst/datafangst/datafangst.json",
   "definitions": {
     "Arealplan": {
-      "$id": "#Arealplan",
       "allOf": [
         {
-          "$ref": "#Fellesegenskaper"
+          "$ref": "#/definitions/Fellesegenskaper"
         },
         {
           "type": "object",
           "properties": {
-            "properties": {
-              "type": "object",
-              "properties": {
-                "nasjonalArealplanId": {
-                  "$ref": "#NasjonalArealplanId"
-                },
-                "plantype": {
-                  "$ref": "#RpPlantype"
-                },
-                "plannavn": {
-                  "type": "string"
-                },
-                "lovreferanse": {
-                  "$ref": "#Lovreferanse"
-                },
-                "planleggingIgangsatt": {
-                  "type": "array",
-                  "minItems": 1,
-                  "items": {
-                    "type": "string",
-                    "format": "uri"
-                  },
-                  "uniqueItems": true
-                }
+            "nasjonalArealplanId": {
+              "$ref": "#/definitions/NasjonalArealplanId"
+            },
+            "plantype": {
+              "$ref": "#/definitions/RpPlantype"
+            },
+            "plannavn": {
+              "type": "string"
+            },
+            "lovreferanse": {
+              "$ref": "#/definitions/Lovreferanse"
+            },
+            "planleggingIgangsatt": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "format": "uri"
               },
-              "required": [
-                "lovreferanse",
-                "nasjonalArealplanId",
-                "planleggingIgangsatt",
-                "plantype"
-              ]
+              "uniqueItems": true
             }
           },
           "required": [
-            "properties"
+            "lovreferanse",
+            "nasjonalArealplanId",
+            "planleggingIgangsatt",
+            "plantype"
           ]
         }
       ]
     },
     "Fellesegenskaper": {
-      "$id": "#Fellesegenskaper",
       "type": "object",
       "properties": {
-        "properties": {
-          "type": "object",
-          "properties": {
-            "identifikasjon": {
-              "$ref": "#Identifikasjon"
-            },
-            "oppdateringsdato": {
-              "type": "string",
-              "format": "date"
-            }
-          },
-          "required": [
-            "identifikasjon",
-            "oppdateringsdato"
-          ]
+        "@type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "identifikasjon": {
+          "$ref": "#/definitions/Identifikasjon"
+        },
+        "oppdateringsdato": {
+          "type": "string",
+          "format": "date"
         }
       },
       "required": [
-        "properties"
+        "@type",
+        "identifikasjon",
+        "oppdateringsdato"
       ]
     },
     "Identifikasjon": {
-      "$id": "#Identifikasjon",
       "type": "object",
       "properties": {
         "lokalId": {
@@ -96,29 +84,27 @@
       ]
     },
     "Kommunenummer": {
-      "$id": "#Kommunenummer",
-      "type": "string"
+      "type": "string",
+      "format": "uri"
     },
     "Landkode": {
-      "$id": "#Landkode",
       "type": "string",
       "enum": [
         "NO"
       ]
     },
     "Lovreferanse": {
-      "$id": "#Lovreferanse",
-      "type": "string"
+      "type": "string",
+      "format": "uri"
     },
     "NasjonalArealplanId": {
-      "$id": "#NasjonalArealplanId",
       "type": "object",
       "properties": {
         "kommunenummer": {
-          "$ref": "#Kommunenummer"
+          "$ref": "#/definitions/Kommunenummer"
         },
         "landkode": {
-          "$ref": "#Landkode"
+          "$ref": "#/definitions/Landkode"
         },
         "planid": {
           "type": "string"
@@ -129,10 +115,9 @@
       ]
     },
     "Planområde": {
-      "$id": "#Planområde",
       "allOf": [
         {
-          "$ref": "#Fellesegenskaper"
+          "$ref": "#/definitions/Fellesegenskaper"
         },
         {
           "type": "object",
@@ -145,8 +130,8 @@
       ]
     },
     "RpPlantype": {
-      "$id": "#RpPlantype",
-      "type": "string"
+      "type": "string",
+      "format": "uri"
     }
   }
 }
