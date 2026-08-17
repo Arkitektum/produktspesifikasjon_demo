@@ -192,6 +192,7 @@ jobs:
               if o.strip()
           ]
           geopackage_output = "true" if "geopackage" in selected_outputs else "false"
+          odcs_output = "true" if "odcs" in selected_outputs else "false"
 
           # ShapeChange-leveranser: outputs `xsd`/`jsonschema` → ShapeChange-targets
           # (`xsd`/`json`). Syntetiser namespace fra product_slug (ShapeChange krever
@@ -306,6 +307,7 @@ jobs:
                       + "\n"
                   )
               gh_out.write(f"geopackage-output={geopackage_output}\n")
+              gh_out.write(f"odcs-output={odcs_output}\n")
               # Normalisert slug — produkttreet ligger under denne (samme som
               # prepare-action-en bruker). Skjema-katalogen henger på her.
               gh_out.write(f"product-slug-normalized={_pslug}\n")
@@ -340,6 +342,8 @@ jobs:
           xmi-model: ${{ steps.config.outputs.xmi-model }}
           # Skriv også en tom GeoPackage av datamodellen når config har outputs: geopackage.
           geopackage-output: ${{ steps.config.outputs.geopackage-output }}
+          # Skriv også en ODCS-datakontrakt (.odcs.yaml) når config har outputs: odcs.
+          odcs-output: ${{ steps.config.outputs.odcs-output }}
 
       # ShapeChange: generer GML/XSD- og/eller JSON Schema når config har
       # outputs: xsd / jsonschema. Kjøres én gang PER datakilde (scope) i en
