@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "featureTypes": {
+    "Planområde": {
+      "attributes": {
+        "kunngjøringsdatoVarselOmPlanoppstart": {
+          "description": "når planinitiativet har varsel oppstart til berørte parter som naboer, sektormyndigheter og lag/foreninger med interresser i planen"
+        }
+      }
+    }
+  }
+}
