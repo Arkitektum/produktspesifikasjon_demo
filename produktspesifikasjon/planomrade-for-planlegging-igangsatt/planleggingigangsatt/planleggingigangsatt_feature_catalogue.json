@@ -212,7 +212,7 @@
         "name": "kunngjøringsdatoVarselOmPlanoppstart",
         "type": "date (string)",
         "cardinality": "0..1",
-        "description": "kunngjøringsdatoVarselOmPlanoppstart"
+        "description": "når planinitiativet har varsel oppstart til berørte parter som naboer, sektormyndigheter og lag/foreninger med interresser i planen"
       },
       {
         "name": "forslagsstillertype",
