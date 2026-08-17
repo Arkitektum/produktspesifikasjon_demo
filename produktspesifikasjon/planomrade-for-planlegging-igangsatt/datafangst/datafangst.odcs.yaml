@@ -1,0 +1,181 @@
+# Open Data Contract Standard (ODCS) v3.1.0 — generert fra datamodellen.
+apiVersion: v3.1.0
+kind: DataContract
+id: urn:odcs:planomr-de-for-planlegging-igangsatt-datafangst:1.0.0
+version: 1.0.0
+status: active
+name: Planområde for planlegging igangsatt - Datafangst
+schema:
+- name: Arealplan
+  physicalName: arealplan
+  logicalType: object
+  physicalType: table
+  description: dataobjekt for igangsatt planlegging etter pbl
+  customProperties:
+  - property: sosiObjektType
+    value: Arealplan
+  - property: inheritsFrom
+    value: Fellesegenskaper
+  - property: associations
+    value:
+    - role: planleggingIgangsatt
+      target: Planområde
+      cardinality: 1..*
+  properties:
+  - name: identifikasjon
+    logicalType: object
+    properties:
+    - name: lokalId
+      logicalType: string
+      description: 'lokal identifikator av et objekt.
+
+
+        Skal være en uuid, slik at den er unik, uavhengig av navnerommet'
+      required: true
+    - name: navnerom
+      logicalType: string
+      description: 'navnerom som unikt identifiserer datakilden til et objekt.
+
+
+        Navnerom anbefales å være en http-URI og må være registrert i data.geonorge.no
+
+        For plan anbefales navnerommet http://data.geonorge.no/sosi/plan'
+      required: true
+    - name: versjonId
+      logicalType: string
+      description: identifikasjon av en spesiell versjon av et geografisk objekt (instans)
+    description: 'unik identifikasjon av et dataobjekt
+
+
+      Følger dataobjektet og identifiserer det i hele dets levetid.'
+    required: true
+  - name: oppdateringsdato
+    logicalType: timestamp
+    description: tidspunkt for siste endring på dataobjektet
+    required: true
+  - name: nasjonalArealplanId
+    logicalType: object
+    properties:
+    - name: kommunenummer
+      logicalType: string
+      authoritativeDefinitions:
+      - url: https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer
+        type: businessDefinition
+      customProperties:
+      - property: sosiCodeList
+        value: Kommunenummer
+      - property: asDictionary
+        value: 'true'
+      description: 'kode som viser til offisiell nummerering av kommuner
+
+
+        Merknad: Det presiseres at kommunenummer alltid skal ha 4 siffer, dvs. eventuelt
+        med ledende null. Kommunenummer benyttes for kobling mot en rekke andre registre
+        som også benytter 4 siffer.'
+    - name: landkode
+      logicalType: string
+      logicalTypeOptions:
+        pattern: ^(NO)$
+      customProperties:
+      - property: allowedValues
+        value:
+        - value: 'NO'
+          label: Norge. Aktuell kode for administrativ enhet for statlig vedtatte
+            planer
+      description: landkode = NO anvendes kun av statlig vedtaksmyndighet
+    - name: planid
+      logicalType: string
+      description: entydig identifikasjon av en plan innen vedkommende administrative
+        enhet (pbl. §§ 9-1, 12-1, samt kart- og planforskriften § 9 andre og sjette
+        ledd)
+      required: true
+    description: 'landsdekkende entydig og unik identifikasjon av en arealplan (pbl.
+      §§ 6-4, 9-1, og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd).
+
+
+      Denne identifikatoren tildeles planen når planprosessen starter, og den kan
+      ikke endres undervegs av forslagstiller.'
+    required: true
+  - name: plantype
+    logicalType: string
+    authoritativeDefinitions:
+    - url: https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/rpplantype
+      type: businessDefinition
+    customProperties:
+    - property: sosiCodeList
+      value: RpPlantype
+    - property: asDictionary
+      value: 'true'
+    description: type reguleringsplan (pbl. §§ 12-2 og 12-3)
+    required: true
+  - name: plannavn
+    logicalType: string
+    description: planens offisielle navn
+  - name: lovreferanse
+    logicalType: string
+    authoritativeDefinitions:
+    - url: https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse
+      type: businessDefinition
+    customProperties:
+    - property: sosiCodeList
+      value: Lovreferanse
+    - property: asDictionary
+      value: 'true'
+    description: 'kode for hvilken lov planen vedtas etter
+
+
+      For reguleringsplanforslag og planlegging igangsatt skal lovreferanse = 6 (pbl
+      2008)'
+    required: true
+- name: Planområde
+  physicalName: planomr_de
+  logicalType: object
+  physicalType: table
+  description: 'område for planlegging igangsatt etter pbl 2008.
+
+
+    Området skal være sammenhengende i grunnriss, men kan dekke flere vertikalnivåer'
+  customProperties:
+  - property: sosiObjektType
+    value: Planområde
+  - property: inheritsFrom
+    value: Fellesegenskaper
+  properties:
+  - name: identifikasjon
+    logicalType: object
+    properties:
+    - name: lokalId
+      logicalType: string
+      description: 'lokal identifikator av et objekt.
+
+
+        Skal være en uuid, slik at den er unik, uavhengig av navnerommet'
+      required: true
+    - name: navnerom
+      logicalType: string
+      description: 'navnerom som unikt identifiserer datakilden til et objekt.
+
+
+        Navnerom anbefales å være en http-URI og må være registrert i data.geonorge.no
+
+        For plan anbefales navnerommet http://data.geonorge.no/sosi/plan'
+      required: true
+    - name: versjonId
+      logicalType: string
+      description: identifikasjon av en spesiell versjon av et geografisk objekt (instans)
+    description: 'unik identifikasjon av et dataobjekt
+
+
+      Følger dataobjektet og identifiserer det i hele dets levetid.'
+    required: true
+  - name: oppdateringsdato
+    logicalType: timestamp
+    description: tidspunkt for siste endring på dataobjektet
+    required: true
+  - name: område
+    logicalType: object
+    physicalType: geometry(Surface)
+    required: true
+    customProperties:
+    - property: geometryType
+      value: Surface

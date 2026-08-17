@@ -1,0 +1,151 @@
+# Open Data Contract Standard (ODCS) v3.1.0 — generert fra datamodellen.
+apiVersion: v3.1.0
+kind: DataContract
+id: urn:odcs:planomr-de-for-planlegging-igangsatt-planleggingigangsatt:1.0.0
+version: 1.0.0
+status: active
+name: Planområde for planlegging igangsatt - Planleggingigangsatt
+schema:
+- name: Arealplan
+  physicalName: arealplan
+  logicalType: object
+  physicalType: table
+  description: Dataobjekt for igangsatt planlegging etter pbl
+  customProperties:
+  - property: sosiObjektType
+    value: Arealplan
+  - property: associations
+    value:
+    - role: planomrade
+      target: Planområde
+      cardinality: 0..1
+  properties:
+  - name: geometri
+    logicalType: object
+    physicalType: geometry(Geometry)
+    required: true
+    customProperties:
+    - property: geometryType
+      value: Geometry
+  - name: objid
+    logicalType: integer
+    description: objid
+    primaryKey: true
+  - name: nasjonalArealplanId
+    logicalType: object
+    properties:
+    - name: planid
+      logicalType: string
+    - name: kommunenummer
+      logicalType: string
+    description: nasjonalArealplanId
+  - name: plannavn
+    logicalType: string
+    description: plannavn
+  - name: plantype
+    logicalType: string
+    description: plantype
+  - name: kunngjøringsdatoVarselOmPlanoppstart
+    logicalType: string
+    description: kunngjøringsdatoVarselOmPlanoppstart
+  - name: forslagsstillertype
+    logicalType: string
+    description: forslagsstillertype
+  - name: lovreferanse
+    logicalType: string
+    description: lovreferanse
+  - name: identifikasjon
+    logicalType: object
+    properties:
+    - name: lokalId
+      logicalType: string
+    - name: navnerom
+      logicalType: string
+    - name: versjonId
+      logicalType: string
+    description: identifikasjon
+  - name: forsteDigitaliseringsdato
+    logicalType: string
+    description: forsteDigitaliseringsdato
+  - name: oppdateringsdato
+    logicalType: string
+    description: oppdateringsdato
+  - name: link
+    logicalType: string
+    description: link
+- name: Planområde
+  physicalName: planomr_de
+  logicalType: object
+  physicalType: table
+  description: Geometriske områder og tilhørende metadata fra "Varsel om Oppstart
+    av Reguleringsplanarbeider"-databasen
+  customProperties:
+  - property: sosiObjektType
+    value: Planområde
+  - property: defaultCrs
+    value: EPSG:25833
+  - property: associations
+    value:
+    - role: arealplan
+      target: Arealplan
+      cardinality: 0..1
+  properties:
+  - name: geometri
+    logicalType: object
+    physicalType: geometry(Geometry,25833)
+    required: true
+    customProperties:
+    - property: geometryType
+      value: Geometry
+    - property: crs
+      value: EPSG:25833
+  - name: objid
+    logicalType: integer
+    description: objid
+    primaryKey: true
+  - name: identifikasjon
+    logicalType: object
+    properties:
+    - name: lokalId
+      logicalType: string
+    - name: navnerom
+      logicalType: string
+    - name: versjonId
+      logicalType: string
+    description: identifikasjon
+  - name: arealplan
+    logicalType: integer
+    description: arealplan
+  - name: førsteDigitaliseringsdato
+    logicalType: string
+    description: førsteDigitaliseringsdato
+  - name: nasjonalArealplanId
+    logicalType: object
+    properties:
+    - name: planid
+      logicalType: string
+    - name: kommunenummer
+      logicalType: string
+    description: nasjonalArealplanId
+  - name: plannavn
+    logicalType: string
+    description: plannavn
+  - name: plantype
+    logicalType: string
+    description: plantype
+  - name: kunngjøringsdatoVarselOmPlanoppstart
+    logicalType: string
+    description: når planinitiativet har varsel oppstart til berørte parter som naboer,
+      sektormyndigheter og lag/foreninger med interresser i planen
+  - name: forslagsstillertype
+    logicalType: string
+    description: forslagsstillertype
+  - name: lovreferanse
+    logicalType: string
+    description: lovreferanse
+  - name: oppdateringsdato
+    logicalType: string
+    description: oppdateringsdato
+  - name: link
+    logicalType: string
+    description: link

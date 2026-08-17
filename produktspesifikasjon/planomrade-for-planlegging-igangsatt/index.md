@@ -63,7 +63,7 @@ logo: "https://register.geonorge.no/data/organizations/974760223_DIBK_liten.jpg"
 > - **Klassifisering**: Ugradert
 
 ### Formål
-
+Formålet med datasettet er å gi en enhetlig digital representasjon av …
 Formålet er å kunne identifisere og vise hvor planarbeid er startet, slik at naboer, berørte parter, høringsmyndigheter og kommunen får informasjon om planinitiativet og kan medvirke i prosessen.
 
 ### Overskrifter
