@@ -1,0 +1,9 @@
+metadataId: 8252baea-5bad-428b-8f18-fe236fa4ced6
+output_directory: produktspesifikasjon
+product_slug: dyrkbar_jord2
+updated: '2026-08-21'
+scopes:
+- name: Dyrkbarjord_atomfeedgeopackage.xml
+  url: http://nedlasting.geonorge.no/geonorge/ATOM-feeds/DyrkbarJord_AtomFeedGeoPackage.xml
+  generator: geopackage
+  description: GeoPackage (Atom Feed)
