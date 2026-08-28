@@ -1,0 +1,385 @@
+@startuml
+' For wide diagrams, render with: plantuml -DPLANTUML_LIMIT_SIZE=16384 ...
+' The 'scale max' directive below caps the rendered output to prevent the
+' default PlantUML 4096px size limit from cropping the diagram.
+scale max 4000*4000
+
+title Reguleringsplaner - Reguleringsplan - Objekttyper
+
+skinparam backgroundColor #F5F5F5
+skinparam shadowing false
+skinparam RoundCorner 6
+skinparam ArrowColor #6C8198
+skinparam wrapWidth 200
+skinparam class {
+  BackgroundColor #FBF2E8
+  BorderColor #9C8578
+  FontColor #2D201A
+  HeaderBackgroundColor #EFE1D6
+  HeaderFontColor #2D201A
+  AttributeIconSize 0
+}
+skinparam note {
+  BackgroundColor #FFFFFF
+  BorderColor #6C8198
+  FontColor #2D201A
+}
+skinparam stereotypeCBackgroundColor #EAD9CE
+skinparam stereotypeCBorderColor #9C8578
+skinparam stereotypeCFontColor #2D201A
+
+package "Objekttyper" {
+
+  abstract class SOSI_Objekt <<featureType>> {
+    + identifikasjon [1] : Identifikasjon
+    + førsteDigitaliseringsdato [0..1] : Date
+    + oppdateringsdato [1] : Date
+    + kvalitet [0..1] : Posisjonskvalitet
+  }
+
+  class RpGrense <<featureType>> {
+    + grense [1] : GM_Curve
+  }
+
+  class "RpOmråde" as RpOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + vertikalnivå [1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + nasjonalArealplanId [1] : NasjonalArealplanId
+    + plantype [0..1] : Plantype
+    + planstatus [0..1] : Planstatus
+    + plannavn [0..1] : CharacterString
+    + omPlanbestemmelser [0..1] : OmPlanbestemmelser
+    + lovreferanse [0..1] : Lovreferansetype
+    + lovreferanseBeskrivelse [0..1] : CharacterString
+    + opprinneligNasjonalArealplanId [0..1] : OpprinneligNasjonalArealplanId
+    + forslagsstillerType [0..1] : ForslagsstillerType
+    + vedtakEndeligPlanDato [0..1] : Date
+    + kunngjøringsdato [0..1] : Date
+    + ikrafttredelsesdato [0..1] : Date
+    + prosesshistorie [0..*] : CharacterString
+    + informasjon [0..*] : CharacterString
+    + link [0..*] : CharacterString
+  }
+
+  class "RpUtsattRettsvirkningOmråde" as RpUtsattRettsvirkningOmr_de <<featureType>> {
+    + nasjonalArealplanId [1] : NasjonalArealplanId
+    + område [1] : GM_MultiSurface
+    + vertikalnivå [1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + saksummer [1] : Saksnummer
+    + endeligVedtakDato [0..1] : Date
+  }
+
+  class "RpEndringOmråde" as RpEndringOmr_de <<featureType>> {
+    + nasjonalArealplanId [1] : NasjonalArealplanId
+    + område [1] : GM_MultiSurface
+    + vertikalnivå [1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+    + endringstype [1] : Planendringstype
+    + hjemmelsgrunnlag [1] : CharacterString
+    + saksnummer [1] : Saksnummer
+    + endringsnavn [0..1] : CharacterString
+    + endringVedtakDato [0..1] : Date
+  }
+
+  abstract class RpAvgrensingslinje <<featureType>> {
+    + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+  }
+
+  abstract class RpObjekt <<featureType>> {
+    + nasjonalArealplanId [1] : NasjonalArealplanId
+    + vertikalnivå [1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+  }
+
+  abstract class RpRomligObjekt <<featureType>> {
+    + nasjonalArealplanId [1] : NasjonalArealplanId
+    + vertikalnivå [0..1] : Vertikalnivå
+    + vertikallag [0..1] : Vertikallag
+  }
+
+  class "RpFormålGrense" as RpForm_lGrense <<featureType>> {
+    + grense [1] : GM_Curve
+  }
+
+  class "RpArealformålOmråde" as RpArealform_lOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + eierform [1] : EierformType
+    + arealformål [1] : RpArealformål
+    + beskrivelse [0..1] : CharacterString
+    + feltnavn [1] : CharacterString
+    + utnytting [0..*] : Utnytting
+    + uteoppholdsareal [0..1] : Integer
+    + byggverkbestemmelse [0..1] : Byggverkbestemmelse
+    + avkjørselsbestemmelse [0..1] : Avkjørselsbestemmelse
+  }
+
+  class "RpGjennomføringSone" as RpGjennomf_ringSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + gjennomføring [1] : RpGjennomføringSoneType
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+  }
+
+  class RpHensynRom <<featureType>> {
+    + rom [1] : GM_Solid
+  }
+
+  class RpAngittHensynSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + angittHensyn [1] : RpAngittHensynSoneType
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+  }
+
+  class RpDetaljeringSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + detaljering [1] : RpDetaljeringSoneType
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+  }
+
+  class RpSikringSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + sikring [1] : RpSikringSoneType
+    + beskrivelse [0..1] : CharacterString
+    + hensynSonenavn [1] : CharacterString
+  }
+
+  class "RpStøySone" as RpSt_ySone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + støy [1] : RpStøySoneType
+    + beskrivelse [0..1] : CharacterString
+    + hensynSonenavn [1] : CharacterString
+  }
+
+  class RpInfrastrukturSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + infrastruktur [1] : RpInfrastrukturSoneType
+    + beskrivelse [0..1] : CharacterString
+    + hensynSonenavn [1] : CharacterString
+  }
+
+  class RpFareSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + fare [1] : RpFareSoneType
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+  }
+
+  class "RpBåndleggingSone" as RpB_ndleggingSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + båndlegging [1] : RpBåndleggingSoneType
+    + båndlagtFremTil [0..1] : Date
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+  }
+
+  class "RpHandlingOmråde" as RpHandlingOmr_de <<featureType>> {
+    + område [1] : GM_Surface
+  }
+
+  class RpJuridiskLinje <<featureType>> {
+    + linjeforløp [1] : GM_Curve
+    + juridiskLinjetype [1] : RpJuridiskLinjeType
+    + objektnavn [0..1] : CharacterString
+  }
+
+  class RpBestemmelseMidlByggAnlegg <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + bestemmelseOmrådeNavn [1] : CharacterString
+    + saksnummer [0..1] : Saksnummer
+    + avgjørelsesdato [1] : Date
+    + gyldigTilDato [1] : Date
+  }
+
+  class RpHandlingRom <<featureType>> {
+    + rom [1] : GM_Solid
+  }
+
+  class "RpBestemmelseOmråde" as RpBestemmelseOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + bestemmelseOmrådeNavn [1] : CharacterString
+    + rpBestemmelseHjemmel [1..*] : RpBestemmelseHjemmel
+  }
+
+  class RpBestemmelseRom <<featureType>> {
+    + rom [1] : GM_Solid
+  }
+
+  class RpJuridiskPunkt <<featureType>> {
+    + posisjon [1] : GM_Point
+    + symbolretning [0..1] : Vector
+    + juridiskPunkttype [1] : RpJuridiskPunktType
+    + objektnavn [0..1] : CharacterString
+  }
+
+  class "RpRegulertHøyde" as RpRegulertH_yde <<featureType>> {
+    + stedfesting [1] : GM_Primitive
+    + høydeFraPlanbestemmelse [1] : HøydeFraPlanbestemmelse
+  }
+
+  class RpBestemmelseRegTerreng <<featureType>> {
+    + overflate [1] : GM_Surface
+    + overflateType [1] : RegulertOverflateType
+  }
+
+  class "RpPåskrift" as RpP_skrift <<featureType>> {
+    + objektposisjon [1] : GM_Point
+    + tekstplassering [0..1] : GM_Primitive
+    + generellTekststreng [1] : CharacterString
+    + påskriftType [0..1] : PåskriftType
+  }
+
+  class "RbFareOmråde" as RbFareOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + reguleringsformål [1] : RegformFare
+    + feltnavn [0..1] : CharacterString
+    + reguleringsformålsutdyping [0..1] : CharacterString
+  }
+
+  class "RbFornyelseOmråde" as RbFornyelseOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + reguleringsformål [1] : RegformFornyelse
+    + feltnavn [0..1] : CharacterString
+  }
+
+  class "RbFormålOmråde" as RbForm_lOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + reguleringsformål [1] : RegformBrukFormål
+    + reguleringsformålsutdyping [0..1] : CharacterString
+    + feltnavn [0..1] : CharacterString
+    + utnytting [0..1] : Utnytting
+    + uteoppholdsareal [0..1] : Integer
+    + byggverkbestemmelse [0..1] : Byggverkbestemmelse
+    + avkjørselsbestemmelse [0..1] : Avkjørselsbestemmelse
+  }
+
+  class "RbRestriksjonOmråde" as RbRestriksjonOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + reguleringsformål [1] : RegformRestriksjon
+    + feltnavn [0..1] : CharacterString
+  }
+
+  class "RbBevaringOmråde" as RbBevaringOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + reguleringsformål [1] : RegformBevaring
+    + feltnavn [0..1] : CharacterString
+  }
+
+  class "RbRekkefølgeOmråde" as RbRekkef_lgeOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + reguleringsformål [1] : RegformRekkefølge
+    + feltnavn [0..1] : CharacterString
+  }
+
+  class Identifikasjon <<dataType>> {
+    + lokalId [1] : CharacterString
+    + navnerom [1] : CharacterString
+    + versjonId [0..1] : CharacterString
+  }
+
+  class Posisjonskvalitet <<dataType>> {
+    + datafangstmetode [0..1] : Datafangstmetode
+    + målemetode [0..1] : Målemetode
+    + nøyaktighet [0..1] : Integer
+  }
+
+  class Vertikallag <<dataType>> {
+    + lag [1] : CharacterString
+    + referansehøyde [0..1] : Real
+  }
+
+  class NasjonalArealplanId <<dataType>> {
+    + administrativEnhet [1] : AdministrativEnhetskode
+    + planId [1] : CharacterString
+  }
+
+  class AdministrativEnhetskode <<dataType>> {
+    + kommunenummer [0..1] : Kommunenummer
+    + fylkesnummer [0..1] : Fylkesnummer
+    + landkode [0..1] : Landkode
+  }
+
+  class OpprinneligNasjonalArealplanId <<dataType>> {
+    + opprinneligAdmEnhet [0..1] : CharacterString
+    + opprinneligPlanId [0..1] : CharacterString
+  }
+
+  class Saksnummer <<dataType>> {
+    + saksår [1] : Integer
+    + sakssekvensnummer [1] : Integer
+  }
+
+  class Utnytting <<dataType>> {
+    + utnyttingstype [1] : Utnyttingstype
+    + utnyttingstall [0..1] : Integer
+    + utnyttingstall_minimum [0..1] : Integer
+  }
+
+  class "HøydeFraPlanbestemmelse" as H_ydeFraPlanbestemmelse <<dataType>> {
+    + regulertHøyde [1] : Real
+    + typeHøyde [0..1] : TypeHøyde
+    + høydereferansesystem [0..1] : Høydereferansesystem
+    + terrengreferanse [0..1] : Terrengreferanse
+  }
+}
+
+  RpAvgrensingslinje <|-- RpGrense
+  SOSI_Objekt <|-- RpOmr_de
+  RpOmr_de --> RpGrense : avgrensesAv [0..*]
+  RpOmr_de --> RpObjekt : rpObjekt [0..*]
+  SOSI_Objekt <|-- RpUtsattRettsvirkningOmr_de
+  RpUtsattRettsvirkningOmr_de --> RpGrense : avgrensesAv [0..*]
+  RpUtsattRettsvirkningOmr_de --> RpObjekt : rpObjekt [0..*]
+  SOSI_Objekt <|-- RpEndringOmr_de
+  RpEndringOmr_de --> RpObjekt : rpObjekt [0..*]
+  SOSI_Objekt <|-- RpAvgrensingslinje
+  SOSI_Objekt <|-- RpObjekt
+  SOSI_Objekt <|-- RpRomligObjekt
+  RpAvgrensingslinje <|-- RpForm_lGrense
+  RpObjekt <|-- RpArealform_lOmr_de
+  RpArealform_lOmr_de --> RpForm_lGrense : avgrensesAv [0..*]
+  RpObjekt <|-- RpGjennomf_ringSone
+  RpGjennomf_ringSone --> RpHensynRom : rom [0..1]
+  RpRomligObjekt <|-- RpHensynRom
+  RpObjekt <|-- RpAngittHensynSone
+  RpAngittHensynSone --> RpHensynRom : rom [0..1]
+  RpObjekt <|-- RpDetaljeringSone
+  RpDetaljeringSone --> RpHensynRom : rom [0..*]
+  RpObjekt <|-- RpSikringSone
+  RpSikringSone --> RpHensynRom : rom [0..1]
+  RpObjekt <|-- RpSt_ySone
+  RpSt_ySone --> RpHensynRom : rom [0..1]
+  RpObjekt <|-- RpInfrastrukturSone
+  RpInfrastrukturSone --> RpHensynRom : rom [0..1]
+  RpObjekt <|-- RpFareSone
+  RpFareSone --> RpHensynRom : rom [0..1]
+  RpObjekt <|-- RpB_ndleggingSone
+  RpB_ndleggingSone --> RpHensynRom : rom [0..1]
+  RpObjekt <|-- RpHandlingOmr_de
+  RpHandlingOmr_de --> RpHandlingRom : rom [0..1]
+  RpObjekt <|-- RpJuridiskLinje
+  RpObjekt <|-- RpBestemmelseMidlByggAnlegg
+  RpBestemmelseMidlByggAnlegg --> RpBestemmelseRom : rom [0..1]
+  RpRomligObjekt <|-- RpHandlingRom
+  RpObjekt <|-- RpBestemmelseOmr_de
+  RpBestemmelseOmr_de --> RpBestemmelseRegTerreng : regulertTerreng [0..*]
+  RpBestemmelseOmr_de --> RpBestemmelseRom : rom [0..1]
+  RpRomligObjekt <|-- RpBestemmelseRom
+  RpObjekt <|-- RpJuridiskPunkt
+  RpObjekt <|-- RpRegulertH_yde
+  RpObjekt <|-- RpBestemmelseRegTerreng
+  RpObjekt <|-- RpP_skrift
+  RpObjekt <|-- RbFareOmr_de
+  RpObjekt <|-- RbFornyelseOmr_de
+  RpObjekt <|-- RbForm_lOmr_de
+  RbForm_lOmr_de --> RpForm_lGrense : avgrensesAv [0..*]
+  RpObjekt <|-- RbRestriksjonOmr_de
+  RpObjekt <|-- RbBevaringOmr_de
+  RpObjekt <|-- RbRekkef_lgeOmr_de
+
+@enduml

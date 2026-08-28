@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ShapeChangeConfiguration xmlns="http://www.interactive-instruments.de/ShapeChange/Configuration/1.1" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.interactive-instruments.de/ShapeChange/Configuration/1.1 https://shapechange.net/resources/schema/ShapeChangeConfiguration.xsd">
+ <input id="INPUT">
+  <parameter name="inputModelType" value="SCXML" />
+  <parameter name="inputFile" value="/home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/produktspesifikasjon/reguleringsplaner/reguleringsplan/schema/model.scxml" />
+  <parameter name="appSchemaNameRegex" value="^reguleringsplan$" />
+  <parameter name="publicOnly" value="true" />
+  <parameter name="checkingConstraints" value="disabled" />
+  <parameter name="sortedSchemaOutput" value="true" />
+  <parameter name="addTaggedValues" value="*" />
+  <parameter name="representTaggedValues" value="SOSI_navn,SOSI_verdi,NVDB_ID" />
+  <xi:include href="https://shapechange.net/resources/config/StandardAliases.xml" />
+ </input>
+ <log>
+  <parameter name="reportLevel" value="INFO" />
+  <parameter name="logFile" value="/home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/produktspesifikasjon/reguleringsplaner/reguleringsplan/schema/log.xml" />
+ </log>
+ <targets>
+  <TargetXmlSchema class="de.interactive_instruments.shapechange.core.target.xmlschema.XmlSchema" mode="enabled" inputs="INPUT">
+   <targetParameter name="outputDirectory" value="/home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/produktspesifikasjon/reguleringsplaner/reguleringsplan/schema/xsd" />
+   <targetParameter name="sortedOutput" value="true" />
+   <targetParameter name="defaultEncodingRule" value="sosi" />
+   <targetParameter name="documentationTemplate" value="[[documentation]]" />
+   <targetParameter name="documentationNoValue" value="" />
+   <rules>
+    <EncodingRule name="sosi" extends="iso19136_2007">
+     <rule name="rule-xsd-prop-length-size-pattern" />
+     <rule name="rule-xsd-all-tagged-values" />
+     <rule name="rule-xsd-all-notEncoded" />
+     <rule name="rule-xsd-pkg-schematron" />
+     <rule name="rule-xsd-prop-nillable" />
+     <rule name="rule-xsd-prop-targetCodeListURI" />
+    </EncodingRule>
+   </rules>
+   <xi:include href="https://shapechange.net/resources/config/StandardRules.xml" />
+   <xi:include href="https://shapechange.net/resources/config/StandardNamespaces.xml" />
+   <xi:include href="https://shapechange.net/resources/config/StandardMapEntries.xml" />
+   <xi:include href="file:///home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/.psactions/shapechange/data/StandardMapEntries_sosi.xml" />
+  </TargetXmlSchema>
+ </targets>
+</ShapeChangeConfiguration>

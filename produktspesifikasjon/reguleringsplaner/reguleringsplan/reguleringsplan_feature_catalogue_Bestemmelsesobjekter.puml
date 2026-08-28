@@ -1,0 +1,99 @@
+@startuml
+' For wide diagrams, render with: plantuml -DPLANTUML_LIMIT_SIZE=16384 ...
+' The 'scale max' directive below caps the rendered output to prevent the
+' default PlantUML 4096px size limit from cropping the diagram.
+scale max 4000*4000
+
+title Reguleringsplaner - Reguleringsplan - Bestemmelsesobjekter
+
+skinparam backgroundColor #F5F5F5
+skinparam shadowing false
+skinparam RoundCorner 6
+skinparam ArrowColor #6C8198
+skinparam wrapWidth 200
+skinparam class {
+  BackgroundColor #FBF2E8
+  BorderColor #9C8578
+  FontColor #2D201A
+  HeaderBackgroundColor #EFE1D6
+  HeaderFontColor #2D201A
+  AttributeIconSize 0
+}
+skinparam note {
+  BackgroundColor #FFFFFF
+  BorderColor #6C8198
+  FontColor #2D201A
+}
+skinparam stereotypeCBackgroundColor #EAD9CE
+skinparam stereotypeCBorderColor #9C8578
+skinparam stereotypeCFontColor #2D201A
+
+package "Bestemmelsesobjekter" {
+
+  class "RpHandlingOmråde" as RpHandlingOmr_de <<featureType>> {
+    + område [1] : GM_Surface
+  }
+
+  class RpJuridiskLinje <<featureType>> {
+    + linjeforløp [1] : GM_Curve
+    + juridiskLinjetype [1] : RpJuridiskLinjeType
+    + objektnavn [0..1] : CharacterString
+  }
+
+  class RpBestemmelseMidlByggAnlegg <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + bestemmelseOmrådeNavn [1] : CharacterString
+    + saksnummer [0..1] : Saksnummer
+    + avgjørelsesdato [1] : Date
+    + gyldigTilDato [1] : Date
+  }
+
+  class RpHandlingRom <<featureType>> {
+    + rom [1] : GM_Solid
+  }
+
+  class "RpBestemmelseOmråde" as RpBestemmelseOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + bestemmelseOmrådeNavn [1] : CharacterString
+    + rpBestemmelseHjemmel [1..*] : RpBestemmelseHjemmel
+  }
+
+  class RpBestemmelseRom <<featureType>> {
+    + rom [1] : GM_Solid
+  }
+
+  class RpJuridiskPunkt <<featureType>> {
+    + posisjon [1] : GM_Point
+    + symbolretning [0..1] : Vector
+    + juridiskPunkttype [1] : RpJuridiskPunktType
+    + objektnavn [0..1] : CharacterString
+  }
+
+  class Saksnummer <<dataType>> {
+    + saksår [1] : Integer
+    + sakssekvensnummer [1] : Integer
+  }
+}
+
+package "Eksterne referanser" <<Frame>> {
+  class RpBestemmelseRegTerreng <<Regulert høyde og terreng>> {
+  }
+  class RpObjekt <<Abstrakte typer>> {
+  }
+  class RpRomligObjekt <<Abstrakte typer>> {
+  }
+}
+
+RpObjekt <|-- RpHandlingOmr_de
+RpHandlingOmr_de --> RpHandlingRom : rom [0..1]
+RpObjekt <|-- RpJuridiskLinje
+RpObjekt <|-- RpBestemmelseMidlByggAnlegg
+RpBestemmelseMidlByggAnlegg --> RpBestemmelseRom : rom [0..1]
+RpRomligObjekt <|-- RpHandlingRom
+RpObjekt <|-- RpBestemmelseOmr_de
+RpBestemmelseOmr_de --> RpBestemmelseRegTerreng : regulertTerreng [0..*]
+RpBestemmelseOmr_de --> RpBestemmelseRom : rom [0..1]
+RpRomligObjekt <|-- RpBestemmelseRom
+RpObjekt <|-- RpJuridiskPunkt
+
+@enduml

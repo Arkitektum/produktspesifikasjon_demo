@@ -1,0 +1,97 @@
+@startuml
+' For wide diagrams, render with: plantuml -DPLANTUML_LIMIT_SIZE=16384 ...
+' The 'scale max' directive below caps the rendered output to prevent the
+' default PlantUML 4096px size limit from cropping the diagram.
+scale max 4000*4000
+
+title Reguleringsplaner - Reguleringsplan - Rp 1985
+
+skinparam backgroundColor #F5F5F5
+skinparam shadowing false
+skinparam RoundCorner 6
+skinparam ArrowColor #6C8198
+skinparam wrapWidth 200
+skinparam class {
+  BackgroundColor #FBF2E8
+  BorderColor #9C8578
+  FontColor #2D201A
+  HeaderBackgroundColor #EFE1D6
+  HeaderFontColor #2D201A
+  AttributeIconSize 0
+}
+skinparam note {
+  BackgroundColor #FFFFFF
+  BorderColor #6C8198
+  FontColor #2D201A
+}
+skinparam stereotypeCBackgroundColor #EAD9CE
+skinparam stereotypeCBorderColor #9C8578
+skinparam stereotypeCFontColor #2D201A
+
+package "Rp 1985" {
+
+  class "RbFareOmråde" as RbFareOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + reguleringsformål [1] : RegformFare
+    + feltnavn [0..1] : CharacterString
+    + reguleringsformålsutdyping [0..1] : CharacterString
+  }
+
+  class "RbFornyelseOmråde" as RbFornyelseOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + reguleringsformål [1] : RegformFornyelse
+    + feltnavn [0..1] : CharacterString
+  }
+
+  class "RbFormålOmråde" as RbForm_lOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + reguleringsformål [1] : RegformBrukFormål
+    + reguleringsformålsutdyping [0..1] : CharacterString
+    + feltnavn [0..1] : CharacterString
+    + utnytting [0..1] : Utnytting
+    + uteoppholdsareal [0..1] : Integer
+    + byggverkbestemmelse [0..1] : Byggverkbestemmelse
+    + avkjørselsbestemmelse [0..1] : Avkjørselsbestemmelse
+  }
+
+  class "RbRestriksjonOmråde" as RbRestriksjonOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + reguleringsformål [1] : RegformRestriksjon
+    + feltnavn [0..1] : CharacterString
+  }
+
+  class "RbBevaringOmråde" as RbBevaringOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + reguleringsformål [1] : RegformBevaring
+    + feltnavn [0..1] : CharacterString
+  }
+
+  class "RbRekkefølgeOmråde" as RbRekkef_lgeOmr_de <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + reguleringsformål [1] : RegformRekkefølge
+    + feltnavn [0..1] : CharacterString
+  }
+
+  class Utnytting <<dataType>> {
+    + utnyttingstype [1] : Utnyttingstype
+    + utnyttingstall [0..1] : Integer
+    + utnyttingstall_minimum [0..1] : Integer
+  }
+}
+
+package "Eksterne referanser" <<Frame>> {
+  class "RpFormålGrense" as RpForm_lGrense <<Formål>> {
+  }
+  class RpObjekt <<Abstrakte typer>> {
+  }
+}
+
+RpObjekt <|-- RbFareOmr_de
+RpObjekt <|-- RbFornyelseOmr_de
+RpObjekt <|-- RbForm_lOmr_de
+RbForm_lOmr_de --> RpForm_lGrense : avgrensesAv [0..*]
+RpObjekt <|-- RbRestriksjonOmr_de
+RpObjekt <|-- RbBevaringOmr_de
+RpObjekt <|-- RbRekkef_lgeOmr_de
+
+@enduml

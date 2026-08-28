@@ -1,0 +1,2123 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:reguleringsplan="https://skjema.geonorge.no/SOSI/produktspesifikasjon/reguleringsplaner/reguleringsplan/1.0" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://skjema.geonorge.no/SOSI/produktspesifikasjon/reguleringsplaner/reguleringsplan/1.0" version="1.0">
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="AdministrativEnhetskode" substitutionGroup="gml:AbstractObject" type="reguleringsplan:AdministrativEnhetskodeType"/>
+  <complexType name="AdministrativEnhetskodeType">
+    <sequence>
+      <element minOccurs="0" name="kommunenummer" type="gml:CodeType">
+        <annotation>
+          <documentation>offisiell nummerering av kommuner</documentation>
+          <appinfo>
+            <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer</sc:targetCodeListURI>
+            <sc:taggedValue tag="SOSI_navn">KOMM</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="fylkesnummer" type="gml:CodeType">
+        <annotation>
+          <documentation>offisiell nummerering av fylker</documentation>
+          <appinfo>
+            <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/fylkesnummer</sc:targetCodeListURI>
+            <sc:taggedValue tag="SOSI_navn">FYLKESNR</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="landkode" type="reguleringsplan:LandkodeType">
+        <annotation>
+          <documentation>kode med verdien 'NO', som angir at administrativ enhet er staten Norge, ihht. ISO 3166</documentation>
+          <appinfo>
+            <sc:taggedValue tag="SOSI_navn">LANDKODE</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="AdministrativEnhetskodePropertyType">
+    <sequence>
+      <element ref="reguleringsplan:AdministrativEnhetskode"/>
+    </sequence>
+  </complexType>
+  <element name="HøydeFraPlanbestemmelse" substitutionGroup="gml:AbstractObject" type="reguleringsplan:HøydeFraPlanbestemmelseType"/>
+  <complexType name="HøydeFraPlanbestemmelseType">
+    <sequence>
+      <element name="regulertHøyde" type="double">
+        <annotation>
+          <documentation>tall for enten kotehøyde eller høyde over terreng</documentation>
+          <appinfo>
+            <sc:taggedValue tag="SOSI_navn">REGULERTHØYDE</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="typeHøyde" type="gml:CodeType">
+        <annotation>
+          <documentation>hva en planbestemmelse om regulert høyde gjelder for</documentation>
+          <appinfo>
+            <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/plan-felles/typehøyde</sc:targetCodeListURI>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="høydereferansesystem" type="gml:CodeType">
+        <annotation>
+          <documentation>høydereferansesystem som ligger til grunn for bestemmelser om regulert høyde
+
+Offisielt høydereferansesystem i Norge er NN2000, men eldre planer kan ha brukt et eldre høydereferansesystem</documentation>
+          <appinfo>
+            <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/plan-felles/høydereferansesystem</sc:targetCodeListURI>
+            <sc:taggedValue tag="SOSI_navn">HØYDE-REF</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="terrengreferanse" type="gml:CodeType">
+        <annotation>
+          <documentation>type terrengoverflate som danner utgangspunktet for å fastsette regulert høyde over terreng
+
+Kan bare brukes for gesimshøyde og mønehøyde</documentation>
+          <appinfo>
+            <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/plan-felles/terrengreferanse</sc:targetCodeListURI>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="HøydeFraPlanbestemmelsePropertyType">
+    <sequence>
+      <element ref="reguleringsplan:HøydeFraPlanbestemmelse"/>
+    </sequence>
+  </complexType>
+  <element name="Identifikasjon" substitutionGroup="gml:AbstractObject" type="reguleringsplan:IdentifikasjonType"/>
+  <complexType name="IdentifikasjonType">
+    <sequence>
+      <element name="lokalId" type="string">
+        <annotation>
+          <documentation>lokal identifikator av et objekt
+Skal være en uuid, slik at den er unik, uavhengig av navnerommet</documentation>
+          <appinfo>
+            <sc:taggedValue tag="SOSI_navn">LOKALID</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="navnerom" type="string">
+        <annotation>
+          <documentation>navnerom som unikt identifiserer datakilden til et objekt.
+
+Merknad: Navnerom anbefales å være en http-URI og må være registrert i data.geonorge.no. For plan anbefales navnerommet 'http://data.geonorge.no/sosi/plan'</documentation>
+          <appinfo>
+            <sc:taggedValue tag="SOSI_navn">NAVNEROM</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="versjonId" type="string">
+        <annotation>
+          <documentation>identifikasjon av en spesiell versjon av et geografisk objekt (instans)</documentation>
+          <appinfo>
+            <sc:taggedValue tag="SOSI_navn">VERSJONID</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="IdentifikasjonPropertyType">
+    <sequence>
+      <element ref="reguleringsplan:Identifikasjon"/>
+    </sequence>
+  </complexType>
+  <simpleType name="LandkodeType">
+    <annotation>
+      <documentation>alfanumerisk kode for nasjonalt nivå / Norge.
+
+Avledet fra "ISO 3166 Codes for the representation of names of countries and their subdivisions"</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="NO">
+        <annotation>
+          <documentation>Norge</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <element name="NasjonalArealplanId" substitutionGroup="gml:AbstractObject" type="reguleringsplan:NasjonalArealplanIdType"/>
+  <complexType name="NasjonalArealplanIdType">
+    <sequence>
+      <element name="administrativEnhet" type="reguleringsplan:AdministrativEnhetskodePropertyType">
+        <annotation>
+          <documentation>entydig identifikasjon av administrativ enhet som vedtar planen (vedtaksmyndighet)
+
+Merknad: Bruken av landkode=NO er forbeholdt statlig vedtaksmyndighet</documentation>
+        </annotation>
+      </element>
+      <element name="planId" type="string">
+        <annotation>
+          <documentation>entydig identifikasjon for en plan innen den administrative enheten</documentation>
+          <appinfo>
+            <sc:taggedValue tag="SOSI_navn">PLANID</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="NasjonalArealplanIdPropertyType">
+    <sequence>
+      <element ref="reguleringsplan:NasjonalArealplanId"/>
+    </sequence>
+  </complexType>
+  <element name="OpprinneligNasjonalArealplanId" substitutionGroup="gml:AbstractObject" type="reguleringsplan:OpprinneligNasjonalArealplanIdType"/>
+  <complexType name="OpprinneligNasjonalArealplanIdType">
+    <sequence>
+      <element minOccurs="0" name="opprinneligAdmEnhet" type="string">
+        <annotation>
+          <documentation>opprinnelig identifikasjon av administrativ enhet som har vedtatt planen (opprinnelig vedtaksmyndighet)</documentation>
+          <appinfo>
+            <sc:taggedValue tag="SOSI_navn">OPPRINNELIGADMINISTRATIVENHET</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="opprinneligPlanId" type="string">
+        <annotation>
+          <documentation>opprinnelig verdi for planid, unik for planen innen den opprinnelige adm. enheten</documentation>
+          <appinfo>
+            <sc:taggedValue tag="SOSI_navn">PLANID</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="OpprinneligNasjonalArealplanIdPropertyType">
+    <sequence>
+      <element ref="reguleringsplan:OpprinneligNasjonalArealplanId"/>
+    </sequence>
+  </complexType>
+  <element name="Posisjonskvalitet" substitutionGroup="gml:AbstractObject" type="reguleringsplan:PosisjonskvalitetType"/>
+  <complexType name="PosisjonskvalitetType">
+    <sequence>
+      <element minOccurs="0" name="datafangstmetode" type="gml:CodeType">
+        <annotation>
+          <documentation>hvordan  grunnrisskoordinatene (x,y) er posisjonert fra et datagrunnlag</documentation>
+          <appinfo>
+            <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/plan-felles/datafangstmetode</sc:targetCodeListURI>
+            <sc:taggedValue tag="SOSI_navn">DATAFANGSTMETODE</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="målemetode" type="gml:CodeType">
+        <annotation>
+          <documentation>metode som ligger til grunn for registrering av posisjon</documentation>
+          <appinfo>
+            <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/malemetode-kode</sc:targetCodeListURI>
+            <sc:taggedValue tag="SOSI_navn">MÅLEMETODE</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="nøyaktighet" type="integer">
+        <annotation>
+          <documentation>punktstandardavviket i grunnriss, oppgitt i cm, for punkter, samt tverravvik for linjer</documentation>
+          <appinfo>
+            <sc:taggedValue tag="SOSI_navn">NØYAKTIGHET</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="PosisjonskvalitetPropertyType">
+    <sequence>
+      <element ref="reguleringsplan:Posisjonskvalitet"/>
+    </sequence>
+  </complexType>
+  <element name="RbBevaringOmråde" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RbBevaringOmrådeType">
+    <annotation>
+      <documentation>område for bevaring i regulerings- og bebyggelsesplan (pbl. 1985 § 25 første ledd nr. 6)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RbBevaringOmrådeType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning i grunnriss</documentation>
+            </annotation>
+          </element>
+          <element name="reguleringsformål" type="gml:CodeType">
+            <annotation>
+              <documentation>type bevaringsformål
+(pbl. 1985 § 25 første ledd)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/pbl-1985/regformbevaring</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">REGFORM</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="feltnavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på formålsfelt innen regulerings- og bebyggelsesplan
+(pbl. 1985 § 25 første ledd)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">FELTNAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RbBevaringOmrådePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RbBevaringOmråde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RbFareOmråde" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RbFareOmrådeType">
+    <annotation>
+      <documentation>område med fare i regulerings- og bebyggelsesplan (pbl. 1985 § 25 første ledd, nr. 5)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RbFareOmrådeType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning i grunnriss</documentation>
+            </annotation>
+          </element>
+          <element name="reguleringsformål" type="gml:CodeType">
+            <annotation>
+              <documentation>type reguleringsformål
+(pbl. 1985 § 25 første ledd)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/pbl-1985/regformfare</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">REGFORM</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="feltnavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på formålsfelt innen regulerings- og bebyggelsesplan
+(pbl. 1985 § 25 første ledd)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">FELTNAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="reguleringsformålsutdyping" type="string">
+            <annotation>
+              <documentation>utdyping av reguleringsformål
+(pbl. 1985 § 25 første ledd)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">REGFORMUTDYP</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RbFareOmrådePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RbFareOmråde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RbFormålOmråde" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RbFormålOmrådeType">
+    <annotation>
+      <documentation>område for reguleringsformål i regulerings- og bebyggelsesplan (pbl. 1985 § 25, første ledd)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RbFormålOmrådeType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>formålområdets flategeometri</documentation>
+            </annotation>
+          </element>
+          <element name="reguleringsformål" type="gml:CodeType">
+            <annotation>
+              <documentation>type reguleringsformål
+(pbl. 1985 § 25 første ledd)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/pbl-1985/reguleringsformål</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">REGFORM</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="reguleringsformålsutdyping" type="string">
+            <annotation>
+              <documentation>utdyping av reguleringsformål
+(pbl. 1985 § 25 første ledd)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">REGFORMUTDYP</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="feltnavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på formålsfelt innen regulerings- og bebyggelsesplan
+(pbl. 1985 § 25 første ledd)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">FELTNAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="utnytting" type="reguleringsplan:UtnyttingPropertyType">
+            <annotation>
+              <documentation>grad av utnytting
+(pbl85. § 20-4 andre ledd bokstav b og § 26 første ledd og forskrift TEK kap. III)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">UTNYTT</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="uteoppholdsareal" type="integer">
+            <annotation>
+              <documentation>minste uteoppholdsareal
+(pbl. 1985 § 26 andre ledd)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">UTEAREAL</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="byggverkbestemmelse" type="gml:CodeType">
+            <annotation>
+              <documentation>planbestemmelse om bygningers plassering, utforming mv.
+(pbl. 1985 § 20-4 andre ledd bokstav a og § 26 første ledd og § 28-2)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/byggverkbestemmelse</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">BYGGVERK</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avkjørselsbestemmelse" type="gml:CodeType">
+            <annotation>
+              <documentation>planbestemmelse om avkjørsel
+(pbl. 1985 §§ 25 og 26 første ledd)
+
+Merknad:
+Angir om avkjørsel til formålsområdet tillates eller ikke tillates, eller om det i planbestemmelser er tillatt avkjørsel via annet formål enn vei (via gangvei, turvei e.l.).  I sistnevnte situasjon knyttes egenskapen til det formålsområdet det er tillatt å passere</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/avkjørselsbestemmelse</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">AVKJ</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="avgrensesAv" type="reguleringsplan:RpFormålGrensePropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RbFormålOmrådePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RbFormålOmråde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RbFornyelseOmråde" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RbFornyelseOmrådeType">
+    <annotation>
+      <documentation>område for fornyelse i regulerings- og bebyggelsesplan (pbl. § 25 første ledd nr. 8)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RbFornyelseOmrådeType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning i grunnriss</documentation>
+            </annotation>
+          </element>
+          <element name="reguleringsformål" type="gml:CodeType">
+            <annotation>
+              <documentation>type reguleringsformål
+(pbl. 1985 § 25 første ledd)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/pbl-1985/regformfornyelse</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">REGFORM</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="feltnavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på formålsfelt innen regulerings- og bebyggelsesplan
+(pbl. 1985 § 25 første ledd)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">FELTNAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RbFornyelseOmrådePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RbFornyelseOmråde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RbRekkefølgeOmråde" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RbRekkefølgeOmrådeType">
+    <annotation>
+      <documentation>område med formålsrekkefølge i regulerings- og bebyggelsesplan (pbl. 1985 § 25 andre ledd, § 26 og § 28-2)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RbRekkefølgeOmrådeType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning i grunnriss</documentation>
+            </annotation>
+          </element>
+          <element name="reguleringsformål" type="gml:CodeType">
+            <annotation>
+              <documentation>type reguleringsformål
+(pbl. 1985 § 25 første ledd)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/pbl-1985/regformrekkefølge</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">REGFORM</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="feltnavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på formålsfelt innen regulerings- og bebyggelsesplan
+(pbl. 1985 § 25 første ledd)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">FELTNAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RbRekkefølgeOmrådePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RbRekkefølgeOmråde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RbRestriksjonOmråde" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RbRestriksjonOmrådeType">
+    <annotation>
+      <documentation>område med restriksjon i regulerings- og bebyggelsesplan (pbl. 1985 § 25 første ledd nr. 6, § 26 og § 28-2)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RbRestriksjonOmrådeType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning i grunnriss</documentation>
+            </annotation>
+          </element>
+          <element name="reguleringsformål" type="gml:CodeType">
+            <annotation>
+              <documentation>type reguleringsformål
+(pbl.1985  § 25 første ledd)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/pbl-1985/regformrestriksjon</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">REGFORM</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="feltnavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på formålsfelt innen regulerings- og bebyggelsesplan
+(pbl. 1985 § 25 første ledd)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">FELTNAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RbRestriksjonOmrådePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RbRestriksjonOmråde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpAngittHensynSone" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpAngittHensynSoneType">
+    <annotation>
+      <documentation>hensynssone for nærmere angitt hensyn i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav c)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpAngittHensynSoneType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning og avgrensing i grunnriss (2D)</documentation>
+            </annotation>
+          </element>
+          <element name="angittHensyn" type="gml:CodeType">
+            <annotation>
+              <documentation>type angitt hensyn i hensynssone for nærmere angitt særlig hensyn
+(pbl. §12-6, jf. § 11-8 tredje ledd bokstav c)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/hensyn/angitthensynsonetype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">RPANGITTHENSYN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="hensynSonenavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på hensynssone
+(pbl. §§ 12-6, 12 A-13, jf. § 11-8)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">HENSYNSONENAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>supplerende beskrivelse</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">BESKRIVELSE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rom" type="reguleringsplan:RpHensynRomPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpAngittHensynSonePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpAngittHensynSone"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpArealformålOmråde" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpArealformålOmrådeType">
+    <annotation>
+      <documentation>område med angitt arealformål i reguleringsplan  (pbl. § 12-5 - https://lovdata.no/lov/2008-06-27-71/§12-5)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpArealformålOmrådeType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>flategeometri</documentation>
+            </annotation>
+          </element>
+          <element name="eierform" type="gml:CodeType">
+            <annotation>
+              <documentation>henvisning til planbestemmelse om arealet skal brukes av det offentlige, eller være fellesarealer for flere eiendommer
+(pbl. § 12-7 nr. 14 - https://lovdata.no/lov/2008-06-27-71/§12-7)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/plan-felles/eierformtype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">EIERFORM</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="arealformål" type="gml:CodeType">
+            <annotation>
+              <documentation>kode for arealformål i reguleringsplan
+(kart- og planforskriften Vedlegg I - https://lovdata.no/dokument/SF/forskrift/2025-01-20-52)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/rparealformål</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">RPAREALFORMÅL</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>detaljert beskrivelse av formål
+
+Merknad: kan benyttes der loven gir anledning til det, men lov/forskrift ikke har angitt detaljeringen i form av spesifikke arealformål</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">BESKRIVELSE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="feltnavn" type="string">
+            <annotation>
+              <documentation>entydig navn/betegnelse på formålsområde i reguleringsplan</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">FELTNAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="utnytting" type="reguleringsplan:UtnyttingPropertyType">
+            <annotation>
+              <documentation>grad av utnytting
+(pbl. § 12-7 nr. 1, samt TEK kap. 5)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">UTNYTT</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="uteoppholdsareal" type="integer">
+            <annotation>
+              <documentation>minste uteoppholdsareal
+(TEK § 5-6)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">UTEAREAL</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="byggverkbestemmelse" type="gml:CodeType">
+            <annotation>
+              <documentation>planbestemmelse om bygningers plassering, utforming mv.
+(pbl. § 12-7 nr. 1,  samt TEK kap. 7 og  8-3)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/byggverkbestemmelse</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">BYGGVERK</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avkjørselsbestemmelse" type="gml:CodeType">
+            <annotation>
+              <documentation>planbestemmelse om avkjørsel
+(pbl. § 11-10 nr. 4 og TEK § 8-8)
+
+Merknad:
+Angir om avkjørsel til formålsområde tillates eller ikke tillates, eller om det i plan / bestemmelser er tillatt avkjørsel via annet formål enn vei (via gangvei, turvei e.l.).  I sistnevnte situasjon knyttes egenskapen til det formålsområde det er tillatt å passere</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/avkjørselsbestemmelse</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">AVKJ</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="avgrensesAv" type="reguleringsplan:RpFormålGrensePropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpArealformålOmrådePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpArealformålOmråde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="RpAvgrensingslinje" substitutionGroup="reguleringsplan:SOSI_Objekt" type="reguleringsplan:RpAvgrensingslinjeType">
+    <annotation>
+      <documentation>abstrakt objekttype for avgrensingslinjer i en reguleringsplan
+
+Brukes der det er behov for å ta vare på kvalitesinformasjon som ikke kan ligge på flateobjektene</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="RpAvgrensingslinjeType">
+    <complexContent>
+      <extension base="reguleringsplan:SOSI_ObjektType">
+        <sequence>
+          <element minOccurs="0" name="nasjonalArealplanId" type="reguleringsplan:NasjonalArealplanIdPropertyType">
+            <annotation>
+              <documentation>identifikasjon av arealplanen som objektet tilhører.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vertikalnivå" type="gml:CodeType">
+            <annotation>
+              <documentation>beliggenhet i forhold til jordoverflaten
+(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/plan-felles/vertikalnivå</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">VERTNIV</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vertikallag" type="reguleringsplan:VertikallagPropertyType">
+            <annotation>
+              <documentation>identifikasjon og plassering av lag innen et vertikalnivå
+(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpAvgrensingslinjePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpAvgrensingslinje"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpBestemmelseMidlByggAnlegg" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpBestemmelseMidlByggAnleggType">
+    <annotation>
+      <documentation>bestemmelsesområde for midlertidig bygge- og anlegg, jfr. pbl. § 12-7 nr. 1.
+
+Merknad:
+Det er utgitt en NPAD Del 1.2 som beskriver det rettslige grunnlaget og den tekniske framstillingen av midlertidig bygge- og anleggsområde.</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpBestemmelseMidlByggAnleggType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets flategeometri</documentation>
+            </annotation>
+          </element>
+          <element name="bestemmelseOmrådeNavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse for bestemmelseområde
+(pbl. § 12-7 nr.1)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">BESTEMMELSEOMRNAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="saksnummer" type="reguleringsplan:SaksnummerPropertyType">
+            <annotation>
+              <documentation>entydig nummerering av en sak i et saksbehandlingsverktøy</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">SAKSNR</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="avgjørelsesdato" type="date">
+            <annotation>
+              <documentation>vedtaksdato for etablering av området</documentation>
+            </annotation>
+          </element>
+          <element name="gyldigTilDato" type="date">
+            <annotation>
+              <documentation>utløpsdato for bestemmelseområdet.
+Etter denne skal det midlertidige bestemmelseområdet fjernes</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">GYLDIGTILDATO</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rom" type="reguleringsplan:RpBestemmelseRomPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpBestemmelseMidlByggAnleggPropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpBestemmelseMidlByggAnlegg"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpBestemmelseOmråde" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpBestemmelseOmrådeType">
+    <annotation>
+      <documentation>område med bestemmelse illustrert på kart (pbl. § 12-7 nr. 1-14)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpBestemmelseOmrådeType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning og avgrensing i grunnriss (2D)</documentation>
+            </annotation>
+          </element>
+          <element name="bestemmelseOmrådeNavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på bestemmelsesområde
+(pbl. §§ 11-9, 11-10 og 11-11, jf. pbl. § 12-7)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">BESTEMMELSEOMRNAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" name="rpBestemmelseHjemmel" type="gml:CodeType">
+            <annotation>
+              <documentation>kode for hjemmel til planbestemmelse i reguleringsplan
+(pbl. §12-7)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/rpbestemmelsehjemmel</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">RPBESTEMMELSEHJEMMEL</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="regulertTerreng" type="reguleringsplan:RpBestemmelseRegTerrengPropertyType"/>
+          <element minOccurs="0" name="rom" type="reguleringsplan:RpBestemmelseRomPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpBestemmelseOmrådePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpBestemmelseOmråde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpBestemmelseRegTerreng" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpBestemmelseRegTerrengType">
+    <annotation>
+      <documentation>regulert terrengoverflate slik det fremgår av planen
+Terrenget angis enten slik det skal være når tiltaket er gjennomført eller slik det maksimalt/minimalt kan utnyttes.</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpBestemmelseRegTerrengType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="overflate" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>angivelse av den regulerte terrengoverflasten</documentation>
+            </annotation>
+          </element>
+          <element name="overflateType" type="gml:CodeType">
+            <annotation>
+              <documentation>om bestemmelsen fastsetter endelig terrengoverflate eller om den gir rammer for tillatt endring</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/regulertoverflatetype</sc:targetCodeListURI>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpBestemmelseRegTerrengPropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpBestemmelseRegTerreng"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpBestemmelseRom" substitutionGroup="reguleringsplan:RpRomligObjekt" type="reguleringsplan:RpBestemmelseRomType">
+    <annotation>
+      <documentation>bestemmelserom i 3D for RpBestemmelseOmråde</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpBestemmelseRomType">
+    <complexContent>
+      <extension base="reguleringsplan:RpRomligObjektType">
+        <sequence>
+          <element name="rom" type="gml:SolidPropertyType">
+            <annotation>
+              <documentation>lukket romgeometri i 3D</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpBestemmelseRomPropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpBestemmelseRom"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpBåndleggingSone" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpBåndleggingSoneType">
+    <annotation>
+      <documentation>hensynssone for båndlegging i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav d)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpBåndleggingSoneType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning og avgrensing i grunnriss (2D)</documentation>
+            </annotation>
+          </element>
+          <element name="båndlegging" type="gml:CodeType">
+            <annotation>
+              <documentation>type båndlegging i hensynssone for båndlegging
+(pbl. § 12-6, jf. § 11-8 tredje ledd bokstav d)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/hensyn/båndleggingsonetype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">RPBÅNDLEGGING</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="båndlagtFremTil" type="date">
+            <annotation>
+              <documentation>dato når båndleggingen opphører</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">BÅNDLAGTFREMTIL</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="hensynSonenavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på hensynssone
+(pbl. §§ 12-6, 12 A-13, jf. § 11-8)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">HENSYNSONENAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>supplerende beskrivelse</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">BESKRIVELSE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rom" type="reguleringsplan:RpHensynRomPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpBåndleggingSonePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpBåndleggingSone"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpDetaljeringSone" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpDetaljeringSoneType">
+    <annotation>
+      <documentation>hensynssone for videreføring av reguleringsplan (pbl. § 12-6, jf. §11-8 tredje ledd bokstav f).
+
+Merknad:
+Kan benyttes i områdeplan for videreføring av plan for detaljregulering
+Benyttes ikke i plan for detaljregulering</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpDetaljeringSoneType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning og avgrensing i grunnriss (2D)</documentation>
+            </annotation>
+          </element>
+          <element name="detaljering" type="gml:CodeType">
+            <annotation>
+              <documentation>type detaljering i hensynsone for videreføring av gjeldende reguleringsplan
+(pbl. § 12-6, jf. §11-8 tredje ledd bokstav f)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/hensyn/detaljeringsonetype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">RPDETALJERING</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="hensynSonenavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på hensynssone
+(pbl. §§ 12-6, 12 A-13, jf. § 11-8)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">HENSYNSONENAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>supplerende beskrivelse</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">BESKRIVELSE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="rom" type="reguleringsplan:RpHensynRomPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpDetaljeringSonePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpDetaljeringSone"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpEndringOmråde" substitutionGroup="reguleringsplan:SOSI_Objekt" type="reguleringsplan:RpEndringOmrådeType">
+    <annotation>
+      <documentation>planområde for reguleringsplan</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpEndringOmrådeType">
+    <complexContent>
+      <extension base="reguleringsplan:SOSI_ObjektType">
+        <sequence>
+          <element name="nasjonalArealplanId" type="reguleringsplan:NasjonalArealplanIdPropertyType">
+            <annotation>
+              <documentation>referanse til arealplanen som planområdet tilhører.</documentation>
+            </annotation>
+          </element>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>planområdets flategeometri</documentation>
+            </annotation>
+          </element>
+          <element name="vertikalnivå" type="gml:CodeType">
+            <annotation>
+              <documentation>beliggenhet i forhold til jordoverflaten
+(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/plan-felles/vertikalnivå</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">VERTNIV</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vertikallag" type="reguleringsplan:VertikallagPropertyType">
+            <annotation>
+              <documentation>identifikasjon og plassering av lag innen et vertikalnivå
+(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)</documentation>
+            </annotation>
+          </element>
+          <element name="endringstype" type="gml:CodeType">
+            <annotation>
+              <documentation>om endringen av reguleringsplanen er foretatt som en forenklet endring eller en endring med full planbehandling</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/planregister/planendringstype</sc:targetCodeListURI>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="hjemmelsgrunnlag" type="string">
+            <annotation>
+              <documentation>lovgrunnlag som ligger til grunn for endringen</documentation>
+            </annotation>
+          </element>
+          <element name="saksnummer" type="reguleringsplan:SaksnummerPropertyType">
+            <annotation>
+              <documentation>entydig nummerering av en sak i et saksbehandlingsverktøy</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="endringsnavn" type="string">
+            <annotation>
+              <documentation>navn eller betegnelse på endringen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="endringVedtakDato" type="date">
+            <annotation>
+              <documentation>dato når endringen av arealplanen trådte ikraft</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="rpObjekt" type="reguleringsplan:RpObjektPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpEndringOmrådePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpEndringOmråde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpFareSone" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpFareSoneType">
+    <annotation>
+      <documentation>hensynssone for fare i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpFareSoneType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning og avgrensing i grunnriss (2D)</documentation>
+            </annotation>
+          </element>
+          <element name="fare" type="gml:CodeType">
+            <annotation>
+              <documentation>type fare i hensynssone for fare
+(pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/hensyn/faresonetype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">RPFARE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="hensynSonenavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på hensynssone
+(pbl. §§ 12-6, 12 A-13, jf. § 11-8)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">HENSYNSONENAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>supplerende beskrivelse</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">BESKRIVELSE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rom" type="reguleringsplan:RpHensynRomPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpFareSonePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpFareSone"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpFormålGrense" substitutionGroup="reguleringsplan:RpAvgrensingslinje" type="reguleringsplan:RpFormålGrenseType">
+    <annotation>
+      <documentation>grense for reguleringsformål i regulerings- og bebyggelsesplan (pbl. 1985 § 25 første ledd) / områderegulering og detaljregulering (pbl. § 12-5)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpFormålGrenseType">
+    <complexContent>
+      <extension base="reguleringsplan:RpAvgrensingslinjeType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>avgrensningslinje</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpFormålGrensePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpFormålGrense"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpGjennomføringSone" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpGjennomføringSoneType">
+    <annotation>
+      <documentation>hensynssone for særskilte gjennomføringsvirkemidler i reguleringsplan (pbl. §§ 12-6, 12 A-1, 12 A-13, jf. § 11-8 tredje ledd bokstav e)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpGjennomføringSoneType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning og avgrensing i grunnriss (2D)</documentation>
+            </annotation>
+          </element>
+          <element name="gjennomføring" type="gml:CodeType">
+            <annotation>
+              <documentation>type særskilte gjennomføringsvirkemidler i gjennomføringssone
+(pbl. § 12-6, jf. § 11-8 tredje ledd bokstav e andre ledd)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/hensyn/gjennomføringsonetype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">RPGJENNOMFØRING</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="hensynSonenavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på hensynssone
+(pbl. §§ 12-6, 12 A-13, jf. § 11-8)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">HENSYNSONENAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>supplerende beskrivelse</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">BESKRIVELSE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rom" type="reguleringsplan:RpHensynRomPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpGjennomføringSonePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpGjennomføringSone"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpGrense" substitutionGroup="reguleringsplan:RpAvgrensingslinje" type="reguleringsplan:RpGrenseType">
+    <annotation>
+      <documentation>avgrensingslinje for et planomåde (RpOmråde) i en reguleringplan.</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpGrenseType">
+    <complexContent>
+      <extension base="reguleringsplan:RpAvgrensingslinjeType">
+        <sequence>
+          <element name="grense" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>avgrensningslinje</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpGrensePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpGrense"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpHandlingOmråde" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpHandlingOmrådeType">
+    <annotation>
+      <documentation>område som konstruksjonen/tiltaket må holde seg innenfor (kart- og planforskriften vedlegg - https://lovdata.no/forskrift/2025-01-20-52/§2).
+
+Merknad: RpHandlingOmråde har samme betydning som byggegrense og anvendes ved fremstilling av planen i 2D. Dette kan suppleres med et RpHandlingRom for å avgrense tiltaket vertikalt.</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpHandlingOmrådeType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>områdets flategeometri</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rom" type="reguleringsplan:RpHandlingRomPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpHandlingOmrådePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpHandlingOmråde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpHandlingRom" substitutionGroup="reguleringsplan:RpRomligObjekt" type="reguleringsplan:RpHandlingRomType">
+    <annotation>
+      <documentation>handlingsrom i 3D for RpHandlingOmråde.
+
+Konstruksjonen/tiltaket må holde seg innenfor handlingrommet, i henhold til de tilhørende planbestemmelsene</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpHandlingRomType">
+    <complexContent>
+      <extension base="reguleringsplan:RpRomligObjektType">
+        <sequence>
+          <element name="rom" type="gml:SolidPropertyType">
+            <annotation>
+              <documentation>lukket romgeometri i 3D</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpHandlingRomPropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpHandlingRom"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpHensynRom" substitutionGroup="reguleringsplan:RpRomligObjekt" type="reguleringsplan:RpHensynRomType">
+    <annotation>
+      <documentation>hensynsrom i 3D for RpHensynSone
+hensynsrom i 3D for en hensynssone i reguleringsplan
+
+Hensynsrommet tilhører alltid en hensynssone, som er en av subtypene til den abstrakte supertypen RpHensynSone, dvs. en av disse: RpStøySone, RpSikringSone, RpFareSone, RpBåndleggingSone, RpAngittHensynSone, RpInfrastrukturSone eller RpGjennomføringSone.</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpHensynRomType">
+    <complexContent>
+      <extension base="reguleringsplan:RpRomligObjektType">
+        <sequence>
+          <element name="rom" type="gml:SolidPropertyType">
+            <annotation>
+              <documentation>objektets utstrekning og avgrensning i 3D</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpHensynRomPropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpHensynRom"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpInfrastrukturSone" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpInfrastrukturSoneType">
+    <annotation>
+      <documentation>hensynssone for særlige krav til infrastruktur i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav b)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpInfrastrukturSoneType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning og avgrensing i grunnriss (2D)</documentation>
+            </annotation>
+          </element>
+          <element name="infrastruktur" type="gml:CodeType">
+            <annotation>
+              <documentation>type infrastrukturkrav i hensynsone for infrastruktur
+(pbl. § 12-6, jf. § 11-8 tredje ledd bokstav b)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/hensyn/infrastruktursonetype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">RPINFRASTRUKTUR</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>supplerende beskrivelse</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">BESKRIVELSE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="hensynSonenavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på hensynssone
+(pbl. §§ 12-6, 12 A-13, jf. § 11-8)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">HENSYNSONENAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rom" type="reguleringsplan:RpHensynRomPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpInfrastrukturSonePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpInfrastrukturSone"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpJuridiskLinje" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpJuridiskLinjeType">
+    <annotation>
+      <documentation>bestemmelse stedfestet med linje i reguleringsplan
+(pbl. §12-7, kart- og planforskriften Vedlegg IV - https://lovdata.no/forskrift/2025-01-20-52/§2; pbl. 1985 §§ 25, 26 og 28-2)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpJuridiskLinjeType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="linjeforløp" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>linje for stedfesting av bestemmeler</documentation>
+            </annotation>
+          </element>
+          <element name="juridiskLinjetype" type="gml:CodeType">
+            <annotation>
+              <documentation>type bestemmelse stedfestet med  linje</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/rpjuridisklinjetype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">RPJURLINJE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="objektnavn" type="string">
+            <annotation>
+              <documentation>entydig tekstlig betegnelse som identiserer kartobjektet,
+kan fungere som koblingsnøkkel til mellom kartobjekt og planbestememlser</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpJuridiskLinjePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpJuridiskLinje"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpJuridiskPunkt" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpJuridiskPunktType">
+    <annotation>
+      <documentation>bestemmelse stedfestet med punkt i reguleringsplan (pbl. §12-7, kart- og planforskriften Vedlegg IV - https://lovdata.no/forskrift/2025-01-20-52/§2 ; pbl. 1985 §§ 25, 26 og 28-2)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpJuridiskPunktType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>punkt for stedfesting av bestemmelser</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="symbolretning" type="gml:VectorType">
+            <annotation>
+              <documentation>retningsvektor i kartkoordinatsystemet som fastsetter retning av kartsymbol</documentation>
+            </annotation>
+          </element>
+          <element name="juridiskPunkttype" type="gml:CodeType">
+            <annotation>
+              <documentation>type bestemmelse stedfestet med punkt</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/rpjuridiskpunkttype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">RPJURPUNKT</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="objektnavn" type="string">
+            <annotation>
+              <documentation>entydig tekstlig betegnelse som identiserer kartobjektet,
+kan fungere som koblingsnøkkel til mellom kartobjekt og planbestememlser</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpJuridiskPunktPropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpJuridiskPunkt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="RpObjekt" substitutionGroup="reguleringsplan:SOSI_Objekt" type="reguleringsplan:RpObjektType">
+    <annotation>
+      <documentation>abstrakt supertype for kartobjekter som representer stedfestede planelementer, som formål, hensynssoner og bestemmelsesobjekter</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="RpObjektType">
+    <complexContent>
+      <extension base="reguleringsplan:SOSI_ObjektType">
+        <sequence>
+          <element name="nasjonalArealplanId" type="reguleringsplan:NasjonalArealplanIdPropertyType">
+            <annotation>
+              <documentation>identifikasjon av arealplanen som objektet tilhører.</documentation>
+            </annotation>
+          </element>
+          <element name="vertikalnivå" type="gml:CodeType">
+            <annotation>
+              <documentation>beliggenhet i forhold til jordoverflaten
+(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/plan-felles/vertikalnivå</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">VERTNIV</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vertikallag" type="reguleringsplan:VertikallagPropertyType">
+            <annotation>
+              <documentation>identifikasjon og plassering av lag innen et vertikalnivå
+(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpObjektPropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpObjekt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpOmråde" substitutionGroup="reguleringsplan:SOSI_Objekt" type="reguleringsplan:RpOmrådeType">
+    <annotation>
+      <documentation>planområde for reguleringsplan, med attributter fra gammelt forvaltningssystem
+
+Merknad: Noen egenskaper er modellert som avleda egenskaper. Dette er markert ved  tegnet '/' før egenskapsnavnet. Ved overgangen til Plan 5.0 er et lagt til grunn at disse egenskpene ikke skal dobbeltlagres, men kun forvaltes i objektet Arealplan, og avledes derfra. Inntil det er kontrollert at innholdet stemmer med Areaplan kan disse egenskapene beholdes også på RpOmråde.</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpOmrådeType">
+    <complexContent>
+      <extension base="reguleringsplan:SOSI_ObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>planområdets flategeometri</documentation>
+            </annotation>
+          </element>
+          <element name="vertikalnivå" type="gml:CodeType">
+            <annotation>
+              <documentation>beliggenhet i forhold til jordoverflaten (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/plan-felles/vertikalnivå</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">VERTNIV</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vertikallag" type="reguleringsplan:VertikallagPropertyType">
+            <annotation>
+              <documentation>identifikasjon og plassering av lag innen et vertikalnivå (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)</documentation>
+            </annotation>
+          </element>
+          <element name="nasjonalArealplanId" type="reguleringsplan:NasjonalArealplanIdPropertyType">
+            <annotation>
+              <documentation>referanse til arealplanen som planområdet tilhører.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plantype" type="gml:CodeType">
+            <annotation>
+              <documentation>type reguleringsplan</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/planregister/plantype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">PLANTYPE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="planstatus" type="gml:CodeType">
+            <annotation>
+              <documentation>planens behandling og rettsvirkning (pbl. §§ 11-12 til 11-15, samt pbl. 1985 §§ 20-5 og 20-6)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/planregister/planstatus</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">PLANSTAT</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plannavn" type="string">
+            <annotation>
+              <documentation>planens offisielle navn (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§2)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">PLANNAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="omPlanbestemmelser" type="gml:CodeType">
+            <annotation>
+              <documentation>om planen har bestemmelser (pbl. §§ 11-9 til  11-11 / pbl. 1985 § 20-4), og hvordan disse er representert
+
+Merknad: viderefører egenskapen 'planbestemmelser' fra tidligere versjoner</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/planregister/omplanbestemmelser</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">PLANBEST</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lovreferanse" type="gml:CodeType">
+            <annotation>
+              <documentation>hvilken lov planen er vedtatt etter</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/planregister/lovreferansetype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">LOVREFERANSE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lovreferanseBeskrivelse" type="string">
+            <annotation>
+              <documentation>tekstlig beskrivelse av hvilken lov planen er vedtatt etter.
+
+Merknad: Kan være utfyllende til egenskapen lovereferanse</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">LOVREFBESKRIVELSE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="opprinneligNasjonalArealplanId" type="reguleringsplan:OpprinneligNasjonalArealplanIdPropertyType">
+            <annotation>
+              <documentation>opprinnelig nasjonal arealplanId, som kun skal brukes når planen har fått ny nasjonalArealplanid</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="forslagsstillerType" type="gml:CodeType">
+            <annotation>
+              <documentation>om forslagsstiller er privat eller offentlig</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/planregister/forslagsstillertype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">FORSLAGSSTILLERTYPE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedtakEndeligPlanDato" type="date">
+            <annotation>
+              <documentation>dato for rettsvirkning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kunngjøringsdato" type="date">
+            <annotation>
+              <documentation>dato når endelig vedtatt arealplan ble kunngjort
+(pbl. 12-12 siste ledd)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">KUNNGJØRINGSDATO</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ikrafttredelsesdato" type="date">
+            <annotation>
+              <documentation>dato når arealplanen trådte ikraft</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">IKRAFT</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="prosesshistorie" type="string">
+            <annotation>
+              <documentation>beskrivelse av de prosesser som dataene er gått gjennom som kan ha betydning for kvaliteten og bruken av dataene</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">PROSESS_HISTORIE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="informasjon" type="string">
+            <annotation>
+              <documentation>generell opplysning
+
+Merknad: mulighet til å legge inn utfyllende informasjon om objektet</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">INFORMASJON</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="link" type="string">
+            <annotation>
+              <documentation>referanse til et informasjonselement, enten lokalt eller globalt</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">LINK</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="avgrensesAv" type="reguleringsplan:RpGrensePropertyType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="rpObjekt" type="reguleringsplan:RpObjektPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpOmrådePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpOmråde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpPåskrift" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpPåskriftType">
+    <annotation>
+      <documentation>påskrift eller supplerende tekst på plankartet for regulerings- og bebyggelsesplan (pbl. 1985 §§ 25 og 26 og 28-2) / områderegulering og detaljregulering (pbl. §§ 12-2, 12-3, 12-5 og 12-7)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpPåskriftType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="objektposisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>representasjonspunkt som knytter påskriften geometrisk til et annet kartobjekt.
+
+Svarer til 1. koordinat fra SOSI-formatets .TEKST-geometri</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tekstplassering" type="gml:GeometricPrimitivePropertyType">
+            <annotation>
+              <documentation>plassering av påskriften, representert ved punkt eller linje
+
+Denne geometriegenskapen er en videreføring av deler av SOSI-formatets .TEKST-geometri. Mens 1. koordinat i .TEKST er ivaretatt ved objektposisjonen, svarer tekstplassering til koordinat nr 2 og 3.
+Tekstplassering referer til tekstens grunnlinje. Angitt som punkt skal teksten stå vannrett ut fra punktet, og angitt som linje angir den startpunkt og retning for en rotert tekst. Det skal ikke brukes en krum kurve.
+Når tekstplassering er utelatt, brukes objektposisjonen.</documentation>
+            </annotation>
+          </element>
+          <element name="generellTekststreng" type="string">
+            <annotation>
+              <documentation>påskriftens tekstlige innhold</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="påskriftType" type="gml:CodeType">
+            <annotation>
+              <documentation>hva påskriften i plankartet omhandler</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/plan-felles/påskrifttype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">RPPÅSKRIFTTYPE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpPåskriftPropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpPåskrift"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpRegulertHøyde" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpRegulertHøydeType">
+    <annotation>
+      <documentation>linje med bestemmelse om regulert høyde (pbl. § 12-7 nr. 1,  kart- og planforskriften Vedlegg IV - https://lovdata.no/forskrift/2025-01-20-52/§2)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpRegulertHøydeType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="stedfesting" type="gml:GeometricPrimitivePropertyType">
+            <annotation>
+              <documentation>punkt eller linje</documentation>
+            </annotation>
+          </element>
+          <element name="høydeFraPlanbestemmelse" type="reguleringsplan:HøydeFraPlanbestemmelsePropertyType">
+            <annotation>
+              <documentation>regulert høyde gitt i planbestemmelser
+(bestemmelse om utforming illustrert på kart, pbl. § 12-7 nr. 1)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">HØYDEFRAPLANBEST</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpRegulertHøydePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpRegulertHøyde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="RpRomligObjekt" substitutionGroup="reguleringsplan:SOSI_Objekt" type="reguleringsplan:RpRomligObjektType">
+    <annotation>
+      <documentation>abstrakt objekttype for romgeometier i en  reguleringsplan.
+Brukes for å definere objekttyper med rom-geometri (3D), som supplererer utvalgtge obejkttyper med flategeometri</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="RpRomligObjektType">
+    <complexContent>
+      <extension base="reguleringsplan:SOSI_ObjektType">
+        <sequence>
+          <element name="nasjonalArealplanId" type="reguleringsplan:NasjonalArealplanIdPropertyType">
+            <annotation>
+              <documentation>identifikasjon av arealplanen som objektet tilhører.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vertikalnivå" type="gml:CodeType">
+            <annotation>
+              <documentation>beliggenhet i forhold til jordoverflaten
+(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/plan-felles/vertikalnivå</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">VERTNIV</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vertikallag" type="reguleringsplan:VertikallagPropertyType">
+            <annotation>
+              <documentation>identifikasjon og plassering av lag innen et vertikalnivå
+(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpRomligObjektPropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpRomligObjekt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpSikringSone" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpSikringSoneType">
+    <annotation>
+      <documentation>hensynssone for sikring i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpSikringSoneType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning og avgrensing i grunnriss (2D)</documentation>
+            </annotation>
+          </element>
+          <element name="sikring" type="gml:CodeType">
+            <annotation>
+              <documentation>type sikring i hensynsone for sikring
+(pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/hensyn/sikringsonetype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">RPSIKRING</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>supplerende beskrivelse</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">BESKRIVELSE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="hensynSonenavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på hensynssone
+(pbl. §§ 12-6, 12 A-13, jf. § 11-8)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">HENSYNSONENAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rom" type="reguleringsplan:RpHensynRomPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpSikringSonePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpSikringSone"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpStøySone" substitutionGroup="reguleringsplan:RpObjekt" type="reguleringsplan:RpStøySoneType">
+    <annotation>
+      <documentation>hensynssone for støy i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpStøySoneType">
+    <complexContent>
+      <extension base="reguleringsplan:RpObjektType">
+        <sequence>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>objektets utstrekning og avgrensing i grunnriss (2D)</documentation>
+            </annotation>
+          </element>
+          <element name="støy" type="gml:CodeType">
+            <annotation>
+              <documentation>type støy i hensynsone for støy
+(pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/hensyn/støysonetype</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">RPSTØY</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>supplerende beskrivelse</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">BESKRIVELSE</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="hensynSonenavn" type="string">
+            <annotation>
+              <documentation>navn/feltbetegnelse på hensynssone
+(pbl. §§ 12-6, 12 A-13, jf. § 11-8)</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">HENSYNSONENAVN</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rom" type="reguleringsplan:RpHensynRomPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpStøySonePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpStøySone"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="RpUtsattRettsvirkningOmråde" substitutionGroup="reguleringsplan:SOSI_Objekt" type="reguleringsplan:RpUtsattRettsvirkningOmrådeType">
+    <annotation>
+      <documentation>planområde som er vedtatt med utsatt rettsvirkning i reguleringsplan</documentation>
+    </annotation>
+  </element>
+  <complexType name="RpUtsattRettsvirkningOmrådeType">
+    <complexContent>
+      <extension base="reguleringsplan:SOSI_ObjektType">
+        <sequence>
+          <element name="nasjonalArealplanId" type="reguleringsplan:NasjonalArealplanIdPropertyType">
+            <annotation>
+              <documentation>referanse til arealplanen som planområdet tilhører.</documentation>
+            </annotation>
+          </element>
+          <element name="område" type="gml:MultiSurfacePropertyType">
+            <annotation>
+              <documentation>planområdets flategeometri</documentation>
+            </annotation>
+          </element>
+          <element name="vertikalnivå" type="gml:CodeType">
+            <annotation>
+              <documentation>beliggenhet i forhold til jordoverflaten (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/plan-felles/vertikalnivå</sc:targetCodeListURI>
+                <sc:taggedValue tag="SOSI_navn">VERTNIV</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vertikallag" type="reguleringsplan:VertikallagPropertyType">
+            <annotation>
+              <documentation>identifikasjon og plassering av lag innen et vertikalnivå (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)</documentation>
+            </annotation>
+          </element>
+          <element name="saksummer" type="reguleringsplan:SaksnummerPropertyType">
+            <annotation>
+              <documentation>entydig nummerering av en sak i et saksbehandlingsverktøy</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="endeligVedtakDato" type="date">
+            <annotation>
+              <documentation>vedtaksdato for rettsvirkning for område med utsatt rettsvirkning</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">VEDTAKENDELIGPLANDATO</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="avgrensesAv" type="reguleringsplan:RpGrensePropertyType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="rpObjekt" type="reguleringsplan:RpObjektPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RpUtsattRettsvirkningOmrådePropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:RpUtsattRettsvirkningOmråde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element abstract="true" name="SOSI_Objekt" substitutionGroup="gml:AbstractFeature" type="reguleringsplan:SOSI_ObjektType">
+    <annotation>
+      <documentation>abstrakt objekttype med egenskaper fra SOSI_Objekt i SOSI Del 1 som er anvendt på objekttyper med stedfesting</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="SOSI_ObjektType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="identifikasjon" type="reguleringsplan:IdentifikasjonPropertyType">
+            <annotation>
+              <documentation>unik identifikasjon av et dataobjekt.
+
+Merknad: Systemegenskap som ikke skal kunne endres av brukerne</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">IDENT</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="førsteDigitaliseringsdato" type="date">
+            <annotation>
+              <documentation>dato når en representasjon av objektet i digital form første gang ble etablert</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">FØRSTEDIGITALISERINGSDATO</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="oppdateringsdato" type="date">
+            <annotation>
+              <documentation>tidspunkt for siste endring på dataobjektet.
+
+Merknad: Systemegenskap som ikke skal kunne endres av brukerne</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">OPPDATERINGSDATO</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kvalitet" type="reguleringsplan:PosisjonskvalitetPropertyType">
+            <annotation>
+              <documentation>beskrivelse av kvaliteten på stedfestingen</documentation>
+              <appinfo>
+                <sc:taggedValue tag="SOSI_navn">KVALITET</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SOSI_ObjektPropertyType">
+    <sequence minOccurs="0">
+      <element ref="reguleringsplan:SOSI_Objekt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Saksnummer" substitutionGroup="gml:AbstractObject" type="reguleringsplan:SaksnummerType"/>
+  <complexType name="SaksnummerType">
+    <sequence>
+      <element name="saksår" type="integer">
+        <annotation>
+          <documentation>Årstallet saken ble initiert</documentation>
+        </annotation>
+      </element>
+      <element name="sakssekvensnummer" type="integer">
+        <annotation>
+          <documentation>løpenummer for saken innenfor året.
+
+NB! attributtnavnet forandret fra sekvensnummer til sakssekvensnummer desember 2011, for å tilpasses NOARK 5.</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="SaksnummerPropertyType">
+    <sequence>
+      <element ref="reguleringsplan:Saksnummer"/>
+    </sequence>
+  </complexType>
+  <element name="Utnytting" substitutionGroup="gml:AbstractObject" type="reguleringsplan:UtnyttingType"/>
+  <complexType name="UtnyttingType">
+    <sequence>
+      <element name="utnyttingstype" type="gml:CodeType">
+        <annotation>
+          <documentation>type grad av utnytting
+(pbl. 1985 § 26 første ledd og forskrift TEK kap. III; pbl. § 12-7 nr 1 og TEK kap. 5)</documentation>
+          <appinfo>
+            <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/plan-felles/utnyttingstype</sc:targetCodeListURI>
+            <sc:taggedValue tag="SOSI_navn">UTNTYP</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="utnyttingstall" type="integer">
+        <annotation>
+          <documentation>tallverdi for grad av utnytting
+(pbl. 1985 § 26 første ledd og forskrift TEK kap. III; pbl. §12-7 nr 1 og TEK kap. 5)</documentation>
+          <appinfo>
+            <sc:taggedValue tag="SOSI_navn">UTNTALL</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="utnyttingstall_minimum" type="integer">
+        <annotation>
+          <documentation>tallverdi for minste utnyttingsgrad
+(pbl. §12-7 nr 1 og TEK kap 5 )</documentation>
+          <appinfo>
+            <sc:taggedValue tag="SOSI_navn">UTNTALL_MIN</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="UtnyttingPropertyType">
+    <sequence>
+      <element ref="reguleringsplan:Utnytting"/>
+    </sequence>
+  </complexType>
+  <element name="Vertikallag" substitutionGroup="gml:AbstractObject" type="reguleringsplan:VertikallagType"/>
+  <complexType name="VertikallagType">
+    <sequence>
+      <element name="lag" type="string">
+        <annotation>
+          <documentation>identifikasjon av vertikallag innen et vertikalnivå.
+
+Brukes der det er flere vertikallag innen ett vertikalnivå</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="referansehøyde" type="double">
+        <annotation>
+          <documentation>nærmere spesifikasjon av høydenivået for et vertikallag</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="VertikallagPropertyType">
+    <sequence>
+      <element ref="reguleringsplan:Vertikallag"/>
+    </sequence>
+  </complexType>
+</schema>
