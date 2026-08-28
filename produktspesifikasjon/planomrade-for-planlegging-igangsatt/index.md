@@ -151,6 +151,16 @@ Datasettet brukes som grunnlag ved oversendelse av planinitiativ til kommunen og
 | --- | --- | --- | --- | --- |
 | OGC API-Features | [Lenke](https://plandata.ft.dibk.no/services/rest/planleggingigangsatt) | OGC:API-Features | GeoJSON | landsfiler |
 | WMS-tjeneste | [Lenke](https://plandata.ft.dibk.no/services/wms/planleggingigangsatt/?service=WMS&request=GetCapabilities) | OGC:WMS | PNG, BMP, GeoTIFF, JPEG, TIFF | landsfiler |
+| GeoPackage: datafangst | [Lenke](https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst/datafangst.gpkg) | Nedlasting | GPKG |  |
+| GeoPackage: datafangst_feature_catalogue | [Lenke](https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst/datafangst_feature_catalogue.gpkg) | Nedlasting | GPKG |  |
+| GeoPackage: planleggingigangsatt | [Lenke](https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/planleggingigangsatt.gpkg) | Nedlasting | GPKG |  |
+| GeoPackage: planleggingigangsatt_feature_catalogue | [Lenke](https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/planleggingigangsatt_feature_catalogue.gpkg) | Nedlasting | GPKG |  |
+| GML/XSD-skjema: datafangst | [Lenke](https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst/schema/xsd/INPUT/datafangst.xsd) | Nedlasting | XSD |  |
+| GML/XSD-skjema: planleggingigangsatt | [Lenke](https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/schema/xsd/INPUT/planleggingigangsatt.xsd) | Nedlasting | XSD |  |
+| GML/XSD-skjema: planomradeforplanleggingigangsatt | [Lenke](https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/schema/xsd/INPUT/planomradeforplanleggingigangsatt.xsd) | Nedlasting | XSD |  |
+| JSON Schema: datafangst | [Lenke](https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst/schema/jsonschema/INPUT/datafangst/datafangst.json) | Nedlasting | JSON Schema |  |
+| JSON Schema: planleggingigangsatt | [Lenke](https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/schema/jsonschema/INPUT/planleggingigangsatt/planleggingigangsatt.json) | Nedlasting | JSON Schema |  |
+| JSON Schema: planomradeforplanleggingigangsatt | [Lenke](https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/schema/jsonschema/INPUT/planomradeforplanleggingigangsatt/planomradeforplanleggingigangsatt.json) | Nedlasting | JSON Schema |  |
 
 ## Metadata
 
