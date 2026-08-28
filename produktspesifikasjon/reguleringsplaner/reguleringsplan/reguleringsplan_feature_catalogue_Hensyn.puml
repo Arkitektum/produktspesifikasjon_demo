@@ -1,0 +1,120 @@
+@startuml
+' For wide diagrams, render with: plantuml -DPLANTUML_LIMIT_SIZE=16384 ...
+' The 'scale max' directive below caps the rendered output to prevent the
+' default PlantUML 4096px size limit from cropping the diagram.
+scale max 4000*4000
+
+title Reguleringsplaner - Reguleringsplan - Hensyn
+
+skinparam backgroundColor #F5F5F5
+skinparam shadowing false
+skinparam RoundCorner 6
+skinparam ArrowColor #6C8198
+skinparam wrapWidth 200
+skinparam class {
+  BackgroundColor #FBF2E8
+  BorderColor #9C8578
+  FontColor #2D201A
+  HeaderBackgroundColor #EFE1D6
+  HeaderFontColor #2D201A
+  AttributeIconSize 0
+}
+skinparam note {
+  BackgroundColor #FFFFFF
+  BorderColor #6C8198
+  FontColor #2D201A
+}
+skinparam stereotypeCBackgroundColor #EAD9CE
+skinparam stereotypeCBorderColor #9C8578
+skinparam stereotypeCFontColor #2D201A
+
+package "Hensyn" {
+
+  class "RpGjennomføringSone" as RpGjennomf_ringSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + gjennomføring [1] : RpGjennomføringSoneType
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+  }
+
+  class RpHensynRom <<featureType>> {
+    + rom [1] : GM_Solid
+  }
+
+  class RpAngittHensynSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + angittHensyn [1] : RpAngittHensynSoneType
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+  }
+
+  class RpDetaljeringSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + detaljering [1] : RpDetaljeringSoneType
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+  }
+
+  class RpSikringSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + sikring [1] : RpSikringSoneType
+    + beskrivelse [0..1] : CharacterString
+    + hensynSonenavn [1] : CharacterString
+  }
+
+  class "RpStøySone" as RpSt_ySone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + støy [1] : RpStøySoneType
+    + beskrivelse [0..1] : CharacterString
+    + hensynSonenavn [1] : CharacterString
+  }
+
+  class RpInfrastrukturSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + infrastruktur [1] : RpInfrastrukturSoneType
+    + beskrivelse [0..1] : CharacterString
+    + hensynSonenavn [1] : CharacterString
+  }
+
+  class RpFareSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + fare [1] : RpFareSoneType
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+  }
+
+  class "RpBåndleggingSone" as RpB_ndleggingSone <<featureType>> {
+    + område [1] : GM_MultiSurface
+    + båndlegging [1] : RpBåndleggingSoneType
+    + båndlagtFremTil [0..1] : Date
+    + hensynSonenavn [1] : CharacterString
+    + beskrivelse [0..1] : CharacterString
+  }
+}
+
+package "Eksterne referanser" <<Frame>> {
+  class RpObjekt <<Abstrakte typer>> {
+  }
+  class RpRomligObjekt <<Abstrakte typer>> {
+  }
+}
+
+RpObjekt <|-- RpGjennomf_ringSone
+RpGjennomf_ringSone --> RpHensynRom : rom [0..1]
+RpRomligObjekt <|-- RpHensynRom
+RpObjekt <|-- RpAngittHensynSone
+RpAngittHensynSone --> RpHensynRom : rom [0..1]
+RpObjekt <|-- RpDetaljeringSone
+RpDetaljeringSone --> RpHensynRom : rom [0..*]
+RpObjekt <|-- RpSikringSone
+RpSikringSone --> RpHensynRom : rom [0..1]
+RpObjekt <|-- RpSt_ySone
+RpSt_ySone --> RpHensynRom : rom [0..1]
+RpObjekt <|-- RpInfrastrukturSone
+RpInfrastrukturSone --> RpHensynRom : rom [0..1]
+RpObjekt <|-- RpFareSone
+RpFareSone --> RpHensynRom : rom [0..1]
+RpObjekt <|-- RpB_ndleggingSone
+RpB_ndleggingSone --> RpHensynRom : rom [0..1]
+
+@enduml

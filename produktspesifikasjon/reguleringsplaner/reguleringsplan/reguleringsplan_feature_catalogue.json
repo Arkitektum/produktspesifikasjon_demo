@@ -1,0 +1,2661 @@
+[
+  {
+    "name": "SOSI_Objekt",
+    "description": "abstrakt objekttype med egenskaper fra SOSI_Objekt i SOSI Del 1 som er anvendt på objekttyper med stedfesting",
+    "attributes": [
+      {
+        "name": "identifikasjon",
+        "type": "Identifikasjon",
+        "description": "unik identifikasjon av et dataobjekt.\n\nMerknad: Systemegenskap som ikke skal kunne endres av brukerne",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "IDENT"
+        },
+        "attributes": [
+          {
+            "name": "lokalId",
+            "type": "CharacterString",
+            "description": "lokal identifikator av et objekt\nSkal være en uuid, slik at den er unik, uavhengig av navnerommet",
+            "cardinality": "1",
+            "taggedValues": {
+              "SOSI_navn": "LOKALID"
+            }
+          },
+          {
+            "name": "navnerom",
+            "type": "CharacterString",
+            "description": "navnerom som unikt identifiserer datakilden til et objekt.\n\nMerknad: Navnerom anbefales å være en http-URI og må være registrert i data.geonorge.no. For plan anbefales navnerommet 'http://data.geonorge.no/sosi/plan'",
+            "cardinality": "1",
+            "taggedValues": {
+              "SOSI_navn": "NAVNEROM"
+            }
+          },
+          {
+            "name": "versjonId",
+            "type": "CharacterString",
+            "description": "identifikasjon av en spesiell versjon av et geografisk objekt (instans)",
+            "cardinality": "0..1",
+            "taggedValues": {
+              "SOSI_navn": "VERSJONID"
+            }
+          }
+        ]
+      },
+      {
+        "name": "førsteDigitaliseringsdato",
+        "type": "DateTime",
+        "description": "dato når en representasjon av objektet i digital form første gang ble etablert",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "FØRSTEDIGITALISERINGSDATO"
+        }
+      },
+      {
+        "name": "oppdateringsdato",
+        "type": "DateTime",
+        "description": "tidspunkt for siste endring på dataobjektet.\n\nMerknad: Systemegenskap som ikke skal kunne endres av brukerne",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "OPPDATERINGSDATO"
+        }
+      },
+      {
+        "name": "kvalitet",
+        "type": "Posisjonskvalitet",
+        "description": "beskrivelse av kvaliteten på stedfestingen",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "KVALITET"
+        },
+        "attributes": [
+          {
+            "name": "datafangstmetode",
+            "type": "Datafangstmetode",
+            "description": "hvordan  grunnrisskoordinatene (x,y) er posisjonert fra et datagrunnlag",
+            "cardinality": "0..1",
+            "valueDomain": {
+              "kind": "codelist",
+              "definition": "hvordan vektordataene er posisjonert fra et datagrunnlag",
+              "asDictionary": "true",
+              "codeList": "https://register.geonorge.no/sosi-kodelister/plan/plan-felles/datafangstmetode"
+            },
+            "taggedValues": {
+              "SOSI_navn": "DATAFANGSTMETODE"
+            }
+          },
+          {
+            "name": "målemetode",
+            "type": "Målemetode",
+            "description": "metode som ligger til grunn for registrering av posisjon",
+            "cardinality": "0..1",
+            "valueDomain": {
+              "kind": "codelist",
+              "definition": "metode som ligger til grunn for registrering av posisjon",
+              "asDictionary": "true",
+              "codeList": "https://register.geonorge.no/sosi-kodelister/malemetode-kode"
+            },
+            "taggedValues": {
+              "SOSI_navn": "MÅLEMETODE"
+            }
+          },
+          {
+            "name": "nøyaktighet",
+            "type": "Integer",
+            "description": "punktstandardavviket i grunnriss, oppgitt i cm, for punkter, samt tverravvik for linjer",
+            "cardinality": "0..1",
+            "taggedValues": {
+              "SOSI_navn": "NØYAKTIGHET"
+            }
+          }
+        ]
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [],
+      "associations": []
+    },
+    "package": "SOSI_Fellesegenskaper"
+  },
+  {
+    "name": "RpGrense",
+    "description": "avgrensingslinje for et planomåde (RpOmråde) i en reguleringplan.",
+    "attributes": [
+      {
+        "name": "grense",
+        "type": "GM_Curve",
+        "description": "avgrensningslinje",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpAvgrensingslinje"
+      ],
+      "associations": []
+    },
+    "package": "Planområder"
+  },
+  {
+    "name": "RpOmråde",
+    "description": "planområde for reguleringsplan, med attributter fra gammelt forvaltningssystem\n\nMerknad: Noen egenskaper er modellert som avleda egenskaper. Dette er markert ved  tegnet '/' før egenskapsnavnet. Ved overgangen til Plan 5.0 er et lagt til grunn at disse egenskpene ikke skal dobbeltlagres, men kun forvaltes i objektet Arealplan, og avledes derfra. Inntil det er kontrollert at innholdet stemmer med Areaplan kan disse egenskapene beholdes også på RpOmråde.",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "planområdets flategeometri",
+        "cardinality": "1"
+      },
+      {
+        "name": "vertikalnivå",
+        "type": "Vertikalnivå",
+        "description": "beliggenhet i forhold til jordoverflaten (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "beliggenhet i forhold til jordoverflaten (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/plan-felles/vertikalnivå"
+        },
+        "taggedValues": {
+          "SOSI_navn": "VERTNIV"
+        }
+      },
+      {
+        "name": "vertikallag",
+        "type": "Vertikallag",
+        "description": "identifikasjon og plassering av lag innen et vertikalnivå (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "lag",
+            "type": "CharacterString",
+            "description": "identifikasjon av vertikallag innen et vertikalnivå.\n\nBrukes der det er flere vertikallag innen ett vertikalnivå",
+            "cardinality": "1"
+          },
+          {
+            "name": "referansehøyde",
+            "type": "Real",
+            "description": "nærmere spesifikasjon av høydenivået for et vertikallag",
+            "cardinality": "0..1"
+          }
+        ]
+      },
+      {
+        "name": "nasjonalArealplanId",
+        "type": "NasjonalArealplanId",
+        "description": "referanse til arealplanen som planområdet tilhører.",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "administrativEnhet",
+            "type": "AdministrativEnhetskode",
+            "description": "entydig identifikasjon av administrativ enhet som vedtar planen (vedtaksmyndighet)\n\nMerknad: Bruken av landkode=NO er forbeholdt statlig vedtaksmyndighet",
+            "cardinality": "1",
+            "attributes": [
+              {
+                "name": "kommunenummer",
+                "type": "Kommunenummer",
+                "description": "offisiell nummerering av kommuner",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "codelist",
+                  "definition": "kodeliste for kommunenummer.",
+                  "asDictionary": "true",
+                  "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer"
+                },
+                "taggedValues": {
+                  "SOSI_navn": "KOMM"
+                }
+              },
+              {
+                "name": "fylkesnummer",
+                "type": "Fylkesnummer",
+                "description": "offisiell nummerering av fylker",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "codelist",
+                  "definition": "kodeliste for fylkesnummer.",
+                  "asDictionary": "true",
+                  "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/fylkesnummer"
+                },
+                "taggedValues": {
+                  "SOSI_navn": "FYLKESNR"
+                }
+              },
+              {
+                "name": "landkode",
+                "type": "Landkode",
+                "description": "kode med verdien 'NO', som angir at administrativ enhet er staten Norge, ihht. ISO 3166",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "enumeration",
+                  "listedValues": [
+                    {
+                      "value": "NO",
+                      "label": "Norge"
+                    }
+                  ],
+                  "definition": "alfanumerisk kode for nasjonalt nivå / Norge.\n\nAvledet fra \"ISO 3166 Codes for the representation of names of countries and their subdivisions\""
+                },
+                "taggedValues": {
+                  "SOSI_navn": "LANDKODE"
+                }
+              }
+            ]
+          },
+          {
+            "name": "planId",
+            "type": "CharacterString",
+            "description": "entydig identifikasjon for en plan innen den administrative enheten",
+            "cardinality": "1",
+            "taggedValues": {
+              "SOSI_navn": "PLANID"
+            }
+          }
+        ]
+      },
+      {
+        "name": "plantype",
+        "type": "Plantype",
+        "description": "type reguleringsplan",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type arealplan",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/planregister/plantype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "PLANTYPE"
+        }
+      },
+      {
+        "name": "planstatus",
+        "type": "Planstatus",
+        "description": "planens behandling og rettsvirkning (pbl. §§ 11-12 til 11-15, samt pbl. 1985 §§ 20-5 og 20-6)",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "planens behandling og rettsvirkning (pbl. §§ 11-12 til 11-15, samt pbl. 1985 §§ 20-5 og 20-6)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/planregister/planstatus"
+        },
+        "taggedValues": {
+          "SOSI_navn": "PLANSTAT"
+        }
+      },
+      {
+        "name": "plannavn",
+        "type": "CharacterString",
+        "description": "planens offisielle navn (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§2)",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "PLANNAVN"
+        }
+      },
+      {
+        "name": "omPlanbestemmelser",
+        "type": "OmPlanbestemmelser",
+        "description": "om planen har bestemmelser (pbl. §§ 11-9 til  11-11 / pbl. 1985 § 20-4), og hvordan disse er representert\n\nMerknad: viderefører egenskapen 'planbestemmelser' fra tidligere versjoner",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "om planen har bestemmelser (pbl. §§ 11-9 til  11-11 / pbl. 1985 § 20-4), og hvordan disse er representert",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/planregister/omplanbestemmelser"
+        },
+        "taggedValues": {
+          "SOSI_navn": "PLANBEST"
+        }
+      },
+      {
+        "name": "lovreferanse",
+        "type": "Lovreferansetype",
+        "description": "hvilken lov planen er vedtatt etter",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "hvilken lov planen er vedtatt etter",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/planregister/lovreferansetype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "LOVREFERANSE"
+        }
+      },
+      {
+        "name": "lovreferanseBeskrivelse",
+        "type": "CharacterString",
+        "description": "tekstlig beskrivelse av hvilken lov planen er vedtatt etter.\n\nMerknad: Kan være utfyllende til egenskapen lovereferanse",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "LOVREFBESKRIVELSE"
+        }
+      },
+      {
+        "name": "opprinneligNasjonalArealplanId",
+        "type": "OpprinneligNasjonalArealplanId",
+        "description": "opprinnelig nasjonal arealplanId, som kun skal brukes når planen har fått ny nasjonalArealplanid",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "opprinneligAdmEnhet",
+            "type": "CharacterString",
+            "description": "opprinnelig identifikasjon av administrativ enhet som har vedtatt planen (opprinnelig vedtaksmyndighet)",
+            "cardinality": "0..1",
+            "taggedValues": {
+              "SOSI_navn": "OPPRINNELIGADMINISTRATIVENHET"
+            }
+          },
+          {
+            "name": "opprinneligPlanId",
+            "type": "CharacterString",
+            "description": "opprinnelig verdi for planid, unik for planen innen den opprinnelige adm. enheten",
+            "cardinality": "0..1",
+            "taggedValues": {
+              "SOSI_navn": "PLANID"
+            }
+          }
+        ]
+      },
+      {
+        "name": "forslagsstillerType",
+        "type": "ForslagsstillerType",
+        "description": "om forslagsstiller er privat eller offentlig",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "om forslagsstiller er privat eller offentlig",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/planregister/forslagsstillertype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "FORSLAGSSTILLERTYPE"
+        }
+      },
+      {
+        "name": "vedtakEndeligPlanDato",
+        "type": "Date",
+        "description": "dato for rettsvirkning",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "kunngjøringsdato",
+        "type": "Date",
+        "description": "dato når endelig vedtatt arealplan ble kunngjort\n(pbl. 12-12 siste ledd)",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "KUNNGJØRINGSDATO"
+        }
+      },
+      {
+        "name": "ikrafttredelsesdato",
+        "type": "Date",
+        "description": "dato når arealplanen trådte ikraft",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "IKRAFT"
+        }
+      },
+      {
+        "name": "prosesshistorie",
+        "type": "CharacterString",
+        "description": "beskrivelse av de prosesser som dataene er gått gjennom som kan ha betydning for kvaliteten og bruken av dataene",
+        "cardinality": "0..*",
+        "taggedValues": {
+          "SOSI_navn": "PROSESS_HISTORIE"
+        }
+      },
+      {
+        "name": "informasjon",
+        "type": "CharacterString",
+        "description": "generell opplysning\n\nMerknad: mulighet til å legge inn utfyllende informasjon om objektet",
+        "cardinality": "0..*",
+        "taggedValues": {
+          "SOSI_navn": "INFORMASJON"
+        }
+      },
+      {
+        "name": "link",
+        "type": "CharacterString",
+        "description": "referanse til et informasjonselement, enten lokalt eller globalt",
+        "cardinality": "0..*",
+        "taggedValues": {
+          "SOSI_navn": "LINK"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "SOSI_Objekt"
+      ],
+      "associations": [
+        {
+          "target": "RpGrense",
+          "role": "avgrensesAv",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpObjekt",
+          "role": "rpObjekt",
+          "cardinality": "0..*"
+        }
+      ]
+    },
+    "package": "Planområder"
+  },
+  {
+    "name": "RpUtsattRettsvirkningOmråde",
+    "description": "planområde som er vedtatt med utsatt rettsvirkning i reguleringsplan",
+    "attributes": [
+      {
+        "name": "nasjonalArealplanId",
+        "type": "NasjonalArealplanId",
+        "description": "referanse til arealplanen som planområdet tilhører.",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "administrativEnhet",
+            "type": "AdministrativEnhetskode",
+            "description": "entydig identifikasjon av administrativ enhet som vedtar planen (vedtaksmyndighet)\n\nMerknad: Bruken av landkode=NO er forbeholdt statlig vedtaksmyndighet",
+            "cardinality": "1",
+            "attributes": [
+              {
+                "name": "kommunenummer",
+                "type": "Kommunenummer",
+                "description": "offisiell nummerering av kommuner",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "codelist",
+                  "definition": "kodeliste for kommunenummer.",
+                  "asDictionary": "true",
+                  "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer"
+                },
+                "taggedValues": {
+                  "SOSI_navn": "KOMM"
+                }
+              },
+              {
+                "name": "fylkesnummer",
+                "type": "Fylkesnummer",
+                "description": "offisiell nummerering av fylker",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "codelist",
+                  "definition": "kodeliste for fylkesnummer.",
+                  "asDictionary": "true",
+                  "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/fylkesnummer"
+                },
+                "taggedValues": {
+                  "SOSI_navn": "FYLKESNR"
+                }
+              },
+              {
+                "name": "landkode",
+                "type": "Landkode",
+                "description": "kode med verdien 'NO', som angir at administrativ enhet er staten Norge, ihht. ISO 3166",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "enumeration",
+                  "listedValues": [
+                    {
+                      "value": "NO",
+                      "label": "Norge"
+                    }
+                  ],
+                  "definition": "alfanumerisk kode for nasjonalt nivå / Norge.\n\nAvledet fra \"ISO 3166 Codes for the representation of names of countries and their subdivisions\""
+                },
+                "taggedValues": {
+                  "SOSI_navn": "LANDKODE"
+                }
+              }
+            ]
+          },
+          {
+            "name": "planId",
+            "type": "CharacterString",
+            "description": "entydig identifikasjon for en plan innen den administrative enheten",
+            "cardinality": "1",
+            "taggedValues": {
+              "SOSI_navn": "PLANID"
+            }
+          }
+        ]
+      },
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "planområdets flategeometri",
+        "cardinality": "1"
+      },
+      {
+        "name": "vertikalnivå",
+        "type": "Vertikalnivå",
+        "description": "beliggenhet i forhold til jordoverflaten (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "beliggenhet i forhold til jordoverflaten (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/plan-felles/vertikalnivå"
+        },
+        "taggedValues": {
+          "SOSI_navn": "VERTNIV"
+        }
+      },
+      {
+        "name": "vertikallag",
+        "type": "Vertikallag",
+        "description": "identifikasjon og plassering av lag innen et vertikalnivå (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "lag",
+            "type": "CharacterString",
+            "description": "identifikasjon av vertikallag innen et vertikalnivå.\n\nBrukes der det er flere vertikallag innen ett vertikalnivå",
+            "cardinality": "1"
+          },
+          {
+            "name": "referansehøyde",
+            "type": "Real",
+            "description": "nærmere spesifikasjon av høydenivået for et vertikallag",
+            "cardinality": "0..1"
+          }
+        ]
+      },
+      {
+        "name": "saksummer",
+        "type": "Saksnummer",
+        "description": "entydig nummerering av en sak i et saksbehandlingsverktøy",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "saksår",
+            "type": "Integer",
+            "description": "Årstallet saken ble initiert",
+            "cardinality": "1"
+          },
+          {
+            "name": "sakssekvensnummer",
+            "type": "Integer",
+            "description": "løpenummer for saken innenfor året.\n\nNB! attributtnavnet forandret fra sekvensnummer til sakssekvensnummer desember 2011, for å tilpasses NOARK 5.",
+            "cardinality": "1"
+          }
+        ]
+      },
+      {
+        "name": "endeligVedtakDato",
+        "type": "Date",
+        "description": "vedtaksdato for rettsvirkning for område med utsatt rettsvirkning",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "VEDTAKENDELIGPLANDATO"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "SOSI_Objekt"
+      ],
+      "associations": [
+        {
+          "target": "RpGrense",
+          "role": "avgrensesAv",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpObjekt",
+          "role": "rpObjekt",
+          "cardinality": "0..*"
+        }
+      ]
+    },
+    "package": "Planområder"
+  },
+  {
+    "name": "RpEndringOmråde",
+    "description": "planområde for reguleringsplan",
+    "attributes": [
+      {
+        "name": "nasjonalArealplanId",
+        "type": "NasjonalArealplanId",
+        "description": "referanse til arealplanen som planområdet tilhører.",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "administrativEnhet",
+            "type": "AdministrativEnhetskode",
+            "description": "entydig identifikasjon av administrativ enhet som vedtar planen (vedtaksmyndighet)\n\nMerknad: Bruken av landkode=NO er forbeholdt statlig vedtaksmyndighet",
+            "cardinality": "1",
+            "attributes": [
+              {
+                "name": "kommunenummer",
+                "type": "Kommunenummer",
+                "description": "offisiell nummerering av kommuner",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "codelist",
+                  "definition": "kodeliste for kommunenummer.",
+                  "asDictionary": "true",
+                  "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer"
+                },
+                "taggedValues": {
+                  "SOSI_navn": "KOMM"
+                }
+              },
+              {
+                "name": "fylkesnummer",
+                "type": "Fylkesnummer",
+                "description": "offisiell nummerering av fylker",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "codelist",
+                  "definition": "kodeliste for fylkesnummer.",
+                  "asDictionary": "true",
+                  "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/fylkesnummer"
+                },
+                "taggedValues": {
+                  "SOSI_navn": "FYLKESNR"
+                }
+              },
+              {
+                "name": "landkode",
+                "type": "Landkode",
+                "description": "kode med verdien 'NO', som angir at administrativ enhet er staten Norge, ihht. ISO 3166",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "enumeration",
+                  "listedValues": [
+                    {
+                      "value": "NO",
+                      "label": "Norge"
+                    }
+                  ],
+                  "definition": "alfanumerisk kode for nasjonalt nivå / Norge.\n\nAvledet fra \"ISO 3166 Codes for the representation of names of countries and their subdivisions\""
+                },
+                "taggedValues": {
+                  "SOSI_navn": "LANDKODE"
+                }
+              }
+            ]
+          },
+          {
+            "name": "planId",
+            "type": "CharacterString",
+            "description": "entydig identifikasjon for en plan innen den administrative enheten",
+            "cardinality": "1",
+            "taggedValues": {
+              "SOSI_navn": "PLANID"
+            }
+          }
+        ]
+      },
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "planområdets flategeometri",
+        "cardinality": "1"
+      },
+      {
+        "name": "vertikalnivå",
+        "type": "Vertikalnivå",
+        "description": "beliggenhet i forhold til jordoverflaten\n(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "beliggenhet i forhold til jordoverflaten (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/plan-felles/vertikalnivå"
+        },
+        "taggedValues": {
+          "SOSI_navn": "VERTNIV"
+        }
+      },
+      {
+        "name": "vertikallag",
+        "type": "Vertikallag",
+        "description": "identifikasjon og plassering av lag innen et vertikalnivå\n(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "lag",
+            "type": "CharacterString",
+            "description": "identifikasjon av vertikallag innen et vertikalnivå.\n\nBrukes der det er flere vertikallag innen ett vertikalnivå",
+            "cardinality": "1"
+          },
+          {
+            "name": "referansehøyde",
+            "type": "Real",
+            "description": "nærmere spesifikasjon av høydenivået for et vertikallag",
+            "cardinality": "0..1"
+          }
+        ]
+      },
+      {
+        "name": "endringstype",
+        "type": "Planendringstype",
+        "description": "om endringen av reguleringsplanen er foretatt som en forenklet endring eller en endring med full planbehandling",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "Hvilke prosessregler en planendring har fulgt",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/planregister/planendringstype"
+        }
+      },
+      {
+        "name": "hjemmelsgrunnlag",
+        "type": "CharacterString",
+        "description": "lovgrunnlag som ligger til grunn for endringen",
+        "cardinality": "1"
+      },
+      {
+        "name": "saksnummer",
+        "type": "Saksnummer",
+        "description": "entydig nummerering av en sak i et saksbehandlingsverktøy",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "saksår",
+            "type": "Integer",
+            "description": "Årstallet saken ble initiert",
+            "cardinality": "1"
+          },
+          {
+            "name": "sakssekvensnummer",
+            "type": "Integer",
+            "description": "løpenummer for saken innenfor året.\n\nNB! attributtnavnet forandret fra sekvensnummer til sakssekvensnummer desember 2011, for å tilpasses NOARK 5.",
+            "cardinality": "1"
+          }
+        ]
+      },
+      {
+        "name": "endringsnavn",
+        "type": "CharacterString",
+        "description": "navn eller betegnelse på endringen",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "endringVedtakDato",
+        "type": "Date",
+        "description": "dato når endringen av arealplanen trådte ikraft",
+        "cardinality": "0..1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "SOSI_Objekt"
+      ],
+      "associations": [
+        {
+          "target": "RpObjekt",
+          "role": "rpObjekt",
+          "cardinality": "0..*"
+        }
+      ]
+    },
+    "package": "Planområder"
+  },
+  {
+    "name": "RpAvgrensingslinje",
+    "description": "abstrakt objekttype for avgrensingslinjer i en reguleringsplan\n\nBrukes der det er behov for å ta vare på kvalitesinformasjon som ikke kan ligge på flateobjektene",
+    "attributes": [
+      {
+        "name": "nasjonalArealplanId",
+        "type": "NasjonalArealplanId",
+        "description": "identifikasjon av arealplanen som objektet tilhører.",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "administrativEnhet",
+            "type": "AdministrativEnhetskode",
+            "description": "entydig identifikasjon av administrativ enhet som vedtar planen (vedtaksmyndighet)\n\nMerknad: Bruken av landkode=NO er forbeholdt statlig vedtaksmyndighet",
+            "cardinality": "1",
+            "attributes": [
+              {
+                "name": "kommunenummer",
+                "type": "Kommunenummer",
+                "description": "offisiell nummerering av kommuner",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "codelist",
+                  "definition": "kodeliste for kommunenummer.",
+                  "asDictionary": "true",
+                  "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer"
+                },
+                "taggedValues": {
+                  "SOSI_navn": "KOMM"
+                }
+              },
+              {
+                "name": "fylkesnummer",
+                "type": "Fylkesnummer",
+                "description": "offisiell nummerering av fylker",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "codelist",
+                  "definition": "kodeliste for fylkesnummer.",
+                  "asDictionary": "true",
+                  "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/fylkesnummer"
+                },
+                "taggedValues": {
+                  "SOSI_navn": "FYLKESNR"
+                }
+              },
+              {
+                "name": "landkode",
+                "type": "Landkode",
+                "description": "kode med verdien 'NO', som angir at administrativ enhet er staten Norge, ihht. ISO 3166",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "enumeration",
+                  "listedValues": [
+                    {
+                      "value": "NO",
+                      "label": "Norge"
+                    }
+                  ],
+                  "definition": "alfanumerisk kode for nasjonalt nivå / Norge.\n\nAvledet fra \"ISO 3166 Codes for the representation of names of countries and their subdivisions\""
+                },
+                "taggedValues": {
+                  "SOSI_navn": "LANDKODE"
+                }
+              }
+            ]
+          },
+          {
+            "name": "planId",
+            "type": "CharacterString",
+            "description": "entydig identifikasjon for en plan innen den administrative enheten",
+            "cardinality": "1",
+            "taggedValues": {
+              "SOSI_navn": "PLANID"
+            }
+          }
+        ]
+      },
+      {
+        "name": "vertikalnivå",
+        "type": "Vertikalnivå",
+        "description": "beliggenhet i forhold til jordoverflaten\n(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "beliggenhet i forhold til jordoverflaten (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/plan-felles/vertikalnivå"
+        },
+        "taggedValues": {
+          "SOSI_navn": "VERTNIV"
+        }
+      },
+      {
+        "name": "vertikallag",
+        "type": "Vertikallag",
+        "description": "identifikasjon og plassering av lag innen et vertikalnivå\n(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "lag",
+            "type": "CharacterString",
+            "description": "identifikasjon av vertikallag innen et vertikalnivå.\n\nBrukes der det er flere vertikallag innen ett vertikalnivå",
+            "cardinality": "1"
+          },
+          {
+            "name": "referansehøyde",
+            "type": "Real",
+            "description": "nærmere spesifikasjon av høydenivået for et vertikallag",
+            "cardinality": "0..1"
+          }
+        ]
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [
+        "SOSI_Objekt"
+      ],
+      "associations": []
+    },
+    "package": "Abstrakte typer"
+  },
+  {
+    "name": "RpObjekt",
+    "description": "abstrakt supertype for kartobjekter som representer stedfestede planelementer, som formål, hensynssoner og bestemmelsesobjekter",
+    "attributes": [
+      {
+        "name": "nasjonalArealplanId",
+        "type": "NasjonalArealplanId",
+        "description": "identifikasjon av arealplanen som objektet tilhører.",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "administrativEnhet",
+            "type": "AdministrativEnhetskode",
+            "description": "entydig identifikasjon av administrativ enhet som vedtar planen (vedtaksmyndighet)\n\nMerknad: Bruken av landkode=NO er forbeholdt statlig vedtaksmyndighet",
+            "cardinality": "1",
+            "attributes": [
+              {
+                "name": "kommunenummer",
+                "type": "Kommunenummer",
+                "description": "offisiell nummerering av kommuner",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "codelist",
+                  "definition": "kodeliste for kommunenummer.",
+                  "asDictionary": "true",
+                  "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer"
+                },
+                "taggedValues": {
+                  "SOSI_navn": "KOMM"
+                }
+              },
+              {
+                "name": "fylkesnummer",
+                "type": "Fylkesnummer",
+                "description": "offisiell nummerering av fylker",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "codelist",
+                  "definition": "kodeliste for fylkesnummer.",
+                  "asDictionary": "true",
+                  "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/fylkesnummer"
+                },
+                "taggedValues": {
+                  "SOSI_navn": "FYLKESNR"
+                }
+              },
+              {
+                "name": "landkode",
+                "type": "Landkode",
+                "description": "kode med verdien 'NO', som angir at administrativ enhet er staten Norge, ihht. ISO 3166",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "enumeration",
+                  "listedValues": [
+                    {
+                      "value": "NO",
+                      "label": "Norge"
+                    }
+                  ],
+                  "definition": "alfanumerisk kode for nasjonalt nivå / Norge.\n\nAvledet fra \"ISO 3166 Codes for the representation of names of countries and their subdivisions\""
+                },
+                "taggedValues": {
+                  "SOSI_navn": "LANDKODE"
+                }
+              }
+            ]
+          },
+          {
+            "name": "planId",
+            "type": "CharacterString",
+            "description": "entydig identifikasjon for en plan innen den administrative enheten",
+            "cardinality": "1",
+            "taggedValues": {
+              "SOSI_navn": "PLANID"
+            }
+          }
+        ]
+      },
+      {
+        "name": "vertikalnivå",
+        "type": "Vertikalnivå",
+        "description": "beliggenhet i forhold til jordoverflaten\n(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "beliggenhet i forhold til jordoverflaten (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/plan-felles/vertikalnivå"
+        },
+        "taggedValues": {
+          "SOSI_navn": "VERTNIV"
+        }
+      },
+      {
+        "name": "vertikallag",
+        "type": "Vertikallag",
+        "description": "identifikasjon og plassering av lag innen et vertikalnivå\n(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "lag",
+            "type": "CharacterString",
+            "description": "identifikasjon av vertikallag innen et vertikalnivå.\n\nBrukes der det er flere vertikallag innen ett vertikalnivå",
+            "cardinality": "1"
+          },
+          {
+            "name": "referansehøyde",
+            "type": "Real",
+            "description": "nærmere spesifikasjon av høydenivået for et vertikallag",
+            "cardinality": "0..1"
+          }
+        ]
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [
+        "SOSI_Objekt"
+      ],
+      "associations": []
+    },
+    "package": "Abstrakte typer"
+  },
+  {
+    "name": "RpRomligObjekt",
+    "description": "abstrakt objekttype for romgeometier i en  reguleringsplan.\nBrukes for å definere objekttyper med rom-geometri (3D), som supplererer utvalgtge obejkttyper med flategeometri",
+    "attributes": [
+      {
+        "name": "nasjonalArealplanId",
+        "type": "NasjonalArealplanId",
+        "description": "identifikasjon av arealplanen som objektet tilhører.",
+        "cardinality": "1",
+        "attributes": [
+          {
+            "name": "administrativEnhet",
+            "type": "AdministrativEnhetskode",
+            "description": "entydig identifikasjon av administrativ enhet som vedtar planen (vedtaksmyndighet)\n\nMerknad: Bruken av landkode=NO er forbeholdt statlig vedtaksmyndighet",
+            "cardinality": "1",
+            "attributes": [
+              {
+                "name": "kommunenummer",
+                "type": "Kommunenummer",
+                "description": "offisiell nummerering av kommuner",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "codelist",
+                  "definition": "kodeliste for kommunenummer.",
+                  "asDictionary": "true",
+                  "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer"
+                },
+                "taggedValues": {
+                  "SOSI_navn": "KOMM"
+                }
+              },
+              {
+                "name": "fylkesnummer",
+                "type": "Fylkesnummer",
+                "description": "offisiell nummerering av fylker",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "codelist",
+                  "definition": "kodeliste for fylkesnummer.",
+                  "asDictionary": "true",
+                  "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/fylkesnummer"
+                },
+                "taggedValues": {
+                  "SOSI_navn": "FYLKESNR"
+                }
+              },
+              {
+                "name": "landkode",
+                "type": "Landkode",
+                "description": "kode med verdien 'NO', som angir at administrativ enhet er staten Norge, ihht. ISO 3166",
+                "cardinality": "0..1",
+                "valueDomain": {
+                  "kind": "enumeration",
+                  "listedValues": [
+                    {
+                      "value": "NO",
+                      "label": "Norge"
+                    }
+                  ],
+                  "definition": "alfanumerisk kode for nasjonalt nivå / Norge.\n\nAvledet fra \"ISO 3166 Codes for the representation of names of countries and their subdivisions\""
+                },
+                "taggedValues": {
+                  "SOSI_navn": "LANDKODE"
+                }
+              }
+            ]
+          },
+          {
+            "name": "planId",
+            "type": "CharacterString",
+            "description": "entydig identifikasjon for en plan innen den administrative enheten",
+            "cardinality": "1",
+            "taggedValues": {
+              "SOSI_navn": "PLANID"
+            }
+          }
+        ]
+      },
+      {
+        "name": "vertikalnivå",
+        "type": "Vertikalnivå",
+        "description": "beliggenhet i forhold til jordoverflaten\n(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "beliggenhet i forhold til jordoverflaten (kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/plan-felles/vertikalnivå"
+        },
+        "taggedValues": {
+          "SOSI_navn": "VERTNIV"
+        }
+      },
+      {
+        "name": "vertikallag",
+        "type": "Vertikallag",
+        "description": "identifikasjon og plassering av lag innen et vertikalnivå\n(kart- og planforskriften § 9 - https://lovdata.no/forskrift/2025-01-20-52/§9)",
+        "cardinality": "0..1",
+        "attributes": [
+          {
+            "name": "lag",
+            "type": "CharacterString",
+            "description": "identifikasjon av vertikallag innen et vertikalnivå.\n\nBrukes der det er flere vertikallag innen ett vertikalnivå",
+            "cardinality": "1"
+          },
+          {
+            "name": "referansehøyde",
+            "type": "Real",
+            "description": "nærmere spesifikasjon av høydenivået for et vertikallag",
+            "cardinality": "0..1"
+          }
+        ]
+      }
+    ],
+    "abstract": true,
+    "relationships": {
+      "inheritance": [
+        "SOSI_Objekt"
+      ],
+      "associations": []
+    },
+    "package": "Abstrakte typer"
+  },
+  {
+    "name": "RpFormålGrense",
+    "description": "grense for reguleringsformål i regulerings- og bebyggelsesplan (pbl. 1985 § 25 første ledd) / områderegulering og detaljregulering (pbl. § 12-5)",
+    "attributes": [
+      {
+        "name": "grense",
+        "type": "GM_Curve",
+        "description": "avgrensningslinje",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpAvgrensingslinje"
+      ],
+      "associations": []
+    },
+    "package": "Formål"
+  },
+  {
+    "name": "RpArealformålOmråde",
+    "description": "område med angitt arealformål i reguleringsplan  (pbl. § 12-5 - https://lovdata.no/lov/2008-06-27-71/§12-5)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "flategeometri",
+        "cardinality": "1"
+      },
+      {
+        "name": "eierform",
+        "type": "EierformType",
+        "description": "henvisning til planbestemmelse om arealet skal brukes av det offentlige, eller være fellesarealer for flere eiendommer\n(pbl. § 12-7 nr. 14 - https://lovdata.no/lov/2008-06-27-71/§12-7)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "henvisning til planbestemmelse om arealet skal brukes av det offentlige, eller være fellesarealer for flere eiendommer (pbl. § 12-7 nr. 14 - https://lovdata.no/lov/2008-06-27-71/§12-7)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/plan-felles/eierformtype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "EIERFORM"
+        }
+      },
+      {
+        "name": "arealformål",
+        "type": "RpArealformål",
+        "description": "kode for arealformål i reguleringsplan\n(kart- og planforskriften Vedlegg I - https://lovdata.no/dokument/SF/forskrift/2025-01-20-52)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "kodeliste for arealformål i reguleringsplan (kart- og planforskriften Vedlegg I - https://lovdata.no/forskrift/2025-01-20-52/§2 - https://lovdata.no/forskrift/2025-01-20-52/§2)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/rparealformål"
+        },
+        "taggedValues": {
+          "SOSI_navn": "RPAREALFORMÅL"
+        }
+      },
+      {
+        "name": "beskrivelse",
+        "type": "CharacterString",
+        "description": "detaljert beskrivelse av formål\n\nMerknad: kan benyttes der loven gir anledning til det, men lov/forskrift ikke har angitt detaljeringen i form av spesifikke arealformål",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "BESKRIVELSE"
+        }
+      },
+      {
+        "name": "feltnavn",
+        "type": "CharacterString",
+        "description": "entydig navn/betegnelse på formålsområde i reguleringsplan",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "FELTNAVN"
+        }
+      },
+      {
+        "name": "utnytting",
+        "type": "Utnytting",
+        "description": "grad av utnytting\n(pbl. § 12-7 nr. 1, samt TEK kap. 5)",
+        "cardinality": "0..*",
+        "taggedValues": {
+          "SOSI_navn": "UTNYTT"
+        },
+        "attributes": [
+          {
+            "name": "utnyttingstype",
+            "type": "Utnyttingstype",
+            "description": "type grad av utnytting\n(pbl. 1985 § 26 første ledd og forskrift TEK kap. III; pbl. § 12-7 nr 1 og TEK kap. 5)",
+            "cardinality": "1",
+            "valueDomain": {
+              "kind": "codelist",
+              "definition": "type grad av utnytting (pbl. 1985 § 26 første ledd og forskrift TEK kap. III; pbl. § 12-7 nr 1 og TEK kap. 5)",
+              "asDictionary": "true",
+              "codeList": "https://register.geonorge.no/sosi-kodelister/plan/plan-felles/utnyttingstype"
+            },
+            "taggedValues": {
+              "SOSI_navn": "UTNTYP"
+            }
+          },
+          {
+            "name": "utnyttingstall",
+            "type": "Integer",
+            "description": "tallverdi for grad av utnytting\n(pbl. 1985 § 26 første ledd og forskrift TEK kap. III; pbl. §12-7 nr 1 og TEK kap. 5)",
+            "cardinality": "0..1",
+            "taggedValues": {
+              "SOSI_navn": "UTNTALL"
+            }
+          },
+          {
+            "name": "utnyttingstall_minimum",
+            "type": "Integer",
+            "description": "tallverdi for minste utnyttingsgrad\n(pbl. §12-7 nr 1 og TEK kap 5 )",
+            "cardinality": "0..1",
+            "taggedValues": {
+              "SOSI_navn": "UTNTALL_MIN"
+            }
+          }
+        ]
+      },
+      {
+        "name": "uteoppholdsareal",
+        "type": "Integer",
+        "description": "minste uteoppholdsareal\n(TEK § 5-6)",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "UTEAREAL"
+        }
+      },
+      {
+        "name": "byggverkbestemmelse",
+        "type": "Byggverkbestemmelse",
+        "description": "planbestemmelse om bygningers plassering, utforming mv.\n(pbl. § 12-7 nr. 1,  samt TEK kap. 7 og  8-3)",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "kodeliste for henvisning til planbestemmelse om bygningers plassering, utforming mv. ( pbl. § 12-7 nr. 1, samt pbl. 1985 § 26 første ledd og § 28-2)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/byggverkbestemmelse"
+        },
+        "taggedValues": {
+          "SOSI_navn": "BYGGVERK"
+        }
+      },
+      {
+        "name": "avkjørselsbestemmelse",
+        "type": "Avkjørselsbestemmelse",
+        "description": "planbestemmelse om avkjørsel\n(pbl. § 11-10 nr. 4 og TEK § 8-8)\n\nMerknad:\nAngir om avkjørsel til formålsområde tillates eller ikke tillates, eller om det i plan / bestemmelser er tillatt avkjørsel via annet formål enn vei (via gangvei, turvei e.l.).  I sistnevnte situasjon knyttes egenskapen til det formålsområde det er tillatt å passere",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "kodeliste for planbestemmelse om avkjørsel (pbl. § 11-10 nr. 4 og TEK § 8-8, samt pbl.85 §§ 25 og 26, 1. ledd)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/avkjørselsbestemmelse"
+        },
+        "taggedValues": {
+          "SOSI_navn": "AVKJ"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpFormålGrense",
+          "role": "avgrensesAv",
+          "cardinality": "0..*"
+        }
+      ]
+    },
+    "package": "Formål"
+  },
+  {
+    "name": "RpGjennomføringSone",
+    "description": "hensynssone for særskilte gjennomføringsvirkemidler i reguleringsplan (pbl. §§ 12-6, 12 A-1, 12 A-13, jf. § 11-8 tredje ledd bokstav e)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets utstrekning og avgrensing i grunnriss (2D)",
+        "cardinality": "1"
+      },
+      {
+        "name": "gjennomføring",
+        "type": "RpGjennomføringSoneType",
+        "description": "type særskilte gjennomføringsvirkemidler i gjennomføringssone\n(pbl. § 12-6, jf. § 11-8 tredje ledd bokstav e andre ledd)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type særskilte gjennomføringsvirkemidler i gjennomføringssone (pbl. §§ 12-6, 12 A-1, 12 A-13,  jf. § 11-8 tredje ledd bokstav e)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/hensyn/gjennomføringsonetype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "RPGJENNOMFØRING"
+        }
+      },
+      {
+        "name": "hensynSonenavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på hensynssone\n(pbl. §§ 12-6, 12 A-13, jf. § 11-8)",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "HENSYNSONENAVN"
+        }
+      },
+      {
+        "name": "beskrivelse",
+        "type": "CharacterString",
+        "description": "supplerende beskrivelse",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "BESKRIVELSE"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpHensynRom",
+          "role": "rom",
+          "cardinality": "0..1"
+        }
+      ]
+    },
+    "package": "Hensyn"
+  },
+  {
+    "name": "RpHensynRom",
+    "description": "hensynsrom i 3D for RpHensynSone\nhensynsrom i 3D for en hensynssone i reguleringsplan\n\nHensynsrommet tilhører alltid en hensynssone, som er en av subtypene til den abstrakte supertypen RpHensynSone, dvs. en av disse: RpStøySone, RpSikringSone, RpFareSone, RpBåndleggingSone, RpAngittHensynSone, RpInfrastrukturSone eller RpGjennomføringSone.",
+    "attributes": [
+      {
+        "name": "rom",
+        "type": "GM_Solid",
+        "description": "objektets utstrekning og avgrensning i 3D",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpRomligObjekt"
+      ],
+      "associations": []
+    },
+    "package": "Hensyn"
+  },
+  {
+    "name": "RpAngittHensynSone",
+    "description": "hensynssone for nærmere angitt hensyn i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav c)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets utstrekning og avgrensing i grunnriss (2D)",
+        "cardinality": "1"
+      },
+      {
+        "name": "angittHensyn",
+        "type": "RpAngittHensynSoneType",
+        "description": "type angitt hensyn i hensynssone for nærmere angitt særlig hensyn\n(pbl. §12-6, jf. § 11-8 tredje ledd bokstav c)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type angitt hensyn i hensynssone for nærmere angitt særlig hensyn (pbl. §12-6, jf. § 11-8 tredje ledd bokstav c)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/hensyn/angitthensynsonetype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "RPANGITTHENSYN"
+        }
+      },
+      {
+        "name": "hensynSonenavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på hensynssone\n(pbl. §§ 12-6, 12 A-13, jf. § 11-8)",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "HENSYNSONENAVN"
+        }
+      },
+      {
+        "name": "beskrivelse",
+        "type": "CharacterString",
+        "description": "supplerende beskrivelse",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "BESKRIVELSE"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpHensynRom",
+          "role": "rom",
+          "cardinality": "0..1"
+        }
+      ]
+    },
+    "package": "Hensyn"
+  },
+  {
+    "name": "RpDetaljeringSone",
+    "description": "hensynssone for videreføring av reguleringsplan (pbl. § 12-6, jf. §11-8 tredje ledd bokstav f).\n\nMerknad:\nKan benyttes i områdeplan for videreføring av plan for detaljregulering\nBenyttes ikke i plan for detaljregulering",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets utstrekning og avgrensing i grunnriss (2D)",
+        "cardinality": "1"
+      },
+      {
+        "name": "detaljering",
+        "type": "RpDetaljeringSoneType",
+        "description": "type detaljering i hensynsone for videreføring av gjeldende reguleringsplan\n(pbl. § 12-6, jf. §11-8 tredje ledd bokstav f)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type detaljering i hensynsone for videreføring av gjeldende reguleringsplan (pbl. § 12-6, jf. §11-8 tredje ledd bokstav f)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/hensyn/detaljeringsonetype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "RPDETALJERING"
+        }
+      },
+      {
+        "name": "hensynSonenavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på hensynssone\n(pbl. §§ 12-6, 12 A-13, jf. § 11-8)",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "HENSYNSONENAVN"
+        }
+      },
+      {
+        "name": "beskrivelse",
+        "type": "CharacterString",
+        "description": "supplerende beskrivelse",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "BESKRIVELSE"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpHensynRom",
+          "role": "rom",
+          "cardinality": "0..*"
+        }
+      ]
+    },
+    "package": "Hensyn"
+  },
+  {
+    "name": "RpSikringSone",
+    "description": "hensynssone for sikring i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets utstrekning og avgrensing i grunnriss (2D)",
+        "cardinality": "1"
+      },
+      {
+        "name": "sikring",
+        "type": "RpSikringSoneType",
+        "description": "type sikring i hensynsone for sikring\n(pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type sikring i hensynsone for sikring i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/hensyn/sikringsonetype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "RPSIKRING"
+        }
+      },
+      {
+        "name": "beskrivelse",
+        "type": "CharacterString",
+        "description": "supplerende beskrivelse",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "BESKRIVELSE"
+        }
+      },
+      {
+        "name": "hensynSonenavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på hensynssone\n(pbl. §§ 12-6, 12 A-13, jf. § 11-8)",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "HENSYNSONENAVN"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpHensynRom",
+          "role": "rom",
+          "cardinality": "0..1"
+        }
+      ]
+    },
+    "package": "Hensyn"
+  },
+  {
+    "name": "RpStøySone",
+    "description": "hensynssone for støy i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets utstrekning og avgrensing i grunnriss (2D)",
+        "cardinality": "1"
+      },
+      {
+        "name": "støy",
+        "type": "RpStøySoneType",
+        "description": "type støy i hensynsone for støy\n(pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type støy i hensynsone for støy (pbl. § 12-6, jf. § 11-8, tredje ledd bokstav a).\nhttps://www.regjeringen.no/no/dokumenter/retningslinje-for-behandling-av-stoy-i-arealplanlegging/id2857574/",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/hensyn/støysonetype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "RPSTØY"
+        }
+      },
+      {
+        "name": "beskrivelse",
+        "type": "CharacterString",
+        "description": "supplerende beskrivelse",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "BESKRIVELSE"
+        }
+      },
+      {
+        "name": "hensynSonenavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på hensynssone\n(pbl. §§ 12-6, 12 A-13, jf. § 11-8)",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "HENSYNSONENAVN"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpHensynRom",
+          "role": "rom",
+          "cardinality": "0..1"
+        }
+      ]
+    },
+    "package": "Hensyn"
+  },
+  {
+    "name": "RpInfrastrukturSone",
+    "description": "hensynssone for særlige krav til infrastruktur i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav b)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets utstrekning og avgrensing i grunnriss (2D)",
+        "cardinality": "1"
+      },
+      {
+        "name": "infrastruktur",
+        "type": "RpInfrastrukturSoneType",
+        "description": "type infrastrukturkrav i hensynsone for infrastruktur\n(pbl. § 12-6, jf. § 11-8 tredje ledd bokstav b)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type infrastrukturkrav i hensynsone for infrastruktur (pbl. § 12-6, jf. § 11-8, tredje ledd bokstav b)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/hensyn/infrastruktursonetype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "RPINFRASTRUKTUR"
+        }
+      },
+      {
+        "name": "beskrivelse",
+        "type": "CharacterString",
+        "description": "supplerende beskrivelse",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "BESKRIVELSE"
+        }
+      },
+      {
+        "name": "hensynSonenavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på hensynssone\n(pbl. §§ 12-6, 12 A-13, jf. § 11-8)",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "HENSYNSONENAVN"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpHensynRom",
+          "role": "rom",
+          "cardinality": "0..1"
+        }
+      ]
+    },
+    "package": "Hensyn"
+  },
+  {
+    "name": "RpFareSone",
+    "description": "hensynssone for fare i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets utstrekning og avgrensing i grunnriss (2D)",
+        "cardinality": "1"
+      },
+      {
+        "name": "fare",
+        "type": "RpFareSoneType",
+        "description": "type fare i hensynssone for fare\n(pbl. § 12-6, jf. § 11-8 tredje ledd bokstav a)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type fare i hensynssone for fare (pbl. § 12-6, jf. § 11-8, tredje ledd bokstav a)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/hensyn/faresonetype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "RPFARE"
+        }
+      },
+      {
+        "name": "hensynSonenavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på hensynssone\n(pbl. §§ 12-6, 12 A-13, jf. § 11-8)",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "HENSYNSONENAVN"
+        }
+      },
+      {
+        "name": "beskrivelse",
+        "type": "CharacterString",
+        "description": "supplerende beskrivelse",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "BESKRIVELSE"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpHensynRom",
+          "role": "rom",
+          "cardinality": "0..1"
+        }
+      ]
+    },
+    "package": "Hensyn"
+  },
+  {
+    "name": "RpBåndleggingSone",
+    "description": "hensynssone for båndlegging i reguleringsplan (pbl. § 12-6, jf. § 11-8 tredje ledd bokstav d)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets utstrekning og avgrensing i grunnriss (2D)",
+        "cardinality": "1"
+      },
+      {
+        "name": "båndlegging",
+        "type": "RpBåndleggingSoneType",
+        "description": "type båndlegging i hensynssone for båndlegging\n(pbl. § 12-6, jf. § 11-8 tredje ledd bokstav d)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type båndlegging i hensynssone for båndlegging (§ 12-6, jf.  pbl. § 11-8 tredje ledd bokstav d)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/hensyn/båndleggingsonetype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "RPBÅNDLEGGING"
+        }
+      },
+      {
+        "name": "båndlagtFremTil",
+        "type": "Date",
+        "description": "dato når båndleggingen opphører",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "BÅNDLAGTFREMTIL"
+        }
+      },
+      {
+        "name": "hensynSonenavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på hensynssone\n(pbl. §§ 12-6, 12 A-13, jf. § 11-8)",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "HENSYNSONENAVN"
+        }
+      },
+      {
+        "name": "beskrivelse",
+        "type": "CharacterString",
+        "description": "supplerende beskrivelse",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "BESKRIVELSE"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpHensynRom",
+          "role": "rom",
+          "cardinality": "0..1"
+        }
+      ]
+    },
+    "package": "Hensyn"
+  },
+  {
+    "name": "RpHandlingOmråde",
+    "description": "område som konstruksjonen/tiltaket må holde seg innenfor (kart- og planforskriften vedlegg - https://lovdata.no/forskrift/2025-01-20-52/§2).\n\nMerknad: RpHandlingOmråde har samme betydning som byggegrense og anvendes ved fremstilling av planen i 2D. Dette kan suppleres med et RpHandlingRom for å avgrense tiltaket vertikalt.",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_Surface",
+        "description": "områdets flategeometri",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpHandlingRom",
+          "role": "rom",
+          "cardinality": "0..1"
+        }
+      ]
+    },
+    "package": "Bestemmelsesobjekter"
+  },
+  {
+    "name": "RpJuridiskLinje",
+    "description": "bestemmelse stedfestet med linje i reguleringsplan\n(pbl. §12-7, kart- og planforskriften Vedlegg IV - https://lovdata.no/forskrift/2025-01-20-52/§2; pbl. 1985 §§ 25, 26 og 28-2)",
+    "attributes": [
+      {
+        "name": "linjeforløp",
+        "type": "GM_Curve",
+        "description": "linje for stedfesting av bestemmeler",
+        "cardinality": "1"
+      },
+      {
+        "name": "juridiskLinjetype",
+        "type": "RpJuridiskLinjeType",
+        "description": "type bestemmelse stedfestet med  linje",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type bestemmelse stedfestet med linje i reguleringsplan (pbl. §12-7, kart- og planforskriften Vedlegg IV - https://lovdata.no/forskrift/2025-01-20-52/§2;\npbl. 1985 §§ 25, 26 og 28-2)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/rpjuridisklinjetype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "RPJURLINJE"
+        }
+      },
+      {
+        "name": "objektnavn",
+        "type": "CharacterString",
+        "description": "entydig tekstlig betegnelse som identiserer kartobjektet,\nkan fungere som koblingsnøkkel til mellom kartobjekt og planbestememlser",
+        "cardinality": "0..1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    },
+    "package": "Bestemmelsesobjekter"
+  },
+  {
+    "name": "RpBestemmelseMidlByggAnlegg",
+    "description": "bestemmelsesområde for midlertidig bygge- og anlegg, jfr. pbl. § 12-7 nr. 1.\n\nMerknad:\nDet er utgitt en NPAD Del 1.2 som beskriver det rettslige grunnlaget og den tekniske framstillingen av midlertidig bygge- og anleggsområde.",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets flategeometri",
+        "cardinality": "1"
+      },
+      {
+        "name": "bestemmelseOmrådeNavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse for bestemmelseområde\n(pbl. § 12-7 nr.1)",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "BESTEMMELSEOMRNAVN"
+        }
+      },
+      {
+        "name": "saksnummer",
+        "type": "Saksnummer",
+        "description": "entydig nummerering av en sak i et saksbehandlingsverktøy",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "SAKSNR"
+        },
+        "attributes": [
+          {
+            "name": "saksår",
+            "type": "Integer",
+            "description": "Årstallet saken ble initiert",
+            "cardinality": "1"
+          },
+          {
+            "name": "sakssekvensnummer",
+            "type": "Integer",
+            "description": "løpenummer for saken innenfor året.\n\nNB! attributtnavnet forandret fra sekvensnummer til sakssekvensnummer desember 2011, for å tilpasses NOARK 5.",
+            "cardinality": "1"
+          }
+        ]
+      },
+      {
+        "name": "avgjørelsesdato",
+        "type": "Date",
+        "description": "vedtaksdato for etablering av området",
+        "cardinality": "1"
+      },
+      {
+        "name": "gyldigTilDato",
+        "type": "Date",
+        "description": "utløpsdato for bestemmelseområdet.\nEtter denne skal det midlertidige bestemmelseområdet fjernes",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "GYLDIGTILDATO"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpBestemmelseRom",
+          "role": "rom",
+          "cardinality": "0..1"
+        }
+      ]
+    },
+    "package": "Bestemmelsesobjekter"
+  },
+  {
+    "name": "RpHandlingRom",
+    "description": "handlingsrom i 3D for RpHandlingOmråde.\n\nKonstruksjonen/tiltaket må holde seg innenfor handlingrommet, i henhold til de tilhørende planbestemmelsene",
+    "attributes": [
+      {
+        "name": "rom",
+        "type": "GM_Solid",
+        "description": "lukket romgeometri i 3D",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpRomligObjekt"
+      ],
+      "associations": []
+    },
+    "package": "Bestemmelsesobjekter"
+  },
+  {
+    "name": "RpBestemmelseOmråde",
+    "description": "område med bestemmelse illustrert på kart (pbl. § 12-7 nr. 1-14)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets utstrekning og avgrensing i grunnriss (2D)",
+        "cardinality": "1"
+      },
+      {
+        "name": "bestemmelseOmrådeNavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på bestemmelsesområde\n(pbl. §§ 11-9, 11-10 og 11-11, jf. pbl. § 12-7)",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "BESTEMMELSEOMRNAVN"
+        }
+      },
+      {
+        "name": "rpBestemmelseHjemmel",
+        "type": "RpBestemmelseHjemmel",
+        "description": "kode for hjemmel til planbestemmelse i reguleringsplan\n(pbl. §12-7)",
+        "cardinality": "1..*",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "kodeliste for hjemmel til planbestemmelse i reguleringsplan (pbl. §12-7)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/rpbestemmelsehjemmel"
+        },
+        "taggedValues": {
+          "SOSI_navn": "RPBESTEMMELSEHJEMMEL"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpBestemmelseRegTerreng",
+          "role": "regulertTerreng",
+          "cardinality": "0..*"
+        },
+        {
+          "target": "RpBestemmelseRom",
+          "role": "rom",
+          "cardinality": "0..1"
+        }
+      ]
+    },
+    "package": "Bestemmelsesobjekter"
+  },
+  {
+    "name": "RpBestemmelseRom",
+    "description": "bestemmelserom i 3D for RpBestemmelseOmråde",
+    "attributes": [
+      {
+        "name": "rom",
+        "type": "GM_Solid",
+        "description": "lukket romgeometri i 3D",
+        "cardinality": "1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpRomligObjekt"
+      ],
+      "associations": []
+    },
+    "package": "Bestemmelsesobjekter"
+  },
+  {
+    "name": "RpJuridiskPunkt",
+    "description": "bestemmelse stedfestet med punkt i reguleringsplan (pbl. §12-7, kart- og planforskriften Vedlegg IV - https://lovdata.no/forskrift/2025-01-20-52/§2 ; pbl. 1985 §§ 25, 26 og 28-2)",
+    "attributes": [
+      {
+        "name": "posisjon",
+        "type": "GM_Point",
+        "description": "punkt for stedfesting av bestemmelser",
+        "cardinality": "1"
+      },
+      {
+        "name": "symbolretning",
+        "type": "Vector",
+        "description": "retningsvektor i kartkoordinatsystemet som fastsetter retning av kartsymbol",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "juridiskPunkttype",
+        "type": "RpJuridiskPunktType",
+        "description": "type bestemmelse stedfestet med punkt",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type bestemmelse stedfestet med punkt i reguleringsplan (pbl. §12-7, kart- og planforskriften Vedlegg IV - https://lovdata.no/forskrift/2025-01-20-52/§2; pbl. 1985 §§ 25, 26 og 28-2)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/rpjuridiskpunkttype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "RPJURPUNKT"
+        }
+      },
+      {
+        "name": "objektnavn",
+        "type": "CharacterString",
+        "description": "entydig tekstlig betegnelse som identiserer kartobjektet,\nkan fungere som koblingsnøkkel til mellom kartobjekt og planbestememlser",
+        "cardinality": "0..1"
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    },
+    "package": "Bestemmelsesobjekter"
+  },
+  {
+    "name": "RpRegulertHøyde",
+    "description": "linje med bestemmelse om regulert høyde (pbl. § 12-7 nr. 1,  kart- og planforskriften Vedlegg IV - https://lovdata.no/forskrift/2025-01-20-52/§2)",
+    "attributes": [
+      {
+        "name": "stedfesting",
+        "type": "GM_Primitive",
+        "description": "punkt eller linje",
+        "cardinality": "1"
+      },
+      {
+        "name": "høydeFraPlanbestemmelse",
+        "type": "HøydeFraPlanbestemmelse",
+        "description": "regulert høyde gitt i planbestemmelser\n(bestemmelse om utforming illustrert på kart, pbl. § 12-7 nr. 1)",
+        "cardinality": "1",
+        "taggedValues": {
+          "SOSI_navn": "HØYDEFRAPLANBEST"
+        },
+        "attributes": [
+          {
+            "name": "regulertHøyde",
+            "type": "Real",
+            "description": "tall for enten kotehøyde eller høyde over terreng",
+            "cardinality": "1",
+            "taggedValues": {
+              "SOSI_navn": "REGULERTHØYDE"
+            }
+          },
+          {
+            "name": "typeHøyde",
+            "type": "TypeHøyde",
+            "description": "hva en planbestemmelse om regulert høyde gjelder for",
+            "cardinality": "0..1",
+            "valueDomain": {
+              "kind": "codelist",
+              "definition": "hva en planbestemmelse om regulert høyde gjelder for",
+              "asDictionary": "true",
+              "codeList": "https://register.geonorge.no/sosi-kodelister/plan/plan-felles/typehøyde"
+            }
+          },
+          {
+            "name": "høydereferansesystem",
+            "type": "Høydereferansesystem",
+            "description": "høydereferansesystem som ligger til grunn for bestemmelser om regulert høyde\n\nOffisielt høydereferansesystem i Norge er NN2000, men eldre planer kan ha brukt et eldre høydereferansesystem",
+            "cardinality": "0..1",
+            "valueDomain": {
+              "kind": "codelist",
+              "definition": "høydereferansesystem som ligger til grunn for bestemmelser om regulert høyde",
+              "asDictionary": "true",
+              "codeList": "https://register.geonorge.no/sosi-kodelister/plan/plan-felles/høydereferansesystem"
+            },
+            "taggedValues": {
+              "SOSI_navn": "HØYDE-REF"
+            }
+          },
+          {
+            "name": "terrengreferanse",
+            "type": "Terrengreferanse",
+            "description": "type terrengoverflate som danner utgangspunktet for å fastsette regulert høyde over terreng\n\nKan bare brukes for gesimshøyde og mønehøyde",
+            "cardinality": "0..1",
+            "valueDomain": {
+              "kind": "codelist",
+              "definition": "type terrengoverflate som danner utgangspunktet for å fastsette den regulerte høyden",
+              "asDictionary": "true",
+              "codeList": "https://register.geonorge.no/sosi-kodelister/plan/plan-felles/terrengreferanse"
+            }
+          }
+        ]
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    },
+    "package": "Regulert høyde og terreng"
+  },
+  {
+    "name": "RpBestemmelseRegTerreng",
+    "description": "regulert terrengoverflate slik det fremgår av planen\nTerrenget angis enten slik det skal være når tiltaket er gjennomført eller slik det maksimalt/minimalt kan utnyttes.",
+    "attributes": [
+      {
+        "name": "overflate",
+        "type": "GM_Surface",
+        "description": "angivelse av den regulerte terrengoverflasten",
+        "cardinality": "1"
+      },
+      {
+        "name": "overflateType",
+        "type": "RegulertOverflateType",
+        "description": "om bestemmelsen fastsetter endelig terrengoverflate eller om den gir rammer for tillatt endring",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "om bestemmelsen fastsetter endelig terrengoverflate eller om den gir rammer for tillatt endring",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/regulertoverflatetype"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    },
+    "package": "Regulert høyde og terreng"
+  },
+  {
+    "name": "RpPåskrift",
+    "description": "påskrift eller supplerende tekst på plankartet for regulerings- og bebyggelsesplan (pbl. 1985 §§ 25 og 26 og 28-2) / områderegulering og detaljregulering (pbl. §§ 12-2, 12-3, 12-5 og 12-7)",
+    "attributes": [
+      {
+        "name": "objektposisjon",
+        "type": "GM_Point",
+        "description": "representasjonspunkt som knytter påskriften geometrisk til et annet kartobjekt.\n\nSvarer til 1. koordinat fra SOSI-formatets .TEKST-geometri",
+        "cardinality": "1"
+      },
+      {
+        "name": "tekstplassering",
+        "type": "GM_Primitive",
+        "description": "plassering av påskriften, representert ved punkt eller linje\n\nDenne geometriegenskapen er en videreføring av deler av SOSI-formatets .TEKST-geometri. Mens 1. koordinat i .TEKST er ivaretatt ved objektposisjonen, svarer tekstplassering til koordinat nr 2 og 3.\nTekstplassering referer til tekstens grunnlinje. Angitt som punkt skal teksten stå vannrett ut fra punktet, og angitt som linje angir den startpunkt og retning for en rotert tekst. Det skal ikke brukes en krum kurve.\nNår tekstplassering er utelatt, brukes objektposisjonen.",
+        "cardinality": "0..1"
+      },
+      {
+        "name": "generellTekststreng",
+        "type": "CharacterString",
+        "description": "påskriftens tekstlige innhold",
+        "cardinality": "1"
+      },
+      {
+        "name": "påskriftType",
+        "type": "PåskriftType",
+        "description": "hva påskriften i plankartet omhandler",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "kind": "codelist",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/plan-felles/påskrifttype"
+        },
+        "taggedValues": {
+          "SOSI_navn": "RPPÅSKRIFTTYPE"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    },
+    "package": "Påskrift"
+  },
+  {
+    "name": "RbFareOmråde",
+    "description": "område med fare i regulerings- og bebyggelsesplan (pbl. 1985 § 25 første ledd, nr. 5)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets utstrekning i grunnriss",
+        "cardinality": "1"
+      },
+      {
+        "name": "reguleringsformål",
+        "type": "RegformFare",
+        "description": "type reguleringsformål\n(pbl. 1985 § 25 første ledd)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type reguleringsformål (pbl. 1985 § 25 første ledd)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/pbl-1985/regformfare"
+        },
+        "taggedValues": {
+          "SOSI_navn": "REGFORM"
+        }
+      },
+      {
+        "name": "feltnavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på formålsfelt innen regulerings- og bebyggelsesplan\n(pbl. 1985 § 25 første ledd)",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "FELTNAVN"
+        }
+      },
+      {
+        "name": "reguleringsformålsutdyping",
+        "type": "CharacterString",
+        "description": "utdyping av reguleringsformål\n(pbl. 1985 § 25 første ledd)",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "REGFORMUTDYP"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    },
+    "package": "Rp 1985"
+  },
+  {
+    "name": "RbFornyelseOmråde",
+    "description": "område for fornyelse i regulerings- og bebyggelsesplan (pbl. § 25 første ledd nr. 8)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets utstrekning i grunnriss",
+        "cardinality": "1"
+      },
+      {
+        "name": "reguleringsformål",
+        "type": "RegformFornyelse",
+        "description": "type reguleringsformål\n(pbl. 1985 § 25 første ledd)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type reguleringsformål (pbl. 1985 § 25 første ledd)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/pbl-1985/regformfornyelse"
+        },
+        "taggedValues": {
+          "SOSI_navn": "REGFORM"
+        }
+      },
+      {
+        "name": "feltnavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på formålsfelt innen regulerings- og bebyggelsesplan\n(pbl. 1985 § 25 første ledd)",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "FELTNAVN"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    },
+    "package": "Rp 1985"
+  },
+  {
+    "name": "RbFormålOmråde",
+    "description": "område for reguleringsformål i regulerings- og bebyggelsesplan (pbl. 1985 § 25, første ledd)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "formålområdets flategeometri",
+        "cardinality": "1"
+      },
+      {
+        "name": "reguleringsformål",
+        "type": "RegformBrukFormål",
+        "description": "type reguleringsformål\n(pbl. 1985 § 25 første ledd)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type reguleringsformål (pbl. 1985 § 25 første ledd)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/pbl-1985/reguleringsformål"
+        },
+        "taggedValues": {
+          "SOSI_navn": "REGFORM"
+        }
+      },
+      {
+        "name": "reguleringsformålsutdyping",
+        "type": "CharacterString",
+        "description": "utdyping av reguleringsformål\n(pbl. 1985 § 25 første ledd)",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "REGFORMUTDYP"
+        }
+      },
+      {
+        "name": "feltnavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på formålsfelt innen regulerings- og bebyggelsesplan\n(pbl. 1985 § 25 første ledd)",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "FELTNAVN"
+        }
+      },
+      {
+        "name": "utnytting",
+        "type": "Utnytting",
+        "description": "grad av utnytting\n(pbl85. § 20-4 andre ledd bokstav b og § 26 første ledd og forskrift TEK kap. III)",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "UTNYTT"
+        },
+        "attributes": [
+          {
+            "name": "utnyttingstype",
+            "type": "Utnyttingstype",
+            "description": "type grad av utnytting\n(pbl. 1985 § 26 første ledd og forskrift TEK kap. III; pbl. § 12-7 nr 1 og TEK kap. 5)",
+            "cardinality": "1",
+            "valueDomain": {
+              "kind": "codelist",
+              "definition": "type grad av utnytting (pbl. 1985 § 26 første ledd og forskrift TEK kap. III; pbl. § 12-7 nr 1 og TEK kap. 5)",
+              "asDictionary": "true",
+              "codeList": "https://register.geonorge.no/sosi-kodelister/plan/plan-felles/utnyttingstype"
+            },
+            "taggedValues": {
+              "SOSI_navn": "UTNTYP"
+            }
+          },
+          {
+            "name": "utnyttingstall",
+            "type": "Integer",
+            "description": "tallverdi for grad av utnytting\n(pbl. 1985 § 26 første ledd og forskrift TEK kap. III; pbl. §12-7 nr 1 og TEK kap. 5)",
+            "cardinality": "0..1",
+            "taggedValues": {
+              "SOSI_navn": "UTNTALL"
+            }
+          },
+          {
+            "name": "utnyttingstall_minimum",
+            "type": "Integer",
+            "description": "tallverdi for minste utnyttingsgrad\n(pbl. §12-7 nr 1 og TEK kap 5 )",
+            "cardinality": "0..1",
+            "taggedValues": {
+              "SOSI_navn": "UTNTALL_MIN"
+            }
+          }
+        ]
+      },
+      {
+        "name": "uteoppholdsareal",
+        "type": "Integer",
+        "description": "minste uteoppholdsareal\n(pbl. 1985 § 26 andre ledd)",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "UTEAREAL"
+        }
+      },
+      {
+        "name": "byggverkbestemmelse",
+        "type": "Byggverkbestemmelse",
+        "description": "planbestemmelse om bygningers plassering, utforming mv.\n(pbl. 1985 § 20-4 andre ledd bokstav a og § 26 første ledd og § 28-2)",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "kodeliste for henvisning til planbestemmelse om bygningers plassering, utforming mv. ( pbl. § 12-7 nr. 1, samt pbl. 1985 § 26 første ledd og § 28-2)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/byggverkbestemmelse"
+        },
+        "taggedValues": {
+          "SOSI_navn": "BYGGVERK"
+        }
+      },
+      {
+        "name": "avkjørselsbestemmelse",
+        "type": "Avkjørselsbestemmelse",
+        "description": "planbestemmelse om avkjørsel\n(pbl. 1985 §§ 25 og 26 første ledd)\n\nMerknad:\nAngir om avkjørsel til formålsområdet tillates eller ikke tillates, eller om det i planbestemmelser er tillatt avkjørsel via annet formål enn vei (via gangvei, turvei e.l.).  I sistnevnte situasjon knyttes egenskapen til det formålsområdet det er tillatt å passere",
+        "cardinality": "0..1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "kodeliste for planbestemmelse om avkjørsel (pbl. § 11-10 nr. 4 og TEK § 8-8, samt pbl.85 §§ 25 og 26, 1. ledd)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplan/avkjørselsbestemmelse"
+        },
+        "taggedValues": {
+          "SOSI_navn": "AVKJ"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": [
+        {
+          "target": "RpFormålGrense",
+          "role": "avgrensesAv",
+          "cardinality": "0..*"
+        }
+      ]
+    },
+    "package": "Rp 1985"
+  },
+  {
+    "name": "RbRestriksjonOmråde",
+    "description": "område med restriksjon i regulerings- og bebyggelsesplan (pbl. 1985 § 25 første ledd nr. 6, § 26 og § 28-2)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets utstrekning i grunnriss",
+        "cardinality": "1"
+      },
+      {
+        "name": "reguleringsformål",
+        "type": "RegformRestriksjon",
+        "description": "type reguleringsformål\n(pbl.1985  § 25 første ledd)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type reguleringsformål (pbl. 1985 § 25 første ledd)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/pbl-1985/regformrestriksjon"
+        },
+        "taggedValues": {
+          "SOSI_navn": "REGFORM"
+        }
+      },
+      {
+        "name": "feltnavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på formålsfelt innen regulerings- og bebyggelsesplan\n(pbl. 1985 § 25 første ledd)",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "FELTNAVN"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    },
+    "package": "Rp 1985"
+  },
+  {
+    "name": "RbBevaringOmråde",
+    "description": "område for bevaring i regulerings- og bebyggelsesplan (pbl. 1985 § 25 første ledd nr. 6)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets utstrekning i grunnriss",
+        "cardinality": "1"
+      },
+      {
+        "name": "reguleringsformål",
+        "type": "RegformBevaring",
+        "description": "type bevaringsformål\n(pbl. 1985 § 25 første ledd)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type bevaringsformål\n(pbl. 1985 § 25 første ledd)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/pbl-1985/regformbevaring"
+        },
+        "taggedValues": {
+          "SOSI_navn": "REGFORM"
+        }
+      },
+      {
+        "name": "feltnavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på formålsfelt innen regulerings- og bebyggelsesplan\n(pbl. 1985 § 25 første ledd)",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "FELTNAVN"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    },
+    "package": "Rp 1985"
+  },
+  {
+    "name": "RbRekkefølgeOmråde",
+    "description": "område med formålsrekkefølge i regulerings- og bebyggelsesplan (pbl. 1985 § 25 andre ledd, § 26 og § 28-2)",
+    "attributes": [
+      {
+        "name": "område",
+        "type": "GM_MultiSurface",
+        "description": "objektets utstrekning i grunnriss",
+        "cardinality": "1"
+      },
+      {
+        "name": "reguleringsformål",
+        "type": "RegformRekkefølge",
+        "description": "type reguleringsformål\n(pbl. 1985 § 25 første ledd)",
+        "cardinality": "1",
+        "valueDomain": {
+          "kind": "codelist",
+          "definition": "type reguleringsformål (pbl. 1985 § 25 første ledd)",
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/pbl-1985/regformrekkefølge"
+        },
+        "taggedValues": {
+          "SOSI_navn": "REGFORM"
+        }
+      },
+      {
+        "name": "feltnavn",
+        "type": "CharacterString",
+        "description": "navn/feltbetegnelse på formålsfelt innen regulerings- og bebyggelsesplan\n(pbl. 1985 § 25 første ledd)",
+        "cardinality": "0..1",
+        "taggedValues": {
+          "SOSI_navn": "FELTNAVN"
+        }
+      }
+    ],
+    "abstract": false,
+    "relationships": {
+      "inheritance": [
+        "RpObjekt"
+      ],
+      "associations": []
+    },
+    "package": "Rp 1985"
+  }
+]

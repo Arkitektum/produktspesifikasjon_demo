@@ -1,0 +1,396 @@
+{
+  "overview": "Denne produktspesifikasjonen er autogenerert fra metadata i Geonorge og datamodell fra SOSI modellregister og/eller OGC API Features. Noe ekstra informasjon kan ha blitt lagt til gjennom manuell prosess. Produktspesifikasjonen er i henhold til standarden: 'Geografisk informasjon - Dataproduktspesifikasjoner' (ISO19131:2022)",
+  "title": "Reguleringsplaner",
+  "format": "text/html",
+  "date": {
+    "creation": "2025-09-16",
+    "revision": "2026-08-28"
+  },
+  "language": "nor",
+  "contact": {
+    "individualName": "Olaug Hana Nesheim",
+    "organizationName": "Direktoratet for byggkvalitet",
+    "logo": "https://register.geonorge.no/data/organizations/974760223_DIBK_liten.jpg",
+    "electronicMailAddress": "ftb@dibk.no",
+    "role": "owner"
+  },
+  "identificationSection": {
+    "title": "Reguleringsplaner",
+    "abstract": "Fra 1.1.2026 vil Direktoratet for byggkvalitet opprettholde «Norge digitalt arealplankartløsning» (NAP) med datasett for reguleringsplaner og denne oppføringen er oppdatert med distribusjoner.\n\nReguleringsplan er et arealplankart med tilhørende bestemmelser som fastlegger bruk, flerbruk og vern i bestemte områder, og som gir grunnlag for avklaring av hvilke bygge- og anleggstiltak som kan gjennomføres i planområdet. Kommunestyret skal sørge for at det blir utarbeidet reguleringsplan for de områder i kommunen hvor dette følger av loven eller av kommuneplanens arealdel, samt der det ellers er behov for å sikre forsvarlig planavklaring og gjennomføring av bygge- og anleggstiltak, flerbruk og vern i forhold til berørte private og offentlige interesser. For gjennomføring av større bygge- og anleggstiltak og andre tiltak som kan få vesentlige virkninger for miljø og samfunn, kreves det reguleringsplan. Reguleringsplan kan utarbeides som en områderegulering for et større område eller som en detaljregulering for enkelttiltak eller mindre områder. Staten kan, når viktige statlige eller regionale interesser tilsier det, vedta statlig reguleringsplan. Private har rett til å fremme forslag til detaljregulering.\n\nDatasettet genereres fra den landsdekkende kopien av reguleringsplaner. Denne holdes oppdatert med data fra de originale plandataene som forvaltes i kommunene. Oppdateringen skjer ved synkronisering eller periodisk kopiering fra kommunene sine data.",
+    "purpose": {
+      "summary": "Dekke Norge digitalt parter sine behov for tilgang til reguleringsplaner (geografiske data - vektordata).\nVise plan for bruk, vern og utforming av arealer og fysiske omgivelser i bestemte områder.",
+      "useCase": {
+        "name": "Bruksområde",
+        "summary": "Arealplanlegging, saksbehandling i henhold til plan og bygningsloven, utarbeidelse av statistikk, vurdering av tiltak/prosjekter, innsyn i kommunens reguleringplaner."
+      }
+    },
+    "topicCategory": [
+      "Plan og eiendom"
+    ],
+    "spatialRepresentationType": "Vektor",
+    "spatialResolution": {
+      "distance": {
+        "uom": "meter",
+        "value": 0.01
+      }
+    },
+    "supplementalInformation": "Det er kun de geografiske dataene (vektordataene) av reguleringsplanene som er tilgjengelige for nedlasting. De tilhørende plandokumenter/bestemmelser finnes i kommunenes planregistre. Det ligger en lenke på planområdene i de geografiske dataene som peker til kommunenes planregistre, og dermed gjør dokumentene lettere tilgjengelig for brukerne.\n\nEn reguleringsplan kan inneholde ett eller flere vertikalnivåer; under grunnen, på grunnen/vannoverflaten, over grunnen, på bunnen og i vannsøylen.\nDatasettet er delt i vertikalnivå (vn1 til vn5) avhengig av i hvilket vertikalnivå forslaget ligger, eventuelt flere vertikalnivåer.\n- Under grunnen (tunnel) = 1\n- På grunnen/vannoverflate = 2\n- Over grunnen (bru) = 3\n- På bunnen (vann/sjø) = 4\n- I vannsøylen = 5",
+    "uniqueId": "dac27348-5c2e-4a6a-9497-c4c792108cae",
+    "keyword": [
+      "Reguleringsplan",
+      "Arealplan",
+      "Områdeplan",
+      "Detaljregulering",
+      "Norges fastland",
+      "Norge",
+      "Kommune",
+      "Arealbruk",
+      "Plan"
+    ],
+    "restriction": {
+      "resourceConstraints": {
+        "useLimitations": "Ikke egnet for kommunens arealplanarbeid. Oppdaterte data fås hos kommunen. Private forslagsstillere må henvende seg direkte til kommunen."
+      },
+      "legalConstraints": {
+        "accessConstraints": "Norge digitalt begrenset",
+        "useConstraints": "Lisens",
+        "license": "Norge digitalt-lisens",
+        "licenseUrl": "https://www.kartverket.no/geodataarbeid/norge-digitalt/partsinformasjon/avtaler-og-vilkar/norge-digitalt-lisens",
+        "otherConstraints": "Nedlasting av data begrenset til Norge digitalt avtaleparter."
+      },
+      "securityConstraints": {
+        "classification": "Ugradert"
+      }
+    },
+    "contact": [
+      {
+        "individualName": "Olaug Hana Nesheim",
+        "organizationName": "Direktoratet for byggkvalitet",
+        "electronicMailAddress": "ftb@dibk.no",
+        "role": "owner"
+      },
+      {
+        "individualName": "Olaug Hana Nesheim",
+        "organizationName": "Direktoratet for byggkvalitet",
+        "electronicMailAddress": "ftb@dibk.no",
+        "role": "pointOfContact"
+      },
+      {
+        "individualName": "Olaug Hana Nesheim",
+        "organizationName": "Direktoratet for byggkvalitet",
+        "electronicMailAddress": "ftb@dibk.no",
+        "role": "publisher"
+      }
+    ],
+    "maintenance": "Daglig",
+    "extent": {
+      "geographicElement": {
+        "westBoundLongitude": "2.0",
+        "eastBoundLongitude": "33.0",
+        "southBoundLatitude": "57.0",
+        "northBoundLatitude": "72.0"
+      },
+      "temporalElement": {
+        "timePeriod": {
+          "beginPosition": "2025-09-16",
+          "endPosition": "2026-08-28"
+        }
+      }
+    },
+    "date": {
+      "creation": "2025-09-16",
+      "publication": "2025-09-16",
+      "revision": "2026-08-28"
+    },
+    "language": "nor"
+  },
+  "scopeSection": [
+    {
+      "specificationScope": {
+        "scopeIdentification": "Hele datasettet",
+        "level": "dataset",
+        "levelDescription": "Gjelder hele datasettet. Hvis omfang ikke er oppgitt under en overskrift, gjelder teksten for hele datasettet og alle leveranser"
+      }
+    },
+    {
+      "specificationScope": {
+        "scopeIdentification": "Reguleringsplan",
+        "level": "dataset"
+      }
+    }
+  ],
+  "dataQualitySection": {
+    "scope": {
+      "level": "dataset"
+    }
+  },
+  "maintenanceSection": {
+    "maintenanceAndUpdateFrequency": "Daglig",
+    "maintenanceAndUpdateStatement": "Kontinuerlig oppdatert"
+  },
+  "deliverySection": [
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "landsfiler",
+          "deliveryMediumName": "WMS-tjeneste",
+          "deliveryService": {
+            "serviceEndpoint": "https://nap.ft.dibk.no/services/wms/reguleringsplaner/?service=WMS&request=GetCapabilities",
+            "serviceProperty": {
+              "type": "WMS-tjeneste",
+              "value": "OGC:WMS"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "PNG"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "landsfiler",
+          "deliveryMediumName": "OGC API-Features",
+          "deliveryService": {
+            "serviceEndpoint": "https://nap.ft.dibk.no/services/rest/reguleringsplaner/vn1",
+            "serviceProperty": {
+              "type": "OGC API-Features",
+              "value": "OGC:API-Features"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GeoJSON"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "landsfiler",
+          "deliveryMediumName": "OGC API-Features",
+          "deliveryService": {
+            "serviceEndpoint": "https://nap.ft.dibk.no/services/rest/reguleringsplaner/vn2",
+            "serviceProperty": {
+              "type": "OGC API-Features",
+              "value": "OGC:API-Features"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GeoJSON"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "landsfiler",
+          "deliveryMediumName": "OGC API-Features",
+          "deliveryService": {
+            "serviceEndpoint": "https://nap.ft.dibk.no/services/rest/reguleringsplaner/vn3",
+            "serviceProperty": {
+              "type": "OGC API-Features",
+              "value": "OGC:API-Features"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GeoJSON"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "landsfiler",
+          "deliveryMediumName": "OGC API-Features",
+          "deliveryService": {
+            "serviceEndpoint": "https://nap.ft.dibk.no/services/rest/reguleringsplaner/vn4",
+            "serviceProperty": {
+              "type": "OGC API-Features",
+              "value": "OGC:API-Features"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GeoJSON"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "landsfiler",
+          "deliveryMediumName": "OGC API-Features",
+          "deliveryService": {
+            "serviceEndpoint": "https://nap.ft.dibk.no/services/rest/reguleringsplaner/vn5",
+            "serviceProperty": {
+              "type": "OGC API-Features",
+              "value": "OGC:API-Features"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GeoJSON"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "landsfiler",
+          "deliveryMediumName": "Atom Feed",
+          "deliveryService": {
+            "serviceEndpoint": "https://nap.ft.dibk.no/services/download/reguleringsplaner/atom",
+            "serviceProperty": {
+              "type": "Atom Feed",
+              "value": "W3C:AtomFeed"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "PostGIS"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "landsfiler",
+          "deliveryMediumName": "Egen nedlastningsside",
+          "deliveryService": {
+            "serviceEndpoint": "https://nap.ft.dibk.no/services/download/klimagasskalkulator/",
+            "serviceProperty": {
+              "type": "Egen nedlastningsside",
+              "value": "WWW:DOWNLOAD-1.0-http--download"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GeoJSON"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "landsfiler",
+          "deliveryMediumName": "Geonorge nedlastning",
+          "deliveryService": {
+            "serviceEndpoint": "https://nap.ft.dibk.no/services/nedlasting/api/capabilities/",
+            "serviceProperty": {
+              "type": "Geonorge nedlastning",
+              "value": "GEONORGE:DOWNLOAD"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GeoPackage"
+          },
+          {
+            "formatName": "GML"
+          },
+          {
+            "formatName": "PostGIS"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "Reguleringsplaner",
+          "deliveryService": {
+            "serviceEndpoint": "https://nap.ft.dibk.no/services/wms/reguleringsplaner/?service=WMS&request=GetCapabilities",
+            "serviceProperty": {
+              "type": "Reguleringsplaner",
+              "value": "WMS-tjeneste"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "PNG"
+          }
+        ],
+        "deliveryScope": "Tjeneste"
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "GeoPackage: reguleringsplan",
+          "deliveryService": {
+            "serviceEndpoint": "https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/reguleringsplaner/reguleringsplan/reguleringsplan.gpkg",
+            "serviceProperty": {
+              "type": "Fil",
+              "value": "Nedlasting"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GPKG"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "GML/XSD-skjema: reguleringsplan",
+          "deliveryService": {
+            "serviceEndpoint": "https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/reguleringsplaner/reguleringsplan/schema/xsd/INPUT/reguleringsplan.xsd",
+            "serviceProperty": {
+              "type": "Fil",
+              "value": "Nedlasting"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "XSD"
+          }
+        ]
+      }
+    }
+  ],
+  "metadataSection": {
+    "metadataStandard": "ISO19115",
+    "metadataStandardVersion": "2003",
+    "metadataDate": "2026-08-28",
+    "language": "nor",
+    "contact": {
+      "organizationName": "Direktoratet for byggkvalitet",
+      "individualName": "Olaug Hana Nesheim",
+      "logo": "https://register.geonorge.no/data/organizations/974760223_DIBK_liten.jpg",
+      "electronicMailAddress": "ftb@dibk.no",
+      "role": "pointOfContact"
+    },
+    "metadataIdentifier": {
+      "authority": "Geonorge",
+      "code": "dac27348-5c2e-4a6a-9497-c4c792108cae",
+      "codeSpace": "https://kartkatalog.geonorge.no/metadata/",
+      "metadataLinkage": "https://kartkatalog.geonorge.no/metadata/dac27348-5c2e-4a6a-9497-c4c792108cae"
+    }
+  }
+}

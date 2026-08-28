@@ -1,0 +1,183 @@
+@startuml
+' For wide diagrams, render with: plantuml -DPLANTUML_LIMIT_SIZE=16384 ...
+' The 'scale max' directive below caps the rendered output to prevent the
+' default PlantUML 4096px size limit from cropping the diagram.
+scale max 4000*4000
+
+title Reguleringsplaner - Reguleringsplan - Oversikt
+
+skinparam backgroundColor #F5F5F5
+skinparam shadowing false
+skinparam RoundCorner 6
+skinparam ArrowColor #6C8198
+skinparam wrapWidth 200
+skinparam class {
+  BackgroundColor #FBF2E8
+  BorderColor #9C8578
+  FontColor #2D201A
+  HeaderBackgroundColor #EFE1D6
+  HeaderFontColor #2D201A
+  AttributeIconSize 0
+}
+skinparam note {
+  BackgroundColor #FFFFFF
+  BorderColor #6C8198
+  FontColor #2D201A
+}
+skinparam stereotypeCBackgroundColor #EAD9CE
+skinparam stereotypeCBorderColor #9C8578
+skinparam stereotypeCFontColor #2D201A
+
+package "Abstrakte typer" {
+  abstract class RpAvgrensingslinje <<featureType>> {
+  }
+  abstract class RpObjekt <<featureType>> {
+  }
+  abstract class RpRomligObjekt <<featureType>> {
+  }
+}
+
+package "Bestemmelsesobjekter" {
+  class "RpHandlingOmråde" as RpHandlingOmr_de <<featureType>> {
+  }
+  class RpJuridiskLinje <<featureType>> {
+  }
+  class RpBestemmelseMidlByggAnlegg <<featureType>> {
+  }
+  class RpHandlingRom <<featureType>> {
+  }
+  class "RpBestemmelseOmråde" as RpBestemmelseOmr_de <<featureType>> {
+  }
+  class RpBestemmelseRom <<featureType>> {
+  }
+  class RpJuridiskPunkt <<featureType>> {
+  }
+}
+
+package "Formål" {
+  class "RpFormålGrense" as RpForm_lGrense <<featureType>> {
+  }
+  class "RpArealformålOmråde" as RpArealform_lOmr_de <<featureType>> {
+  }
+}
+
+package "Hensyn" {
+  class "RpGjennomføringSone" as RpGjennomf_ringSone <<featureType>> {
+  }
+  class RpHensynRom <<featureType>> {
+  }
+  class RpAngittHensynSone <<featureType>> {
+  }
+  class RpDetaljeringSone <<featureType>> {
+  }
+  class RpSikringSone <<featureType>> {
+  }
+  class "RpStøySone" as RpSt_ySone <<featureType>> {
+  }
+  class RpInfrastrukturSone <<featureType>> {
+  }
+  class RpFareSone <<featureType>> {
+  }
+  class "RpBåndleggingSone" as RpB_ndleggingSone <<featureType>> {
+  }
+}
+
+package "Planområder" {
+  class RpGrense <<featureType>> {
+  }
+  class "RpOmråde" as RpOmr_de <<featureType>> {
+  }
+  class "RpUtsattRettsvirkningOmråde" as RpUtsattRettsvirkningOmr_de <<featureType>> {
+  }
+  class "RpEndringOmråde" as RpEndringOmr_de <<featureType>> {
+  }
+}
+
+package "Påskrift" {
+  class "RpPåskrift" as RpP_skrift <<featureType>> {
+  }
+}
+
+package "Regulert høyde og terreng" {
+  class "RpRegulertHøyde" as RpRegulertH_yde <<featureType>> {
+  }
+  class RpBestemmelseRegTerreng <<featureType>> {
+  }
+}
+
+package "Rp 1985" {
+  class "RbFareOmråde" as RbFareOmr_de <<featureType>> {
+  }
+  class "RbFornyelseOmråde" as RbFornyelseOmr_de <<featureType>> {
+  }
+  class "RbFormålOmråde" as RbForm_lOmr_de <<featureType>> {
+  }
+  class "RbRestriksjonOmråde" as RbRestriksjonOmr_de <<featureType>> {
+  }
+  class "RbBevaringOmråde" as RbBevaringOmr_de <<featureType>> {
+  }
+  class "RbRekkefølgeOmråde" as RbRekkef_lgeOmr_de <<featureType>> {
+  }
+}
+
+package "SOSI_Fellesegenskaper" {
+  abstract class SOSI_Objekt <<featureType>> {
+  }
+}
+
+
+RpAvgrensingslinje <|-- RpGrense
+SOSI_Objekt <|-- RpOmr_de
+RpOmr_de --> RpGrense : avgrensesAv [0..*]
+RpOmr_de --> RpObjekt : rpObjekt [0..*]
+SOSI_Objekt <|-- RpUtsattRettsvirkningOmr_de
+RpUtsattRettsvirkningOmr_de --> RpGrense : avgrensesAv [0..*]
+RpUtsattRettsvirkningOmr_de --> RpObjekt : rpObjekt [0..*]
+SOSI_Objekt <|-- RpEndringOmr_de
+RpEndringOmr_de --> RpObjekt : rpObjekt [0..*]
+SOSI_Objekt <|-- RpAvgrensingslinje
+SOSI_Objekt <|-- RpObjekt
+SOSI_Objekt <|-- RpRomligObjekt
+RpAvgrensingslinje <|-- RpForm_lGrense
+RpObjekt <|-- RpArealform_lOmr_de
+RpArealform_lOmr_de --> RpForm_lGrense : avgrensesAv [0..*]
+RpObjekt <|-- RpGjennomf_ringSone
+RpGjennomf_ringSone --> RpHensynRom : rom [0..1]
+RpRomligObjekt <|-- RpHensynRom
+RpObjekt <|-- RpAngittHensynSone
+RpAngittHensynSone --> RpHensynRom : rom [0..1]
+RpObjekt <|-- RpDetaljeringSone
+RpDetaljeringSone --> RpHensynRom : rom [0..*]
+RpObjekt <|-- RpSikringSone
+RpSikringSone --> RpHensynRom : rom [0..1]
+RpObjekt <|-- RpSt_ySone
+RpSt_ySone --> RpHensynRom : rom [0..1]
+RpObjekt <|-- RpInfrastrukturSone
+RpInfrastrukturSone --> RpHensynRom : rom [0..1]
+RpObjekt <|-- RpFareSone
+RpFareSone --> RpHensynRom : rom [0..1]
+RpObjekt <|-- RpB_ndleggingSone
+RpB_ndleggingSone --> RpHensynRom : rom [0..1]
+RpObjekt <|-- RpHandlingOmr_de
+RpHandlingOmr_de --> RpHandlingRom : rom [0..1]
+RpObjekt <|-- RpJuridiskLinje
+RpObjekt <|-- RpBestemmelseMidlByggAnlegg
+RpBestemmelseMidlByggAnlegg --> RpBestemmelseRom : rom [0..1]
+RpRomligObjekt <|-- RpHandlingRom
+RpObjekt <|-- RpBestemmelseOmr_de
+RpBestemmelseOmr_de --> RpBestemmelseRegTerreng : regulertTerreng [0..*]
+RpBestemmelseOmr_de --> RpBestemmelseRom : rom [0..1]
+RpRomligObjekt <|-- RpBestemmelseRom
+RpObjekt <|-- RpJuridiskPunkt
+RpObjekt <|-- RpRegulertH_yde
+RpObjekt <|-- RpBestemmelseRegTerreng
+RpObjekt <|-- RpP_skrift
+RpObjekt <|-- RbFareOmr_de
+RpObjekt <|-- RbFornyelseOmr_de
+RpObjekt <|-- RbForm_lOmr_de
+RbForm_lOmr_de --> RpForm_lGrense : avgrensesAv [0..*]
+RpObjekt <|-- RbRestriksjonOmr_de
+RpObjekt <|-- RbBevaringOmr_de
+RpObjekt <|-- RbRekkef_lgeOmr_de
+
+@enduml
