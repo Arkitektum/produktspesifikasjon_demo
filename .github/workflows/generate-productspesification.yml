@@ -194,6 +194,14 @@ jobs:
           geopackage_output = "true" if "geopackage" in selected_outputs else "false"
           odcs_output = "true" if "odcs" in selected_outputs else "false"
 
+          # ldproxy-provider-dialekt: 'postgis' (default) eller 'geopackage'. GeoPackage-
+          # provideren peker på den genererte gpkg-en, så den må da også bygges.
+          ldproxy_provider = str(values.get("ldproxy_provider", "postgis")).strip().lower()
+          if ldproxy_provider not in ("postgis", "geopackage"):
+              ldproxy_provider = "postgis"
+          if "ldproxy" in selected_outputs and ldproxy_provider == "geopackage":
+              geopackage_output = "true"
+
           # ShapeChange-leveranser: outputs `xsd`/`jsonschema` → ShapeChange-targets
           # (`xsd`/`json`). Syntetiser namespace fra product_slug (ShapeChange krever
           # target-namespace — ingen kilde bærer en).
@@ -210,6 +218,8 @@ jobs:
               sc_targets.append("xsd")
           if "jsonschema" in selected_outputs:
               sc_targets.append("json")
+          if "ldproxy" in selected_outputs:
+              sc_targets.append("ldproxy")
           shapechange_targets = ",".join(sc_targets)
           run_shapechange = "true" if shapechange_targets and scopes else "false"
 
@@ -313,6 +323,7 @@ jobs:
               gh_out.write(f"product-slug-normalized={_pslug}\n")
               gh_out.write(f"run-shapechange={run_shapechange}\n")
               gh_out.write(f"shapechange-targets={shapechange_targets}\n")
+              gh_out.write(f"ldproxy-provider={ldproxy_provider}\n")
               # Per-scope deskriptorer som JSON (kompakt, én linje) — workflowen
               # looper over disse og kjører ShapeChange én gang per datakilde.
               gh_out.write(
@@ -395,6 +406,7 @@ jobs:
         env:
           SCOPES_JSON: ${{ steps.config.outputs.shapechange-scopes }}
           TARGETS: ${{ steps.config.outputs.shapechange-targets }}
+          LDPROXY_PROVIDER: ${{ steps.config.outputs.ldproxy-provider }}
         run: |
           set -uo pipefail
           echo "$SCOPES_JSON" > /tmp/sc_scopes.json
@@ -438,6 +450,13 @@ jobs:
             errs=$(grep -oE 'with [0-9]+ error' /tmp/sc_check.txt | grep -oE '[0-9]+' || echo 0)
             warns=$(grep -oE '[0-9]+ warning' /tmp/sc_check.txt | grep -oE '[0-9]+' || echo 0)
             note+="- \`$sslug\`: ${errs:-0} feil, ${warns:-0} advarsler"$'\n'
+            # Valgt ldproxy-dialekt: skriv om provideren til GeoPackage (peker på den
+            # genererte gpkg-en) når brukeren har valgt det. 'postgis' er no-op.
+            if [ "${LDPROXY_PROVIDER:-postgis}" = "geopackage" ]; then
+              python "$run_sc" --mode ldproxy-provider --output-dir "$outdir" \
+                --ldproxy-provider geopackage \
+                || echo "::warning::ldproxy: klarte ikke skrive GeoPackage-provider for '$sslug'"
+            fi
             echo "::endgroup::"
           done
           {
@@ -510,6 +529,9 @@ jobs:
           xmi-feature-catalogue-uml: ${{ steps.prepare.outputs.xmi-feature-catalogue-uml }}
           xmi-feature-catalogue-png: ${{ steps.xmi-feature-png.outputs.path }}
           updated: ${{ steps.config.outputs.updated }}
+          # Raw-lenker til de genererte output-filene (GeoPackage/skjema) i Leveranse-tabellen.
+          # Peker på default-branchen, der filene ligger etter at PR-en er merget.
+          repo-raw-base: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.event.repository.default_branch }}
       - name: Inspect generated files
         run: |
           echo "Markdown: ${{ steps.prepare.outputs.spec-markdown }}"
