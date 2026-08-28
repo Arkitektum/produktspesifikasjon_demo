@@ -2,6 +2,7 @@ metadataId: dac27348-5c2e-4a6a-9497-c4c792108cae
 output_directory: produktspesifikasjon
 product_slug: reguleringsplaner
 updated: '2026-08-28'
+outputs: xsd,geopackage
 scopes:
 - name: Reguleringsplan
   url: https://sosi.geonorge.no/svn/SOSI/SOSI%20Del%203/Kommunal-%20og%20moderniseringsdepartementet/Arealplan/Reguleringsplan/Reguleringsplan-2024.xml
