@@ -239,6 +239,196 @@
         ],
         "deliveryScope": "Tjeneste"
       }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "GeoPackage: datafangst",
+          "deliveryService": {
+            "serviceEndpoint": "https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst/datafangst.gpkg",
+            "serviceProperty": {
+              "type": "Fil",
+              "value": "Nedlasting"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GPKG"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "GeoPackage: datafangst_feature_catalogue",
+          "deliveryService": {
+            "serviceEndpoint": "https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst/datafangst_feature_catalogue.gpkg",
+            "serviceProperty": {
+              "type": "Fil",
+              "value": "Nedlasting"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GPKG"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "GeoPackage: planleggingigangsatt",
+          "deliveryService": {
+            "serviceEndpoint": "https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/planleggingigangsatt.gpkg",
+            "serviceProperty": {
+              "type": "Fil",
+              "value": "Nedlasting"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GPKG"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "GeoPackage: planleggingigangsatt_feature_catalogue",
+          "deliveryService": {
+            "serviceEndpoint": "https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/planleggingigangsatt_feature_catalogue.gpkg",
+            "serviceProperty": {
+              "type": "Fil",
+              "value": "Nedlasting"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GPKG"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "GML/XSD-skjema: datafangst",
+          "deliveryService": {
+            "serviceEndpoint": "https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst/schema/xsd/INPUT/datafangst.xsd",
+            "serviceProperty": {
+              "type": "Fil",
+              "value": "Nedlasting"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "XSD"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "GML/XSD-skjema: planleggingigangsatt",
+          "deliveryService": {
+            "serviceEndpoint": "https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/schema/xsd/INPUT/planleggingigangsatt.xsd",
+            "serviceProperty": {
+              "type": "Fil",
+              "value": "Nedlasting"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "XSD"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "GML/XSD-skjema: planomradeforplanleggingigangsatt",
+          "deliveryService": {
+            "serviceEndpoint": "https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/schema/xsd/INPUT/planomradeforplanleggingigangsatt.xsd",
+            "serviceProperty": {
+              "type": "Fil",
+              "value": "Nedlasting"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "XSD"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "JSON Schema: datafangst",
+          "deliveryService": {
+            "serviceEndpoint": "https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst/schema/jsonschema/INPUT/datafangst/datafangst.json",
+            "serviceProperty": {
+              "type": "Fil",
+              "value": "Nedlasting"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "JSON Schema"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "JSON Schema: planleggingigangsatt",
+          "deliveryService": {
+            "serviceEndpoint": "https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/schema/jsonschema/INPUT/planleggingigangsatt/planleggingigangsatt.json",
+            "serviceProperty": {
+              "type": "Fil",
+              "value": "Nedlasting"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "JSON Schema"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "deliveryMediumName": "JSON Schema: planomradeforplanleggingigangsatt",
+          "deliveryService": {
+            "serviceEndpoint": "https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/planomrade-for-planlegging-igangsatt/schema/jsonschema/INPUT/planomradeforplanleggingigangsatt/planomradeforplanleggingigangsatt.json",
+            "serviceProperty": {
+              "type": "Fil",
+              "value": "Nedlasting"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "JSON Schema"
+          }
+        ]
+      }
     }
   ],
   "metadataSection": {

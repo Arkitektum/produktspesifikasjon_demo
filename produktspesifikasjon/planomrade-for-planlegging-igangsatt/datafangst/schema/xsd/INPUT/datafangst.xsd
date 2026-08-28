@@ -2,13 +2,20 @@
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="Arealplan" substitutionGroup="datafangst:Fellesegenskaper" type="datafangst:ArealplanType"/>
+  <element name="Arealplan" substitutionGroup="datafangst:Fellesegenskaper" type="datafangst:ArealplanType">
+    <annotation>
+      <documentation>dataobjekt for igangsatt planlegging etter pbl</documentation>
+    </annotation>
+  </element>
   <complexType name="ArealplanType">
     <complexContent>
       <extension base="datafangst:FellesegenskaperType">
         <sequence>
           <element name="nasjonalArealplanId" type="datafangst:NasjonalArealplanIdPropertyType">
             <annotation>
+              <documentation>landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1, og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd).
+
+Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikke endres undervegs av forslagstiller.</documentation>
               <appinfo>
                 <sc:taggedValue tag="SOSI_navn">NASJONALAREALPLANID</sc:taggedValue>
               </appinfo>
@@ -16,6 +23,7 @@
           </element>
           <element name="plantype" type="gml:CodeType">
             <annotation>
+              <documentation>type reguleringsplan (pbl. §§ 12-2 og 12-3)</documentation>
               <appinfo>
                 <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/rpplantype</sc:targetCodeListURI>
                 <sc:taggedValue tag="SOSI_navn">PLANTYPE</sc:taggedValue>
@@ -24,6 +32,7 @@
           </element>
           <element minOccurs="0" name="plannavn" type="string">
             <annotation>
+              <documentation>planens offisielle navn</documentation>
               <appinfo>
                 <sc:taggedValue tag="SOSI_navn">PLANNAVN</sc:taggedValue>
               </appinfo>
@@ -31,6 +40,9 @@
           </element>
           <element name="lovreferanse" type="gml:CodeType">
             <annotation>
+              <documentation>kode for hvilken lov planen vedtas etter
+
+For reguleringsplanforslag og planlegging igangsatt skal lovreferanse = 6 (pbl 2008)</documentation>
               <appinfo>
                 <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse</sc:targetCodeListURI>
                 <sc:taggedValue tag="SOSI_navn">LOVREFERANSE</sc:taggedValue>
@@ -49,13 +61,20 @@
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
-  <element abstract="true" name="Fellesegenskaper" substitutionGroup="gml:AbstractFeature" type="datafangst:FellesegenskaperType"/>
+  <element abstract="true" name="Fellesegenskaper" substitutionGroup="gml:AbstractFeature" type="datafangst:FellesegenskaperType">
+    <annotation>
+      <documentation>abstrakt objekttype som bærer de egenskapene fra SOSI_Fellesegenskaper som er anvendt på objekttypene i denne modellen.</documentation>
+    </annotation>
+  </element>
   <complexType abstract="true" name="FellesegenskaperType">
     <complexContent>
       <extension base="gml:AbstractFeatureType">
         <sequence>
           <element name="identifikasjon" type="datafangst:IdentifikasjonPropertyType">
             <annotation>
+              <documentation>unik identifikasjon av et dataobjekt
+
+Følger dataobjektet og identifiserer det i hele dets levetid.</documentation>
               <appinfo>
                 <sc:taggedValue tag="SOSI_navn">IDENT</sc:taggedValue>
               </appinfo>
@@ -63,6 +82,7 @@
           </element>
           <element name="oppdateringsdato" type="date">
             <annotation>
+              <documentation>tidspunkt for siste endring på dataobjektet</documentation>
               <appinfo>
                 <sc:taggedValue tag="SOSI_navn">OPPDATERINGSDATO</sc:taggedValue>
               </appinfo>
@@ -84,6 +104,9 @@
     <sequence>
       <element name="lokalId" type="string">
         <annotation>
+          <documentation>lokal identifikator av et objekt.
+
+Skal være en uuid, slik at den er unik, uavhengig av navnerommet</documentation>
           <appinfo>
             <sc:taggedValue tag="SOSI_navn">LOKALID</sc:taggedValue>
           </appinfo>
@@ -91,6 +114,10 @@
       </element>
       <element name="navnerom" type="string">
         <annotation>
+          <documentation>navnerom som unikt identifiserer datakilden til et objekt.
+
+Navnerom anbefales å være en http-URI og må være registrert i data.geonorge.no
+For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</documentation>
           <appinfo>
             <sc:taggedValue tag="SOSI_navn">NAVNEROM</sc:taggedValue>
           </appinfo>
@@ -98,6 +125,7 @@
       </element>
       <element minOccurs="0" name="versjonId" type="string">
         <annotation>
+          <documentation>identifikasjon av en spesiell versjon av et geografisk objekt (instans)</documentation>
           <appinfo>
             <sc:taggedValue tag="SOSI_navn">VERSJONID</sc:taggedValue>
           </appinfo>
@@ -111,8 +139,17 @@
     </sequence>
   </complexType>
   <simpleType name="LandkodeType">
+    <annotation>
+      <documentation>alfanumerisk kode for nasjonalt nivå / Norge.
+
+Avledet fra "ISO 3166 Codes for the representation of names of countries and their subdivisions"</documentation>
+    </annotation>
     <restriction base="string">
-      <enumeration value="NO"/>
+      <enumeration value="NO">
+        <annotation>
+          <documentation>Norge. Aktuell kode for administrativ enhet for statlig vedtatte planer</documentation>
+        </annotation>
+      </enumeration>
     </restriction>
   </simpleType>
   <element name="NasjonalArealplanId" substitutionGroup="gml:AbstractObject" type="datafangst:NasjonalArealplanIdType"/>
@@ -120,6 +157,9 @@
     <sequence>
       <element minOccurs="0" name="kommunenummer" type="gml:CodeType">
         <annotation>
+          <documentation>kode som viser til offisiell nummerering av kommuner
+
+Merknad: Det presiseres at kommunenummer alltid skal ha 4 siffer, dvs. eventuelt med ledende null. Kommunenummer benyttes for kobling mot en rekke andre registre som også benytter 4 siffer.</documentation>
           <appinfo>
             <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer</sc:targetCodeListURI>
             <sc:taggedValue tag="SOSI_navn">KOMM</sc:taggedValue>
@@ -128,6 +168,7 @@
       </element>
       <element minOccurs="0" name="landkode" type="datafangst:LandkodeType">
         <annotation>
+          <documentation>landkode = NO anvendes kun av statlig vedtaksmyndighet</documentation>
           <appinfo>
             <sc:taggedValue tag="SOSI_navn">LANDKODE</sc:taggedValue>
           </appinfo>
@@ -135,6 +176,7 @@
       </element>
       <element name="planid" type="string">
         <annotation>
+          <documentation>entydig identifikasjon av en plan innen vedkommende administrative enhet (pbl. §§ 9-1, 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)</documentation>
           <appinfo>
             <sc:taggedValue tag="SOSI_navn">PLANID</sc:taggedValue>
           </appinfo>
@@ -147,12 +189,22 @@
       <element ref="datafangst:NasjonalArealplanId"/>
     </sequence>
   </complexType>
-  <element name="Planområde" substitutionGroup="datafangst:Fellesegenskaper" type="datafangst:PlanområdeType"/>
+  <element name="Planområde" substitutionGroup="datafangst:Fellesegenskaper" type="datafangst:PlanområdeType">
+    <annotation>
+      <documentation>område for planlegging igangsatt etter pbl 2008.
+
+Området skal være sammenhengende i grunnriss, men kan dekke flere vertikalnivåer</documentation>
+    </annotation>
+  </element>
   <complexType name="PlanområdeType">
     <complexContent>
       <extension base="datafangst:FellesegenskaperType">
         <sequence>
-          <element name="område" type="gml:SurfacePropertyType"/>
+          <element name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>planens utstrekning i grunnriss uavhengig av vertikalnivå</documentation>
+            </annotation>
+          </element>
         </sequence>
       </extension>
     </complexContent>

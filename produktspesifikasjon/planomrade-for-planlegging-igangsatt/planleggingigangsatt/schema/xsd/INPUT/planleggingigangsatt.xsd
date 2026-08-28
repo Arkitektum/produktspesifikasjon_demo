@@ -1,22 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:planleggingigangsatt="https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/1.0" elementFormDefault="qualified" targetNamespace="https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/1.0" version="1.0">
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="Arealplan" substitutionGroup="gml:AbstractFeature" type="planleggingigangsatt:ArealplanType"/>
+  <element name="Arealplan" substitutionGroup="gml:AbstractFeature" type="planleggingigangsatt:ArealplanType">
+    <annotation>
+      <documentation>Dataobjekt for igangsatt planlegging etter pbl</documentation>
+    </annotation>
+  </element>
   <complexType name="ArealplanType">
     <complexContent>
       <extension base="gml:AbstractFeatureType">
         <sequence>
-          <element minOccurs="0" name="objid" type="integer"/>
-          <element minOccurs="0" name="nasjonalArealplanId" type="planleggingigangsatt:NasjonalArealplanIdPropertyType"/>
-          <element minOccurs="0" name="plannavn" type="string"/>
-          <element minOccurs="0" name="plantype" type="string"/>
-          <element minOccurs="0" name="kunngjøringsdatoVarselOmPlanoppstart" type="date"/>
-          <element minOccurs="0" name="forslagsstillertype" type="string"/>
-          <element minOccurs="0" name="lovreferanse" type="string"/>
-          <element minOccurs="0" name="identifikasjon" type="planleggingigangsatt:IdentifikasjonPropertyType"/>
-          <element minOccurs="0" name="forsteDigitaliseringsdato" type="dateTime"/>
-          <element minOccurs="0" name="oppdateringsdato" type="dateTime"/>
-          <element minOccurs="0" name="link" type="string"/>
+          <element minOccurs="0" name="objid" type="integer">
+            <annotation>
+              <documentation>objid</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="nasjonalArealplanId" type="planleggingigangsatt:NasjonalArealplanIdPropertyType">
+            <annotation>
+              <documentation>nasjonalArealplanId</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plannavn" type="string">
+            <annotation>
+              <documentation>plannavn</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plantype" type="string">
+            <annotation>
+              <documentation>plantype</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kunngjøringsdatoVarselOmPlanoppstart" type="date">
+            <annotation>
+              <documentation>kunngjøringsdatoVarselOmPlanoppstart</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="forslagsstillertype" type="string">
+            <annotation>
+              <documentation>forslagsstillertype</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lovreferanse" type="string">
+            <annotation>
+              <documentation>lovreferanse</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="identifikasjon" type="planleggingigangsatt:IdentifikasjonPropertyType">
+            <annotation>
+              <documentation>identifikasjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="forsteDigitaliseringsdato" type="dateTime">
+            <annotation>
+              <documentation>forsteDigitaliseringsdato</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppdateringsdato" type="dateTime">
+            <annotation>
+              <documentation>oppdateringsdato</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="link" type="string">
+            <annotation>
+              <documentation>link</documentation>
+            </annotation>
+          </element>
           <element minOccurs="0" name="planomrade" type="planleggingigangsatt:PlanområdePropertyType"/>
         </sequence>
       </extension>
@@ -54,24 +102,76 @@
       <element ref="planleggingigangsatt:NasjonalArealplanId"/>
     </sequence>
   </complexType>
-  <element name="Planområde" substitutionGroup="gml:AbstractFeature" type="planleggingigangsatt:PlanområdeType"/>
+  <element name="Planområde" substitutionGroup="gml:AbstractFeature" type="planleggingigangsatt:PlanområdeType">
+    <annotation>
+      <documentation>Geometriske områder og tilhørende metadata fra "Varsel om Oppstart av Reguleringsplanarbeider"-databasen</documentation>
+    </annotation>
+  </element>
   <complexType name="PlanområdeType">
     <complexContent>
       <extension base="gml:AbstractFeatureType">
         <sequence>
           <element name="geometry" type="gml:GeometryPropertyType"/>
-          <element minOccurs="0" name="objid" type="integer"/>
-          <element minOccurs="0" name="identifikasjon" type="planleggingigangsatt:IdentifikasjonPropertyType"/>
-          <element minOccurs="0" name="arealplan" type="integer"/>
-          <element minOccurs="0" name="førsteDigitaliseringsdato" type="dateTime"/>
-          <element minOccurs="0" name="nasjonalArealplanId" type="planleggingigangsatt:NasjonalArealplanIdPropertyType"/>
-          <element minOccurs="0" name="plannavn" type="string"/>
-          <element minOccurs="0" name="plantype" type="string"/>
-          <element minOccurs="0" name="kunngjøringsdatoVarselOmPlanoppstart" type="date"/>
-          <element minOccurs="0" name="forslagsstillertype" type="string"/>
-          <element minOccurs="0" name="lovreferanse" type="string"/>
-          <element minOccurs="0" name="oppdateringsdato" type="dateTime"/>
-          <element minOccurs="0" name="link" type="string"/>
+          <element minOccurs="0" name="objid" type="integer">
+            <annotation>
+              <documentation>objid</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="identifikasjon" type="planleggingigangsatt:IdentifikasjonPropertyType">
+            <annotation>
+              <documentation>identifikasjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arealplan" type="integer">
+            <annotation>
+              <documentation>arealplan</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="førsteDigitaliseringsdato" type="dateTime">
+            <annotation>
+              <documentation>førsteDigitaliseringsdato</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="nasjonalArealplanId" type="planleggingigangsatt:NasjonalArealplanIdPropertyType">
+            <annotation>
+              <documentation>nasjonalArealplanId</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plannavn" type="string">
+            <annotation>
+              <documentation>plannavn</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plantype" type="string">
+            <annotation>
+              <documentation>plantype</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kunngjøringsdatoVarselOmPlanoppstart" type="date">
+            <annotation>
+              <documentation>når planinitiativet har varsel oppstart til berørte parter som naboer, sektormyndigheter og lag/foreninger med interresser i planen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="forslagsstillertype" type="string">
+            <annotation>
+              <documentation>forslagsstillertype</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lovreferanse" type="string">
+            <annotation>
+              <documentation>lovreferanse</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppdateringsdato" type="dateTime">
+            <annotation>
+              <documentation>oppdateringsdato</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="link" type="string">
+            <annotation>
+              <documentation>link</documentation>
+            </annotation>
+          </element>
           <element minOccurs="0" name="arealplan" type="planleggingigangsatt:ArealplanPropertyType"/>
         </sequence>
       </extension>

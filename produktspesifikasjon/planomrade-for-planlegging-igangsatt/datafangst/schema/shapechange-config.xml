@@ -20,6 +20,8 @@
    <targetParameter name="outputDirectory" value="/home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst/schema/xsd" />
    <targetParameter name="sortedOutput" value="true" />
    <targetParameter name="defaultEncodingRule" value="sosi" />
+   <targetParameter name="documentationTemplate" value="[[documentation]]" />
+   <targetParameter name="documentationNoValue" value="" />
    <rules>
     <EncodingRule name="sosi" extends="iso19136_2007">
      <rule name="rule-xsd-prop-length-size-pattern" />
@@ -42,6 +44,8 @@
    <targetParameter name="jsonBaseUri" value="https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst" />
    <targetParameter name="entityTypeName" value="@type" />
    <targetParameter name="defaultEncodingRule" value="sosiJson" />
+   <targetParameter name="documentationTemplate" value="[[documentation]]" />
+   <targetParameter name="documentationNoValue" value="" />
    <rules>
     <EncodingRule name="sosiJson">
      <rule name="rule-json-cls-basictype" />
