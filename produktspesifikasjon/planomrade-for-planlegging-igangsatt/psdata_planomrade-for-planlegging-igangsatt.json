@@ -160,11 +160,7 @@
   },
   "dataCaptureAndProductionSection": {
     "DataAcquisitionAndProcessing": {
-      "processStep": [
-        {
-          "description": "datafangst skjer gjennom tjenesten varsel om planoppstart på fellestjenester plan som fylles ut av forslagsstiller eller plankonsulent"
-        }
-      ]
+      "dataCaptureStatement": "datafangst skjer gjennom tjenesten varsel om planoppstart på fellestjenester plan som fylles ut av forslagsstiller eller plankonsulent"
     }
   },
   "deliverySection": [
@@ -449,5 +445,22 @@
       "codeSpace": "https://kartkatalog.geonorge.no/metadata/",
       "metadataLinkage": "https://kartkatalog.geonorge.no/metadata/779a554b-fc3e-48a6-b202-561b07e9d4c2"
     }
+  },
+  "chapterAutofill": {
+    "om_spesifikasjonen": 12,
+    "om_produktet": 90,
+    "formaal": 28,
+    "bruksomraade": 35,
+    "omfang": 50,
+    "datainnhold_og_struktur": 0,
+    "referansesystem": 37,
+    "datakvalitet": 1,
+    "datafangst_og_produksjon": 17,
+    "vedlikehold": 3,
+    "presentasjon": 0,
+    "leveranse": 96,
+    "metadata": 17,
+    "tilleggsinformasjon": 0,
+    "datamodell": 596
   }
 }

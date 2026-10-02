@@ -134,10 +134,7 @@ Datasettet brukes som grunnlag ved oversendelse av planinitiativ til kommunen og
 
 ## Datafangst og produksjon
 
-**Datainnsamling og prosessering**:
-
-- **Prosesstrinn**:
-  - **Beskrivelse**: datafangst skjer gjennom tjenesten varsel om planoppstart på fellestjenester plan som fylles ut av forslagsstiller eller plankonsulent
+datafangst skjer gjennom tjenesten varsel om planoppstart på fellestjenester plan som fylles ut av forslagsstiller eller plankonsulent
 
 ## Vedlikehold
 
