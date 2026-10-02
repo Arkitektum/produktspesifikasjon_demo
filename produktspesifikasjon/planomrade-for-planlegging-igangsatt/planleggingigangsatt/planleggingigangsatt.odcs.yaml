@@ -5,6 +5,69 @@ id: urn:odcs:planomr-de-for-planlegging-igangsatt-planleggingigangsatt:1.0.0
 version: 1.0.0
 status: active
 name: Planområde for planlegging igangsatt - Planleggingigangsatt
+tags:
+- Plan og eiendom
+- planområde
+- planomriss
+- Arealplan
+- Plan
+- Åpne data
+- Ugradert
+price:
+  priceAmount: 0
+  priceUnit: dataset
+description:
+  limitations: Åpne data. Lisens. Ugradert
+  purpose: Formålet er å kunne identifisere og vise hvor planarbeid er startet, slik
+    at naboer, berørte parter, høringsmyndigheter og kommunen får informasjon om planinitiativet
+    og kan medvirke i prosessen.
+authoritativeDefinitions:
+- url: https://kartkatalog.geonorge.no/metadata/779a554b-fc3e-48a6-b202-561b07e9d4c2
+  type: businessDefinition
+  description: Metadata i Kartkatalogen
+team:
+  members:
+  - username: ftb@dibk.no
+    name: Olaug Hana Nesheim
+    description: Direktoratet for byggkvalitet
+    role: owner, pointOfContact, publisher
+support:
+- channel: Direktoratet for byggkvalitet
+  tool: email
+  url: mailto:ftb@dibk.no
+  scope: issues
+  description: Kontaktpunkt hos Direktoratet for byggkvalitet
+slaProperties:
+- property: frequency
+  value: Kontinuerlig
+  driver: operational
+  description: Kontinuerlig oppdatert
+customProperties:
+- property: license
+  value: Norsk lisens for offentlige data (NLOD) 2.0
+- property: licenseUrl
+  value: https://data.norge.no/nlod/no/2.0
+- property: accessConstraints
+  value: Åpne data
+- property: useConstraints
+  value: Lisens
+- property: classification
+  value: Ugradert
+- property: spatialRepresentationType
+  value: Vektor
+- property: language
+  value: nor
+- property: maintenanceAndUpdateStatement
+  value: Kontinuerlig oppdatert
+servers:
+- server: ogc-api-features
+  type: api
+  location: https://plandata.ft.dibk.no/services/rest/planleggingigangsatt
+  description: OGC API-Features - GeoJSON
+- server: wms-tjeneste
+  type: api
+  location: https://plandata.ft.dibk.no/services/wms/planleggingigangsatt/?service=WMS&request=GetCapabilities
+  description: WMS-tjeneste - PNG, BMP, GeoTIFF, JPEG, TIFF
 schema:
 - name: Arealplan
   physicalName: arealplan
