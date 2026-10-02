@@ -1,0 +1,9 @@
+metadataId: 041f1e6e-bdbc-4091-b48f-8a5990f3cc5b
+output_directory: produktspesifikasjon
+product_slug: administrative_enheter_kommuner
+updated: '2026-10-02'
+scopes:
+- name: Ny datakilde
+  url: inputs/administrative-enheter-kommuner/postgis.schema.sql
+  generator: postgis
+  description: PostGIS-skjema
