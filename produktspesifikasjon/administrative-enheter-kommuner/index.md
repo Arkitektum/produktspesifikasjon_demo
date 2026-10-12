@@ -173,6 +173,7 @@ Forvaltningsmessig saksbehandling. Analyse og presentasjon i et GIS-system. Pres
 | Atom Feed | [Lenke](http://nedlasting.geonorge.no/geonorge/ATOM-feeds/AdministrativeEnheterKommuner_AtomFeedPostGIS.xml) | W3C:AtomFeed | PostGIS | fylkesvis, kommunevis, landsfiler |
 | Atom Feed | [Lenke](http://nedlasting.geonorge.no/geonorge/ATOM-feeds/AdministrativeEnheterKommuner_AtomFeedSOSI.xml) | W3C:AtomFeed | SOSI | fylkesvis, kommunevis, landsfiler |
 | Administrative enheter WMS | [Lenke](https://wms.geonorge.no/skwms1/wms.adm_enheter2?service=wms&request=GetCapabilities) | WMS-tjeneste | png |  |
+| PostGIS-skript: ny-datakilde.postgis | [Lenke](https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/administrative-enheter-kommuner/ny-datakilde/ny-datakilde.postgis.sql) | Nedlasting | SQL |  |
 
 ## Metadata
 
@@ -180,7 +181,7 @@ Forvaltningsmessig saksbehandling. Analyse og presentasjon i et GIS-system. Pres
 
 **Metadatastandardversjon**: 2003
 
-**Metadatadato**: 2026-10-06
+**Metadatadato**: 2026-10-11
 
 **språk**: nor
 
