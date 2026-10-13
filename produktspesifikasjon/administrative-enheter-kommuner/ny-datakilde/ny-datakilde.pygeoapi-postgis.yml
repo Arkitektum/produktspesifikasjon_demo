@@ -1,0 +1,208 @@
+# pygeoapi-konfigurasjon — generert fra datamodellen og metadata i Geonorge.
+# Verdier merket "<REPLACE_ME>" må fylles inn før tjenesten kan startes.
+server:
+  bind:
+    host: 0.0.0.0
+    port: 5000
+  cors: false
+  url: ${PYGEOAPI_SERVER_URL:-http://localhost:5000}
+  mimetype: application/json; charset=UTF-8
+  encoding: utf-8
+  gzip: false
+  languages:
+  - nb-NO
+  pretty_print: true
+  admin: ${PYGEOAPI_SERVER_ADMIN:-false}
+  limits:
+    default_items: 20
+    max_items: 100
+  map:
+    url: https://tile.openstreetmap.org/{z}/{x}/{y}.png
+    attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap
+      contributors</a>'
+logging:
+  level: ERROR
+metadata:
+  identification:
+    title: Administrative enheter kommuner
+    description: "Datasettet viser kommuneinndelinga i landet med de mest nøyaktige\
+      \ grensene som er registrert digitalt og som er samlet i ett datasett. \n \n\
+      Flatene inneholder egenskaper som forteller om offisielle kommunenumre. De offisielle\
+      \ norske, samiske og kvenske navnene for kommunene er hentet fra SSR. I tillegg\
+      \ finnes informasjon om samiske forvaltningsområder.\n\nGeodataene er fra nasjonal\
+      \ inndelingsbase, som er en del av matrikkelen. Ved overgang til ny forvaltningsløsning,\
+      \ ble det også gjort endringer i UML-modellen.\n\nDatasettet har referansedato\
+      \ 1.1.2026, og er oppdatert med overføring av to arealer mellom Indre Østfold\
+      \ og Nordre Follo ved Slemmestadveien, og et areal mellom Indre Østfold og Vestby\
+      \ ved Laaskenveien. Det er i tillegg oppdatert med en del mindre kvalitetshevinger,\
+      \ som følge av jordskiftesaker og klarlegging av eksisterende grense på kommune-/fylkesgrenser.\n\
+      \nDatasettet blir oppdatert årlig, og da ved nyttår. Dersom det blir gjort vedtak\
+      \ om grensejustering mellom kommuner etter inndelingsloven med ikrafttredelsesdato\
+      \ underveis i året, blir filene oppdatert rundt ikrafttredelsesdato."
+    keywords:
+    - Kommune
+    - Administrativ inndeling
+    - Administrative grenser
+    - Kommunegrenser
+    - Fylkesgrenser
+    - Riksgrense
+    - ABAS
+    - Administrative enheter
+    - Det offentlige kartgrunnlaget
+    - Inspire
+    - geodataloven
+    - Norge digitalt
+    - beredskapsbase
+    - dataNorgeNo
+    - fellesDatakatalog
+    - Basis geodata
+    - Norge
+    keywords_type: theme
+    terms_of_service: Åpne data
+    url: https://kartkatalog.geonorge.no/metadata/041f1e6e-bdbc-4091-b48f-8a5990f3cc5b
+  license:
+    name: Creative Commons BY 4.0 (CC BY 4.0)
+    url: https://creativecommons.org/licenses/by/4.0/
+  provider:
+    name: Kartverket
+    url: "<REPLACE_ME>"
+  contact:
+    name: Kartverket
+    email: post@kartverket.no
+    url: "<REPLACE_ME>"
+resources:
+  kommune:
+    type: collection
+    title: Kommune
+    description: 'inndeling i administrative og politiske enheter innenfor fylket
+
+
+      Merknad: Tilsvarer NUTS 5 og LAU 2 på internasjonalt statistisk nivå'
+    keywords:
+    - Kommune
+    extents:
+      spatial:
+        bbox:
+        - 2.0
+        - 57.0
+        - 33.0
+        - 72.0
+        crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    providers:
+    - type: feature
+      name: PostgreSQLProvider
+      data:
+        host: "<REPLACE_ME>"
+        port: "<REPLACE_ME>"
+        dbname: ny_datakilde
+        user: "<REPLACE_ME>"
+        password: "<REPLACE_ME>"
+        search_path:
+        - public
+      id_field: objid
+      table: kommune
+      geom_field: omraade
+      crs:
+      - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+      - http://www.opengis.net/def/crs/EPSG/0/25832
+      - http://www.opengis.net/def/crs/EPSG/0/25833
+      - http://www.opengis.net/def/crs/EPSG/0/25835
+      - http://www.opengis.net/def/crs/EPSG/0/5972
+      - http://www.opengis.net/def/crs/EPSG/0/5973
+      - http://www.opengis.net/def/crs/EPSG/0/5975
+      - http://www.opengis.net/def/crs/EPSG/0/3857
+      - http://www.opengis.net/def/crs/EPSG/0/3575
+      - http://www.opengis.net/def/crs/EPSG/0/4326
+      - http://www.opengis.net/def/crs/EPSG/0/3035
+      - http://www.opengis.net/def/crs/EPSG/0/4258
+      - http://www.opengis.net/def/crs/EPSG/0/5942
+      storage_crs: http://www.opengis.net/def/crs/EPSG/0/25833
+  grense:
+    type: collection
+    title: Grense
+    description: Generell avgrensingslinje
+    keywords:
+    - Grense
+    extents:
+      spatial:
+        bbox:
+        - 2.0
+        - 57.0
+        - 33.0
+        - 72.0
+        crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    providers:
+    - type: feature
+      name: PostgreSQLProvider
+      data:
+        host: "<REPLACE_ME>"
+        port: "<REPLACE_ME>"
+        dbname: ny_datakilde
+        user: "<REPLACE_ME>"
+        password: "<REPLACE_ME>"
+        search_path:
+        - public
+      id_field: objid
+      table: grense
+      geom_field: grense
+      crs:
+      - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+      - http://www.opengis.net/def/crs/EPSG/0/25832
+      - http://www.opengis.net/def/crs/EPSG/0/25833
+      - http://www.opengis.net/def/crs/EPSG/0/25835
+      - http://www.opengis.net/def/crs/EPSG/0/5972
+      - http://www.opengis.net/def/crs/EPSG/0/5973
+      - http://www.opengis.net/def/crs/EPSG/0/5975
+      - http://www.opengis.net/def/crs/EPSG/0/3857
+      - http://www.opengis.net/def/crs/EPSG/0/3575
+      - http://www.opengis.net/def/crs/EPSG/0/4326
+      - http://www.opengis.net/def/crs/EPSG/0/3035
+      - http://www.opengis.net/def/crs/EPSG/0/4258
+      - http://www.opengis.net/def/crs/EPSG/0/5942
+      storage_crs: http://www.opengis.net/def/crs/EPSG/0/25833
+  fylke:
+    type: collection
+    title: Fylke
+    description: 'administrativ inndeling av nasjonen på regionalt nivå
+
+
+      Merknad: Tilsvarer NUTS 3 på internasjonalt statistisk nivå'
+    keywords:
+    - Fylke
+    extents:
+      spatial:
+        bbox:
+        - 2.0
+        - 57.0
+        - 33.0
+        - 72.0
+        crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    providers:
+    - type: feature
+      name: PostgreSQLProvider
+      data:
+        host: "<REPLACE_ME>"
+        port: "<REPLACE_ME>"
+        dbname: ny_datakilde
+        user: "<REPLACE_ME>"
+        password: "<REPLACE_ME>"
+        search_path:
+        - public
+      id_field: objid
+      table: fylke
+      geom_field: omraade
+      crs:
+      - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+      - http://www.opengis.net/def/crs/EPSG/0/25832
+      - http://www.opengis.net/def/crs/EPSG/0/25833
+      - http://www.opengis.net/def/crs/EPSG/0/25835
+      - http://www.opengis.net/def/crs/EPSG/0/5972
+      - http://www.opengis.net/def/crs/EPSG/0/5973
+      - http://www.opengis.net/def/crs/EPSG/0/5975
+      - http://www.opengis.net/def/crs/EPSG/0/3857
+      - http://www.opengis.net/def/crs/EPSG/0/3575
+      - http://www.opengis.net/def/crs/EPSG/0/4326
+      - http://www.opengis.net/def/crs/EPSG/0/3035
+      - http://www.opengis.net/def/crs/EPSG/0/4258
+      - http://www.opengis.net/def/crs/EPSG/0/5942
+      storage_crs: http://www.opengis.net/def/crs/EPSG/0/25833

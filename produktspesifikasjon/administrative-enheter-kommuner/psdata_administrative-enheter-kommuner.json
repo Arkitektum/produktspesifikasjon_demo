@@ -350,6 +350,25 @@
     {
       "delivery": {
         "deliveryMedium": {
+          "deliveryMediumName": "GeoPackage: ny-datakilde",
+          "deliveryService": {
+            "serviceEndpoint": "https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/administrative-enheter-kommuner/ny-datakilde/ny-datakilde.gpkg",
+            "serviceProperty": {
+              "type": "Fil",
+              "value": "Nedlasting"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GPKG"
+          }
+        ]
+      }
+    },
+    {
+      "delivery": {
+        "deliveryMedium": {
           "deliveryMediumName": "PostGIS-skript: ny-datakilde.postgis",
           "deliveryService": {
             "serviceEndpoint": "https://raw.githubusercontent.com/Arkitektum/produktspesifikasjon_demo/main/produktspesifikasjon/administrative-enheter-kommuner/ny-datakilde/ny-datakilde.postgis.sql",
@@ -370,7 +389,7 @@
   "metadataSection": {
     "metadataStandard": "ISO19115",
     "metadataStandardVersion": "2003",
-    "metadataDate": "2026-10-11",
+    "metadataDate": "2026-10-13",
     "language": "nor",
     "contact": {
       "organizationName": "Kartverket",
@@ -404,7 +423,7 @@
     "datafangst_og_produksjon": 0,
     "vedlikehold": 3,
     "presentasjon": 2,
-    "leveranse": 80,
+    "leveranse": 86,
     "metadata": 15,
     "tilleggsinformasjon": 24,
     "datamodell": 2596
