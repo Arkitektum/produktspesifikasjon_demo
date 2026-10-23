@@ -44,7 +44,7 @@ Norge fastland
 > **Opprettet dato:** 2006-07-01<br>
 > **Endret dato:** 2026-07-30<br>
 > **Språk:** nor<br>
-> **Kontaktinformasjon:** Kartverket, [post@kartverket.no](mailto:post@kartverket.no)
+> **Kontaktinformasjon:** Test
 
 ## Om produktet Administrative enheter kommuner
 
@@ -182,7 +182,7 @@ Forvaltningsmessig saksbehandling. Analyse og presentasjon i et GIS-system. Pres
 
 **Metadatastandardversjon**: 2003
 
-**Metadatadato**: 2026-10-13
+**Metadatadato**: 2026-10-23
 
 **språk**: nor
 
