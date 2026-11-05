@@ -5,8 +5,8 @@ updated: '2026-06-22'
 outputs: jsonschema,geopackage,xsd,odcs
 scopes:
 - name: Planleggingigangsatt
-  url: https://plandata.ft.dibk.no/services/rest/planleggingigangsatt
-  generator: ogc_feature_api
+  url: inputs/planomrade-for-planlegging-igangsatt/planleggingigangsatt.feature_types.json
+  generator: custom
   description: OGC API-Features fra Direktoratet for byggkvalitet
 - name: Datafangst
   url: https://sosi.geonorge.no/svn/SOSI/SOSI Del 3/Kommunal- og moderniseringsdepartementet/Arealplan/Arealplan 5.0/PlanleggingIgangsatt.xml
