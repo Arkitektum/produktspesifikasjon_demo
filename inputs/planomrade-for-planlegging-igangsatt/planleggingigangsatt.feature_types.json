@@ -6,7 +6,7 @@
     "attributes": [
       {
         "name": "objid",
-        "type": "integer",
+        "type": "Integer",
         "cardinality": "0..1",
         "description": "objid",
         "ogcRole": "id"
@@ -31,13 +31,13 @@
       },
       {
         "name": "plannavn",
-        "type": "string",
+        "type": "CharacterString",
         "cardinality": "0..1",
         "description": "plannavn"
       },
       {
         "name": "plantype",
-        "type": "string",
+        "type": "CharacterString",
         "cardinality": "0..1",
         "description": "plantype"
       },
