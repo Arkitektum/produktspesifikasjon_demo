@@ -36,9 +36,14 @@
       },
       {
         "name": "plantype",
-        "type": "CharacterString",
+        "type": "Plantype",
         "cardinality": "0..1",
-        "description": "plantype"
+        "description": "plantype",
+        "valueDomain": {
+          "kind": "enumeration",
+          "listedValues": [],
+          "asDictionary": "false"
+        }
       },
       {
         "name": "kunngjøringsdatoVarselOmPlanoppstart",
@@ -116,7 +121,7 @@
     "attributes": [
       {
         "name": "geometri",
-        "type": "GM_Object",
+        "type": "GM_Surface",
         "cardinality": "1",
         "description": ""
       },
