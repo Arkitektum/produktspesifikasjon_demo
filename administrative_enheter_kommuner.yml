@@ -5,6 +5,6 @@ updated: '2026-10-07'
 outputs: postgis,geopackage
 scopes:
 - name: Ny datakilde
-  url: inputs/administrative-enheter-kommuner/postgis.schema.sql
-  generator: postgis
+  url: inputs/administrative-enheter-kommuner/ny-datakilde.feature_types.json
+  generator: custom
   description: ''
