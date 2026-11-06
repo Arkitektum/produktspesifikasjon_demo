@@ -1,6 +1,6 @@
 ### Datamodell
 
-**Kilde:** [PostGIS-skjema (SQL)](inputs/administrative-enheter-kommuner/postgis.schema.sql)
+**Kilde:** [JSON Schema](inputs/administrative-enheter-kommuner/ny-datakilde.feature_types.json)
 
 
 
