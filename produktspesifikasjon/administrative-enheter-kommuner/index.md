@@ -182,7 +182,7 @@ Forvaltningsmessig saksbehandling. Analyse og presentasjon i et GIS-system. Pres
 
 **Metadatastandardversjon**: 2003
 
-**Metadatadato**: 2026-10-23
+**Metadatadato**: 2026-11-06
 
 **språk**: nor
 
