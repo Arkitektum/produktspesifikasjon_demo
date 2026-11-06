@@ -5,7 +5,7 @@
     "attributes": [
       {
         "name": "objid",
-        "type": "Integer",
+        "type": "CharacterString",
         "cardinality": "0..1",
         "description": "objid",
         "ogcRole": "id"
