@@ -6,7 +6,6 @@
   <parameter name="appSchemaNameRegex" value="^planleggingigangsatt$" />
   <parameter name="publicOnly" value="true" />
   <parameter name="checkingConstraints" value="disabled" />
-  <parameter name="sortedSchemaOutput" value="true" />
   <parameter name="addTaggedValues" value="*" />
   <parameter name="representTaggedValues" value="SOSI_navn,SOSI_verdi,NVDB_ID" />
   <xi:include href="https://shapechange.net/resources/config/StandardAliases.xml" />
@@ -18,7 +17,6 @@
  <targets>
   <TargetXmlSchema class="de.interactive_instruments.shapechange.core.target.xmlschema.XmlSchema" mode="enabled" inputs="INPUT">
    <targetParameter name="outputDirectory" value="/home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/schema/xsd" />
-   <targetParameter name="sortedOutput" value="true" />
    <targetParameter name="defaultEncodingRule" value="sosi" />
    <targetParameter name="documentationTemplate" value="[[documentation]]" />
    <targetParameter name="documentationNoValue" value="" />
@@ -38,14 +36,20 @@
    <xi:include href="file:///home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/.psactions/shapechange/data/StandardMapEntries_sosi.xml" />
   </TargetXmlSchema>
   <Target class="de.interactive_instruments.shapechange.core.target.json.JsonSchemaTarget" mode="enabled" inputs="INPUT">
+   <advancedProcessConfigurations>
+    <JsonSchemaAnnotations>
+     <annotations>
+      <SimpleAnnotation annotation="description" descriptorOrTaggedValue="documentation" noValueBehavior="ignore" />
+      <SimpleAnnotation annotation="title" descriptorOrTaggedValue="alias" noValueBehavior="ignore" />
+      <SimpleAnnotation annotation="codelist" descriptorOrTaggedValue="TV:codeList" noValueBehavior="ignore" />
+     </annotations>
+    </JsonSchemaAnnotations>
+   </advancedProcessConfigurations>
    <targetParameter name="outputDirectory" value="/home/runner/work/produktspesifikasjon_demo/produktspesifikasjon_demo/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/schema/jsonschema" />
-   <targetParameter name="sortedOutput" value="true" />
    <targetParameter name="jsonSchemaVersion" value="draft-07" />
    <targetParameter name="jsonBaseUri" value="https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt" />
    <targetParameter name="entityTypeName" value="@type" />
    <targetParameter name="defaultEncodingRule" value="sosiJson" />
-   <targetParameter name="documentationTemplate" value="[[documentation]]" />
-   <targetParameter name="documentationNoValue" value="" />
    <rules>
     <EncodingRule name="sosiJson">
      <rule name="rule-json-cls-basictype" />
@@ -56,6 +60,7 @@
      <rule name="rule-json-cls-union-propertyCount" />
      <rule name="rule-json-cls-valueTypeOptions" />
      <rule name="rule-json-all-documentation" />
+     <rule name="rule-json-cls-documentation-enumDescription" />
     </EncodingRule>
    </rules>
    <mapEntries>

@@ -24,14 +24,14 @@ logo: "https://register.geonorge.no/data/organizations/974760223_DIBK_liten.jpg"
 
 - **Tidsperiode**:
   - **Fra**: 2025-10-17
-  - **Til**: 2026-06-10
+  - **Til**: 2025-10-17
 
 ## Om spesifikasjonen
 
 
 > **Denne versjonen av produktspesifikasjonen:** <br>
 > **Opprettet dato:** 2025-10-17<br>
-> **Endret dato:** 2026-06-10<br>
+> **Endret dato:** <br>
 > **Språk:** nor<br>
 > **Kontaktinformasjon:** Direktoratet for byggkvalitet, [ftb@dibk.no](mailto:ftb@dibk.no)
 
@@ -165,7 +165,7 @@ datafangst skjer gjennom tjenesten varsel om planoppstart på fellestjenester pl
 
 **Metadatastandardversjon**: 2003
 
-**Metadatadato**: 2026-06-10
+**Metadatadato**: 2026-10-14
 
 **språk**: nor
 

@@ -1,71 +1,82 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:planleggingigangsatt="https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/1.0" elementFormDefault="qualified" targetNamespace="https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/1.0" version="1.0">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:planleggingigangsatt="https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/1.0" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/1.0" version="1.0">
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
   <element name="Arealplan" substitutionGroup="gml:AbstractFeature" type="planleggingigangsatt:ArealplanType">
     <annotation>
-      <documentation>Dataobjekt for igangsatt planlegging etter pbl</documentation>
+      <documentation>dataobjekt for igangsatt planlegging etter plan- og bygningsloven, slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet</documentation>
     </annotation>
   </element>
   <complexType name="ArealplanType">
     <complexContent>
       <extension base="gml:AbstractFeatureType">
         <sequence>
-          <element minOccurs="0" name="objid" type="integer">
+          <element minOccurs="0" name="objid" type="string">
             <annotation>
-              <documentation>objid</documentation>
+              <documentation>tjenestens interne identifikator for objektet (feature-id i OGC API)</documentation>
             </annotation>
           </element>
           <element minOccurs="0" name="nasjonalArealplanId" type="planleggingigangsatt:NasjonalArealplanIdPropertyType">
             <annotation>
-              <documentation>nasjonalArealplanId</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="plannavn" type="string">
-            <annotation>
-              <documentation>plannavn</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="plantype" type="string">
-            <annotation>
-              <documentation>plantype</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="kunngjøringsdatoVarselOmPlanoppstart" type="date">
-            <annotation>
-              <documentation>kunngjøringsdatoVarselOmPlanoppstart</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="forslagsstillertype" type="string">
-            <annotation>
-              <documentation>forslagsstillertype</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="lovreferanse" type="string">
-            <annotation>
-              <documentation>lovreferanse</documentation>
+              <documentation>landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1 og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)
+
+Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikke endres undervegs av forslagstiller</documentation>
             </annotation>
           </element>
           <element minOccurs="0" name="identifikasjon" type="planleggingigangsatt:IdentifikasjonPropertyType">
             <annotation>
-              <documentation>identifikasjon</documentation>
+              <documentation>unik identifikasjon av et objekt i et datasett, forvaltet av den ansvarlige produsent/forvalter, og kan benyttes av eksterne applikasjoner som stabil referanse til objektet.
+
+Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets levetid, og skal ikke gjenbrukes i andre objekt.</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="forsteDigitaliseringsdato" type="dateTime">
+          <element minOccurs="0" name="plannavn" type="string">
             <annotation>
-              <documentation>forsteDigitaliseringsdato</documentation>
+              <documentation>planens offisielle navn</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="oppdateringsdato" type="dateTime">
+          <element minOccurs="0" name="plantype" type="gml:CodeType">
             <annotation>
-              <documentation>oppdateringsdato</documentation>
+              <documentation>type reguleringsplan (pbl. §§ 12-2 og 12-3); angir om planen er en områderegulering eller detaljregulering</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/rpplantype</sc:targetCodeListURI>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kunngjøringsdatoVarselOmPlanoppstart" type="date">
+            <annotation>
+              <documentation>dato da varsel om oppstart av planarbeid ble kunngjort og sendt til berørte parter som naboer, sektormyndigheter og lag/foreninger med interesser i planen (pbl. § 12-8)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="forslagsstillertype" type="string">
+            <annotation>
+              <documentation>om forslagsstiller er privat eller offentlig planmyndighet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lovreferanse" type="gml:CodeType">
+            <annotation>
+              <documentation>kode for hvilken lov planen vedtas etter. For planlegging igangsatt er lovreferanse = 6 (pbl. 2008)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse</sc:targetCodeListURI>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="forsteDigitaliseringsdato" type="date">
+            <annotation>
+              <documentation>dato når en representasjon av objektet i digital form første gang ble etablert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppdateringsdato" type="date">
+            <annotation>
+              <documentation>tidspunkt for siste endring på dataobjektet</documentation>
             </annotation>
           </element>
           <element minOccurs="0" name="link" type="string">
             <annotation>
-              <documentation>link</documentation>
+              <documentation>lenke (URL) til nærmere informasjon om planen, for eksempel planinnsyn eller varselet om planoppstart</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="planomrade" type="planleggingigangsatt:PlanområdePropertyType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="planomrade" type="planleggingigangsatt:PlanområdePropertyType"/>
         </sequence>
       </extension>
     </complexContent>
@@ -80,9 +91,25 @@
   <element name="Identifikasjon" substitutionGroup="gml:AbstractObject" type="planleggingigangsatt:IdentifikasjonType"/>
   <complexType name="IdentifikasjonType">
     <sequence>
-      <element minOccurs="0" name="lokalId" type="string"/>
-      <element minOccurs="0" name="navnerom" type="string"/>
-      <element minOccurs="0" name="versjonId" type="string"/>
+      <element minOccurs="0" name="lokalId" type="string">
+        <annotation>
+          <documentation>lokal identifikator av et objekt.
+
+Skal være en uuid, slik at den er unik, uavhengig av navnerommet</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="navnerom" type="string">
+        <annotation>
+          <documentation>navnerom som unikt identifiserer datakilden til et objekt.
+
+For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="versjonId" type="string">
+        <annotation>
+          <documentation>identifikasjon av en spesiell versjon av et geografisk objekt (instans)</documentation>
+        </annotation>
+      </element>
     </sequence>
   </complexType>
   <complexType name="IdentifikasjonPropertyType">
@@ -93,8 +120,19 @@
   <element name="NasjonalArealplanId" substitutionGroup="gml:AbstractObject" type="planleggingigangsatt:NasjonalArealplanIdType"/>
   <complexType name="NasjonalArealplanIdType">
     <sequence>
-      <element minOccurs="0" name="planid" type="string"/>
-      <element minOccurs="0" name="kommunenummer" type="string"/>
+      <element minOccurs="0" name="planid" type="string">
+        <annotation>
+          <documentation>entydig identifikasjon av en plan innen vedkommende administrative enhet</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="kommunenummer" type="gml:CodeType">
+        <annotation>
+          <documentation>kode som viser til offisiell nummerering av kommuner, alltid 4 siffer med eventuell ledende null</documentation>
+          <appinfo>
+            <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer</sc:targetCodeListURI>
+          </appinfo>
+        </annotation>
+      </element>
     </sequence>
   </complexType>
   <complexType name="NasjonalArealplanIdPropertyType">
@@ -104,75 +142,91 @@
   </complexType>
   <element name="Planområde" substitutionGroup="gml:AbstractFeature" type="planleggingigangsatt:PlanområdeType">
     <annotation>
-      <documentation>Geometriske områder og tilhørende metadata fra "Varsel om Oppstart av Reguleringsplanarbeider"-databasen</documentation>
+      <documentation>område for planlegging igangsatt etter pbl. 2008, med tilhørende metadata fra varsel om oppstart av planarbeid, slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet.
+
+Området skal være sammenhengende i grunnriss, men kan dekke flere vertikalnivåer.</documentation>
     </annotation>
   </element>
   <complexType name="PlanområdeType">
     <complexContent>
       <extension base="gml:AbstractFeatureType">
         <sequence>
-          <element name="geometry" type="gml:GeometryPropertyType"/>
+          <element name="geometri" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>planområdets avgrensning i grunnriss. Området skal være sammenhengende i grunnriss, men kan dekke flere vertikalnivåer</documentation>
+            </annotation>
+          </element>
           <element minOccurs="0" name="objid" type="integer">
             <annotation>
-              <documentation>objid</documentation>
+              <documentation>tjenestens interne identifikator for objektet (feature-id i OGC API)</documentation>
             </annotation>
           </element>
           <element minOccurs="0" name="identifikasjon" type="planleggingigangsatt:IdentifikasjonPropertyType">
             <annotation>
-              <documentation>identifikasjon</documentation>
+              <documentation>unik identifikasjon av et objekt i et datasett, forvaltet av den ansvarlige produsent/forvalter, og kan benyttes av eksterne applikasjoner som stabil referanse til objektet.
+
+Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets levetid, og skal ikke gjenbrukes i andre objekt.</documentation>
             </annotation>
           </element>
           <element minOccurs="0" name="arealplan" type="integer">
             <annotation>
-              <documentation>arealplan</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="førsteDigitaliseringsdato" type="dateTime">
-            <annotation>
-              <documentation>førsteDigitaliseringsdato</documentation>
+              <documentation>referanse (objid) til arealplanen planområdet tilhører</documentation>
             </annotation>
           </element>
           <element minOccurs="0" name="nasjonalArealplanId" type="planleggingigangsatt:NasjonalArealplanIdPropertyType">
             <annotation>
-              <documentation>nasjonalArealplanId</documentation>
+              <documentation>landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1 og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)
+
+Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikke endres undervegs av forslagstiller</documentation>
             </annotation>
           </element>
           <element minOccurs="0" name="plannavn" type="string">
             <annotation>
-              <documentation>plannavn</documentation>
+              <documentation>planens offisielle navn</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="plantype" type="string">
+          <element minOccurs="0" name="plantype" type="gml:CodeType">
             <annotation>
-              <documentation>plantype</documentation>
+              <documentation>type reguleringsplan (pbl. §§ 12-2 og 12-3); angir om planen er en områderegulering eller detaljregulering</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/rpplantype</sc:targetCodeListURI>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="kunngjøringsdatoVarselOmPlanoppstart" type="date">
             <annotation>
-              <documentation>når planinitiativet har varsel oppstart til berørte parter som naboer, sektormyndigheter og lag/foreninger med interresser i planen</documentation>
+              <documentation>dato da varsel om oppstart av planarbeid ble kunngjort og sendt til berørte parter som naboer, sektormyndigheter og lag/foreninger med interesser i planen (pbl. § 12-8)</documentation>
             </annotation>
           </element>
           <element minOccurs="0" name="forslagsstillertype" type="string">
             <annotation>
-              <documentation>forslagsstillertype</documentation>
+              <documentation>om forslagsstiller er privat eller offentlig planmyndighet</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="lovreferanse" type="string">
+          <element minOccurs="0" name="lovreferanse" type="gml:CodeType">
             <annotation>
-              <documentation>lovreferanse</documentation>
+              <documentation>kode for hvilken lov planen vedtas etter. For planlegging igangsatt er lovreferanse = 6 (pbl. 2008)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse</sc:targetCodeListURI>
+              </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="oppdateringsdato" type="dateTime">
+          <element minOccurs="0" name="førsteDigitaliseringsdato" type="date">
             <annotation>
-              <documentation>oppdateringsdato</documentation>
+              <documentation>dato når en representasjon av objektet i digital form første gang ble etablert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppdateringsdato" type="date">
+            <annotation>
+              <documentation>tidspunkt for siste endring på dataobjektet</documentation>
             </annotation>
           </element>
           <element minOccurs="0" name="link" type="string">
             <annotation>
-              <documentation>link</documentation>
+              <documentation>lenke (URL) til nærmere informasjon om planen, for eksempel planinnsyn eller varselet om planoppstart</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="arealplan" type="planleggingigangsatt:ArealplanPropertyType"/>
+          <element minOccurs="0" name="plan" type="planleggingigangsatt:ArealplanPropertyType"/>
         </sequence>
       </extension>
     </complexContent>
