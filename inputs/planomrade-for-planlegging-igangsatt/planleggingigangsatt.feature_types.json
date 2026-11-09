@@ -30,7 +30,7 @@
           }
         ],
         "cardinality": "0..1",
-        "description": "landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1 og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)",
+        "description": "landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1 og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)\n\nDenne identifikatoren tildeles planen når planprosessen starter, og den kan ikke endres undervegs av forslagstiller",
         "name": "nasjonalArealplanId",
         "type": "NasjonalArealplanId"
       },
@@ -56,7 +56,7 @@
           }
         ],
         "cardinality": "0..1",
-        "description": "unik identifikasjon av et dataobjekt\n\nFølger dataobjektet og identifiserer det i hele dets levetid.",
+        "description": "unik identifikasjon av et objekt i et datasett, forvaltet av den ansvarlige produsent/forvalter, og kan benyttes av eksterne applikasjoner som stabil referanse til objektet.\n\nMerknad: Denne unike identifikatoren skal ikke endres i løpet av objektets levetid, og skal ikke gjenbrukes i andre objekt.",
         "name": "identifikasjon",
         "type": "Identifikasjon"
       },
@@ -86,7 +86,7 @@
       },
       {
         "cardinality": "0..1",
-        "description": "angir hvem som fremmer planforslaget, for eksempel kommunen, annen offentlig myndighet eller privat forslagsstiller",
+        "description": "om forslagsstiller er privat eller offentlig planmyndighet",
         "name": "forslagsstillertype",
         "type": "CharacterString"
       },
@@ -98,13 +98,13 @@
         "valueDomain": {
           "asDictionary": "true",
           "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse",
-          "definition": "ekstern kodeliste for gjeldende plan- og bygningslov",
+          "definition": "ekstern kodeliste for gjeldende pbl.",
           "kind": "codelist"
         }
       },
       {
         "cardinality": "0..1",
-        "description": "tidspunkt da dataobjektet ble registrert digitalt første gang",
+        "description": "dato når en representasjon av objektet i digital form første gang ble etablert",
         "name": "forsteDigitaliseringsdato",
         "type": "DateTime"
       },
@@ -127,6 +127,7 @@
       "associations": [
         {
           "cardinality": "0..*",
+          "description": "planområde(r) som avgrenser arealet for den igangsatte planleggingen (forslag – må verifiseres)",
           "role": "planomrade",
           "target": "Planområde"
         }
@@ -137,7 +138,7 @@
     "attributes": [
       {
         "cardinality": "1",
-        "description": "planområdets utstrekning i grunnriss uavhengig av vertikalnivå",
+        "description": "planområdets avgrensning i grunnriss. Området skal være sammenhengende i grunnriss, men kan dekke flere vertikalnivåer",
         "name": "geometri",
         "type": "GM_Surface"
       },
@@ -170,7 +171,7 @@
           }
         ],
         "cardinality": "0..1",
-        "description": "unik identifikasjon av et dataobjekt\n\nFølger dataobjektet og identifiserer det i hele dets levetid.",
+        "description": "unik identifikasjon av et objekt i et datasett, forvaltet av den ansvarlige produsent/forvalter, og kan benyttes av eksterne applikasjoner som stabil referanse til objektet.\n\nMerknad: Denne unike identifikatoren skal ikke endres i løpet av objektets levetid, og skal ikke gjenbrukes i andre objekt.",
         "name": "identifikasjon",
         "type": "Identifikasjon"
       },
@@ -202,7 +203,7 @@
           }
         ],
         "cardinality": "0..1",
-        "description": "landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1 og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)",
+        "description": "landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1 og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)\n\nDenne identifikatoren tildeles planen når planprosessen starter, og den kan ikke endres undervegs av forslagstiller",
         "name": "nasjonalArealplanId",
         "type": "NasjonalArealplanId"
       },
@@ -232,7 +233,7 @@
       },
       {
         "cardinality": "0..1",
-        "description": "angir hvem som fremmer planforslaget, for eksempel kommunen, annen offentlig myndighet eller privat forslagsstiller",
+        "description": "om forslagsstiller er privat eller offentlig planmyndighet",
         "name": "forslagsstillertype",
         "type": "CharacterString"
       },
@@ -244,13 +245,13 @@
         "valueDomain": {
           "asDictionary": "true",
           "codeList": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse",
-          "definition": "ekstern kodeliste for gjeldende plan- og bygningslov",
+          "definition": "ekstern kodeliste for gjeldende pbl.",
           "kind": "codelist"
         }
       },
       {
         "cardinality": "0..1",
-        "description": "tidspunkt da dataobjektet ble registrert digitalt første gang",
+        "description": "dato når en representasjon av objektet i digital form første gang ble etablert",
         "name": "førsteDigitaliseringsdato",
         "type": "DateTime"
       },
@@ -273,6 +274,7 @@
       "associations": [
         {
           "cardinality": "0..1",
+          "description": "arealplanen som planområdet hører til (forslag – må verifiseres)",
           "role": "plan",
           "target": "Arealplan"
         }
