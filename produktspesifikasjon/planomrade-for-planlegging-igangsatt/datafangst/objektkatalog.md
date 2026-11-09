@@ -25,126 +25,44 @@ abstrakt objekttype som bærer de egenskapene fra SOSI_Fellesegenskaper som er a
 Egenskaper
 
 <table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
+  <thead>
+    <tr>
+      <th>Egenskap</th>
+      <th>Beskrivelse</th>
+      <th>Type</th>
+      <th>Multiplisitet</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>identifikasjon</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
+      <td>identifikasjon</td>
       <td>unik identifikasjon av et dataobjekt<br /><br />Følger dataobjektet og identifiserer det i hele dets levetid.</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>Identifikasjon<br />(datatype)</td>
       <td>1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>Identifikasjon</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>identifikasjon.lokalId</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
+      <td>- lokal<wbr />Id</td>
       <td>lokal identifikator av et objekt.<br /><br />Skal være en uuid, slik at den er unik, uavhengig av navnerommet</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>Character<wbr />String</td>
       <td>1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>CharacterString</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>identifikasjon.navnerom</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
+      <td>- navnerom</td>
       <td>navnerom som unikt identifiserer datakilden til et objekt.<br /><br />Navnerom anbefales å være en http-URI og må være registrert i data.geonorge.no<br />For plan anbefales navnerommet <a href="http://data.geonorge.no/sosi/plan">http://data.geonorge.no/sosi/plan</a></td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>Character<wbr />String</td>
       <td>1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>CharacterString</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>identifikasjon.versjonId</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
+      <td>- versjon<wbr />Id</td>
       <td>identifikasjon av en spesiell versjon av et geografisk objekt (instans)</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>CharacterString</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>oppdateringsdato</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
+      <td>oppdateringsdato</td>
       <td>tidspunkt for siste endring på dataobjektet</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>Date<wbr />Time</td>
       <td>1</td>
-    </tr>
-    <tr>
-      <th scope="row">Type:</th>
-      <td>DateTime</td>
     </tr>
   </tbody>
 </table>
@@ -156,192 +74,89 @@ dataobjekt for igangsatt planlegging etter pbl
 Egenskaper
 
 <table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
+  <thead>
+    <tr>
+      <th>Egenskap</th>
+      <th>Beskrivelse</th>
+      <th>Type</th>
+      <th>Multiplisitet</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>nasjonalArealplanId</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
+      <td>nasjonal<wbr />Arealplan<wbr />Id</td>
       <td>landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1, og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd).<br /><br />Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikke endres undervegs av forslagstiller.</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>Nasjonal<wbr />Arealplan<wbr />Id<br />(datatype)</td>
       <td>1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>NasjonalArealplanId</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>nasjonalArealplanId.kommunenummer</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
+      <td>- kommunenummer</td>
       <td>kode som viser til offisiell nummerering av kommuner<br /><br />Merknad: Det presiseres at kommunenummer alltid skal ha 4 siffer, dvs. eventuelt med ledende null. Kommunenummer benyttes for kobling mot en rekke andre registre som også benytter 4 siffer.</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td><a href="#kodeliste-kommunenummer">Kommunenummer</a><br />(kodeliste)</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>Kommunenummer</td>
-    </tr>
-    <tr>
-      <th scope="row">Tillatte verdier:</th>
-      <td>- Kodeliste: <a href="https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer">https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>nasjonalArealplanId.landkode</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
+      <td>- landkode</td>
       <td>landkode = NO anvendes kun av statlig vedtaksmyndighet</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td><a href="#kodeliste-landkode">Landkode</a><br />(enumerering)</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>Landkode</td>
-    </tr>
-    <tr>
-      <th scope="row">Tillatte verdier:</th>
-      <td>- NO – Norge. Aktuell kode for administrativ enhet for statlig vedtatte planer</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>nasjonalArealplanId.planid</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
+      <td>- planid</td>
       <td>entydig identifikasjon av en plan innen vedkommende administrative enhet (pbl. §§ 9-1, 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>Character<wbr />String</td>
       <td>1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>CharacterString</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>plantype</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
+      <td>plantype</td>
       <td>type reguleringsplan (pbl. §§ 12-2 og 12-3)</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td><a href="#kodeliste-rpplantype">Rp<wbr />Plantype</a><br />(kodeliste)</td>
       <td>1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>RpPlantype</td>
-    </tr>
-    <tr>
-      <th scope="row">Tillatte verdier:</th>
-      <td>- Kodeliste: <a href="https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/rpplantype">https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/rpplantype</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>plannavn</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
+      <td>plannavn</td>
       <td>planens offisielle navn</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>CharacterString</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>lovreferanse</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
+      <td>lovreferanse</td>
       <td>kode for hvilken lov planen vedtas etter<br /><br />For reguleringsplanforslag og planlegging igangsatt skal lovreferanse = 6 (pbl 2008)</td>
+      <td><a href="#kodeliste-lovreferanse">Lovreferanse</a><br />(kodeliste)</td>
+      <td>1</td>
+    </tr>
+    <tr class="inherited-from">
+      <th colspan="4" scope="rowgroup">Arvet fra Fellesegenskaper</th>
     </tr>
     <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>identifikasjon</td>
+      <td>unik identifikasjon av et dataobjekt<br /><br />Følger dataobjektet og identifiserer det i hele dets levetid.</td>
+      <td>Identifikasjon<br />(datatype)</td>
       <td>1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>Lovreferanse</td>
+      <td>- lokal<wbr />Id</td>
+      <td>lokal identifikator av et objekt.<br /><br />Skal være en uuid, slik at den er unik, uavhengig av navnerommet</td>
+      <td>Character<wbr />String</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th scope="row">Tillatte verdier:</th>
-      <td>- Kodeliste: <a href="https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse">https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse</a></td>
+      <td>- navnerom</td>
+      <td>navnerom som unikt identifiserer datakilden til et objekt.<br /><br />Navnerom anbefales å være en http-URI og må være registrert i data.geonorge.no<br />For plan anbefales navnerommet <a href="http://data.geonorge.no/sosi/plan">http://data.geonorge.no/sosi/plan</a></td>
+      <td>Character<wbr />String</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>- versjon<wbr />Id</td>
+      <td>identifikasjon av en spesiell versjon av et geografisk objekt (instans)</td>
+      <td>Character<wbr />String</td>
+      <td>0..1</td>
+    </tr>
+    <tr>
+      <td>oppdateringsdato</td>
+      <td>tidspunkt for siste endring på dataobjektet</td>
+      <td>Date<wbr />Time</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -361,26 +176,53 @@ område for planlegging igangsatt etter pbl 2008.<br /><br />Området skal være
 Egenskaper
 
 <table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
+  <thead>
+    <tr>
+      <th>Egenskap</th>
+      <th>Beskrivelse</th>
+      <th>Type</th>
+      <th>Multiplisitet</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>område</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
+      <td>område</td>
       <td>planens utstrekning i grunnriss uavhengig av vertikalnivå</td>
+      <td>GM_<wbr />Surface</td>
+      <td>1</td>
+    </tr>
+    <tr class="inherited-from">
+      <th colspan="4" scope="rowgroup">Arvet fra Fellesegenskaper</th>
     </tr>
     <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>identifikasjon</td>
+      <td>unik identifikasjon av et dataobjekt<br /><br />Følger dataobjektet og identifiserer det i hele dets levetid.</td>
+      <td>Identifikasjon<br />(datatype)</td>
       <td>1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>GM_Surface</td>
+      <td>- lokal<wbr />Id</td>
+      <td>lokal identifikator av et objekt.<br /><br />Skal være en uuid, slik at den er unik, uavhengig av navnerommet</td>
+      <td>Character<wbr />String</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>- navnerom</td>
+      <td>navnerom som unikt identifiserer datakilden til et objekt.<br /><br />Navnerom anbefales å være en http-URI og må være registrert i data.geonorge.no<br />For plan anbefales navnerommet <a href="http://data.geonorge.no/sosi/plan">http://data.geonorge.no/sosi/plan</a></td>
+      <td>Character<wbr />String</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>- versjon<wbr />Id</td>
+      <td>identifikasjon av en spesiell versjon av et geografisk objekt (instans)</td>
+      <td>Character<wbr />String</td>
+      <td>0..1</td>
+    </tr>
+    <tr>
+      <td>oppdateringsdato</td>
+      <td>tidspunkt for siste endring på dataobjektet</td>
+      <td>Date<wbr />Time</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -392,7 +234,7 @@ Fellesegenskaper
 
 ### Kodelister
 
-#### «CodeList» Kommunenummer
+#### <a id="kodeliste-kommunenummer"></a>«CodeList» Kommunenummer
 
 **Definisjon:** ekstern kodeliste for kommunenummer
 Koder med status Gyldig refererer til dagens kommuner, mens koder med status Utgått referer til utgåtte kommunenummer
@@ -416,7 +258,7 @@ Profilparametre i tagged values
   </tbody>
 </table>
 
-#### «Enumeration» Landkode
+#### <a id="kodeliste-landkode"></a>«Enumeration» Landkode
 
 **Definisjon:** alfanumerisk kode for nasjonalt nivå / Norge.
 
@@ -441,7 +283,7 @@ Koder
   </tbody>
 </table>
 
-#### «CodeList» RpPlantype
+#### <a id="kodeliste-rpplantype"></a>«CodeList» RpPlantype
 
 **Definisjon:** ekstern kodeliste for type reguleringsplan (pbl. §§ 12-2 og 12-3) ihht til gjeldende lov. Angir om planen er en områdeplan eller detaljplan.
 
@@ -464,7 +306,7 @@ Profilparametre i tagged values
   </tbody>
 </table>
 
-#### «CodeList» Lovreferanse
+#### <a id="kodeliste-lovreferanse"></a>«CodeList» Lovreferanse
 
 **Definisjon:** ekstern kodeliste for gjeldende pbl.
 

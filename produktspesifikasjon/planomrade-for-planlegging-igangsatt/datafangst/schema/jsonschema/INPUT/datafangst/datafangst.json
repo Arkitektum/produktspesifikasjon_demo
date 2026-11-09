@@ -4,6 +4,7 @@
   "$id": "https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/datafangst/datafangst/datafangst.json",
   "definitions": {
     "Arealplan": {
+      "description": "dataobjekt for igangsatt planlegging etter pbl",
       "allOf": [
         {
           "$ref": "#/definitions/Fellesegenskaper"
@@ -12,15 +13,19 @@
           "type": "object",
           "properties": {
             "nasjonalArealplanId": {
+              "description": "landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1, og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd).\n\nDenne identifikatoren tildeles planen når planprosessen starter, og den kan ikke endres undervegs av forslagstiller.",
               "$ref": "#/definitions/NasjonalArealplanId"
             },
             "plantype": {
+              "description": "type reguleringsplan (pbl. §§ 12-2 og 12-3)",
               "$ref": "#/definitions/RpPlantype"
             },
             "plannavn": {
+              "description": "planens offisielle navn",
               "type": "string"
             },
             "lovreferanse": {
+              "description": "kode for hvilken lov planen vedtas etter\n\nFor reguleringsplanforslag og planlegging igangsatt skal lovreferanse \u003d 6 (pbl 2008)",
               "$ref": "#/definitions/Lovreferanse"
             },
             "planleggingIgangsatt": {
@@ -43,6 +48,7 @@
       ]
     },
     "Fellesegenskaper": {
+      "description": "abstrakt objekttype som bærer de egenskapene fra SOSI_Fellesegenskaper som er anvendt på objekttypene i denne modellen.",
       "type": "object",
       "properties": {
         "@type": {
@@ -52,9 +58,11 @@
           "type": "string"
         },
         "identifikasjon": {
+          "description": "unik identifikasjon av et dataobjekt\n\nFølger dataobjektet og identifiserer det i hele dets levetid.",
           "$ref": "#/definitions/Identifikasjon"
         },
         "oppdateringsdato": {
+          "description": "tidspunkt for siste endring på dataobjektet",
           "type": "string",
           "format": "date"
         }
@@ -69,12 +77,15 @@
       "type": "object",
       "properties": {
         "lokalId": {
+          "description": "lokal identifikator av et objekt.\n\nSkal være en uuid, slik at den er unik, uavhengig av navnerommet",
           "type": "string"
         },
         "navnerom": {
+          "description": "navnerom som unikt identifiserer datakilden til et objekt.\n\nNavnerom anbefales å være en http-URI og må være registrert i data.geonorge.no\nFor plan anbefales navnerommet http://data.geonorge.no/sosi/plan",
           "type": "string"
         },
         "versjonId": {
+          "description": "identifikasjon av en spesiell versjon av et geografisk objekt (instans)",
           "type": "string"
         }
       },
@@ -84,16 +95,26 @@
       ]
     },
     "Kommunenummer": {
+      "description": "ekstern kodeliste for kommunenummer\nKoder med status Gyldig refererer til dagens kommuner, mens koder med status Utgått referer til utgåtte kommunenummer",
+      "codelist": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer",
       "type": "string",
       "format": "uri"
     },
     "Landkode": {
+      "description": "alfanumerisk kode for nasjonalt nivå / Norge.\n\nAvledet fra \"ISO 3166 Codes for the representation of names of countries and their subdivisions\"",
+      "enumDescription": {
+        "NO": {
+          "description": "Norge. Aktuell kode for administrativ enhet for statlig vedtatte planer"
+        }
+      },
       "type": "string",
       "enum": [
         "NO"
       ]
     },
     "Lovreferanse": {
+      "description": "ekstern kodeliste for gjeldende pbl.",
+      "codelist": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse",
       "type": "string",
       "format": "uri"
     },
@@ -101,12 +122,15 @@
       "type": "object",
       "properties": {
         "kommunenummer": {
+          "description": "kode som viser til offisiell nummerering av kommuner\n\nMerknad: Det presiseres at kommunenummer alltid skal ha 4 siffer, dvs. eventuelt med ledende null. Kommunenummer benyttes for kobling mot en rekke andre registre som også benytter 4 siffer.",
           "$ref": "#/definitions/Kommunenummer"
         },
         "landkode": {
+          "description": "landkode \u003d NO anvendes kun av statlig vedtaksmyndighet",
           "$ref": "#/definitions/Landkode"
         },
         "planid": {
+          "description": "entydig identifikasjon av en plan innen vedkommende administrative enhet (pbl. §§ 9-1, 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)",
           "type": "string"
         }
       },
@@ -115,6 +139,7 @@
       ]
     },
     "Planområde": {
+      "description": "område for planlegging igangsatt etter pbl 2008.\n\nOmrådet skal være sammenhengende i grunnriss, men kan dekke flere vertikalnivåer",
       "allOf": [
         {
           "$ref": "#/definitions/Fellesegenskaper"
@@ -130,6 +155,8 @@
       ]
     },
     "RpPlantype": {
+      "description": "ekstern kodeliste for type reguleringsplan (pbl. §§ 12-2 og 12-3) ihht til gjeldende lov. Angir om planen er en områdeplan eller detaljplan.",
+      "codelist": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/rpplantype",
       "type": "string",
       "format": "uri"
     }

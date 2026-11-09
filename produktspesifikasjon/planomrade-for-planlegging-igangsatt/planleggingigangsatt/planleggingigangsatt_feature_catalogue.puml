@@ -31,40 +31,38 @@ skinparam stereotypeCFontColor #2D201A
 package "Objekttyper" {
 
   class Arealplan <<featureType>> {
-    + objid [0..1] : Integer
+    + objid [0..1] : CharacterString
     + nasjonalArealplanId [0..1] : NasjonalArealplanId
+    + identifikasjon [0..1] : Identifikasjon
     + plannavn [0..1] : CharacterString
-    + plantype [0..1] : CharacterString
+    + plantype [0..1] : RpPlantype
     + kunngjøringsdatoVarselOmPlanoppstart [0..1] : Date
     + forslagsstillertype [0..1] : CharacterString
-    + lovreferanse [0..1] : CharacterString
-    + identifikasjon [0..1] : Identifikasjon
-    + forsteDigitaliseringsdato [0..1] : DateTime
-    + oppdateringsdato [0..1] : DateTime
+    + lovreferanse [0..1] : Lovreferanse
+    + forsteDigitaliseringsdato [0..1] : Date
+    + oppdateringsdato [0..1] : Date
     + link [0..1] : CharacterString
   }
 
   class "Planområde" as Planomr_de <<featureType>> {
+    + geometri [1] : GM_Surface
     + objid [0..1] : Integer
     + identifikasjon [0..1] : Identifikasjon
     + arealplan [0..1] : Integer
-    + førsteDigitaliseringsdato [0..1] : DateTime
     + nasjonalArealplanId [0..1] : NasjonalArealplanId
     + plannavn [0..1] : CharacterString
-    + plantype [0..1] : CharacterString
+    + plantype [0..1] : RpPlantype
     + kunngjøringsdatoVarselOmPlanoppstart [0..1] : Date
     + forslagsstillertype [0..1] : CharacterString
-    + lovreferanse [0..1] : CharacterString
-    + oppdateringsdato [0..1] : DateTime
+    + lovreferanse [0..1] : Lovreferanse
+    + førsteDigitaliseringsdato [0..1] : Date
+    + oppdateringsdato [0..1] : Date
     + link [0..1] : CharacterString
-
-    ..Geometri..
-    + geometry [1] : GM_Object
   }
 
   class NasjonalArealplanId <<dataType>> {
     + planid [0..1] : CharacterString
-    + kommunenummer [0..1] : CharacterString
+    + kommunenummer [0..1] : Kommunenummer
   }
 
   class Identifikasjon <<dataType>> {
@@ -72,14 +70,9 @@ package "Objekttyper" {
     + navnerom [0..1] : CharacterString
     + versjonId [0..1] : CharacterString
   }
-
-  class Plandokumenter {
-  }
 }
 
-  Arealplan --> Planomr_de : planomrade [0..1]
-  Arealplan --> Plandokumenter : plandokumenter [0..1]
-  Planomr_de --> Arealplan : arealplan [0..1]
-  Planomr_de --> Plandokumenter : plandokumenter [0..1]
+  Arealplan --> Planomr_de : planomrade [0..*]
+  Planomr_de --> Arealplan : plan [0..1]
 
 @enduml

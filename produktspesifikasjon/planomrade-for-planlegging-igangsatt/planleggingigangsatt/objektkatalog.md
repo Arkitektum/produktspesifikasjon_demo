@@ -1,6 +1,6 @@
 ### Datamodell
 
-**Kilde:** [OGC API - Features](https://plandata.ft.dibk.no/services/rest/planleggingigangsatt)
+**Kilde:** [JSON Schema](inputs/planomrade-for-planlegging-igangsatt/planleggingigangsatt.feature_types.json)
 
 
 
@@ -10,390 +10,115 @@
 
 #### Arealplan
 
-Dataobjekt for igangsatt planlegging etter pbl
+dataobjekt for igangsatt planlegging etter plan- og bygningsloven, slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet
 
 Egenskaper
 
 <table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
+  <thead>
+    <tr>
+      <th>Egenskap</th>
+      <th>Beskrivelse</th>
+      <th>Type</th>
+      <th>Multiplisitet</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>objid</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
       <td>objid</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>tjenestens interne identifikator for objektet (feature-id i OGC API)<br />OGC-rolle: id</td>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>integer</td>
-    </tr>
-    <tr>
-      <th scope="row">OGC-rolle:</th>
-      <td>id</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>nasjonalArealplanId</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
-      <td>nasjonalArealplanId</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>nasjonal<wbr />Arealplan<wbr />Id</td>
+      <td>landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1 og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)<br /><br />Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikke endres undervegs av forslagstiller</td>
+      <td>Nasjonal<wbr />Arealplan<wbr />Id<br />(datatype)</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>NasjonalArealplanId</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>nasjonalArealplanId.planid</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>- planid</td>
+      <td>entydig identifikasjon av en plan innen vedkommende administrative enhet</td>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>nasjonalArealplanId.kommunenummer</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>- kommunenummer</td>
+      <td>kode som viser til offisiell nummerering av kommuner, alltid 4 siffer med eventuell ledende null</td>
+      <td><a href="#kodeliste-kommunenummer">Kommunenummer</a><br />(kodeliste)</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>plannavn</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
-      <td>plannavn</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
-      <td>0..1</td>
-    </tr>
-    <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>plantype</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
-      <td>plantype</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
-      <td>0..1</td>
-    </tr>
-    <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>kunngjøringsdatoVarselOmPlanoppstart</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
-      <td>kunngjøringsdatoVarselOmPlanoppstart</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
-      <td>0..1</td>
-    </tr>
-    <tr>
-      <th scope="row">Type:</th>
-      <td>date (string)</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>forslagsstillertype</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
-      <td>forslagsstillertype</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
-      <td>0..1</td>
-    </tr>
-    <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>lovreferanse</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
-      <td>lovreferanse</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
-      <td>0..1</td>
-    </tr>
-    <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>identifikasjon</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
       <td>identifikasjon</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>unik identifikasjon av et objekt i et datasett, forvaltet av den ansvarlige produsent/forvalter, og kan benyttes av eksterne applikasjoner som stabil referanse til objektet.<br /><br />Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets levetid, og skal ikke gjenbrukes i andre objekt.</td>
+      <td>Identifikasjon<br />(datatype)</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>Identifikasjon</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>identifikasjon.lokalId</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>- lokal<wbr />Id</td>
+      <td>lokal identifikator av et objekt.<br /><br />Skal være en uuid, slik at den er unik, uavhengig av navnerommet</td>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>identifikasjon.navnerom</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>- navnerom</td>
+      <td>navnerom som unikt identifiserer datakilden til et objekt.<br /><br />For plan anbefales navnerommet <a href="http://data.geonorge.no/sosi/plan">http://data.geonorge.no/sosi/plan</a></td>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>identifikasjon.versjonId</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>- versjon<wbr />Id</td>
+      <td>identifikasjon av en spesiell versjon av et geografisk objekt (instans)</td>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>forsteDigitaliseringsdato</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
-      <td>forsteDigitaliseringsdato</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>plannavn</td>
+      <td>planens offisielle navn</td>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>date-time (string)</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>oppdateringsdato</strong></td>
+      <td>plantype</td>
+      <td>type reguleringsplan (pbl. §§ 12-2 og 12-3); angir om planen er en områderegulering eller detaljregulering</td>
+      <td><a href="#kodeliste-rpplantype">Rp<wbr />Plantype</a><br />(kodeliste)</td>
+      <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Definisjon:</th>
+      <td>kunngjøringsdato<wbr />Varsel<wbr />Om<wbr />Planoppstart</td>
+      <td>dato da varsel om oppstart av planarbeid ble kunngjort og sendt til berørte parter som naboer, sektormyndigheter og lag/foreninger med interesser i planen (pbl. § 12-8)</td>
+      <td>Date</td>
+      <td>0..1</td>
+    </tr>
+    <tr>
+      <td>forslagsstillertype</td>
+      <td>om forslagsstiller er privat eller offentlig planmyndighet</td>
+      <td>Character<wbr />String</td>
+      <td>0..1</td>
+    </tr>
+    <tr>
+      <td>lovreferanse</td>
+      <td>kode for hvilken lov planen vedtas etter. For planlegging igangsatt er lovreferanse = 6 (pbl. 2008)</td>
+      <td><a href="#kodeliste-lovreferanse">Lovreferanse</a><br />(kodeliste)</td>
+      <td>0..1</td>
+    </tr>
+    <tr>
+      <td>forste<wbr />Digitaliseringsdato</td>
+      <td>dato når en representasjon av objektet i digital form første gang ble etablert</td>
+      <td>Date<wbr />Time</td>
+      <td>0..1</td>
+    </tr>
+    <tr>
       <td>oppdateringsdato</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>tidspunkt for siste endring på dataobjektet</td>
+      <td>Date<wbr />Time</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>date-time (string)</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>link</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
       <td>link</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>lenke (URL) til nærmere informasjon om planen, for eksempel planinnsyn eller varselet om planoppstart</td>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
-    </tr>
-    <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
     </tr>
   </tbody>
 </table>
@@ -401,447 +126,131 @@ Egenskaper
 Relasjoner
 
 **Assosiasjoner**
-Planområde – rolle: planomrade – kardinalitet: 0..1
-Plandokumenter – rolle: plandokumenter – kardinalitet: 0..1
+Planområde – rolle: planomrade – kardinalitet: 0..*
 
 #### Planområde
 
-Geometriske områder og tilhørende metadata fra "Varsel om Oppstart av Reguleringsplanarbeider"-databasen
-
-Geometri:<br />Elementtype: feature<br />Type: geometry-any<br />Lagrings-CRS:<br />• <a href="http://www.opengis.net/def/crs/EPSG/0/25833"><http://www.opengis.net/def/crs/EPSG/0/25833></a><br />Koordinatreferansesystem (crs):<br />• <a href="http://www.opengis.net/def/crs/OGC/1.3/CRS84"><http://www.opengis.net/def/crs/OGC/1.3/CRS84></a><br />• <a href="http://www.opengis.net/def/crs/EPSG/0/25832"><http://www.opengis.net/def/crs/EPSG/0/25832></a><br />• <a href="http://www.opengis.net/def/crs/EPSG/0/25833"><http://www.opengis.net/def/crs/EPSG/0/25833></a><br />• <a href="http://www.opengis.net/def/crs/EPSG/0/25835"><http://www.opengis.net/def/crs/EPSG/0/25835></a><br />• <a href="http://www.opengis.net/def/crs/EPSG/0/4258"><http://www.opengis.net/def/crs/EPSG/0/4258></a><br />• <a href="http://www.opengis.net/def/crs/EPSG/0/4326"><http://www.opengis.net/def/crs/EPSG/0/4326></a><br />• <a href="http://www.opengis.net/def/crs/EPSG/0/3857"><http://www.opengis.net/def/crs/EPSG/0/3857></a>
+område for planlegging igangsatt etter pbl. 2008, med tilhørende metadata fra varsel om oppstart av planarbeid, slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet.<br /><br />Området skal være sammenhengende i grunnriss, men kan dekke flere vertikalnivåer.
 
 Egenskaper
 
 <table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
+  <thead>
+    <tr>
+      <th>Egenskap</th>
+      <th>Beskrivelse</th>
+      <th>Type</th>
+      <th>Multiplisitet</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>geometry</strong></td>
+      <td>geometri</td>
+      <td>planområdets avgrensning i grunnriss. Området skal være sammenhengende i grunnriss, men kan dekke flere vertikalnivåer</td>
+      <td>GM_<wbr />Surface</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th scope="row">Definisjon:</th>
-      <td>Elementtype: feature</td>
-    </tr>
-    <tr>
-      <th scope="row">Type:</th>
-      <td>geometry-any</td>
-    </tr>
-    <tr>
-      <th scope="row">OGC-rolle:</th>
-      <td>primary-geometry</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>objid</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
       <td>objid</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>tjenestens interne identifikator for objektet (feature-id i OGC API)<br />OGC-rolle: id</td>
+      <td>Integer</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>integer</td>
-    </tr>
-    <tr>
-      <th scope="row">OGC-rolle:</th>
-      <td>id</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>identifikasjon</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
       <td>identifikasjon</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>unik identifikasjon av et objekt i et datasett, forvaltet av den ansvarlige produsent/forvalter, og kan benyttes av eksterne applikasjoner som stabil referanse til objektet.<br /><br />Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets levetid, og skal ikke gjenbrukes i andre objekt.</td>
+      <td>Identifikasjon<br />(datatype)</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>Identifikasjon</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>identifikasjon.lokalId</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>- lokal<wbr />Id</td>
+      <td>lokal identifikator av et objekt.<br /><br />Skal være en uuid, slik at den er unik, uavhengig av navnerommet</td>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>identifikasjon.navnerom</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>- navnerom</td>
+      <td>navnerom som unikt identifiserer datakilden til et objekt.<br /><br />For plan anbefales navnerommet <a href="http://data.geonorge.no/sosi/plan">http://data.geonorge.no/sosi/plan</a></td>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>identifikasjon.versjonId</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>- versjon<wbr />Id</td>
+      <td>identifikasjon av en spesiell versjon av et geografisk objekt (instans)</td>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>arealplan</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
       <td>arealplan</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>referanse (objid) til arealplanen planområdet tilhører</td>
+      <td>Integer</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>integer</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>førsteDigitaliseringsdato</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
-      <td>førsteDigitaliseringsdato</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>nasjonal<wbr />Arealplan<wbr />Id</td>
+      <td>landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1 og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)<br /><br />Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikke endres undervegs av forslagstiller</td>
+      <td>Nasjonal<wbr />Arealplan<wbr />Id<br />(datatype)</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>date-time (string)</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>nasjonalArealplanId</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
-      <td>nasjonalArealplanId</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>- planid</td>
+      <td>entydig identifikasjon av en plan innen vedkommende administrative enhet</td>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>NasjonalArealplanId</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>nasjonalArealplanId.planid</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>- kommunenummer</td>
+      <td>kode som viser til offisiell nummerering av kommuner, alltid 4 siffer med eventuell ledende null</td>
+      <td><a href="#kodeliste-kommunenummer">Kommunenummer</a><br />(kodeliste)</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>nasjonalArealplanId.kommunenummer</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
-      <td>0..1</td>
-    </tr>
-    <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>plannavn</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
       <td>plannavn</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>planens offisielle navn</td>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>plantype</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
       <td>plantype</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>type reguleringsplan (pbl. §§ 12-2 og 12-3); angir om planen er en områderegulering eller detaljregulering</td>
+      <td><a href="#kodeliste-rpplantype">Rp<wbr />Plantype</a><br />(kodeliste)</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>kunngjøringsdatoVarselOmPlanoppstart</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
-      <td>når planinitiativet har varsel oppstart til berørte parter som naboer, sektormyndigheter og lag/foreninger med interresser i planen</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>kunngjøringsdato<wbr />Varsel<wbr />Om<wbr />Planoppstart</td>
+      <td>dato da varsel om oppstart av planarbeid ble kunngjort og sendt til berørte parter som naboer, sektormyndigheter og lag/foreninger med interesser i planen (pbl. § 12-8)</td>
+      <td>Date</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>date (string)</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>forslagsstillertype</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
       <td>forslagsstillertype</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>om forslagsstiller er privat eller offentlig planmyndighet</td>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>lovreferanse</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
       <td>lovreferanse</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>kode for hvilken lov planen vedtas etter. For planlegging igangsatt er lovreferanse = 6 (pbl. 2008)</td>
+      <td><a href="#kodeliste-lovreferanse">Lovreferanse</a><br />(kodeliste)</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>oppdateringsdato</strong></td>
+      <td>første<wbr />Digitaliseringsdato</td>
+      <td>dato når en representasjon av objektet i digital form første gang ble etablert</td>
+      <td>Date<wbr />Time</td>
+      <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Definisjon:</th>
       <td>oppdateringsdato</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>tidspunkt for siste endring på dataobjektet</td>
+      <td>Date<wbr />Time</td>
       <td>0..1</td>
     </tr>
     <tr>
-      <th scope="row">Type:</th>
-      <td>date-time (string)</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="feature-attribute-table">
-  <colgroup>
-    <col style="width: 35%;" />
-    <col style="width: 65%;" />
-  </colgroup>
-  <tbody>
-    <tr>
-      <th scope="row">Navn:</th>
-      <td><strong>link</strong></td>
-    </tr>
-    <tr>
-      <th scope="row">Definisjon:</th>
       <td>link</td>
-    </tr>
-    <tr>
-      <th scope="row">Multiplisitet:</th>
+      <td>lenke (URL) til nærmere informasjon om planen, for eksempel planinnsyn eller varselet om planoppstart</td>
+      <td>Character<wbr />String</td>
       <td>0..1</td>
-    </tr>
-    <tr>
-      <th scope="row">Type:</th>
-      <td>string</td>
     </tr>
   </tbody>
 </table>
@@ -849,5 +258,75 @@ Egenskaper
 Relasjoner
 
 **Assosiasjoner**
-Arealplan – rolle: arealplan – kardinalitet: 0..1
-Plandokumenter – rolle: plandokumenter – kardinalitet: 0..1
+Arealplan – rolle: plan – kardinalitet: 0..1
+
+### Kodelister
+
+#### <a id="kodeliste-kommunenummer"></a>«CodeList» Kommunenummer
+
+**Definisjon:** ekstern kodeliste for kommunenummer
+
+Profilparametre i tagged values
+
+<table class="feature-attribute-table">
+  <colgroup>
+    <col style="width: 35%;" />
+    <col style="width: 65%;" />
+  </colgroup>
+  <tbody>
+    <tr>
+      <th scope="row">asDictionary</th>
+      <td>true</td>
+    </tr>
+    <tr>
+      <th scope="row">codeList</th>
+      <td><a href="https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer">https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer</a></td>
+    </tr>
+  </tbody>
+</table>
+
+#### <a id="kodeliste-rpplantype"></a>«CodeList» RpPlantype
+
+**Definisjon:** ekstern kodeliste for type reguleringsplan
+
+Profilparametre i tagged values
+
+<table class="feature-attribute-table">
+  <colgroup>
+    <col style="width: 35%;" />
+    <col style="width: 65%;" />
+  </colgroup>
+  <tbody>
+    <tr>
+      <th scope="row">asDictionary</th>
+      <td>true</td>
+    </tr>
+    <tr>
+      <th scope="row">codeList</th>
+      <td><a href="https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/rpplantype">https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/rpplantype</a></td>
+    </tr>
+  </tbody>
+</table>
+
+#### <a id="kodeliste-lovreferanse"></a>«CodeList» Lovreferanse
+
+**Definisjon:** ekstern kodeliste for gjeldende pbl.
+
+Profilparametre i tagged values
+
+<table class="feature-attribute-table">
+  <colgroup>
+    <col style="width: 35%;" />
+    <col style="width: 65%;" />
+  </colgroup>
+  <tbody>
+    <tr>
+      <th scope="row">asDictionary</th>
+      <td>true</td>
+    </tr>
+    <tr>
+      <th scope="row">codeList</th>
+      <td><a href="https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse">https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse</a></td>
+    </tr>
+  </tbody>
+</table>

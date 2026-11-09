@@ -3,8 +3,7 @@
   "title": "Planområde for planlegging igangsatt",
   "format": "text/html",
   "date": {
-    "creation": "2025-10-17",
-    "revision": "2026-06-10"
+    "creation": "2025-10-17"
   },
   "language": "nor",
   "contact": {
@@ -83,14 +82,13 @@
       "temporalElement": {
         "timePeriod": {
           "beginPosition": "2025-10-17",
-          "endPosition": "2026-06-10"
+          "endPosition": "2025-10-17"
         }
       }
     },
     "date": {
       "creation": "2025-10-17",
-      "publication": "2025-10-17",
-      "revision": "2026-06-10"
+      "publication": "2025-10-17"
     },
     "language": "nor"
   },
@@ -430,7 +428,7 @@
   "metadataSection": {
     "metadataStandard": "ISO19115",
     "metadataStandardVersion": "2003",
-    "metadataDate": "2026-06-10",
+    "metadataDate": "2026-10-14",
     "language": "nor",
     "contact": {
       "organizationName": "Direktoratet for byggkvalitet",
@@ -447,7 +445,7 @@
     }
   },
   "chapterAutofill": {
-    "om_spesifikasjonen": 12,
+    "om_spesifikasjonen": 11,
     "om_produktet": 90,
     "formaal": 28,
     "bruksomraade": 35,
@@ -461,6 +459,7 @@
     "leveranse": 96,
     "metadata": 17,
     "tilleggsinformasjon": 0,
-    "datamodell": 596
-  }
+    "datamodell": 1172
+  },
+  "specificationContact": "Direktoratet for byggkvalitet, [ftb@dibk.no](mailto:ftb@dibk.no)"
 }

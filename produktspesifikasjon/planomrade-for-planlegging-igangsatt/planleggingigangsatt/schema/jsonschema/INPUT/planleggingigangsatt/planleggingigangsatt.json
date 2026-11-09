@@ -4,6 +4,7 @@
   "$id": "https://skjema.geonorge.no/SOSI/produktspesifikasjon/planomrade-for-planlegging-igangsatt/planleggingigangsatt/planleggingigangsatt/planleggingigangsatt.json",
   "definitions": {
     "Arealplan": {
+      "description": "dataobjekt for igangsatt planlegging etter plan- og bygningsloven, slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet",
       "type": "object",
       "properties": {
         "@type": {
@@ -13,44 +14,59 @@
           "type": "string"
         },
         "objid": {
-          "type": "integer"
+          "description": "tjenestens interne identifikator for objektet (feature-id i OGC API)",
+          "type": "string"
         },
         "nasjonalArealplanId": {
+          "description": "landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1 og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)\n\nDenne identifikatoren tildeles planen når planprosessen starter, og den kan ikke endres undervegs av forslagstiller",
           "$ref": "#/definitions/NasjonalArealplanId"
         },
+        "identifikasjon": {
+          "description": "unik identifikasjon av et objekt i et datasett, forvaltet av den ansvarlige produsent/forvalter, og kan benyttes av eksterne applikasjoner som stabil referanse til objektet.\n\nMerknad: Denne unike identifikatoren skal ikke endres i løpet av objektets levetid, og skal ikke gjenbrukes i andre objekt.",
+          "$ref": "#/definitions/Identifikasjon"
+        },
         "plannavn": {
+          "description": "planens offisielle navn",
           "type": "string"
         },
         "plantype": {
-          "type": "string"
+          "description": "type reguleringsplan (pbl. §§ 12-2 og 12-3); angir om planen er en områderegulering eller detaljregulering",
+          "$ref": "#/definitions/RpPlantype"
         },
         "kunngjøringsdatoVarselOmPlanoppstart": {
+          "description": "dato da varsel om oppstart av planarbeid ble kunngjort og sendt til berørte parter som naboer, sektormyndigheter og lag/foreninger med interesser i planen (pbl. § 12-8)",
           "type": "string",
           "format": "date"
         },
         "forslagsstillertype": {
+          "description": "om forslagsstiller er privat eller offentlig planmyndighet",
           "type": "string"
         },
         "lovreferanse": {
-          "type": "string"
-        },
-        "identifikasjon": {
-          "$ref": "#/definitions/Identifikasjon"
+          "description": "kode for hvilken lov planen vedtas etter. For planlegging igangsatt er lovreferanse \u003d 6 (pbl. 2008)",
+          "$ref": "#/definitions/Lovreferanse"
         },
         "forsteDigitaliseringsdato": {
+          "description": "dato når en representasjon av objektet i digital form første gang ble etablert",
           "type": "string",
-          "format": "date-time"
+          "format": "date"
         },
         "oppdateringsdato": {
+          "description": "tidspunkt for siste endring på dataobjektet",
           "type": "string",
-          "format": "date-time"
+          "format": "date"
         },
         "link": {
+          "description": "lenke (URL) til nærmere informasjon om planen, for eksempel planinnsyn eller varselet om planoppstart",
           "type": "string"
         },
         "planomrade": {
-          "type": "string",
-          "format": "uri"
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "uniqueItems": true
         }
       },
       "required": [
@@ -61,30 +77,51 @@
       "type": "object",
       "properties": {
         "lokalId": {
+          "description": "lokal identifikator av et objekt.\n\nSkal være en uuid, slik at den er unik, uavhengig av navnerommet",
           "type": "string"
         },
         "navnerom": {
+          "description": "navnerom som unikt identifiserer datakilden til et objekt.\n\nFor plan anbefales navnerommet http://data.geonorge.no/sosi/plan",
           "type": "string"
         },
         "versjonId": {
+          "description": "identifikasjon av en spesiell versjon av et geografisk objekt (instans)",
           "type": "string"
         }
       }
+    },
+    "Kommunenummer": {
+      "description": "ekstern kodeliste for kommunenummer",
+      "codelist": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer",
+      "type": "string",
+      "format": "uri"
+    },
+    "Lovreferanse": {
+      "description": "ekstern kodeliste for gjeldende pbl.",
+      "codelist": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse",
+      "type": "string",
+      "format": "uri"
     },
     "NasjonalArealplanId": {
       "type": "object",
       "properties": {
         "planid": {
+          "description": "entydig identifikasjon av en plan innen vedkommende administrative enhet",
           "type": "string"
         },
         "kommunenummer": {
-          "type": "string"
+          "description": "kode som viser til offisiell nummerering av kommuner, alltid 4 siffer med eventuell ledende null",
+          "$ref": "#/definitions/Kommunenummer"
         }
       }
     },
     "Planområde": {
+      "description": "område for planlegging igangsatt etter pbl. 2008, med tilhørende metadata fra varsel om oppstart av planarbeid, slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet.\n\nOmrådet skal være sammenhengende i grunnriss, men kan dekke flere vertikalnivåer.",
       "type": "object",
       "properties": {
+        "geometry": {
+          "$ref": "https://geojson.org/schema/Polygon.json"
+        },
         "@type": {
           "type": "string"
         },
@@ -92,49 +129,70 @@
           "type": "string"
         },
         "objid": {
+          "description": "tjenestens interne identifikator for objektet (feature-id i OGC API)",
           "type": "integer"
         },
         "identifikasjon": {
+          "description": "unik identifikasjon av et objekt i et datasett, forvaltet av den ansvarlige produsent/forvalter, og kan benyttes av eksterne applikasjoner som stabil referanse til objektet.\n\nMerknad: Denne unike identifikatoren skal ikke endres i løpet av objektets levetid, og skal ikke gjenbrukes i andre objekt.",
           "$ref": "#/definitions/Identifikasjon"
         },
         "arealplan": {
-          "type": "string",
-          "format": "uri"
-        },
-        "førsteDigitaliseringsdato": {
-          "type": "string",
-          "format": "date-time"
+          "description": "referanse (objid) til arealplanen planområdet tilhører",
+          "type": "integer"
         },
         "nasjonalArealplanId": {
+          "description": "landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1 og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)\n\nDenne identifikatoren tildeles planen når planprosessen starter, og den kan ikke endres undervegs av forslagstiller",
           "$ref": "#/definitions/NasjonalArealplanId"
         },
         "plannavn": {
+          "description": "planens offisielle navn",
           "type": "string"
         },
         "plantype": {
-          "type": "string"
+          "description": "type reguleringsplan (pbl. §§ 12-2 og 12-3); angir om planen er en områderegulering eller detaljregulering",
+          "$ref": "#/definitions/RpPlantype"
         },
         "kunngjøringsdatoVarselOmPlanoppstart": {
+          "description": "dato da varsel om oppstart av planarbeid ble kunngjort og sendt til berørte parter som naboer, sektormyndigheter og lag/foreninger med interesser i planen (pbl. § 12-8)",
           "type": "string",
           "format": "date"
         },
         "forslagsstillertype": {
+          "description": "om forslagsstiller er privat eller offentlig planmyndighet",
           "type": "string"
         },
         "lovreferanse": {
-          "type": "string"
+          "description": "kode for hvilken lov planen vedtas etter. For planlegging igangsatt er lovreferanse \u003d 6 (pbl. 2008)",
+          "$ref": "#/definitions/Lovreferanse"
+        },
+        "førsteDigitaliseringsdato": {
+          "description": "dato når en representasjon av objektet i digital form første gang ble etablert",
+          "type": "string",
+          "format": "date"
         },
         "oppdateringsdato": {
+          "description": "tidspunkt for siste endring på dataobjektet",
           "type": "string",
-          "format": "date-time"
+          "format": "date"
         },
         "link": {
+          "description": "lenke (URL) til nærmere informasjon om planen, for eksempel planinnsyn eller varselet om planoppstart",
           "type": "string"
+        },
+        "plan": {
+          "type": "string",
+          "format": "uri"
         }
       },
       "required": [
         "@type"
       ]
+    },
+    "RpPlantype": {
+      "description": "ekstern kodeliste for type reguleringsplan",
+      "codelist": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/rpplantype",
+      "type": "string",
+      "format": "uri"
     }
   }
 }
