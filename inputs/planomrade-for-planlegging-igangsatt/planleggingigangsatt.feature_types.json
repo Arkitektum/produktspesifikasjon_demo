@@ -128,7 +128,7 @@
         {
           "cardinality": "0..*",
           "description": "planområde(r) som avgrenser arealet for den igangsatte planleggingen (forslag – må verifiseres)",
-          "role": "planleggingigangsatt",
+          "role": "planomrade",
           "target": "Planområde"
         },
         {
@@ -142,6 +142,12 @@
           "description": "parter som er varslet om oppstart av planarbeidet (pbl. § 12-8) (forslag – må verifiseres)",
           "role": "varslingsliste",
           "target": "BerørtPart"
+        },
+        {
+          "cardinality": "0..*",
+          "description": "behandlinger av arealplanen (SOSI Planregister 5.0)",
+          "role": "planbehandling",
+          "target": "Planbehandling"
         }
       ]
     }
@@ -395,6 +401,66 @@
     "name": "BerørtPart",
     "relationships": {
       "associations": []
+    }
+  },
+  {
+    "attributes": [
+      {
+        "cardinality": "1",
+        "description": "dato for planbehandlingen (forslag – må verifiseres)",
+        "name": "planbehandlingsdato",
+        "type": "Date"
+      },
+      {
+        "cardinality": "1",
+        "description": "type planbehandling, for eksempel planlegging igangsatt/oppstartsmøte avholdt (8) eller varsel om planoppstart (9) (forslag – må verifiseres)",
+        "name": "planbehandlingstype",
+        "type": "Planbehandlingstype",
+        "valueDomain": {
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/planregister/planbehandlingstype",
+          "definition": "ekstern kodeliste for type planbehandling",
+          "kind": "codelist"
+        }
+      },
+      {
+        "cardinality": "1",
+        "description": "navn på eller kort beskrivelse av planbehandlingen (forslag – må verifiseres)",
+        "name": "navn",
+        "type": "CharacterString"
+      },
+      {
+        "attributes": [
+          {
+            "cardinality": "1",
+            "description": "året saken ble opprettet (forslag – må verifiseres)",
+            "name": "saksår",
+            "type": "Integer"
+          },
+          {
+            "cardinality": "1",
+            "description": "løpenummer for saken innen saksåret (forslag – må verifiseres)",
+            "name": "sakssekvensnummer",
+            "type": "Integer"
+          }
+        ],
+        "cardinality": "0..1",
+        "description": "kommunens saksnummer for planbehandlingen (forslag – må verifiseres)",
+        "name": "saksnummer",
+        "type": "Saksnummer"
+      }
+    ],
+    "description": "tidfestet behandling av en arealplan, både fram til planen trer i kraft, og etterpå",
+    "name": "Planbehandling",
+    "relationships": {
+      "associations": [
+        {
+          "cardinality": "0..*",
+          "description": "dokumenter som er knyttet til planbehandlingen (SOSI Planregister 5.0)",
+          "role": "plandokument",
+          "target": "Plandokument"
+        }
+      ]
     }
   }
 ]
