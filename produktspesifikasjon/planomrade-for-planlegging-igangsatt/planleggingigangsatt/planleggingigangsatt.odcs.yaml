@@ -80,8 +80,14 @@ schema:
     value: Arealplan
   - property: associations
     value:
-    - role: planomrade
+    - role: planleggingigangsatt
       target: Planområde
+      cardinality: 0..*
+    - role: plandokument
+      target: Plandokument
+      cardinality: 0..*
+    - role: varslingsliste
+      target: BerørtPart
       cardinality: 0..*
   properties:
   - name: objid
@@ -313,3 +319,89 @@ schema:
     logicalType: string
     description: lenke (URL) til nærmere informasjon om planen, for eksempel planinnsyn
       eller varselet om planoppstart
+- name: Plandokument
+  physicalName: plandokument
+  logicalType: object
+  physicalType: table
+  description: referanse til dokument som er knyttet til arealplanen (kart- og planforskriften
+    § 9 første ledd). Et plandokument kan knyttes til den aktuelle planbehandlingen
+    som det gjelder for.
+  customProperties:
+  - property: sosiObjektType
+    value: Plandokument
+  properties:
+  - name: dokumenttype
+    logicalType: string
+    authoritativeDefinitions:
+    - url: https://register.geonorge.no/sosi-kodelister/plan/planregister/plandokumenttype
+      type: businessDefinition
+    customProperties:
+    - property: sosiCodeList
+      value: Plandokumenttype
+    - property: asDictionary
+      value: 'true'
+    description: type plandokument, for eksempel planbeskrivelse, plankart eller varsel
+      om oppstart (forslag – må verifiseres)
+    required: true
+  - name: arkivreferanse
+    logicalType: string
+    description: referanse (URI eller arkivnøkkel) til dokumentet i arkivsystem eller
+      dokumentlager (forslag – må verifiseres)
+    required: true
+  - name: dokumentdato
+    logicalType: date
+    description: dato da dokumentet ble datert eller godkjent (forslag – må verifiseres)
+  - name: beskrivelse
+    logicalType: string
+    description: fritekst som beskriver dokumentets innhold (forslag – må verifiseres)
+  - name: arkivnavn
+    logicalType: string
+    description: navn på arkivet eller systemet der dokumentet er lagret (forslag
+      – må verifiseres)
+- name: BerørtPart
+  physicalName: ber_rtpart
+  logicalType: object
+  physicalType: table
+  description: part som berøres av planarbeidet og skal varsles om oppstart av planarbeidet
+    etter pbl. § 12-8, identifisert ved eiendom (matrikkelnummer) og/eller virksomhet
+    (organisasjonsnummer) (forslag – må verifiseres)
+  customProperties:
+  - property: sosiObjektType
+    value: BerørtPart
+  properties:
+  - name: matrikkelnummer
+    logicalType: object
+    properties:
+    - name: kommunenummer
+      logicalType: string
+      authoritativeDefinitions:
+      - url: https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer
+        type: businessDefinition
+      customProperties:
+      - property: sosiCodeList
+        value: Kommunenummer
+      - property: asDictionary
+        value: 'true'
+      description: kode som viser til offisiell nummerering av kommuner, alltid 4
+        siffer med eventuell ledende null
+      required: true
+    - name: gårdsnummer
+      logicalType: integer
+      description: gårdsnummer i matrikkelen (forslag – må verifiseres)
+      required: true
+    - name: bruksnummer
+      logicalType: integer
+      description: bruksnummer i matrikkelen (forslag – må verifiseres)
+      required: true
+    - name: festenummer
+      logicalType: integer
+      description: festenummer i matrikkelen (forslag – må verifiseres)
+    - name: seksjonsnummer
+      logicalType: integer
+      description: seksjonsnummer i matrikkelen (forslag – må verifiseres)
+    description: identifikasjon av eiendommen som parten er berørt gjennom (struktur
+      etter SOSI Matrikkelen – må verifiseres)
+  - name: organisasjonsnummer
+    logicalType: string
+    description: organisasjonsnummer fra Enhetsregisteret (9 siffer) (forslag – må
+      verifiseres)

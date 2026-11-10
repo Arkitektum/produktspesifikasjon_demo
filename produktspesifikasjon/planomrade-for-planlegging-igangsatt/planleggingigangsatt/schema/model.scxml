@@ -82,7 +82,7 @@ Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikk
        </sc:descriptors>
        <sc:cardinality>0..1</sc:cardinality>
        <sc:sequenceNumber>2</sc:sequenceNumber>
-       <sc:typeId>C3</sc:typeId>
+       <sc:typeId>C5</sc:typeId>
        <sc:typeName>NasjonalArealplanId</sc:typeName>
       </sc:Property>
       <sc:Property>
@@ -99,7 +99,7 @@ Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets leve
        </sc:descriptors>
        <sc:cardinality>0..1</sc:cardinality>
        <sc:sequenceNumber>3</sc:sequenceNumber>
-       <sc:typeId>C4</sc:typeId>
+       <sc:typeId>C6</sc:typeId>
        <sc:typeName>Identifikasjon</sc:typeName>
       </sc:Property>
       <sc:Property>
@@ -128,7 +128,7 @@ Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets leve
        </sc:descriptors>
        <sc:cardinality>0..1</sc:cardinality>
        <sc:sequenceNumber>5</sc:sequenceNumber>
-       <sc:typeId>C6</sc:typeId>
+       <sc:typeId>C9</sc:typeId>
        <sc:typeName>RpPlantype</sc:typeName>
       </sc:Property>
       <sc:Property>
@@ -171,7 +171,7 @@ Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets leve
        </sc:descriptors>
        <sc:cardinality>0..1</sc:cardinality>
        <sc:sequenceNumber>8</sc:sequenceNumber>
-       <sc:typeId>C7</sc:typeId>
+       <sc:typeId>C10</sc:typeId>
        <sc:typeName>Lovreferanse</sc:typeName>
       </sc:Property>
       <sc:Property>
@@ -217,7 +217,7 @@ Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets leve
        <sc:typeName>CharacterString</sc:typeName>
       </sc:Property>
       <sc:Property>
-       <sc:name>planomrade</sc:name>
+       <sc:name>planleggingigangsatt</sc:name>
        <sc:id>Sas1</sc:id>
        <sc:cardinality>0..*</sc:cardinality>
        <sc:isNavigable>true</sc:isNavigable>
@@ -226,6 +226,28 @@ Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets leve
        <sc:typeName>Planområde</sc:typeName>
        <sc:isAttribute>false</sc:isAttribute>
        <sc:associationId>as1</sc:associationId>
+      </sc:Property>
+      <sc:Property>
+       <sc:name>plandokument</sc:name>
+       <sc:id>Sas2</sc:id>
+       <sc:cardinality>0..*</sc:cardinality>
+       <sc:isNavigable>true</sc:isNavigable>
+       <sc:sequenceNumber>13</sc:sequenceNumber>
+       <sc:typeId>C3</sc:typeId>
+       <sc:typeName>Plandokument</sc:typeName>
+       <sc:isAttribute>false</sc:isAttribute>
+       <sc:associationId>as2</sc:associationId>
+      </sc:Property>
+      <sc:Property>
+       <sc:name>varslingsliste</sc:name>
+       <sc:id>Sas3</sc:id>
+       <sc:cardinality>0..*</sc:cardinality>
+       <sc:isNavigable>true</sc:isNavigable>
+       <sc:sequenceNumber>14</sc:sequenceNumber>
+       <sc:typeId>C4</sc:typeId>
+       <sc:typeName>BerørtPart</sc:typeName>
+       <sc:isAttribute>false</sc:isAttribute>
+       <sc:associationId>as3</sc:associationId>
       </sc:Property>
      </sc:properties>
     </sc:Class>
@@ -287,7 +309,7 @@ Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets leve
        </sc:descriptors>
        <sc:cardinality>0..1</sc:cardinality>
        <sc:sequenceNumber>3</sc:sequenceNumber>
-       <sc:typeId>C4</sc:typeId>
+       <sc:typeId>C6</sc:typeId>
        <sc:typeName>Identifikasjon</sc:typeName>
       </sc:Property>
       <sc:Property>
@@ -318,7 +340,7 @@ Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikk
        </sc:descriptors>
        <sc:cardinality>0..1</sc:cardinality>
        <sc:sequenceNumber>5</sc:sequenceNumber>
-       <sc:typeId>C3</sc:typeId>
+       <sc:typeId>C5</sc:typeId>
        <sc:typeName>NasjonalArealplanId</sc:typeName>
       </sc:Property>
       <sc:Property>
@@ -347,7 +369,7 @@ Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikk
        </sc:descriptors>
        <sc:cardinality>0..1</sc:cardinality>
        <sc:sequenceNumber>7</sc:sequenceNumber>
-       <sc:typeId>C6</sc:typeId>
+       <sc:typeId>C9</sc:typeId>
        <sc:typeName>RpPlantype</sc:typeName>
       </sc:Property>
       <sc:Property>
@@ -390,7 +412,7 @@ Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikk
        </sc:descriptors>
        <sc:cardinality>0..1</sc:cardinality>
        <sc:sequenceNumber>10</sc:sequenceNumber>
-       <sc:typeId>C7</sc:typeId>
+       <sc:typeId>C10</sc:typeId>
        <sc:typeName>Lovreferanse</sc:typeName>
       </sc:Property>
       <sc:Property>
@@ -437,27 +459,159 @@ Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikk
       </sc:Property>
       <sc:Property>
        <sc:name>plan</sc:name>
-       <sc:id>Sas2</sc:id>
+       <sc:id>Sas4</sc:id>
        <sc:cardinality>0..1</sc:cardinality>
        <sc:isNavigable>true</sc:isNavigable>
        <sc:sequenceNumber>14</sc:sequenceNumber>
        <sc:typeId>C1</sc:typeId>
        <sc:typeName>Arealplan</sc:typeName>
        <sc:isAttribute>false</sc:isAttribute>
-       <sc:associationId>as2</sc:associationId>
+       <sc:associationId>as4</sc:associationId>
+      </sc:Property>
+     </sc:properties>
+    </sc:Class>
+    <sc:Class>
+     <sc:name>Plandokument</sc:name>
+     <sc:id>C3</sc:id>
+     <sc:stereotypes>
+      <sc:Stereotype>featuretype</sc:Stereotype>
+     </sc:stereotypes>
+     <sc:descriptors>
+      <sc:documentation>
+       <sc:descriptorValues>
+        <sc:DescriptorValue>referanse til dokument som er knyttet til arealplanen (kart- og planforskriften § 9 første ledd). Et plandokument kan knyttes til den aktuelle planbehandlingen som det gjelder for.</sc:DescriptorValue>
+       </sc:descriptorValues>
+      </sc:documentation>
+     </sc:descriptors>
+     <sc:properties>
+      <sc:Property>
+       <sc:name>dokumenttype</sc:name>
+       <sc:id>C3_1</sc:id>
+       <sc:descriptors>
+        <sc:documentation>
+         <sc:descriptorValues>
+          <sc:DescriptorValue>type plandokument, for eksempel planbeskrivelse, plankart eller varsel om oppstart (forslag – må verifiseres)</sc:DescriptorValue>
+         </sc:descriptorValues>
+        </sc:documentation>
+       </sc:descriptors>
+       <sc:cardinality>1</sc:cardinality>
+       <sc:sequenceNumber>1</sc:sequenceNumber>
+       <sc:typeId>C11</sc:typeId>
+       <sc:typeName>Plandokumenttype</sc:typeName>
+      </sc:Property>
+      <sc:Property>
+       <sc:name>arkivreferanse</sc:name>
+       <sc:id>C3_2</sc:id>
+       <sc:descriptors>
+        <sc:documentation>
+         <sc:descriptorValues>
+          <sc:DescriptorValue>referanse (URI eller arkivnøkkel) til dokumentet i arkivsystem eller dokumentlager (forslag – må verifiseres)</sc:DescriptorValue>
+         </sc:descriptorValues>
+        </sc:documentation>
+       </sc:descriptors>
+       <sc:cardinality>1</sc:cardinality>
+       <sc:sequenceNumber>2</sc:sequenceNumber>
+       <sc:typeName>CharacterString</sc:typeName>
+      </sc:Property>
+      <sc:Property>
+       <sc:name>dokumentdato</sc:name>
+       <sc:id>C3_3</sc:id>
+       <sc:descriptors>
+        <sc:documentation>
+         <sc:descriptorValues>
+          <sc:DescriptorValue>dato da dokumentet ble datert eller godkjent (forslag – må verifiseres)</sc:DescriptorValue>
+         </sc:descriptorValues>
+        </sc:documentation>
+       </sc:descriptors>
+       <sc:cardinality>0..1</sc:cardinality>
+       <sc:sequenceNumber>3</sc:sequenceNumber>
+       <sc:typeName>Date</sc:typeName>
+      </sc:Property>
+      <sc:Property>
+       <sc:name>beskrivelse</sc:name>
+       <sc:id>C3_4</sc:id>
+       <sc:descriptors>
+        <sc:documentation>
+         <sc:descriptorValues>
+          <sc:DescriptorValue>fritekst som beskriver dokumentets innhold (forslag – må verifiseres)</sc:DescriptorValue>
+         </sc:descriptorValues>
+        </sc:documentation>
+       </sc:descriptors>
+       <sc:cardinality>0..1</sc:cardinality>
+       <sc:sequenceNumber>4</sc:sequenceNumber>
+       <sc:typeName>CharacterString</sc:typeName>
+      </sc:Property>
+      <sc:Property>
+       <sc:name>arkivnavn</sc:name>
+       <sc:id>C3_5</sc:id>
+       <sc:descriptors>
+        <sc:documentation>
+         <sc:descriptorValues>
+          <sc:DescriptorValue>navn på arkivet eller systemet der dokumentet er lagret (forslag – må verifiseres)</sc:DescriptorValue>
+         </sc:descriptorValues>
+        </sc:documentation>
+       </sc:descriptors>
+       <sc:cardinality>0..1</sc:cardinality>
+       <sc:sequenceNumber>5</sc:sequenceNumber>
+       <sc:typeName>CharacterString</sc:typeName>
+      </sc:Property>
+     </sc:properties>
+    </sc:Class>
+    <sc:Class>
+     <sc:name>BerørtPart</sc:name>
+     <sc:id>C4</sc:id>
+     <sc:stereotypes>
+      <sc:Stereotype>featuretype</sc:Stereotype>
+     </sc:stereotypes>
+     <sc:descriptors>
+      <sc:documentation>
+       <sc:descriptorValues>
+        <sc:DescriptorValue>part som berøres av planarbeidet og skal varsles om oppstart av planarbeidet etter pbl. § 12-8, identifisert ved eiendom (matrikkelnummer) og/eller virksomhet (organisasjonsnummer) (forslag – må verifiseres)</sc:DescriptorValue>
+       </sc:descriptorValues>
+      </sc:documentation>
+     </sc:descriptors>
+     <sc:properties>
+      <sc:Property>
+       <sc:name>matrikkelnummer</sc:name>
+       <sc:id>C4_1</sc:id>
+       <sc:descriptors>
+        <sc:documentation>
+         <sc:descriptorValues>
+          <sc:DescriptorValue>identifikasjon av eiendommen som parten er berørt gjennom (struktur etter SOSI Matrikkelen – må verifiseres)</sc:DescriptorValue>
+         </sc:descriptorValues>
+        </sc:documentation>
+       </sc:descriptors>
+       <sc:cardinality>0..1</sc:cardinality>
+       <sc:sequenceNumber>1</sc:sequenceNumber>
+       <sc:typeId>C7</sc:typeId>
+       <sc:typeName>Matrikkelnummer</sc:typeName>
+      </sc:Property>
+      <sc:Property>
+       <sc:name>organisasjonsnummer</sc:name>
+       <sc:id>C4_2</sc:id>
+       <sc:descriptors>
+        <sc:documentation>
+         <sc:descriptorValues>
+          <sc:DescriptorValue>organisasjonsnummer fra Enhetsregisteret (9 siffer) (forslag – må verifiseres)</sc:DescriptorValue>
+         </sc:descriptorValues>
+        </sc:documentation>
+       </sc:descriptors>
+       <sc:cardinality>0..1</sc:cardinality>
+       <sc:sequenceNumber>2</sc:sequenceNumber>
+       <sc:typeName>CharacterString</sc:typeName>
       </sc:Property>
      </sc:properties>
     </sc:Class>
     <sc:Class>
      <sc:name>NasjonalArealplanId</sc:name>
-     <sc:id>C3</sc:id>
+     <sc:id>C5</sc:id>
      <sc:stereotypes>
       <sc:Stereotype>datatype</sc:Stereotype>
      </sc:stereotypes>
      <sc:properties>
       <sc:Property>
        <sc:name>planid</sc:name>
-       <sc:id>C3_1</sc:id>
+       <sc:id>C5_1</sc:id>
        <sc:descriptors>
         <sc:documentation>
          <sc:descriptorValues>
@@ -471,7 +625,7 @@ Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikk
       </sc:Property>
       <sc:Property>
        <sc:name>kommunenummer</sc:name>
-       <sc:id>C3_2</sc:id>
+       <sc:id>C5_2</sc:id>
        <sc:descriptors>
         <sc:documentation>
          <sc:descriptorValues>
@@ -481,21 +635,21 @@ Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikk
        </sc:descriptors>
        <sc:cardinality>0..1</sc:cardinality>
        <sc:sequenceNumber>2</sc:sequenceNumber>
-       <sc:typeId>C5</sc:typeId>
+       <sc:typeId>C8</sc:typeId>
        <sc:typeName>Kommunenummer</sc:typeName>
       </sc:Property>
      </sc:properties>
     </sc:Class>
     <sc:Class>
      <sc:name>Identifikasjon</sc:name>
-     <sc:id>C4</sc:id>
+     <sc:id>C6</sc:id>
      <sc:stereotypes>
       <sc:Stereotype>datatype</sc:Stereotype>
      </sc:stereotypes>
      <sc:properties>
       <sc:Property>
        <sc:name>lokalId</sc:name>
-       <sc:id>C4_1</sc:id>
+       <sc:id>C6_1</sc:id>
        <sc:descriptors>
         <sc:documentation>
          <sc:descriptorValues>
@@ -511,7 +665,7 @@ Skal være en uuid, slik at den er unik, uavhengig av navnerommet</sc:Descriptor
       </sc:Property>
       <sc:Property>
        <sc:name>navnerom</sc:name>
-       <sc:id>C4_2</sc:id>
+       <sc:id>C6_2</sc:id>
        <sc:descriptors>
         <sc:documentation>
          <sc:descriptorValues>
@@ -527,7 +681,7 @@ For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</sc:DescriptorV
       </sc:Property>
       <sc:Property>
        <sc:name>versjonId</sc:name>
-       <sc:id>C4_3</sc:id>
+       <sc:id>C6_3</sc:id>
        <sc:descriptors>
         <sc:documentation>
          <sc:descriptorValues>
@@ -542,8 +696,88 @@ For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</sc:DescriptorV
      </sc:properties>
     </sc:Class>
     <sc:Class>
+     <sc:name>Matrikkelnummer</sc:name>
+     <sc:id>C7</sc:id>
+     <sc:stereotypes>
+      <sc:Stereotype>datatype</sc:Stereotype>
+     </sc:stereotypes>
+     <sc:properties>
+      <sc:Property>
+       <sc:name>kommunenummer</sc:name>
+       <sc:id>C7_1</sc:id>
+       <sc:descriptors>
+        <sc:documentation>
+         <sc:descriptorValues>
+          <sc:DescriptorValue>kode som viser til offisiell nummerering av kommuner, alltid 4 siffer med eventuell ledende null</sc:DescriptorValue>
+         </sc:descriptorValues>
+        </sc:documentation>
+       </sc:descriptors>
+       <sc:cardinality>1</sc:cardinality>
+       <sc:sequenceNumber>1</sc:sequenceNumber>
+       <sc:typeId>C8</sc:typeId>
+       <sc:typeName>Kommunenummer</sc:typeName>
+      </sc:Property>
+      <sc:Property>
+       <sc:name>gårdsnummer</sc:name>
+       <sc:id>C7_2</sc:id>
+       <sc:descriptors>
+        <sc:documentation>
+         <sc:descriptorValues>
+          <sc:DescriptorValue>gårdsnummer i matrikkelen (forslag – må verifiseres)</sc:DescriptorValue>
+         </sc:descriptorValues>
+        </sc:documentation>
+       </sc:descriptors>
+       <sc:cardinality>1</sc:cardinality>
+       <sc:sequenceNumber>2</sc:sequenceNumber>
+       <sc:typeName>Integer</sc:typeName>
+      </sc:Property>
+      <sc:Property>
+       <sc:name>bruksnummer</sc:name>
+       <sc:id>C7_3</sc:id>
+       <sc:descriptors>
+        <sc:documentation>
+         <sc:descriptorValues>
+          <sc:DescriptorValue>bruksnummer i matrikkelen (forslag – må verifiseres)</sc:DescriptorValue>
+         </sc:descriptorValues>
+        </sc:documentation>
+       </sc:descriptors>
+       <sc:cardinality>1</sc:cardinality>
+       <sc:sequenceNumber>3</sc:sequenceNumber>
+       <sc:typeName>Integer</sc:typeName>
+      </sc:Property>
+      <sc:Property>
+       <sc:name>festenummer</sc:name>
+       <sc:id>C7_4</sc:id>
+       <sc:descriptors>
+        <sc:documentation>
+         <sc:descriptorValues>
+          <sc:DescriptorValue>festenummer i matrikkelen (forslag – må verifiseres)</sc:DescriptorValue>
+         </sc:descriptorValues>
+        </sc:documentation>
+       </sc:descriptors>
+       <sc:cardinality>0..1</sc:cardinality>
+       <sc:sequenceNumber>4</sc:sequenceNumber>
+       <sc:typeName>Integer</sc:typeName>
+      </sc:Property>
+      <sc:Property>
+       <sc:name>seksjonsnummer</sc:name>
+       <sc:id>C7_5</sc:id>
+       <sc:descriptors>
+        <sc:documentation>
+         <sc:descriptorValues>
+          <sc:DescriptorValue>seksjonsnummer i matrikkelen (forslag – må verifiseres)</sc:DescriptorValue>
+         </sc:descriptorValues>
+        </sc:documentation>
+       </sc:descriptors>
+       <sc:cardinality>0..1</sc:cardinality>
+       <sc:sequenceNumber>5</sc:sequenceNumber>
+       <sc:typeName>Integer</sc:typeName>
+      </sc:Property>
+     </sc:properties>
+    </sc:Class>
+    <sc:Class>
      <sc:name>Kommunenummer</sc:name>
-     <sc:id>C5</sc:id>
+     <sc:id>C8</sc:id>
      <sc:stereotypes>
       <sc:Stereotype>codelist</sc:Stereotype>
      </sc:stereotypes>
@@ -571,7 +805,7 @@ For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</sc:DescriptorV
     </sc:Class>
     <sc:Class>
      <sc:name>RpPlantype</sc:name>
-     <sc:id>C6</sc:id>
+     <sc:id>C9</sc:id>
      <sc:stereotypes>
       <sc:Stereotype>codelist</sc:Stereotype>
      </sc:stereotypes>
@@ -599,7 +833,7 @@ For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</sc:DescriptorV
     </sc:Class>
     <sc:Class>
      <sc:name>Lovreferanse</sc:name>
-     <sc:id>C7</sc:id>
+     <sc:id>C10</sc:id>
      <sc:stereotypes>
       <sc:Stereotype>codelist</sc:Stereotype>
      </sc:stereotypes>
@@ -615,6 +849,34 @@ For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</sc:DescriptorV
        <sc:name>codeList</sc:name>
        <sc:values>
         <sc:Value>https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse</sc:Value>
+       </sc:values>
+      </sc:TaggedValue>
+      <sc:TaggedValue>
+       <sc:name>asDictionary</sc:name>
+       <sc:values>
+        <sc:Value>true</sc:Value>
+       </sc:values>
+      </sc:TaggedValue>
+     </sc:taggedValues>
+    </sc:Class>
+    <sc:Class>
+     <sc:name>Plandokumenttype</sc:name>
+     <sc:id>C11</sc:id>
+     <sc:stereotypes>
+      <sc:Stereotype>codelist</sc:Stereotype>
+     </sc:stereotypes>
+     <sc:descriptors>
+      <sc:documentation>
+       <sc:descriptorValues>
+        <sc:DescriptorValue>plandokument må tilhøre en gyldig dokumentkategori. Dokumenttyper for plansaker</sc:DescriptorValue>
+       </sc:descriptorValues>
+      </sc:documentation>
+     </sc:descriptors>
+     <sc:taggedValues>
+      <sc:TaggedValue>
+       <sc:name>codeList</sc:name>
+       <sc:values>
+        <sc:Value>https://register.geonorge.no/sosi-kodelister/plan/planregister/plandokumenttype</sc:Value>
        </sc:values>
       </sc:TaggedValue>
       <sc:TaggedValue>
@@ -648,7 +910,7 @@ For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</sc:DescriptorV
    </sc:end2>
   </sc:Association>
   <sc:Association>
-   <sc:name>Planområde_Arealplan</sc:name>
+   <sc:name>Arealplan_Plandokument</sc:name>
    <sc:id>as2</sc:id>
    <sc:end1 ref="Sas2" />
    <sc:end2>
@@ -657,11 +919,47 @@ For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</sc:DescriptorV
      <sc:cardinality>0..*</sc:cardinality>
      <sc:isNavigable>false</sc:isNavigable>
      <sc:sequenceNumber>1</sc:sequenceNumber>
+     <sc:typeId>C1</sc:typeId>
+     <sc:typeName>Arealplan</sc:typeName>
+     <sc:isAttribute>false</sc:isAttribute>
+     <sc:inClassId>C3</sc:inClassId>
+     <sc:associationId>as2</sc:associationId>
+    </sc:Property>
+   </sc:end2>
+  </sc:Association>
+  <sc:Association>
+   <sc:name>Arealplan_BerørtPart</sc:name>
+   <sc:id>as3</sc:id>
+   <sc:end1 ref="Sas3" />
+   <sc:end2>
+    <sc:Property>
+     <sc:id>Tas3</sc:id>
+     <sc:cardinality>0..*</sc:cardinality>
+     <sc:isNavigable>false</sc:isNavigable>
+     <sc:sequenceNumber>1</sc:sequenceNumber>
+     <sc:typeId>C1</sc:typeId>
+     <sc:typeName>Arealplan</sc:typeName>
+     <sc:isAttribute>false</sc:isAttribute>
+     <sc:inClassId>C4</sc:inClassId>
+     <sc:associationId>as3</sc:associationId>
+    </sc:Property>
+   </sc:end2>
+  </sc:Association>
+  <sc:Association>
+   <sc:name>Planområde_Arealplan</sc:name>
+   <sc:id>as4</sc:id>
+   <sc:end1 ref="Sas4" />
+   <sc:end2>
+    <sc:Property>
+     <sc:id>Tas4</sc:id>
+     <sc:cardinality>0..*</sc:cardinality>
+     <sc:isNavigable>false</sc:isNavigable>
+     <sc:sequenceNumber>1</sc:sequenceNumber>
      <sc:typeId>C2</sc:typeId>
      <sc:typeName>Planområde</sc:typeName>
      <sc:isAttribute>false</sc:isAttribute>
      <sc:inClassId>C1</sc:inClassId>
-     <sc:associationId>as2</sc:associationId>
+     <sc:associationId>as4</sc:associationId>
     </sc:Property>
    </sc:end2>
   </sc:Association>

@@ -76,7 +76,9 @@ Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets leve
               <documentation>lenke (URL) til nærmere informasjon om planen, for eksempel planinnsyn eller varselet om planoppstart</documentation>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="planomrade" type="planleggingigangsatt:PlanområdePropertyType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="planleggingigangsatt" type="planleggingigangsatt:PlanområdePropertyType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="plandokument" type="planleggingigangsatt:PlandokumentPropertyType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="varslingsliste" type="planleggingigangsatt:BerørtPartPropertyType"/>
         </sequence>
       </extension>
     </complexContent>
@@ -84,6 +86,36 @@ Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets leve
   <complexType name="ArealplanPropertyType">
     <sequence minOccurs="0">
       <element ref="planleggingigangsatt:Arealplan"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="BerørtPart" substitutionGroup="gml:AbstractFeature" type="planleggingigangsatt:BerørtPartType">
+    <annotation>
+      <documentation>part som berøres av planarbeidet og skal varsles om oppstart av planarbeidet etter pbl. § 12-8, identifisert ved eiendom (matrikkelnummer) og/eller virksomhet (organisasjonsnummer) (forslag – må verifiseres)</documentation>
+    </annotation>
+  </element>
+  <complexType name="BerørtPartType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element minOccurs="0" name="matrikkelnummer" type="planleggingigangsatt:MatrikkelnummerPropertyType">
+            <annotation>
+              <documentation>identifikasjon av eiendommen som parten er berørt gjennom (struktur etter SOSI Matrikkelen – må verifiseres)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="organisasjonsnummer" type="string">
+            <annotation>
+              <documentation>organisasjonsnummer fra Enhetsregisteret (9 siffer) (forslag – må verifiseres)</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BerørtPartPropertyType">
+    <sequence minOccurs="0">
+      <element ref="planleggingigangsatt:BerørtPart"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
@@ -117,6 +149,44 @@ For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</documentation>
       <element ref="planleggingigangsatt:Identifikasjon"/>
     </sequence>
   </complexType>
+  <element name="Matrikkelnummer" substitutionGroup="gml:AbstractObject" type="planleggingigangsatt:MatrikkelnummerType"/>
+  <complexType name="MatrikkelnummerType">
+    <sequence>
+      <element name="kommunenummer" type="gml:CodeType">
+        <annotation>
+          <documentation>kode som viser til offisiell nummerering av kommuner, alltid 4 siffer med eventuell ledende null</documentation>
+          <appinfo>
+            <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer</sc:targetCodeListURI>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="gårdsnummer" type="integer">
+        <annotation>
+          <documentation>gårdsnummer i matrikkelen (forslag – må verifiseres)</documentation>
+        </annotation>
+      </element>
+      <element name="bruksnummer" type="integer">
+        <annotation>
+          <documentation>bruksnummer i matrikkelen (forslag – må verifiseres)</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="festenummer" type="integer">
+        <annotation>
+          <documentation>festenummer i matrikkelen (forslag – må verifiseres)</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="seksjonsnummer" type="integer">
+        <annotation>
+          <documentation>seksjonsnummer i matrikkelen (forslag – må verifiseres)</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="MatrikkelnummerPropertyType">
+    <sequence>
+      <element ref="planleggingigangsatt:Matrikkelnummer"/>
+    </sequence>
+  </complexType>
   <element name="NasjonalArealplanId" substitutionGroup="gml:AbstractObject" type="planleggingigangsatt:NasjonalArealplanIdType"/>
   <complexType name="NasjonalArealplanIdType">
     <sequence>
@@ -139,6 +209,54 @@ For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</documentation>
     <sequence>
       <element ref="planleggingigangsatt:NasjonalArealplanId"/>
     </sequence>
+  </complexType>
+  <element name="Plandokument" substitutionGroup="gml:AbstractFeature" type="planleggingigangsatt:PlandokumentType">
+    <annotation>
+      <documentation>referanse til dokument som er knyttet til arealplanen (kart- og planforskriften § 9 første ledd). Et plandokument kan knyttes til den aktuelle planbehandlingen som det gjelder for.</documentation>
+    </annotation>
+  </element>
+  <complexType name="PlandokumentType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="dokumenttype" type="gml:CodeType">
+            <annotation>
+              <documentation>type plandokument, for eksempel planbeskrivelse, plankart eller varsel om oppstart (forslag – må verifiseres)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/planregister/plandokumenttype</sc:targetCodeListURI>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>referanse (URI eller arkivnøkkel) til dokumentet i arkivsystem eller dokumentlager (forslag – må verifiseres)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dokumentdato" type="date">
+            <annotation>
+              <documentation>dato da dokumentet ble datert eller godkjent (forslag – må verifiseres)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>fritekst som beskriver dokumentets innhold (forslag – må verifiseres)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivnavn" type="string">
+            <annotation>
+              <documentation>navn på arkivet eller systemet der dokumentet er lagret (forslag – må verifiseres)</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="PlandokumentPropertyType">
+    <sequence minOccurs="0">
+      <element ref="planleggingigangsatt:Plandokument"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
   <element name="Planområde" substitutionGroup="gml:AbstractFeature" type="planleggingigangsatt:PlanområdeType">
     <annotation>

@@ -60,6 +60,19 @@ package "Objekttyper" {
     + link [0..1] : CharacterString
   }
 
+  class Plandokument <<featureType>> {
+    + dokumenttype [1] : Plandokumenttype
+    + arkivreferanse [1] : CharacterString
+    + dokumentdato [0..1] : Date
+    + beskrivelse [0..1] : CharacterString
+    + arkivnavn [0..1] : CharacterString
+  }
+
+  class "BerørtPart" as Ber_rtPart <<featureType>> {
+    + matrikkelnummer [0..1] : Matrikkelnummer
+    + organisasjonsnummer [0..1] : CharacterString
+  }
+
   class NasjonalArealplanId <<dataType>> {
     + planid [0..1] : CharacterString
     + kommunenummer [0..1] : Kommunenummer
@@ -70,9 +83,19 @@ package "Objekttyper" {
     + navnerom [0..1] : CharacterString
     + versjonId [0..1] : CharacterString
   }
+
+  class Matrikkelnummer <<dataType>> {
+    + kommunenummer [1] : Kommunenummer
+    + gårdsnummer [1] : Integer
+    + bruksnummer [1] : Integer
+    + festenummer [0..1] : Integer
+    + seksjonsnummer [0..1] : Integer
+  }
 }
 
-  Arealplan --> Planomr_de : planomrade [0..*]
+  Arealplan --> Planomr_de : planleggingigangsatt [0..*]
+  Arealplan --> Plandokument : plandokument [0..*]
+  Arealplan --> Ber_rtPart : varslingsliste [0..*]
   Planomr_de --> Arealplan : plan [0..1]
 
 @enduml
