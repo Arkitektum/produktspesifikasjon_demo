@@ -128,7 +128,7 @@
         {
           "cardinality": "0..*",
           "description": "planområde(r) som avgrenser arealet for den igangsatte planleggingen (forslag – må verifiseres)",
-          "role": "planomrade",
+          "role": "planleggingigangsatt",
           "target": "Planområde"
         },
         {
