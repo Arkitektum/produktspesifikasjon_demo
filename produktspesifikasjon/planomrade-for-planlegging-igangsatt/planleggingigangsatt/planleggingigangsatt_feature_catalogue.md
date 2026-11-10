@@ -116,7 +116,9 @@ Egenskaper
 Relasjoner
 
 **Assosiasjoner**
-Planområde – rolle: planomrade – kardinalitet: 0..*
+Planområde – rolle: planleggingigangsatt – kardinalitet: 0..*
+Plandokument – rolle: plandokument – kardinalitet: 0..*
+BerørtPart – rolle: varslingsliste – kardinalitet: 0..*
 
 #### Planområde
 
@@ -250,6 +252,116 @@ Relasjoner
 **Assosiasjoner**
 Arealplan – rolle: plan – kardinalitet: 0..1
 
+#### Plandokument
+
+referanse til dokument som er knyttet til arealplanen (kart- og planforskriften § 9 første ledd). Et plandokument kan knyttes til den aktuelle planbehandlingen som det gjelder for.
+
+Egenskaper
+
+<table class="feature-attribute-table">
+  <thead>
+    <tr>
+      <th>Egenskap</th>
+      <th>Beskrivelse</th>
+      <th>Type</th>
+      <th>Multiplisitet</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>dokumenttype</td>
+      <td>type plandokument, for eksempel planbeskrivelse, plankart eller varsel om oppstart (forslag – må verifiseres)</td>
+      <td><a href="#kodeliste-plandokumenttype">Plandokumenttype</a><br />(kodeliste)</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>arkivreferanse</td>
+      <td>referanse (URI eller arkivnøkkel) til dokumentet i arkivsystem eller dokumentlager (forslag – må verifiseres)</td>
+      <td>Character<wbr />String</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>dokumentdato</td>
+      <td>dato da dokumentet ble datert eller godkjent (forslag – må verifiseres)</td>
+      <td>Date</td>
+      <td>0..1</td>
+    </tr>
+    <tr>
+      <td>beskrivelse</td>
+      <td>fritekst som beskriver dokumentets innhold (forslag – må verifiseres)</td>
+      <td>Character<wbr />String</td>
+      <td>0..1</td>
+    </tr>
+    <tr>
+      <td>arkivnavn</td>
+      <td>navn på arkivet eller systemet der dokumentet er lagret (forslag – må verifiseres)</td>
+      <td>Character<wbr />String</td>
+      <td>0..1</td>
+    </tr>
+  </tbody>
+</table>
+
+#### BerørtPart
+
+part som berøres av planarbeidet og skal varsles om oppstart av planarbeidet etter pbl. § 12-8, identifisert ved eiendom (matrikkelnummer) og/eller virksomhet (organisasjonsnummer) (forslag – må verifiseres)
+
+Egenskaper
+
+<table class="feature-attribute-table">
+  <thead>
+    <tr>
+      <th>Egenskap</th>
+      <th>Beskrivelse</th>
+      <th>Type</th>
+      <th>Multiplisitet</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>matrikkelnummer</td>
+      <td>identifikasjon av eiendommen som parten er berørt gjennom (struktur etter SOSI Matrikkelen – må verifiseres)</td>
+      <td>Matrikkelnummer<br />(datatype)</td>
+      <td>0..1</td>
+    </tr>
+    <tr>
+      <td>- kommunenummer</td>
+      <td>kode som viser til offisiell nummerering av kommuner, alltid 4 siffer med eventuell ledende null</td>
+      <td><a href="#kodeliste-kommunenummer">Kommunenummer</a><br />(kodeliste)</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>- gårdsnummer</td>
+      <td>gårdsnummer i matrikkelen (forslag – må verifiseres)</td>
+      <td>Integer</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>- bruksnummer</td>
+      <td>bruksnummer i matrikkelen (forslag – må verifiseres)</td>
+      <td>Integer</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>- festenummer</td>
+      <td>festenummer i matrikkelen (forslag – må verifiseres)</td>
+      <td>Integer</td>
+      <td>0..1</td>
+    </tr>
+    <tr>
+      <td>- seksjonsnummer</td>
+      <td>seksjonsnummer i matrikkelen (forslag – må verifiseres)</td>
+      <td>Integer</td>
+      <td>0..1</td>
+    </tr>
+    <tr>
+      <td>organisasjonsnummer</td>
+      <td>organisasjonsnummer fra Enhetsregisteret (9 siffer) (forslag – må verifiseres)</td>
+      <td>Character<wbr />String</td>
+      <td>0..1</td>
+    </tr>
+  </tbody>
+</table>
+
 ### Kodelister
 
 #### <a id="kodeliste-kommunenummer"></a>«CodeList» Kommunenummer
@@ -317,6 +429,29 @@ Profilparametre i tagged values
     <tr>
       <th scope="row">codeList</th>
       <td><a href="https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse">https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/lovreferanse</a></td>
+    </tr>
+  </tbody>
+</table>
+
+#### <a id="kodeliste-plandokumenttype"></a>«CodeList» Plandokumenttype
+
+**Definisjon:** plandokument må tilhøre en gyldig dokumentkategori. Dokumenttyper for plansaker
+
+Profilparametre i tagged values
+
+<table class="feature-attribute-table">
+  <colgroup>
+    <col style="width: 35%;" />
+    <col style="width: 65%;" />
+  </colgroup>
+  <tbody>
+    <tr>
+      <th scope="row">asDictionary</th>
+      <td>true</td>
+    </tr>
+    <tr>
+      <th scope="row">codeList</th>
+      <td><a href="https://register.geonorge.no/sosi-kodelister/plan/planregister/plandokumenttype">https://register.geonorge.no/sosi-kodelister/plan/planregister/plandokumenttype</a></td>
     </tr>
   </tbody>
 </table>

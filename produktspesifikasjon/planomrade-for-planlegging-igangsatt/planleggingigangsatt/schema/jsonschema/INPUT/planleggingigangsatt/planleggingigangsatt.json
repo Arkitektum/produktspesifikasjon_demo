@@ -60,13 +60,52 @@
           "description": "lenke (URL) til nærmere informasjon om planen, for eksempel planinnsyn eller varselet om planoppstart",
           "type": "string"
         },
-        "planomrade": {
+        "planleggingigangsatt": {
           "type": "array",
           "items": {
             "type": "string",
             "format": "uri"
           },
           "uniqueItems": true
+        },
+        "plandokument": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "uniqueItems": true
+        },
+        "varslingsliste": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "@type"
+      ]
+    },
+    "BerørtPart": {
+      "description": "part som berøres av planarbeidet og skal varsles om oppstart av planarbeidet etter pbl. § 12-8, identifisert ved eiendom (matrikkelnummer) og/eller virksomhet (organisasjonsnummer) (forslag – må verifiseres)",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "matrikkelnummer": {
+          "description": "identifikasjon av eiendommen som parten er berørt gjennom (struktur etter SOSI Matrikkelen – må verifiseres)",
+          "$ref": "#/definitions/Matrikkelnummer"
+        },
+        "organisasjonsnummer": {
+          "description": "organisasjonsnummer fra Enhetsregisteret (9 siffer) (forslag – må verifiseres)",
+          "type": "string"
         }
       },
       "required": [
@@ -102,6 +141,36 @@
       "type": "string",
       "format": "uri"
     },
+    "Matrikkelnummer": {
+      "type": "object",
+      "properties": {
+        "kommunenummer": {
+          "description": "kode som viser til offisiell nummerering av kommuner, alltid 4 siffer med eventuell ledende null",
+          "$ref": "#/definitions/Kommunenummer"
+        },
+        "gårdsnummer": {
+          "description": "gårdsnummer i matrikkelen (forslag – må verifiseres)",
+          "type": "integer"
+        },
+        "bruksnummer": {
+          "description": "bruksnummer i matrikkelen (forslag – må verifiseres)",
+          "type": "integer"
+        },
+        "festenummer": {
+          "description": "festenummer i matrikkelen (forslag – må verifiseres)",
+          "type": "integer"
+        },
+        "seksjonsnummer": {
+          "description": "seksjonsnummer i matrikkelen (forslag – må verifiseres)",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "bruksnummer",
+        "gårdsnummer",
+        "kommunenummer"
+      ]
+    },
     "NasjonalArealplanId": {
       "type": "object",
       "properties": {
@@ -114,6 +183,50 @@
           "$ref": "#/definitions/Kommunenummer"
         }
       }
+    },
+    "Plandokument": {
+      "description": "referanse til dokument som er knyttet til arealplanen (kart- og planforskriften § 9 første ledd). Et plandokument kan knyttes til den aktuelle planbehandlingen som det gjelder for.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "dokumenttype": {
+          "description": "type plandokument, for eksempel planbeskrivelse, plankart eller varsel om oppstart (forslag – må verifiseres)",
+          "$ref": "#/definitions/Plandokumenttype"
+        },
+        "arkivreferanse": {
+          "description": "referanse (URI eller arkivnøkkel) til dokumentet i arkivsystem eller dokumentlager (forslag – må verifiseres)",
+          "type": "string"
+        },
+        "dokumentdato": {
+          "description": "dato da dokumentet ble datert eller godkjent (forslag – må verifiseres)",
+          "type": "string",
+          "format": "date"
+        },
+        "beskrivelse": {
+          "description": "fritekst som beskriver dokumentets innhold (forslag – må verifiseres)",
+          "type": "string"
+        },
+        "arkivnavn": {
+          "description": "navn på arkivet eller systemet der dokumentet er lagret (forslag – må verifiseres)",
+          "type": "string"
+        }
+      },
+      "required": [
+        "@type",
+        "arkivreferanse",
+        "dokumenttype"
+      ]
+    },
+    "Plandokumenttype": {
+      "description": "plandokument må tilhøre en gyldig dokumentkategori. Dokumenttyper for plansaker",
+      "codelist": "https://register.geonorge.no/sosi-kodelister/plan/planregister/plandokumenttype",
+      "type": "string",
+      "format": "uri"
     },
     "Planområde": {
       "description": "område for planlegging igangsatt etter pbl. 2008, med tilhørende metadata fra varsel om oppstart av planarbeid, slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet.\n\nOmrådet skal være sammenhengende i grunnriss, men kan dekke flere vertikalnivåer.",
