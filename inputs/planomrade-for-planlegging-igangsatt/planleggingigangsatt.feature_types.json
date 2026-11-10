@@ -130,6 +130,18 @@
           "description": "planområde(r) som avgrenser arealet for den igangsatte planleggingen (forslag – må verifiseres)",
           "role": "planomrade",
           "target": "Planområde"
+        },
+        {
+          "cardinality": "0..*",
+          "description": "dokumenter som er knyttet til arealplanen (SOSI Planregister 5.0)",
+          "role": "plandokument",
+          "target": "Plandokument"
+        },
+        {
+          "cardinality": "0..*",
+          "description": "parter som er varslet om oppstart av planarbeidet (pbl. § 12-8) (forslag – må verifiseres)",
+          "role": "varslingsliste",
+          "target": "BerørtPart"
         }
       ]
     }
@@ -279,6 +291,110 @@
           "target": "Arealplan"
         }
       ]
+    }
+  },
+  {
+    "attributes": [
+      {
+        "cardinality": "1",
+        "description": "type plandokument, for eksempel planbeskrivelse, plankart eller varsel om oppstart (forslag – må verifiseres)",
+        "name": "dokumenttype",
+        "type": "Plandokumenttype",
+        "valueDomain": {
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/planregister/plandokumenttype",
+          "definition": "plandokument må tilhøre en gyldig dokumentkategori. Dokumenttyper for plansaker",
+          "kind": "codelist"
+        }
+      },
+      {
+        "cardinality": "1",
+        "description": "referanse (URI eller arkivnøkkel) til dokumentet i arkivsystem eller dokumentlager (forslag – må verifiseres)",
+        "name": "arkivreferanse",
+        "type": "CharacterString"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "dato da dokumentet ble datert eller godkjent (forslag – må verifiseres)",
+        "name": "dokumentdato",
+        "type": "Date"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "fritekst som beskriver dokumentets innhold (forslag – må verifiseres)",
+        "name": "beskrivelse",
+        "type": "CharacterString"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "navn på arkivet eller systemet der dokumentet er lagret (forslag – må verifiseres)",
+        "name": "arkivnavn",
+        "type": "CharacterString"
+      }
+    ],
+    "description": "referanse til dokument som er knyttet til arealplanen (kart- og planforskriften § 9 første ledd). Et plandokument kan knyttes til den aktuelle planbehandlingen som det gjelder for.",
+    "name": "Plandokument",
+    "relationships": {
+      "associations": []
+    }
+  },
+  {
+    "attributes": [
+      {
+        "attributes": [
+          {
+            "cardinality": "1",
+            "description": "kode som viser til offisiell nummerering av kommuner, alltid 4 siffer med eventuell ledende null",
+            "name": "kommunenummer",
+            "type": "Kommunenummer",
+            "valueDomain": {
+              "asDictionary": "true",
+              "codeList": "https://register.geonorge.no/sosi-kodelister/inndelinger/inndelingsbase/kommunenummer",
+              "definition": "ekstern kodeliste for kommunenummer",
+              "kind": "codelist"
+            }
+          },
+          {
+            "cardinality": "1",
+            "description": "gårdsnummer i matrikkelen (forslag – må verifiseres)",
+            "name": "gårdsnummer",
+            "type": "Integer"
+          },
+          {
+            "cardinality": "1",
+            "description": "bruksnummer i matrikkelen (forslag – må verifiseres)",
+            "name": "bruksnummer",
+            "type": "Integer"
+          },
+          {
+            "cardinality": "0..1",
+            "description": "festenummer i matrikkelen (forslag – må verifiseres)",
+            "name": "festenummer",
+            "type": "Integer"
+          },
+          {
+            "cardinality": "0..1",
+            "description": "seksjonsnummer i matrikkelen (forslag – må verifiseres)",
+            "name": "seksjonsnummer",
+            "type": "Integer"
+          }
+        ],
+        "cardinality": "0..1",
+        "description": "identifikasjon av eiendommen som parten er berørt gjennom (struktur etter SOSI Matrikkelen – må verifiseres)",
+        "name": "matrikkelnummer",
+        "type": "Matrikkelnummer"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "organisasjonsnummer fra Enhetsregisteret (9 siffer) (forslag – må verifiseres)",
+        "name": "organisasjonsnummer",
+        "type": "CharacterString"
+      }
+    ],
+    "description": "part som berøres av planarbeidet og skal varsles om oppstart av planarbeidet etter pbl. § 12-8, identifisert ved eiendom (matrikkelnummer) og/eller virksomhet (organisasjonsnummer) (forslag – må verifiseres)",
+    "name": "BerørtPart",
+    "relationships": {
+      "associations": []
     }
   }
 ]
