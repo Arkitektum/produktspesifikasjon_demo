@@ -30,7 +30,7 @@
           }
         ],
         "cardinality": "0..1",
-        "description": "landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1 og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)\n\nDenne identifikatoren tildeles planen når planprosessen starter, og den kan ikke endres undervegs av forslagstiller",
+        "description": "landsdekkende entydig og unikt kjennetegn (identifikasjon) på en arealplan (kart- og planforskriften (FOR-2025-01-20-52) § 2). Forslag til arealplan skal tildeles nasjonal arealplan-ID senest ved varsel om oppstart av planarbeidet (kart- og planforskriften (FOR-2025-01-20-52) § 9 andre ledd)",
         "name": "nasjonalArealplanId",
         "type": "NasjonalArealplanId"
       },
@@ -62,13 +62,13 @@
       },
       {
         "cardinality": "0..1",
-        "description": "planens offisielle navn",
+        "description": "planens navn. Arealplanen skal ha navn i samsvar med Nasjonal produktspesifikasjon for arealplan og digitalt planregister (kart- og planforskriften (FOR-2025-01-20-52) § 9 andre ledd)",
         "name": "plannavn",
         "type": "CharacterString"
       },
       {
         "cardinality": "0..1",
-        "description": "type reguleringsplan (pbl. §§ 12-2 og 12-3); angir om planen er en områderegulering eller detaljregulering",
+        "description": "type reguleringsplan: områderegulering (pbl. § 12-2) eller detaljregulering (pbl. § 12-3), jf. pbl. § 12-1 fjerde ledd",
         "name": "plantype",
         "type": "RpPlantype",
         "valueDomain": {
@@ -80,13 +80,13 @@
       },
       {
         "cardinality": "0..1",
-        "description": "dato da varsel om oppstart av planarbeid ble kunngjort og sendt til berørte parter som naboer, sektormyndigheter og lag/foreninger med interesser i planen (pbl. § 12-8)",
+        "description": "dato da varsel om oppstart av planarbeidet ble sendt ut til berørte offentlige organer og andre interesserte, samt til registrerte grunneiere og festere, andre rettighetshavere og naboer som blir direkte berørt (pbl. § 12-8 første og tredje ledd)",
         "name": "kunngjøringsdatoVarselOmPlanoppstart",
         "type": "Date"
       },
       {
         "cardinality": "0..1",
-        "description": "om forslagsstiller er privat eller offentlig planmyndighet",
+        "description": "om forslagsstiller er offentlig planmyndighet eller privat. Områderegulering utarbeides av kommunen, som kan overlate til andre myndigheter og private å utarbeide forslag (pbl. § 12-2 andre ledd). Private, tiltakshavere, organisasjoner og andre myndigheter har rett til å fremme forslag til detaljregulering (pbl. § 12-3 andre ledd)",
         "name": "forslagsstillertype",
         "type": "CharacterString"
       },
@@ -121,31 +121,31 @@
         "type": "CharacterString"
       }
     ],
-    "description": "dataobjekt for igangsatt planlegging etter plan- og bygningsloven, slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet",
+    "description": "reguleringsplan der planarbeidet er igangsatt og varslet etter pbl. § 12-8, slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet. Reguleringsplan er et arealplankart med tilhørende bestemmelser som angir bruk, vern og utforming av arealer og fysiske omgivelser (pbl. § 12-1 første ledd)",
     "name": "Arealplan",
     "relationships": {
       "associations": [
         {
           "cardinality": "0..*",
-          "description": "planområde(r) som avgrenser arealet for den igangsatte planleggingen (forslag – må verifiseres)",
+          "description": "planområdet, dvs. planens geografiske avgrensning, som skal angis ved varsel om oppstart og kunngjøring (pbl. § 12-8 fjerde ledd; kart- og planforskriften (FOR-2025-01-20-52) § 2)",
           "role": "planomrade",
           "target": "Planområde"
         },
         {
           "cardinality": "0..*",
-          "description": "område som omfatter eiendommene til partene som er varslet om oppstart av planarbeidet (pbl. § 12-8) (forslag – må verifiseres)",
+          "description": "område som omfatter eiendommene til partene som er underrettet om oppstart av planarbeidet (pbl. § 12-8 tredje ledd)",
           "role": "varselomrade",
           "target": "Varselområde"
         },
         {
           "cardinality": "0..*",
-          "description": "dokumenter som er knyttet til arealplanen (SOSI Planregister 5.0)",
+          "description": "dokumenter som er knyttet til arealplanen (kart- og planforskriften (FOR-2025-01-20-52) § 9 første ledd; SOSI Planregister 5.0)",
           "role": "plandokument",
           "target": "Plandokument"
         },
         {
           "cardinality": "0..*",
-          "description": "parter som er varslet om oppstart av planarbeidet (pbl. § 12-8) (forslag – må verifiseres)",
+          "description": "berørte offentlige organer, andre interesserte, grunneiere, festere, rettighetshavere og naboer som er varslet om oppstart av planarbeidet (pbl. § 12-8 første og tredje ledd)",
           "role": "varslingsliste",
           "target": "BerørtPart"
         },
@@ -227,19 +227,19 @@
           }
         ],
         "cardinality": "0..1",
-        "description": "landsdekkende entydig og unik identifikasjon av en arealplan (pbl. §§ 6-4, 9-1 og 12-1, samt kart- og planforskriften § 9 andre og sjette ledd)\n\nDenne identifikatoren tildeles planen når planprosessen starter, og den kan ikke endres undervegs av forslagstiller",
+        "description": "landsdekkende entydig og unikt kjennetegn (identifikasjon) på en arealplan (kart- og planforskriften (FOR-2025-01-20-52) § 2). Forslag til arealplan skal tildeles nasjonal arealplan-ID senest ved varsel om oppstart av planarbeidet (kart- og planforskriften (FOR-2025-01-20-52) § 9 andre ledd)",
         "name": "nasjonalArealplanId",
         "type": "NasjonalArealplanId"
       },
       {
         "cardinality": "0..1",
-        "description": "planens offisielle navn",
+        "description": "planens navn. Arealplanen skal ha navn i samsvar med Nasjonal produktspesifikasjon for arealplan og digitalt planregister (kart- og planforskriften (FOR-2025-01-20-52) § 9 andre ledd)",
         "name": "plannavn",
         "type": "CharacterString"
       },
       {
         "cardinality": "0..1",
-        "description": "type reguleringsplan (pbl. §§ 12-2 og 12-3); angir om planen er en områderegulering eller detaljregulering",
+        "description": "type reguleringsplan: områderegulering (pbl. § 12-2) eller detaljregulering (pbl. § 12-3), jf. pbl. § 12-1 fjerde ledd",
         "name": "plantype",
         "type": "RpPlantype",
         "valueDomain": {
@@ -251,13 +251,13 @@
       },
       {
         "cardinality": "0..1",
-        "description": "dato da varsel om oppstart av planarbeid ble kunngjort og sendt til berørte parter som naboer, sektormyndigheter og lag/foreninger med interesser i planen (pbl. § 12-8)",
+        "description": "dato da varsel om oppstart av planarbeidet ble sendt ut til berørte offentlige organer og andre interesserte, samt til registrerte grunneiere og festere, andre rettighetshavere og naboer som blir direkte berørt (pbl. § 12-8 første og tredje ledd)",
         "name": "kunngjøringsdatoVarselOmPlanoppstart",
         "type": "Date"
       },
       {
         "cardinality": "0..1",
-        "description": "om forslagsstiller er privat eller offentlig planmyndighet",
+        "description": "om forslagsstiller er offentlig planmyndighet eller privat. Områderegulering utarbeides av kommunen, som kan overlate til andre myndigheter og private å utarbeide forslag (pbl. § 12-2 andre ledd). Private, tiltakshavere, organisasjoner og andre myndigheter har rett til å fremme forslag til detaljregulering (pbl. § 12-3 andre ledd)",
         "name": "forslagsstillertype",
         "type": "CharacterString"
       },
@@ -292,13 +292,13 @@
         "type": "CharacterString"
       }
     ],
-    "description": "område for planlegging igangsatt etter pbl. 2008, med tilhørende metadata fra varsel om oppstart av planarbeid, slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet.\n\nOmrådet skal være sammenhengende i grunnriss, men kan dekke flere vertikalnivåer.",
+    "description": "område der det skal fremmes forslag til ny plan eller endring av plan, dvs. planens geografiske avgrensning (kart- og planforskriften (FOR-2025-01-20-52) §§ 2 og 12 første ledd bokstav a). Avgrensningen skal angis ved varsel om oppstart og kunngjøring (pbl. § 12-8 fjerde ledd), og planområdet registreres i planregisteret ved varsel om oppstart gjennom denne tjenesten (jf. kart- og planforskriften (FOR-2025-01-20-52) § 12 første ledd bokstav a). Formidles i OGC API-Features fra Direktoratet for byggkvalitet.\n\nOmrådet skal være sammenhengende i grunnriss, men kan dekke flere vertikalnivåer.",
     "name": "Planområde",
     "relationships": {
       "associations": [
         {
           "cardinality": "0..1",
-          "description": "arealplanen som planområdet hører til (forslag – må verifiseres)",
+          "description": "arealplanen som planområdet hører til",
           "role": "plan",
           "target": "Arealplan"
         }
@@ -353,13 +353,13 @@
         "type": "Integer"
       }
     ],
-    "description": "område som omfatter eiendommene til partene som er varslet om oppstart av planarbeidet (pbl. § 12-8), slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet.\n\nVarselområdet er normalt større enn planområdet, og tar typisk med eiendommer som grenser til planområdet eller ligger nær det, for eksempel på andre siden av en veg (forslag – må verifiseres)",
+    "description": "område som omfatter eiendommene til partene som er underrettet om oppstart av planarbeidet etter pbl. § 12-8 tredje ledd: registrerte grunneiere og festere i planområdet, så vidt mulig andre rettighetshavere i planområdet, og naboer til planområdet når de blir direkte berørt. Naboeiendommer er eiendom som har felles grense til planområdet, og skal alltid varsles. Normalt bør også gjenboereiendommer varsles, dvs. eiendommer hvor kun en vei, gate, elv eller annet areal ligger mellom eiendommen og planområdet. Enkelte kommuner varsler også grunneiere inntil 50 meter fra planområdet eller innenfor planens influensområde (veileder Reguleringsplan, KDD 2022, kap. 3.3.3.1). Varselområdet er derfor normalt større enn planområdet. Begrepet varselområde er ikke definert i lov eller forskrift.",
     "name": "Varselområde",
     "relationships": {
       "associations": [
         {
           "cardinality": "0..1",
-          "description": "arealplanen som varselområdet hører til (forslag – må verifiseres)",
+          "description": "arealplanen som varselområdet hører til",
           "role": "plan",
           "target": "Arealplan"
         }
@@ -382,7 +382,7 @@
       },
       {
         "cardinality": "0..1",
-        "description": "vedleggstype dokumentet ble innsendt med i Fellestjenester PLAN (planvarsel), f.eks. Planvarsel, PlanomraadeSosi, PlanomraadePdf, Planinitiativ, ReferatOppstartsmoete, Planprogram eller Annet. Gir finere inndeling enn dokumenttype (forslag – må verifiseres)",
+        "description": "vedleggstype dokumentet ble innsendt med i Fellestjenester PLAN (planvarsel). Gir finere inndeling enn dokumenttype (forslag – må verifiseres)",
         "name": "vedleggstype",
         "type": "Vedleggstype",
         "valueDomain": {
@@ -391,27 +391,27 @@
           "values": [
             {
               "code": "Planvarsel",
-              "definition": "varselbrev/annonse om oppstart av planarbeid"
+              "definition": "varsel om oppstart av planarbeidet til berørte offentlige organer, andre interesserte og direkte berørte grunneiere, festere, rettighetshavere og naboer (pbl. § 12-8 første og tredje ledd)"
             },
             {
               "code": "PlanomraadeSosi",
-              "definition": "planavgrensning i SOSI-format"
+              "definition": "avgrensningen av planområdet i SOSI-format (pbl. § 12-8 fjerde ledd)"
             },
             {
               "code": "PlanomraadePdf",
-              "definition": "kart over planavgrensning i PDF"
+              "definition": "kart som viser avgrensningen av planområdet, i PDF (pbl. § 12-8 fjerde ledd)"
             },
             {
               "code": "Planinitiativ",
-              "definition": "planinitiativ (forskrift om behandling av private forslag til detaljregulering § 1)"
+              "definition": "planinitiativ fra privat forslagsstiller, sendt kommunen senest samtidig med forespørsel om oppstartsmøte (forskrift om behandling av private forslag til detaljregulering (FOR-2017-12-08-1950) § 1)"
             },
             {
               "code": "ReferatOppstartsmoete",
-              "definition": "referat fra oppstartsmøte (pbl. § 12-8)"
+              "definition": "kommunens referat fra oppstartsmøtet (pbl. § 12-8 første ledd; forskrift om behandling av private forslag til detaljregulering (FOR-2017-12-08-1950) § 3)"
             },
             {
               "code": "Planprogram",
-              "definition": "planprogram (pbl. § 4-1)"
+              "definition": "planprogram som grunnlag for planarbeidet, for reguleringsplaner som kan få vesentlige virkninger for miljø og samfunn (pbl. § 4-1)"
             },
             {
               "code": "Annet",
@@ -469,7 +469,7 @@
         "type": "CharacterString"
       }
     ],
-    "description": "referanse til dokument som er knyttet til arealplanen (kart- og planforskriften § 9 første ledd). Et plandokument kan knyttes til den aktuelle planbehandlingen som det gjelder for.",
+    "description": "referanse til dokument som er knyttet til arealplanen. En arealplan omfatter ett eller flere plankart og ett eller flere dokumenter med bestemmelser som ikke framgår av plankartet, herunder eventuelle vedlegg eller illustrasjoner som er gjort bindende (kart- og planforskriften (FOR-2025-01-20-52) § 9 første ledd). Ved oppstart skal varselet ha vedlagt planinitiativet og referatet fra oppstartsmøtet, eller opplyse om hvor de er tilgjengelige (forskrift om behandling av private forslag til detaljregulering (FOR-2017-12-08-1950) § 5). Et plandokument kan knyttes til den planbehandlingen det gjelder for.",
     "name": "Plandokument",
     "relationships": {
       "associations": []
@@ -528,7 +528,7 @@
         "type": "CharacterString"
       }
     ],
-    "description": "part som berøres av planarbeidet og skal varsles om oppstart av planarbeidet etter pbl. § 12-8, identifisert ved eiendom (matrikkelnummer) og/eller virksomhet (organisasjonsnummer) (forslag – må verifiseres)",
+    "description": "part som skal varsles om oppstart av planarbeidet: berørte offentlige organer og andre interesserte (pbl. § 12-8 første ledd), samt registrerte grunneiere og festere i planområdet, så vidt mulig andre rettighetshavere i planområdet og naboer til planområdet når de blir direkte berørt (pbl. § 12-8 tredje ledd). Identifisert ved eiendom (matrikkelnummer) og/eller virksomhet (organisasjonsnummer). Listen over de som er varslet skal sendes kommunen sammen med planforslaget (veileder Reguleringsplan, KDD 2022, kap. 3.3.3.1)",
     "name": "BerørtPart",
     "relationships": {
       "associations": []
@@ -581,7 +581,7 @@
         "type": "Saksnummer"
       }
     ],
-    "description": "tidfestet behandling av en arealplan, både fram til planen trer i kraft, og etterpå",
+    "description": "tidfestet behandling av en arealplan, både fram til planen trer i kraft, og etterpå (SOSI Planregister 5.0). Kommunen skal føre opplysninger om nye vedtak i planregisteret straks vedtaket foreligger (kart- og planforskriften (FOR-2025-01-20-52) § 12 første ledd)",
     "name": "Planbehandling",
     "relationships": {
       "associations": [
