@@ -361,8 +361,8 @@
       },
       {
         "cardinality": "1",
-        "description": "referanse (URI eller arkivnøkkel) til dokumentet i arkivsystem eller dokumentlager. I OGC API-tjenesten for planlegging igangsatt formidles dette som nedlastingslenke (referanseDokumentfil)",
-        "name": "arkivreferanse",
+        "description": "lenke (URL) for nedlasting av dokumentfilen. Tilsvarer arkivreferanse i SOSI Planregister 5.0",
+        "name": "referanseDokumentfil",
         "type": "CharacterString"
       },
       {
