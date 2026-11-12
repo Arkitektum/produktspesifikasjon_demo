@@ -133,6 +133,12 @@
         },
         {
           "cardinality": "0..*",
+          "description": "område som omfatter eiendommene til partene som er varslet om oppstart av planarbeidet (pbl. § 12-8) (forslag – må verifiseres)",
+          "role": "varselomrade",
+          "target": "Varselområde"
+        },
+        {
+          "cardinality": "0..*",
           "description": "dokumenter som er knyttet til arealplanen (SOSI Planregister 5.0)",
           "role": "plandokument",
           "target": "Plandokument"
@@ -293,6 +299,67 @@
         {
           "cardinality": "0..1",
           "description": "arealplanen som planområdet hører til (forslag – må verifiseres)",
+          "role": "plan",
+          "target": "Arealplan"
+        }
+      ]
+    }
+  },
+  {
+    "attributes": [
+      {
+        "cardinality": "1",
+        "description": "varselområdets avgrensning i grunnriss, som et polygon rundt eiendommene til de varslede partene (forslag – må verifiseres)",
+        "name": "geometri",
+        "type": "GM_Surface"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "tjenestens interne identifikator for objektet (feature-id i OGC API)",
+        "name": "objid",
+        "ogcRole": "id",
+        "type": "Integer"
+      },
+      {
+        "attributes": [
+          {
+            "cardinality": "0..1",
+            "description": "lokal identifikator av et objekt.\n\nSkal være en uuid, slik at den er unik, uavhengig av navnerommet",
+            "name": "lokalId",
+            "type": "CharacterString"
+          },
+          {
+            "cardinality": "0..1",
+            "description": "navnerom som unikt identifiserer datakilden til et objekt.\n\nFor plan anbefales navnerommet http://data.geonorge.no/sosi/plan",
+            "name": "navnerom",
+            "type": "CharacterString"
+          },
+          {
+            "cardinality": "0..1",
+            "description": "identifikasjon av en spesiell versjon av et geografisk objekt (instans)",
+            "name": "versjonId",
+            "type": "CharacterString"
+          }
+        ],
+        "cardinality": "0..1",
+        "description": "unik identifikasjon av et objekt i et datasett, forvaltet av den ansvarlige produsent/forvalter, og kan benyttes av eksterne applikasjoner som stabil referanse til objektet.\n\nMerknad: Denne unike identifikatoren skal ikke endres i løpet av objektets levetid, og skal ikke gjenbrukes i andre objekt.",
+        "name": "identifikasjon",
+        "type": "Identifikasjon"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "referanse (objid) til arealplanen varselområdet tilhører",
+        "name": "arealplan",
+        "type": "Integer"
+      }
+    ],
+    "description": "område som omfatter eiendommene til partene som er varslet om oppstart av planarbeidet (pbl. § 12-8), slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet.\n\nVarselområdet er normalt større enn planområdet, og tar typisk med eiendommer som grenser til planområdet eller ligger nær det, for eksempel på andre siden av en veg (forslag – må verifiseres)",
+    "name": "Varselområde",
+    "relationships": {
+      "associations": [
+        {
+          "cardinality": "0..1",
+          "description": "arealplanen som varselområdet hører til (forslag – må verifiseres)",
           "role": "plan",
           "target": "Arealplan"
         }
