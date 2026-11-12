@@ -60,10 +60,22 @@ package "Objekttyper" {
     + link [0..1] : CharacterString
   }
 
+  class "Varselområde" as Varselomr_de <<featureType>> {
+    + geometri [1] : GM_Surface
+    + objid [0..1] : Integer
+    + identifikasjon [0..1] : Identifikasjon
+    + arealplan [0..1] : Integer
+  }
+
   class Plandokument <<featureType>> {
     + dokumenttype [1] : Plandokumenttype
-    + arkivreferanse [1] : CharacterString
+    + vedleggstype [0..1] : Vedleggstype
+    + tittel [0..1] : CharacterString
+    + referanseDokumentfil [1] : CharacterString
     + dokumentdato [0..1] : Date
+    + mimeType [0..1] : CharacterString
+    + sjekksum [0..1] : CharacterString
+    + sjekksumAlgoritme [0..1] : CharacterString
     + beskrivelse [0..1] : CharacterString
     + arkivnavn [0..1] : CharacterString
   }
@@ -71,6 +83,13 @@ package "Objekttyper" {
   class "BerørtPart" as Ber_rtPart <<featureType>> {
     + matrikkelnummer [0..1] : Matrikkelnummer
     + organisasjonsnummer [0..1] : CharacterString
+  }
+
+  class Planbehandling <<featureType>> {
+    + planbehandlingsdato [1] : Date
+    + planbehandlingstype [1] : Planbehandlingstype
+    + navn [1] : CharacterString
+    + saksnummer [0..1] : Saksnummer
   }
 
   class NasjonalArealplanId <<dataType>> {
@@ -91,11 +110,20 @@ package "Objekttyper" {
     + festenummer [0..1] : Integer
     + seksjonsnummer [0..1] : Integer
   }
+
+  class Saksnummer <<dataType>> {
+    + saksår [1] : Integer
+    + sakssekvensnummer [1] : Integer
+  }
 }
 
-  Arealplan --> Planomr_de : planleggingigangsatt [0..*]
+  Arealplan --> Planomr_de : planomrade [0..*]
+  Arealplan --> Varselomr_de : varselomrade [0..*]
   Arealplan --> Plandokument : plandokument [0..*]
   Arealplan --> Ber_rtPart : varslingsliste [0..*]
+  Arealplan --> Planbehandling : planbehandling [0..*]
   Planomr_de --> Arealplan : plan [0..1]
+  Varselomr_de --> Arealplan : plan [0..1]
+  Planbehandling --> Plandokument : plandokument [0..*]
 
 @enduml

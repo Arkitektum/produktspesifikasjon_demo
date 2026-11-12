@@ -80,14 +80,20 @@ schema:
     value: Arealplan
   - property: associations
     value:
-    - role: planleggingigangsatt
+    - role: planomrade
       target: Planområde
+      cardinality: 0..*
+    - role: varselomrade
+      target: Varselområde
       cardinality: 0..*
     - role: plandokument
       target: Plandokument
       cardinality: 0..*
     - role: varslingsliste
       target: BerørtPart
+      cardinality: 0..*
+    - role: planbehandling
+      target: Planbehandling
       cardinality: 0..*
   properties:
   - name: objid
@@ -319,6 +325,66 @@ schema:
     logicalType: string
     description: lenke (URL) til nærmere informasjon om planen, for eksempel planinnsyn
       eller varselet om planoppstart
+- name: Varselområde
+  physicalName: varselomr_de
+  logicalType: object
+  physicalType: table
+  description: 'område som omfatter eiendommene til partene som er varslet om oppstart
+    av planarbeidet (pbl. § 12-8), slik det formidles i OGC API-Features fra Direktoratet
+    for byggkvalitet.
+
+
+    Varselområdet er normalt større enn planområdet, og tar typisk med eiendommer
+    som grenser til planområdet eller ligger nær det, for eksempel på andre siden
+    av en veg (forslag – må verifiseres)'
+  customProperties:
+  - property: sosiObjektType
+    value: Varselområde
+  - property: associations
+    value:
+    - role: plan
+      target: Arealplan
+      cardinality: 0..1
+  properties:
+  - name: geometri
+    logicalType: object
+    physicalType: geometry(Surface)
+    required: true
+    customProperties:
+    - property: geometryType
+      value: Surface
+  - name: objid
+    logicalType: integer
+    description: tjenestens interne identifikator for objektet (feature-id i OGC API)
+    primaryKey: true
+  - name: identifikasjon
+    logicalType: object
+    properties:
+    - name: lokalId
+      logicalType: string
+      description: 'lokal identifikator av et objekt.
+
+
+        Skal være en uuid, slik at den er unik, uavhengig av navnerommet'
+    - name: navnerom
+      logicalType: string
+      description: 'navnerom som unikt identifiserer datakilden til et objekt.
+
+
+        For plan anbefales navnerommet http://data.geonorge.no/sosi/plan'
+    - name: versjonId
+      logicalType: string
+      description: identifikasjon av en spesiell versjon av et geografisk objekt (instans)
+    description: 'unik identifikasjon av et objekt i et datasett, forvaltet av den
+      ansvarlige produsent/forvalter, og kan benyttes av eksterne applikasjoner som
+      stabil referanse til objektet.
+
+
+      Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets levetid,
+      og skal ikke gjenbrukes i andre objekt.'
+  - name: arealplan
+    logicalType: integer
+    description: referanse (objid) til arealplanen varselområdet tilhører
 - name: Plandokument
   physicalName: plandokument
   logicalType: object
@@ -340,24 +406,47 @@ schema:
       value: Plandokumenttype
     - property: asDictionary
       value: 'true'
-    description: type plandokument, for eksempel planbeskrivelse, plankart eller varsel
-      om oppstart (forslag – må verifiseres)
+    description: type plandokument etter kodelisten Plandokumenttype i SOSI Planregister
+      5.0. For dokumenter ved varsel om oppstart brukes normalt KORR (planinitiativ,
+      referat fra oppstartsmøte, varsel om oppstart, liste over varslede parter),
+      KART (planavgrensning), PLANPROG (planprogram) og VEDTAK (vedtak om planoppstart),
+      jf. KS/Geointegrasjon «Dokumenttyper for ePlansak»
     required: true
-  - name: arkivreferanse
+  - name: vedleggstype
     logicalType: string
-    description: referanse (URI eller arkivnøkkel) til dokumentet i arkivsystem eller
-      dokumentlager (forslag – må verifiseres)
+    description: vedleggstype dokumentet ble innsendt med i Fellestjenester PLAN (planvarsel),
+      f.eks. Planvarsel, PlanomraadeSosi, PlanomraadePdf, Planinitiativ, ReferatOppstartsmoete,
+      Planprogram eller Annet. Gir finere inndeling enn dokumenttype (forslag – må
+      verifiseres)
+  - name: tittel
+    logicalType: string
+    description: dokumentets tittel eller filnavn
+  - name: referanseDokumentfil
+    logicalType: string
+    description: lenke (URL) for nedlasting av dokumentfilen. Tilsvarer arkivreferanse
+      i SOSI Planregister 5.0
     required: true
   - name: dokumentdato
     logicalType: date
-    description: dato da dokumentet ble datert eller godkjent (forslag – må verifiseres)
+    description: dokumentets egen dato (datert eller godkjent), ikke dato for innsending
+      eller registrering
+  - name: mimeType
+    logicalType: string
+    description: filformat angitt som medietype (MIME-type) etter IANA, f.eks. application/pdf
+  - name: sjekksum
+    logicalType: string
+    description: sjekksum for dokumentfilen, brukt til å kontrollere at filen er uendret
+      (forslag – må verifiseres)
+  - name: sjekksumAlgoritme
+    logicalType: string
+    description: algoritmen sjekksummen er beregnet med, f.eks. SHA-256 (forslag –
+      må verifiseres)
   - name: beskrivelse
     logicalType: string
-    description: fritekst som beskriver dokumentets innhold (forslag – må verifiseres)
+    description: fritekst som beskriver dokumentets innhold
   - name: arkivnavn
     logicalType: string
-    description: navn på arkivet eller systemet der dokumentet er lagret (forslag
-      – må verifiseres)
+    description: navn på arkivet eller systemet der dokumentet er lagret
 - name: BerørtPart
   physicalName: ber_rtpart
   logicalType: object
@@ -405,3 +494,52 @@ schema:
     logicalType: string
     description: organisasjonsnummer fra Enhetsregisteret (9 siffer) (forslag – må
       verifiseres)
+- name: Planbehandling
+  physicalName: planbehandling
+  logicalType: object
+  physicalType: table
+  description: tidfestet behandling av en arealplan, både fram til planen trer i kraft,
+    og etterpå
+  customProperties:
+  - property: sosiObjektType
+    value: Planbehandling
+  - property: associations
+    value:
+    - role: plandokument
+      target: Plandokument
+      cardinality: 0..*
+  properties:
+  - name: planbehandlingsdato
+    logicalType: date
+    description: dato for planbehandlingen (forslag – må verifiseres)
+    required: true
+  - name: planbehandlingstype
+    logicalType: string
+    authoritativeDefinitions:
+    - url: https://register.geonorge.no/sosi-kodelister/plan/planregister/planbehandlingstype
+      type: businessDefinition
+    customProperties:
+    - property: sosiCodeList
+      value: Planbehandlingstype
+    - property: asDictionary
+      value: 'true'
+    description: type planbehandling, for eksempel planlegging igangsatt/oppstartsmøte
+      avholdt (8) eller varsel om planoppstart (9) (forslag – må verifiseres)
+    required: true
+  - name: navn
+    logicalType: string
+    description: navn på eller kort beskrivelse av planbehandlingen (forslag – må
+      verifiseres)
+    required: true
+  - name: saksnummer
+    logicalType: object
+    properties:
+    - name: saksår
+      logicalType: integer
+      description: året saken ble opprettet (forslag – må verifiseres)
+      required: true
+    - name: sakssekvensnummer
+      logicalType: integer
+      description: løpenummer for saken innen saksåret (forslag – må verifiseres)
+      required: true
+    description: kommunens saksnummer for planbehandlingen (forslag – må verifiseres)

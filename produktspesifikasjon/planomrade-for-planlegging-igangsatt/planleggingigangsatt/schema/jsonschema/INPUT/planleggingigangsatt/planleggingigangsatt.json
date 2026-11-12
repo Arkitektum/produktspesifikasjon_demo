@@ -60,7 +60,15 @@
           "description": "lenke (URL) til nærmere informasjon om planen, for eksempel planinnsyn eller varselet om planoppstart",
           "type": "string"
         },
-        "planleggingigangsatt": {
+        "planomrade": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "uniqueItems": true
+        },
+        "varselomrade": {
           "type": "array",
           "items": {
             "type": "string",
@@ -77,6 +85,14 @@
           "uniqueItems": true
         },
         "varslingsliste": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "uniqueItems": true
+        },
+        "planbehandling": {
           "type": "array",
           "items": {
             "type": "string",
@@ -184,6 +200,55 @@
         }
       }
     },
+    "Planbehandling": {
+      "description": "tidfestet behandling av en arealplan, både fram til planen trer i kraft, og etterpå",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "planbehandlingsdato": {
+          "description": "dato for planbehandlingen (forslag – må verifiseres)",
+          "type": "string",
+          "format": "date"
+        },
+        "planbehandlingstype": {
+          "description": "type planbehandling, for eksempel planlegging igangsatt/oppstartsmøte avholdt (8) eller varsel om planoppstart (9) (forslag – må verifiseres)",
+          "$ref": "#/definitions/Planbehandlingstype"
+        },
+        "navn": {
+          "description": "navn på eller kort beskrivelse av planbehandlingen (forslag – må verifiseres)",
+          "type": "string"
+        },
+        "saksnummer": {
+          "description": "kommunens saksnummer for planbehandlingen (forslag – må verifiseres)",
+          "$ref": "#/definitions/Saksnummer"
+        },
+        "plandokument": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "@type",
+        "navn",
+        "planbehandlingsdato",
+        "planbehandlingstype"
+      ]
+    },
+    "Planbehandlingstype": {
+      "description": "ekstern kodeliste for type planbehandling",
+      "codelist": "https://register.geonorge.no/sosi-kodelister/plan/planregister/planbehandlingstype",
+      "type": "string",
+      "format": "uri"
+    },
     "Plandokument": {
       "description": "referanse til dokument som er knyttet til arealplanen (kart- og planforskriften § 9 første ledd). Et plandokument kan knyttes til den aktuelle planbehandlingen som det gjelder for.",
       "type": "object",
@@ -195,35 +260,55 @@
           "type": "string"
         },
         "dokumenttype": {
-          "description": "type plandokument, for eksempel planbeskrivelse, plankart eller varsel om oppstart (forslag – må verifiseres)",
+          "description": "type plandokument etter kodelisten Plandokumenttype i SOSI Planregister 5.0. For dokumenter ved varsel om oppstart brukes normalt KORR (planinitiativ, referat fra oppstartsmøte, varsel om oppstart, liste over varslede parter), KART (planavgrensning), PLANPROG (planprogram) og VEDTAK (vedtak om planoppstart), jf. KS/Geointegrasjon «Dokumenttyper for ePlansak»",
           "$ref": "#/definitions/Plandokumenttype"
         },
-        "arkivreferanse": {
-          "description": "referanse (URI eller arkivnøkkel) til dokumentet i arkivsystem eller dokumentlager (forslag – må verifiseres)",
+        "vedleggstype": {
+          "description": "vedleggstype dokumentet ble innsendt med i Fellestjenester PLAN (planvarsel), f.eks. Planvarsel, PlanomraadeSosi, PlanomraadePdf, Planinitiativ, ReferatOppstartsmoete, Planprogram eller Annet. Gir finere inndeling enn dokumenttype (forslag – må verifiseres)",
+          "$ref": "#/definitions/Vedleggstype"
+        },
+        "tittel": {
+          "description": "dokumentets tittel eller filnavn",
+          "type": "string"
+        },
+        "referanseDokumentfil": {
+          "description": "lenke (URL) for nedlasting av dokumentfilen. Tilsvarer arkivreferanse i SOSI Planregister 5.0",
           "type": "string"
         },
         "dokumentdato": {
-          "description": "dato da dokumentet ble datert eller godkjent (forslag – må verifiseres)",
+          "description": "dokumentets egen dato (datert eller godkjent), ikke dato for innsending eller registrering",
           "type": "string",
           "format": "date"
         },
+        "mimeType": {
+          "description": "filformat angitt som medietype (MIME-type) etter IANA, f.eks. application/pdf",
+          "type": "string"
+        },
+        "sjekksum": {
+          "description": "sjekksum for dokumentfilen, brukt til å kontrollere at filen er uendret (forslag – må verifiseres)",
+          "type": "string"
+        },
+        "sjekksumAlgoritme": {
+          "description": "algoritmen sjekksummen er beregnet med, f.eks. SHA-256 (forslag – må verifiseres)",
+          "type": "string"
+        },
         "beskrivelse": {
-          "description": "fritekst som beskriver dokumentets innhold (forslag – må verifiseres)",
+          "description": "fritekst som beskriver dokumentets innhold",
           "type": "string"
         },
         "arkivnavn": {
-          "description": "navn på arkivet eller systemet der dokumentet er lagret (forslag – må verifiseres)",
+          "description": "navn på arkivet eller systemet der dokumentet er lagret",
           "type": "string"
         }
       },
       "required": [
         "@type",
-        "arkivreferanse",
-        "dokumenttype"
+        "dokumenttype",
+        "referanseDokumentfil"
       ]
     },
     "Plandokumenttype": {
-      "description": "plandokument må tilhøre en gyldig dokumentkategori. Dokumenttyper for plansaker",
+      "description": "Dokumenttyper for plansaker",
       "codelist": "https://register.geonorge.no/sosi-kodelister/plan/planregister/plandokumenttype",
       "type": "string",
       "format": "uri"
@@ -304,6 +389,62 @@
     "RpPlantype": {
       "description": "ekstern kodeliste for type reguleringsplan",
       "codelist": "https://register.geonorge.no/sosi-kodelister/plan/reguleringsplanforslag/rpplantype",
+      "type": "string",
+      "format": "uri"
+    },
+    "Saksnummer": {
+      "type": "object",
+      "properties": {
+        "saksår": {
+          "description": "året saken ble opprettet (forslag – må verifiseres)",
+          "type": "integer"
+        },
+        "sakssekvensnummer": {
+          "description": "løpenummer for saken innen saksåret (forslag – må verifiseres)",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "sakssekvensnummer",
+        "saksår"
+      ]
+    },
+    "Varselområde": {
+      "description": "område som omfatter eiendommene til partene som er varslet om oppstart av planarbeidet (pbl. § 12-8), slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet.\n\nVarselområdet er normalt større enn planområdet, og tar typisk med eiendommer som grenser til planområdet eller ligger nær det, for eksempel på andre siden av en veg (forslag – må verifiseres)",
+      "type": "object",
+      "properties": {
+        "geometry": {
+          "$ref": "https://geojson.org/schema/Polygon.json"
+        },
+        "@type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "objid": {
+          "description": "tjenestens interne identifikator for objektet (feature-id i OGC API)",
+          "type": "integer"
+        },
+        "identifikasjon": {
+          "description": "unik identifikasjon av et objekt i et datasett, forvaltet av den ansvarlige produsent/forvalter, og kan benyttes av eksterne applikasjoner som stabil referanse til objektet.\n\nMerknad: Denne unike identifikatoren skal ikke endres i løpet av objektets levetid, og skal ikke gjenbrukes i andre objekt.",
+          "$ref": "#/definitions/Identifikasjon"
+        },
+        "arealplan": {
+          "description": "referanse (objid) til arealplanen varselområdet tilhører",
+          "type": "integer"
+        },
+        "plan": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "@type"
+      ]
+    },
+    "Vedleggstype": {
+      "description": "vedleggstyper i Fellestjenester PLAN (DiBK) for varsel om oppstart av planarbeid. Ingen publisert kodeliste funnet – verdier hentet fra plandata.ft.dibk.no (forslag – må verifiseres)",
       "type": "string",
       "format": "uri"
     }
