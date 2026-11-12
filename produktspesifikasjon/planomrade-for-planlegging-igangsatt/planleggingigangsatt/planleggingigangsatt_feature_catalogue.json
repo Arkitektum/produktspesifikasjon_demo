@@ -128,8 +128,14 @@
         {
           "cardinality": "0..*",
           "description": "planområde(r) som avgrenser arealet for den igangsatte planleggingen (forslag – må verifiseres)",
-          "role": "planleggingigangsatt",
+          "role": "planomrade",
           "target": "Planområde"
+        },
+        {
+          "cardinality": "0..*",
+          "description": "område som omfatter eiendommene til partene som er varslet om oppstart av planarbeidet (pbl. § 12-8) (forslag – må verifiseres)",
+          "role": "varselomrade",
+          "target": "Varselområde"
         },
         {
           "cardinality": "0..*",
@@ -142,6 +148,12 @@
           "description": "parter som er varslet om oppstart av planarbeidet (pbl. § 12-8) (forslag – må verifiseres)",
           "role": "varslingsliste",
           "target": "BerørtPart"
+        },
+        {
+          "cardinality": "0..*",
+          "description": "behandlinger av arealplanen (SOSI Planregister 5.0)",
+          "role": "planbehandling",
+          "target": "Planbehandling"
         }
       ]
     }
@@ -297,37 +309,162 @@
     "attributes": [
       {
         "cardinality": "1",
-        "description": "type plandokument, for eksempel planbeskrivelse, plankart eller varsel om oppstart (forslag – må verifiseres)",
+        "description": "varselområdets avgrensning i grunnriss, som et polygon rundt eiendommene til de varslede partene (forslag – må verifiseres)",
+        "name": "geometri",
+        "type": "GM_Surface"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "tjenestens interne identifikator for objektet (feature-id i OGC API)",
+        "name": "objid",
+        "ogcRole": "id",
+        "type": "Integer"
+      },
+      {
+        "attributes": [
+          {
+            "cardinality": "0..1",
+            "description": "lokal identifikator av et objekt.\n\nSkal være en uuid, slik at den er unik, uavhengig av navnerommet",
+            "name": "lokalId",
+            "type": "CharacterString"
+          },
+          {
+            "cardinality": "0..1",
+            "description": "navnerom som unikt identifiserer datakilden til et objekt.\n\nFor plan anbefales navnerommet http://data.geonorge.no/sosi/plan",
+            "name": "navnerom",
+            "type": "CharacterString"
+          },
+          {
+            "cardinality": "0..1",
+            "description": "identifikasjon av en spesiell versjon av et geografisk objekt (instans)",
+            "name": "versjonId",
+            "type": "CharacterString"
+          }
+        ],
+        "cardinality": "0..1",
+        "description": "unik identifikasjon av et objekt i et datasett, forvaltet av den ansvarlige produsent/forvalter, og kan benyttes av eksterne applikasjoner som stabil referanse til objektet.\n\nMerknad: Denne unike identifikatoren skal ikke endres i løpet av objektets levetid, og skal ikke gjenbrukes i andre objekt.",
+        "name": "identifikasjon",
+        "type": "Identifikasjon"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "referanse (objid) til arealplanen varselområdet tilhører",
+        "name": "arealplan",
+        "type": "Integer"
+      }
+    ],
+    "description": "område som omfatter eiendommene til partene som er varslet om oppstart av planarbeidet (pbl. § 12-8), slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet.\n\nVarselområdet er normalt større enn planområdet, og tar typisk med eiendommer som grenser til planområdet eller ligger nær det, for eksempel på andre siden av en veg (forslag – må verifiseres)",
+    "name": "Varselområde",
+    "relationships": {
+      "associations": [
+        {
+          "cardinality": "0..1",
+          "description": "arealplanen som varselområdet hører til (forslag – må verifiseres)",
+          "role": "plan",
+          "target": "Arealplan"
+        }
+      ]
+    }
+  },
+  {
+    "attributes": [
+      {
+        "cardinality": "1",
+        "description": "type plandokument etter kodelisten Plandokumenttype i SOSI Planregister 5.0. For dokumenter ved varsel om oppstart brukes normalt KORR (planinitiativ, referat fra oppstartsmøte, varsel om oppstart, liste over varslede parter), KART (planavgrensning), PLANPROG (planprogram) og VEDTAK (vedtak om planoppstart), jf. KS/Geointegrasjon «Dokumenttyper for ePlansak»",
         "name": "dokumenttype",
         "type": "Plandokumenttype",
         "valueDomain": {
           "asDictionary": "true",
           "codeList": "https://register.geonorge.no/sosi-kodelister/plan/planregister/plandokumenttype",
-          "definition": "plandokument må tilhøre en gyldig dokumentkategori. Dokumenttyper for plansaker",
+          "definition": "Dokumenttyper for plansaker",
           "kind": "codelist"
         }
       },
       {
+        "cardinality": "0..1",
+        "description": "vedleggstype dokumentet ble innsendt med i Fellestjenester PLAN (planvarsel), f.eks. Planvarsel, PlanomraadeSosi, PlanomraadePdf, Planinitiativ, ReferatOppstartsmoete, Planprogram eller Annet. Gir finere inndeling enn dokumenttype (forslag – må verifiseres)",
+        "name": "vedleggstype",
+        "type": "Vedleggstype",
+        "valueDomain": {
+          "definition": "vedleggstyper i Fellestjenester PLAN (DiBK) for varsel om oppstart av planarbeid. Ingen publisert kodeliste funnet – verdier hentet fra plandata.ft.dibk.no (forslag – må verifiseres)",
+          "kind": "codelist",
+          "values": [
+            {
+              "code": "Planvarsel",
+              "definition": "varselbrev/annonse om oppstart av planarbeid"
+            },
+            {
+              "code": "PlanomraadeSosi",
+              "definition": "planavgrensning i SOSI-format"
+            },
+            {
+              "code": "PlanomraadePdf",
+              "definition": "kart over planavgrensning i PDF"
+            },
+            {
+              "code": "Planinitiativ",
+              "definition": "planinitiativ (forskrift om behandling av private forslag til detaljregulering § 1)"
+            },
+            {
+              "code": "ReferatOppstartsmoete",
+              "definition": "referat fra oppstartsmøte (pbl. § 12-8)"
+            },
+            {
+              "code": "Planprogram",
+              "definition": "planprogram (pbl. § 4-1)"
+            },
+            {
+              "code": "Annet",
+              "definition": "annet vedlegg"
+            }
+          ]
+        }
+      },
+      {
+        "cardinality": "0..1",
+        "description": "dokumentets tittel eller filnavn",
+        "name": "tittel",
+        "type": "CharacterString"
+      },
+      {
         "cardinality": "1",
-        "description": "referanse (URI eller arkivnøkkel) til dokumentet i arkivsystem eller dokumentlager (forslag – må verifiseres)",
-        "name": "arkivreferanse",
+        "description": "lenke (URL) for nedlasting av dokumentfilen. Tilsvarer arkivreferanse i SOSI Planregister 5.0",
+        "name": "referanseDokumentfil",
         "type": "CharacterString"
       },
       {
         "cardinality": "0..1",
-        "description": "dato da dokumentet ble datert eller godkjent (forslag – må verifiseres)",
+        "description": "dokumentets egen dato (datert eller godkjent), ikke dato for innsending eller registrering",
         "name": "dokumentdato",
         "type": "Date"
       },
       {
         "cardinality": "0..1",
-        "description": "fritekst som beskriver dokumentets innhold (forslag – må verifiseres)",
+        "description": "filformat angitt som medietype (MIME-type) etter IANA, f.eks. application/pdf",
+        "name": "mimeType",
+        "type": "CharacterString"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "sjekksum for dokumentfilen, brukt til å kontrollere at filen er uendret (forslag – må verifiseres)",
+        "name": "sjekksum",
+        "type": "CharacterString"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "algoritmen sjekksummen er beregnet med, f.eks. SHA-256 (forslag – må verifiseres)",
+        "name": "sjekksumAlgoritme",
+        "type": "CharacterString"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "fritekst som beskriver dokumentets innhold",
         "name": "beskrivelse",
         "type": "CharacterString"
       },
       {
         "cardinality": "0..1",
-        "description": "navn på arkivet eller systemet der dokumentet er lagret (forslag – må verifiseres)",
+        "description": "navn på arkivet eller systemet der dokumentet er lagret",
         "name": "arkivnavn",
         "type": "CharacterString"
       }
@@ -395,6 +532,66 @@
     "name": "BerørtPart",
     "relationships": {
       "associations": []
+    }
+  },
+  {
+    "attributes": [
+      {
+        "cardinality": "1",
+        "description": "dato for planbehandlingen (forslag – må verifiseres)",
+        "name": "planbehandlingsdato",
+        "type": "Date"
+      },
+      {
+        "cardinality": "1",
+        "description": "type planbehandling, for eksempel planlegging igangsatt/oppstartsmøte avholdt (8) eller varsel om planoppstart (9) (forslag – må verifiseres)",
+        "name": "planbehandlingstype",
+        "type": "Planbehandlingstype",
+        "valueDomain": {
+          "asDictionary": "true",
+          "codeList": "https://register.geonorge.no/sosi-kodelister/plan/planregister/planbehandlingstype",
+          "definition": "ekstern kodeliste for type planbehandling",
+          "kind": "codelist"
+        }
+      },
+      {
+        "cardinality": "1",
+        "description": "navn på eller kort beskrivelse av planbehandlingen (forslag – må verifiseres)",
+        "name": "navn",
+        "type": "CharacterString"
+      },
+      {
+        "attributes": [
+          {
+            "cardinality": "1",
+            "description": "året saken ble opprettet (forslag – må verifiseres)",
+            "name": "saksår",
+            "type": "Integer"
+          },
+          {
+            "cardinality": "1",
+            "description": "løpenummer for saken innen saksåret (forslag – må verifiseres)",
+            "name": "sakssekvensnummer",
+            "type": "Integer"
+          }
+        ],
+        "cardinality": "0..1",
+        "description": "kommunens saksnummer for planbehandlingen (forslag – må verifiseres)",
+        "name": "saksnummer",
+        "type": "Saksnummer"
+      }
+    ],
+    "description": "tidfestet behandling av en arealplan, både fram til planen trer i kraft, og etterpå",
+    "name": "Planbehandling",
+    "relationships": {
+      "associations": [
+        {
+          "cardinality": "0..*",
+          "description": "dokumenter som er knyttet til planbehandlingen (SOSI Planregister 5.0)",
+          "role": "plandokument",
+          "target": "Plandokument"
+        }
+      ]
     }
   }
 ]

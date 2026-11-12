@@ -76,9 +76,11 @@ Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets leve
               <documentation>lenke (URL) til nærmere informasjon om planen, for eksempel planinnsyn eller varselet om planoppstart</documentation>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="planleggingigangsatt" type="planleggingigangsatt:PlanområdePropertyType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="planomrade" type="planleggingigangsatt:PlanområdePropertyType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="varselomrade" type="planleggingigangsatt:VarselområdePropertyType"/>
           <element maxOccurs="unbounded" minOccurs="0" name="plandokument" type="planleggingigangsatt:PlandokumentPropertyType"/>
           <element maxOccurs="unbounded" minOccurs="0" name="varslingsliste" type="planleggingigangsatt:BerørtPartPropertyType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="planbehandling" type="planleggingigangsatt:PlanbehandlingPropertyType"/>
         </sequence>
       </extension>
     </complexContent>
@@ -210,6 +212,50 @@ For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</documentation>
       <element ref="planleggingigangsatt:NasjonalArealplanId"/>
     </sequence>
   </complexType>
+  <element name="Planbehandling" substitutionGroup="gml:AbstractFeature" type="planleggingigangsatt:PlanbehandlingType">
+    <annotation>
+      <documentation>tidfestet behandling av en arealplan, både fram til planen trer i kraft, og etterpå</documentation>
+    </annotation>
+  </element>
+  <complexType name="PlanbehandlingType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="planbehandlingsdato" type="date">
+            <annotation>
+              <documentation>dato for planbehandlingen (forslag – må verifiseres)</documentation>
+            </annotation>
+          </element>
+          <element name="planbehandlingstype" type="gml:CodeType">
+            <annotation>
+              <documentation>type planbehandling, for eksempel planlegging igangsatt/oppstartsmøte avholdt (8) eller varsel om planoppstart (9) (forslag – må verifiseres)</documentation>
+              <appinfo>
+                <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/planregister/planbehandlingstype</sc:targetCodeListURI>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="navn" type="string">
+            <annotation>
+              <documentation>navn på eller kort beskrivelse av planbehandlingen (forslag – må verifiseres)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="saksnummer" type="planleggingigangsatt:SaksnummerPropertyType">
+            <annotation>
+              <documentation>kommunens saksnummer for planbehandlingen (forslag – må verifiseres)</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="plandokument" type="planleggingigangsatt:PlandokumentPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="PlanbehandlingPropertyType">
+    <sequence minOccurs="0">
+      <element ref="planleggingigangsatt:Planbehandling"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
   <element name="Plandokument" substitutionGroup="gml:AbstractFeature" type="planleggingigangsatt:PlandokumentType">
     <annotation>
       <documentation>referanse til dokument som er knyttet til arealplanen (kart- og planforskriften § 9 første ledd). Et plandokument kan knyttes til den aktuelle planbehandlingen som det gjelder for.</documentation>
@@ -221,30 +267,55 @@ For plan anbefales navnerommet http://data.geonorge.no/sosi/plan</documentation>
         <sequence>
           <element name="dokumenttype" type="gml:CodeType">
             <annotation>
-              <documentation>type plandokument, for eksempel planbeskrivelse, plankart eller varsel om oppstart (forslag – må verifiseres)</documentation>
+              <documentation>type plandokument etter kodelisten Plandokumenttype i SOSI Planregister 5.0. For dokumenter ved varsel om oppstart brukes normalt KORR (planinitiativ, referat fra oppstartsmøte, varsel om oppstart, liste over varslede parter), KART (planavgrensning), PLANPROG (planprogram) og VEDTAK (vedtak om planoppstart), jf. KS/Geointegrasjon «Dokumenttyper for ePlansak»</documentation>
               <appinfo>
                 <sc:targetCodeListURI>https://register.geonorge.no/sosi-kodelister/plan/planregister/plandokumenttype</sc:targetCodeListURI>
               </appinfo>
             </annotation>
           </element>
-          <element name="arkivreferanse" type="string">
+          <element minOccurs="0" name="vedleggstype" type="planleggingigangsatt:VedleggstypeType">
             <annotation>
-              <documentation>referanse (URI eller arkivnøkkel) til dokumentet i arkivsystem eller dokumentlager (forslag – må verifiseres)</documentation>
+              <documentation>vedleggstype dokumentet ble innsendt med i Fellestjenester PLAN (planvarsel), f.eks. Planvarsel, PlanomraadeSosi, PlanomraadePdf, Planinitiativ, ReferatOppstartsmoete, Planprogram eller Annet. Gir finere inndeling enn dokumenttype (forslag – må verifiseres)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tittel" type="string">
+            <annotation>
+              <documentation>dokumentets tittel eller filnavn</documentation>
+            </annotation>
+          </element>
+          <element name="referanseDokumentfil" type="string">
+            <annotation>
+              <documentation>lenke (URL) for nedlasting av dokumentfilen. Tilsvarer arkivreferanse i SOSI Planregister 5.0</documentation>
             </annotation>
           </element>
           <element minOccurs="0" name="dokumentdato" type="date">
             <annotation>
-              <documentation>dato da dokumentet ble datert eller godkjent (forslag – må verifiseres)</documentation>
+              <documentation>dokumentets egen dato (datert eller godkjent), ikke dato for innsending eller registrering</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="mimeType" type="string">
+            <annotation>
+              <documentation>filformat angitt som medietype (MIME-type) etter IANA, f.eks. application/pdf</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sjekksum" type="string">
+            <annotation>
+              <documentation>sjekksum for dokumentfilen, brukt til å kontrollere at filen er uendret (forslag – må verifiseres)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sjekksumAlgoritme" type="string">
+            <annotation>
+              <documentation>algoritmen sjekksummen er beregnet med, f.eks. SHA-256 (forslag – må verifiseres)</documentation>
             </annotation>
           </element>
           <element minOccurs="0" name="beskrivelse" type="string">
             <annotation>
-              <documentation>fritekst som beskriver dokumentets innhold (forslag – må verifiseres)</documentation>
+              <documentation>fritekst som beskriver dokumentets innhold</documentation>
             </annotation>
           </element>
           <element minOccurs="0" name="arkivnavn" type="string">
             <annotation>
-              <documentation>navn på arkivet eller systemet der dokumentet er lagret (forslag – må verifiseres)</documentation>
+              <documentation>navn på arkivet eller systemet der dokumentet er lagret</documentation>
             </annotation>
           </element>
         </sequence>
@@ -356,4 +427,86 @@ Denne identifikatoren tildeles planen når planprosessen starter, og den kan ikk
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
+  <element name="Saksnummer" substitutionGroup="gml:AbstractObject" type="planleggingigangsatt:SaksnummerType"/>
+  <complexType name="SaksnummerType">
+    <sequence>
+      <element name="saksår" type="integer">
+        <annotation>
+          <documentation>året saken ble opprettet (forslag – må verifiseres)</documentation>
+        </annotation>
+      </element>
+      <element name="sakssekvensnummer" type="integer">
+        <annotation>
+          <documentation>løpenummer for saken innen saksåret (forslag – må verifiseres)</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="SaksnummerPropertyType">
+    <sequence>
+      <element ref="planleggingigangsatt:Saksnummer"/>
+    </sequence>
+  </complexType>
+  <element name="Varselområde" substitutionGroup="gml:AbstractFeature" type="planleggingigangsatt:VarselområdeType">
+    <annotation>
+      <documentation>område som omfatter eiendommene til partene som er varslet om oppstart av planarbeidet (pbl. § 12-8), slik det formidles i OGC API-Features fra Direktoratet for byggkvalitet.
+
+Varselområdet er normalt større enn planområdet, og tar typisk med eiendommer som grenser til planområdet eller ligger nær det, for eksempel på andre siden av en veg (forslag – må verifiseres)</documentation>
+    </annotation>
+  </element>
+  <complexType name="VarselområdeType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element name="geometri" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>varselområdets avgrensning i grunnriss, som et polygon rundt eiendommene til de varslede partene (forslag – må verifiseres)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="objid" type="integer">
+            <annotation>
+              <documentation>tjenestens interne identifikator for objektet (feature-id i OGC API)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="identifikasjon" type="planleggingigangsatt:IdentifikasjonPropertyType">
+            <annotation>
+              <documentation>unik identifikasjon av et objekt i et datasett, forvaltet av den ansvarlige produsent/forvalter, og kan benyttes av eksterne applikasjoner som stabil referanse til objektet.
+
+Merknad: Denne unike identifikatoren skal ikke endres i løpet av objektets levetid, og skal ikke gjenbrukes i andre objekt.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arealplan" type="integer">
+            <annotation>
+              <documentation>referanse (objid) til arealplanen varselområdet tilhører</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plan" type="planleggingigangsatt:ArealplanPropertyType"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VarselområdePropertyType">
+    <sequence minOccurs="0">
+      <element ref="planleggingigangsatt:Varselområde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VedleggstypeType">
+    <annotation>
+      <documentation>vedleggstyper i Fellestjenester PLAN (DiBK) for varsel om oppstart av planarbeid. Ingen publisert kodeliste funnet – verdier hentet fra plandata.ft.dibk.no (forslag – må verifiseres)</documentation>
+    </annotation>
+    <union memberTypes="planleggingigangsatt:VedleggstypeEnumerationType planleggingigangsatt:VedleggstypeOtherType"/>
+  </simpleType>
+  <simpleType name="VedleggstypeEnumerationType">
+    <annotation>
+      <documentation>vedleggstyper i Fellestjenester PLAN (DiBK) for varsel om oppstart av planarbeid. Ingen publisert kodeliste funnet – verdier hentet fra plandata.ft.dibk.no (forslag – må verifiseres)</documentation>
+    </annotation>
+    <restriction base="string"/>
+  </simpleType>
+  <simpleType name="VedleggstypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
 </schema>
