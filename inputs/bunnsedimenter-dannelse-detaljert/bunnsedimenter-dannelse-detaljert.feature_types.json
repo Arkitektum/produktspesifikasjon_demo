@@ -1,2320 +1,2741 @@
 [
   {
-    "name": "Dataavgrensning",
+    "attributes": [
+      {
+        "cardinality": "0..1",
+        "description": "Lokal identifikator for objektet, tildelt av dataleverandør/dataforvalter, og unik innenfor datasettet",
+        "name": "lokalid",
+        "ogcRole": "id",
+        "type": "string"
+      },
+      {
+        "attributes": [
+          {
+            "cardinality": "0..1",
+            "description": "Lokal identifikator, tildelt av dataleverendør/dataforvalter. Den lokale identifikatoren er unik innenfor navnerommet, ingen andre objekter har samme identifikator.<br/>NOTE: Det er data leverendørens ansvar å sørge for at denne lokale identifikatoren er unik innenfor navnerommet.",
+            "name": "lokalId",
+            "type": "string"
+          },
+          {
+            "cardinality": "0..1",
+            "description": "Navnerom som unikt identifiserer datakilden til objektet, starter med to bokstavs kode jfr ISO 3166. Benytter understreking  (\"_\") dersom data produsenten ikke er assosiert med bare et land.\r\n<br/>NOTE 1 : Verdien for nanverom vil eies av den dataprodusent som har ansvar for de unike identifikatorene og vil registreres i \"INSPIRE external  Object Identifier Namespaces Register\"<br/>Eksempel: NO for Norge.",
+            "name": "navnerom",
+            "type": "string"
+          },
+          {
+            "cardinality": "0..1",
+            "description": "Identifikasjon av en spesiell versjon av et geografisk objekt (instans), maksimum lengde på 25 karakterers. Dersom spesifikasjonen av et geografisk objekt med en identifikasjon inkludererer livsløpssyklusinformasjon, benyttes denne versjonId for å skille mellom ulike versjoner av samme objekt. versjonId er en unik  identifikasjon av versjonen. <br/>NOTE Maksimum lengde er valgt for å tillate tidsregistrering i henhold til  ISO 8601, slik som  \"2007-02-12T12:12:12+05:30\" som versjonId.",
+            "name": "versjonId",
+            "type": "string"
+          }
+        ],
+        "cardinality": "0..1",
+        "description": "Unik identifikasjon av et objekt",
+        "name": "identifikasjon",
+        "type": "Identifikasjon"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Dato når en representasjon av objektet i digital form første gang ble etablert<br/>Merknad: <br/>FørsteDigitaliseringsdato kan skille seg fra førsteDatafangstdato ved at den første datafangsten skjedde analogt og gjort om til digital form senere i en produksjonsprosess. <br/>Eventuelt at innlegging i databasen skjedde på et senere tidspunkt enn registreringen /observasjonen / målingen av objektet.",
+        "name": "førsteDigitaliseringsdato",
+        "ogcRole": "primary-instant",
+        "type": "date (string)"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Dato for siste endring på objektetdataene <br/>Merknad: \r\nOppdateringsdato kan være forskjellig fra Datafangsdato ved at data som er registrert kan bufres en kortere eller lengre periode før disse legges inn i datasystemet (databasen).<br/>-Definition-<br/>Date and time at which this version of the spatial object was inserted or changed in the spatial data set.",
+        "name": "oppdateringsdato",
+        "type": "date (string)"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Dato for uttak fra en database<br/>Merknad:<br/>Skiller seg fra Kopidato ved at en ikke skiller på om det er uttak fra en originaldatabase eller en kopidatabase.",
+        "name": "datauttaksdato",
+        "type": "date (string)"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Kvaliteten på registrering/kartlegging av tema sett i forhold til faktiske forhold i naturen. Ulik tematisk oppløsning/generaliseringsgrad kan være styrt av temaets samfunnsmessige betydning, områdets arealmessige betydning eller prosjektets økonomi. Med nøyaktighet i denne sammenheng menes hvor korrekt registreringen avspeiler objektets posisjon i naturen og presisjonen i valg av tematisk innhold i forhold til generalisering\r\n<br/>Merknad: Tematisk oppløsning/generaliseringsgrad kan være styrt av temaets samfunnsmessige betydning, områdets arealmessige betydning eller prosjektets målsetning",
+        "name": "temakvalitet",
+        "type": "Temakvalitet",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "description": "Meget lav posisjonell og tematisk nøyaktighet, sterkt generalisert; for nasjonale eller store regionale oversikter i målestokk mindre enn 1:250 000",
+              "label": "Dårlig",
+              "value": "dårlig"
+            },
+            {
+              "description": "God posisjonell og tematisk nøyaktighet (ca. ±100 m), noe generalisert, ofte basert på flyfototolkning; egnet til oversikt i ca. 1:100 000",
+              "label": "God",
+              "value": "god"
+            },
+            {
+              "description": "Høy posisjonell og tematisk nøyaktighet (ca. ±50 m), høy oppløsning, lite generalisert; egnet for arealplaner i ca. 1:50 000",
+              "label": "Meget god",
+              "value": "megetGod"
+            },
+            {
+              "description": "Lav posisjonell og tematisk nøyaktighet, sterkt generalisert; for oversiktskart i liten målestokk",
+              "label": "Noe dårlig",
+              "value": "noeDårlig"
+            },
+            {
+              "description": "Middels nøyaktighet (ca. ±250 m), en god del generalisert; egnet kun til regionale oversikter i ca. 1:250 000",
+              "label": "Nokså god",
+              "value": "noksåGod"
+            },
+            {
+              "description": "Høyest mulig posisjonell og tematisk nøyaktighet (ca. ±20 m); egnet for kommunal planlegging i målestokk større enn 1:20 000",
+              "label": "Særdeles god",
+              "value": "særdelesGod"
+            }
+          ],
+          "type": "enumeration"
+        }
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen.",
+        "name": "geolPavisningstype",
+        "type": "GeolPavisningstype",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "description": "Påvisningsmetode er ikke angitt",
+              "label": "Ikke spesifisert",
+              "value": "0"
+            },
+            {
+              "description": "Avgrensningen eller registreringen av objektet er påvist eller observert i felt",
+              "label": "Sikker påvisning/observasjon",
+              "value": "1"
+            },
+            {
+              "description": "Avgrensning helt eller delvis bestemt av ikke-geologiske forhold, f.eks. administrativ grense eller kystlinje",
+              "label": "Avgrensning ikke basert på geologi",
+              "value": "10"
+            },
+            {
+              "description": "Avgrensning basert på geofysiske data/metoder verifisert ved prøvetaking",
+              "label": "Avgrensning basert på geofysiske data/metoder verifisert ved prøvetaking",
+              "value": "11"
+            },
+            {
+              "description": "Avgrensning basert på tolkning av tilgjengelige geologiske/geofysiske data av varierende oppløsning, litteratur og kart",
+              "label": "Avgrensning basert på tolkning av tilgjengelige geologiske/geofysiske data av varierende oppløsning, litteratur og kart",
+              "value": "12"
+            },
+            {
+              "description": "Avgrensning basert på geologisk observasjon i felt, prøvetaking og analyser",
+              "label": "Avgrensning basert på geologisk observasjon i felt, prøvetaking og analyser",
+              "value": "13"
+            },
+            {
+              "description": "Tolket avgrensning basert på tilgjengelig geologisk kartlegging",
+              "label": "Tolket avgrensning basert på tilgjengelig geologisk kartlegging",
+              "value": "14"
+            },
+            {
+              "description": "Ikke påvist/observert, men antatt avgrensning/registrering av objekt",
+              "label": "Usikker påvisning/observasjon",
+              "value": "2"
+            },
+            {
+              "description": "Avgrensning basert på prøvetaking",
+              "label": "Avgrensning basert på prøvetaking",
+              "value": "21"
+            },
+            {
+              "description": "Avgrensning basert på seismiske data",
+              "label": "Avgrensning basert på seismikk",
+              "value": "22"
+            },
+            {
+              "description": "Avgrensning basert på detaljerte dybdedata, f.eks. multistråleekkolodd og/eller interferometrisk sonar",
+              "label": "Avgrensning basert på detaljerte dybdedata",
+              "value": "23"
+            },
+            {
+              "description": "Avgrensning basert på backscatter-data eller sidescan sonar",
+              "label": "Avgrensning basert på backscatter data/sidescan sonar",
+              "value": "24"
+            },
+            {
+              "description": "Avgrensning basert på prøvetaking kombinert med akustiske data/metoder",
+              "label": "Avgrensning basert på prøvetaking og akustiske data/metoder",
+              "value": "25"
+            },
+            {
+              "description": "Avgrensning basert på akustiske data/metoder",
+              "label": "Avgrensning basert på akustiske data/metoder",
+              "value": "26"
+            },
+            {
+              "description": "Avgrensning basert på flere metoder eller datatyper",
+              "label": "Avgrensning basert på flere metoder/datatyper",
+              "value": "27"
+            },
+            {
+              "description": "Avgrensning basert på undervannsfoto og/eller -video",
+              "label": "Avgrensning basert på undervannsfoto og/eller -video",
+              "value": "28"
+            },
+            {
+              "description": "Avgrensning basert på akustiske metoder verifisert ved prøvetaking, foto eller lignende",
+              "label": "Avgrensning basert på akustiske data/metoder verifisert ved prøvetaking, foto o.l.",
+              "value": "29"
+            },
+            {
+              "description": "Tilfeldig plassert og meget usikker avgrensning; benyttes blant annet under vann- eller breoverflater",
+              "label": "Konstruert avgrensning",
+              "value": "3"
+            },
+            {
+              "description": "Avgrensning tolket ut fra tilgjengelige batymetriske data av varierende oppløsning, litteratur og kart",
+              "label": "Avgrensning basert på tolkning av tilgjengelige batymetriske data, litteratur og kart",
+              "value": "30"
+            },
+            {
+              "label": "31",
+              "value": "31"
+            },
+            {
+              "label": "32",
+              "value": "32"
+            },
+            {
+              "description": "Avgrensning basert på geofysiske indikasjoner",
+              "label": "Geofysisk tolket grense",
+              "value": "4"
+            },
+            {
+              "description": "Basert på generalisert tolkning av objekter med små innbyrdes forskjeller",
+              "label": "Dårlig synlig avgrensning i terrenget",
+              "value": "5"
+            },
+            {
+              "description": "Gradvis overgang mellom to bergarter eller avsetningstyper",
+              "label": "Overgangsmessig grense",
+              "value": "6"
+            },
+            {
+              "description": "Avgrensning fremkommet ved generalisering, sammentolkning eller aggregering",
+              "label": "Tolket avgrensning/registrering",
+              "value": "7"
+            },
+            {
+              "description": "Objekt eller delobjekt tolket fra flybilder",
+              "label": "Flyfototolket objekt eller delobjekt",
+              "value": "8"
+            },
+            {
+              "description": "Observasjon der beliggenheten er usikker",
+              "label": "Observasjon med usikker geografisk beliggenhet",
+              "value": "9"
+            }
+          ],
+          "type": "enumeration"
+        }
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen.",
+        "name": "geolPavisningstypeNavn",
+        "type": "string"
+      },
+      {
+        "attributes": [
+          {
+            "cardinality": "0..1",
+            "description": "Kode på metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss",
+            "name": "målemetode",
+            "type": "Målemetode",
+            "valueDomain": {
+              "listedValues": [
+                {
+                  "description": "Terrengmålt",
+                  "label": "Terrengmålt",
+                  "value": "10"
+                },
+                {
+                  "description": "Totalstasjon",
+                  "label": "Totalstasjon",
+                  "value": "11"
+                },
+                {
+                  "description": "Teodolitt med elektronisk avstandsmåler",
+                  "label": "Teodolitt med elektronisk avstandsmåler",
+                  "value": "12"
+                },
+                {
+                  "description": "Teodolitt med målebånd",
+                  "label": "Teodolitt med målebånd",
+                  "value": "13"
+                },
+                {
+                  "description": "Ortogonalmetoden",
+                  "label": "Ortogonalmetoden",
+                  "value": "14"
+                },
+                {
+                  "description": "Utmål",
+                  "label": "Utmål",
+                  "value": "15"
+                },
+                {
+                  "description": "Tatt fra plan",
+                  "label": "Tatt fra plan",
+                  "value": "18"
+                },
+                {
+                  "description": "Annet",
+                  "label": "Annet",
+                  "value": "19"
+                },
+                {
+                  "description": "Stereoinstrument",
+                  "label": "Stereoinstrument",
+                  "value": "20"
+                },
+                {
+                  "description": "Aerotriangulert",
+                  "label": "Aerotriangulert",
+                  "value": "21"
+                },
+                {
+                  "description": "Analytisk plotter",
+                  "label": "Analytisk plotter",
+                  "value": "22"
+                },
+                {
+                  "description": "Autograf - vanlig registrering",
+                  "label": "Autograf - vanlig registrering",
+                  "value": "23"
+                },
+                {
+                  "description": "Digitalt stereoinstrument",
+                  "label": "Digitalt stereoinstrument",
+                  "value": "24"
+                },
+                {
+                  "description": "Scannet fra kart",
+                  "label": "Scannet fra kart",
+                  "value": "30"
+                },
+                {
+                  "description": "Scannet fra blyantoriginal",
+                  "label": "Scannet fra blyantoriginal",
+                  "value": "31"
+                },
+                {
+                  "description": "Scannet fra rissefolie",
+                  "label": "Scannet fra rissefolie",
+                  "value": "32"
+                },
+                {
+                  "description": "Scannet fra transparent folie - god kvalitet",
+                  "label": "Scannet fra transparent folie - god kvalitet",
+                  "value": "33"
+                },
+                {
+                  "description": "Scannet fra transparent folie - mindre god kvalitet",
+                  "label": "Scannet fra transparent folie - mindre god kvalitet",
+                  "value": "34"
+                },
+                {
+                  "description": "Scannet fra papirkopi",
+                  "label": "Scannet fra papirkopi",
+                  "value": "35"
+                },
+                {
+                  "description": "Flybåren laserscanner",
+                  "label": "Flybåren laserscanner",
+                  "value": "36"
+                },
+                {
+                  "label": "37",
+                  "value": "37"
+                },
+                {
+                  "label": "38",
+                  "value": "38"
+                },
+                {
+                  "description": "Digitalisert på dig.bord fra ortofoto/flybilde",
+                  "label": "Digitalisert på dig.bord fra ortofoto/flybilde",
+                  "value": "40"
+                },
+                {
+                  "description": "Digitalisert fra ortofoto - film",
+                  "label": "Digitalisert fra ortofoto - film",
+                  "value": "41"
+                },
+                {
+                  "description": "Digitalisert fra ortofoto - fotokopi",
+                  "label": "Digitalisert fra ortofoto - fotokopi",
+                  "value": "42"
+                },
+                {
+                  "description": "Digitalisert fra flybilde - monodigitalisert fra film",
+                  "label": "Digitalisert fra flybilde - monodigitalisert fra film",
+                  "value": "43"
+                },
+                {
+                  "description": "Digitalisert fra flybilde - monodigitalisert fra fotokopi",
+                  "label": "Digitalisert fra flybilde - monodigitalisert fra fotokopi",
+                  "value": "44"
+                },
+                {
+                  "description": "Digitalisert fra ortofoto",
+                  "label": "Digitalisert fra ortofoto",
+                  "value": "45"
+                },
+                {
+                  "description": "Digitalisert på skjerm fra satellittbilde",
+                  "label": "Digitalisert på skjerm fra satellittbilde",
+                  "value": "46"
+                },
+                {
+                  "description": "Digitalisert på skjerm fra andre digitale rasterdata",
+                  "label": "Digitalisert på skjerm fra andre digitale rasterdata",
+                  "value": "47"
+                },
+                {
+                  "label": "48",
+                  "value": "48"
+                },
+                {
+                  "label": "49",
+                  "value": "49"
+                },
+                {
+                  "description": "Digitalisert på dig.bord fra strek-kart",
+                  "label": "Digitalisert på dig.bord fra strek-kart",
+                  "value": "50"
+                },
+                {
+                  "description": "Digitalisert på dig.bord fra blyantoriginal",
+                  "label": "Digitalisert på dig.bord fra blyantoriginal",
+                  "value": "51"
+                },
+                {
+                  "description": "Digitalisert på dig.bord fra rissefolie",
+                  "label": "Digitalisert på dig.bord fra rissefolie",
+                  "value": "52"
+                },
+                {
+                  "description": "Digitalisert på dig.bord fra transparent film - god kvalitet",
+                  "label": "Digitalisert på dig.bord fra transparent film - god kvalitet",
+                  "value": "53"
+                },
+                {
+                  "description": "Digitalisert på dig.bord fra transparent film - mindre god kvalitet",
+                  "label": "Digitalisert på dig.bord fra transparent film - mindre god kvalitet",
+                  "value": "54"
+                },
+                {
+                  "description": "Digitalisert på dig.bord fra papirkopi",
+                  "label": "Digitalisert på dig.bord fra papirkopi",
+                  "value": "55"
+                },
+                {
+                  "description": "Digitalisert på skjerm fra scannet samkopi (Raster)",
+                  "label": "Digitalisert på skjerm fra scannet samkopi (Raster)",
+                  "value": "56"
+                },
+                {
+                  "description": "Genererte data (interpolasjon)",
+                  "label": "Genererte data (interpolasjon)",
+                  "value": "60"
+                },
+                {
+                  "description": "Generert i terrengmodell",
+                  "label": "Generert i terrengmodell",
+                  "value": "61"
+                },
+                {
+                  "description": "Vektet middel",
+                  "label": "Vektet middel",
+                  "value": "62"
+                },
+                {
+                  "description": "Generert sirkelgeometri",
+                  "label": "Generert sirkelgeometri",
+                  "value": "63"
+                },
+                {
+                  "description": "Generalisert",
+                  "label": "Generalisert",
+                  "value": "64"
+                },
+                {
+                  "description": "Generert sentralpunkt",
+                  "label": "Generert sentralpunkt",
+                  "value": "65"
+                },
+                {
+                  "description": "Sammenknytningspunkt/randpunkt",
+                  "label": "Sammenknytningspunkt/randpunkt",
+                  "value": "66"
+                },
+                {
+                  "description": "Koordinater hentet fra GAB",
+                  "label": "Koordinater hentet fra GAB",
+                  "value": "67"
+                },
+                {
+                  "description": "Koordinater hentet fra JREG",
+                  "label": "Koordinater hentet fra JREG",
+                  "value": "68"
+                },
+                {
+                  "description": "Beregnet",
+                  "label": "Beregnet",
+                  "value": "69"
+                },
+                {
+                  "description": "Spesielle metoder",
+                  "label": "Spesielle metoder",
+                  "value": "70"
+                },
+                {
+                  "description": "Målt med stikkstang",
+                  "label": "Målt med stikkstang",
+                  "value": "71"
+                },
+                {
+                  "description": "Målt med waterstang",
+                  "label": "Målt med waterstang",
+                  "value": "72"
+                },
+                {
+                  "description": "Målt med målehjul",
+                  "label": "Målt med målehjul",
+                  "value": "73"
+                },
+                {
+                  "description": "Målt med stigningsmåler",
+                  "label": "Målt med stigningsmåler",
+                  "value": "74"
+                },
+                {
+                  "label": "77",
+                  "value": "77"
+                },
+                {
+                  "description": "Fastsatt ved dom eller kongelig resolusjon",
+                  "label": "Fastsatt ved dom eller kongelig resolusjon",
+                  "value": "78"
+                },
+                {
+                  "description": "Annen spesiell metode (spesifiseres i filhode)",
+                  "label": "Annen spesiell metode (spesifiseres i filhode)",
+                  "value": "79"
+                },
+                {
+                  "description": "Frihåndstegning",
+                  "label": "Frihåndstegning",
+                  "value": "80"
+                },
+                {
+                  "description": "Digitalisert fra krokering på kart",
+                  "label": "Digitalisert fra krokering på kart",
+                  "value": "81"
+                },
+                {
+                  "description": "Direkte innlagt på skjerm",
+                  "label": "Direkte innlagt på skjerm",
+                  "value": "82"
+                },
+                {
+                  "description": "Treghetsstedfesting",
+                  "label": "Treghetsstedfesting",
+                  "value": "90"
+                },
+                {
+                  "description": "GPS Kodemåling, relative målinger",
+                  "label": "GPS Kodemåling, relative målinger",
+                  "value": "91"
+                },
+                {
+                  "description": "GPS Kodemåling, enkeltmålinger",
+                  "label": "GPS Kodemåling, enkeltmålinger",
+                  "value": "92"
+                },
+                {
+                  "description": "GPS Fasemåling, statisk måling",
+                  "label": "GPS Fasemåling, statisk måling",
+                  "value": "93"
+                },
+                {
+                  "description": "GPS Fasemåling, andre metoder (utenom RTK)",
+                  "label": "GPS Fasemåling, andre metoder (utenom RTK)",
+                  "value": "94"
+                },
+                {
+                  "description": "Kombinasjon av GPS/Treghet",
+                  "label": "Kombinasjon av GPS/Treghet",
+                  "value": "95"
+                },
+                {
+                  "description": "GPS Fasemåling RTK (Realtids kinematisk måling)",
+                  "label": "GPS Fasemåling RTK (Realtids kinematisk måling)",
+                  "value": "96"
+                },
+                {
+                  "description": "GPS Fasemåling, float-løsning",
+                  "label": "GPS Fasemåling, float-løsning",
+                  "value": "97"
+                },
+                {
+                  "description": "Ukjent målemetode",
+                  "label": "Ukjent målemetode",
+                  "value": "99"
+                }
+              ],
+              "type": "enumeration"
+            }
+          },
+          {
+            "cardinality": "0..1",
+            "description": "Navn på metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss",
+            "name": "målemetodeNavn",
+            "type": "string"
+          },
+          {
+            "cardinality": "0..1",
+            "description": "Punktstandardavviket i grunnriss for punkter samt tverravvik for linjer<br/>Merknad:<br/>Oppgitt i cm",
+            "name": "nøyaktighet",
+            "type": "integer"
+          }
+        ],
+        "cardinality": "0..1",
+        "description": "Beskrivelse av kvaliteten på stedfestingen<br/>Merknad: Denne er identisk med ..KVALITET i tidligere versjoner av SOSI.",
+        "name": "kvalitet",
+        "type": "Posisjonskvalitet"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Objektets beliggenhet i forhold til jordoverflaten<br/>Eksempel:\r\nPå bro, i tunnel, inne i et bygningsmessig anlegg, etc.",
+        "name": "medium",
+        "type": "Medium",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "description": "I bygning/bygningsmessig anlegg",
+              "label": "I bygning/bygningsmessig anlegg",
+              "value": "B"
+            },
+            {
+              "description": "Tidvis under vann",
+              "label": "Tidvis under vann",
+              "value": "D"
+            },
+            {
+              "description": "På isbre",
+              "label": "På isbre",
+              "value": "I"
+            },
+            {
+              "description": "Under isbre",
+              "label": "Under isbre",
+              "value": "J"
+            },
+            {
+              "description": "I luft",
+              "label": "I luft",
+              "value": "L"
+            },
+            {
+              "description": "På vannoverflaten",
+              "label": "På vannoverflaten",
+              "value": "O"
+            },
+            {
+              "description": "På sjøbunnen",
+              "label": "På sjøbunnen",
+              "value": "S"
+            },
+            {
+              "description": "På terrenget/på bakkenivå",
+              "label": "På terrenget/på bakkenivå",
+              "value": "T"
+            },
+            {
+              "description": "Under terrenget",
+              "label": "Under terrenget",
+              "value": "U"
+            },
+            {
+              "description": "Alltid i vann",
+              "label": "Alltid i vann",
+              "value": "V"
+            },
+            {
+              "description": "Under sjøbunnen",
+              "label": "Under sjøbunnen",
+              "value": "W"
+            },
+            {
+              "description": "Ukjent",
+              "label": "Ukjent",
+              "value": "X"
+            }
+          ],
+          "type": "enumeration"
+        }
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Objektets beliggenhet i forhold til jordoverflaten<br/>Eksempel:\r\nPå bro, i tunnel, inne i et bygningsmessig anlegg, etc.",
+        "name": "mediumNavn",
+        "type": "string"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Referanse til opphavsmaterialet, kildematerialet, organisasjons/publiseringskilde\r\n<br/>Merknad: <br/>Kan også beskrive navn på person og årsak til oppdatering",
+        "name": "opphav",
+        "type": "string"
+      }
+    ],
     "description": "Generell avgrensningslinje, f.eks. mellom datasett med ulik kvalitet, innhold eller detaljering",
     "geometry": {
-      "itemType": "feature",
-      "type": "geometry-linestring",
       "crs": [
         "#/crs",
         "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
       ],
-      "storageCrs": "http://www.opengis.net/def/crs/EPSG/0/4258",
       "format": "geometry-linestring",
-      "ogcRole": "primary-geometry"
+      "itemType": "feature",
+      "ogcRole": "primary-geometry",
+      "storageCrs": "http://www.opengis.net/def/crs/EPSG/0/4258",
+      "type": "geometry-linestring"
     },
-    "attributes": [
-      {
-        "name": "lokalid",
-        "type": "string",
-        "cardinality": "0..1",
-        "description": "lokalid",
-        "ogcRole": "id"
-      },
-      {
-        "name": "identifikasjon",
-        "type": "Identifikasjon",
-        "cardinality": "0..1",
-        "description": "Unik identifikasjon av et objekt",
-        "attributes": [
-          {
-            "name": "lokalId",
-            "type": "string",
-            "cardinality": "0..1",
-            "description": "Lokal identifikator, tildelt av dataleverendør/dataforvalter. Den lokale identifikatoren er unik innenfor navnerommet, ingen andre objekter har samme identifikator.<br/>NOTE: Det er data leverendørens ansvar å sørge for at denne lokale identifikatoren er unik innenfor navnerommet."
-          },
-          {
-            "name": "navnerom",
-            "type": "string",
-            "cardinality": "0..1",
-            "description": "Navnerom som unikt identifiserer datakilden til objektet, starter med to bokstavs kode jfr ISO 3166. Benytter understreking  (\"_\") dersom data produsenten ikke er assosiert med bare et land.\r\n<br/>NOTE 1 : Verdien for nanverom vil eies av den dataprodusent som har ansvar for de unike identifikatorene og vil registreres i \"INSPIRE external  Object Identifier Namespaces Register\"<br/>Eksempel: NO for Norge."
-          },
-          {
-            "name": "versjonId",
-            "type": "string",
-            "cardinality": "0..1",
-            "description": "Identifikasjon av en spesiell versjon av et geografisk objekt (instans), maksimum lengde på 25 karakterers. Dersom spesifikasjonen av et geografisk objekt med en identifikasjon inkludererer livsløpssyklusinformasjon, benyttes denne versjonId for å skille mellom ulike versjoner av samme objekt. versjonId er en unik  identifikasjon av versjonen. <br/>NOTE Maksimum lengde er valgt for å tillate tidsregistrering i henhold til  ISO 8601, slik som  \"2007-02-12T12:12:12+05:30\" som versjonId."
-          }
-        ]
-      },
-      {
-        "name": "førsteDigitaliseringsdato",
-        "type": "date (string)",
-        "cardinality": "0..1",
-        "description": "Dato når en representasjon av objektet i digital form første gang ble etablert<br/>Merknad: <br/>FørsteDigitaliseringsdato kan skille seg fra førsteDatafangstdato ved at den første datafangsten skjedde analogt og gjort om til digital form senere i en produksjonsprosess. <br/>Eventuelt at innlegging i databasen skjedde på et senere tidspunkt enn registreringen /observasjonen / målingen av objektet.",
-        "ogcRole": "primary-instant"
-      },
-      {
-        "name": "oppdateringsdato",
-        "type": "date (string)",
-        "cardinality": "0..1",
-        "description": "Dato for siste endring på objektetdataene <br/>Merknad: \r\nOppdateringsdato kan være forskjellig fra Datafangsdato ved at data som er registrert kan bufres en kortere eller lengre periode før disse legges inn i datasystemet (databasen).<br/>-Definition-<br/>Date and time at which this version of the spatial object was inserted or changed in the spatial data set."
-      },
-      {
-        "name": "datauttaksdato",
-        "type": "date (string)",
-        "cardinality": "0..1",
-        "description": "Dato for uttak fra en database<br/>Merknad:<br/>Skiller seg fra Kopidato ved at en ikke skiller på om det er uttak fra en originaldatabase eller en kopidatabase."
-      },
-      {
-        "name": "temakvalitet",
-        "type": "Temakvalitet",
-        "cardinality": "0..1",
-        "description": "Kvaliteten på registrering/kartlegging av tema sett i forhold til faktiske forhold i naturen. Ulik tematisk oppløsning/generaliseringsgrad kan være styrt av temaets samfunnsmessige betydning, områdets arealmessige betydning eller prosjektets økonomi. Med nøyaktighet i denne sammenheng menes hvor korrekt registreringen avspeiler objektets posisjon i naturen og presisjonen i valg av tematisk innhold i forhold til generalisering\r\n<br/>Merknad: Tematisk oppløsning/generaliseringsgrad kan være styrt av temaets samfunnsmessige betydning, områdets arealmessige betydning eller prosjektets målsetning",
-        "valueDomain": {
-          "type": "enumeration",
-          "listedValues": [
-            {
-              "value": "dårlig",
-              "label": "dårlig"
-            },
-            {
-              "value": "god",
-              "label": "god"
-            },
-            {
-              "value": "megetGod",
-              "label": "megetGod"
-            },
-            {
-              "value": "noeDårlig",
-              "label": "noeDårlig"
-            },
-            {
-              "value": "noksåGod",
-              "label": "noksåGod"
-            },
-            {
-              "value": "særdelesGod",
-              "label": "særdelesGod"
-            }
-          ]
-        }
-      },
-      {
-        "name": "geolPavisningstype",
-        "type": "GeolPavisningstype",
-        "cardinality": "0..1",
-        "description": "Hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen.",
-        "valueDomain": {
-          "type": "enumeration",
-          "listedValues": [
-            {
-              "value": "0",
-              "label": "0"
-            },
-            {
-              "value": "1",
-              "label": "1"
-            },
-            {
-              "value": "10",
-              "label": "10"
-            },
-            {
-              "value": "11",
-              "label": "11"
-            },
-            {
-              "value": "12",
-              "label": "12"
-            },
-            {
-              "value": "13",
-              "label": "13"
-            },
-            {
-              "value": "14",
-              "label": "14"
-            },
-            {
-              "value": "2",
-              "label": "2"
-            },
-            {
-              "value": "21",
-              "label": "21"
-            },
-            {
-              "value": "22",
-              "label": "22"
-            },
-            {
-              "value": "23",
-              "label": "23"
-            },
-            {
-              "value": "24",
-              "label": "24"
-            },
-            {
-              "value": "25",
-              "label": "25"
-            },
-            {
-              "value": "26",
-              "label": "26"
-            },
-            {
-              "value": "27",
-              "label": "27"
-            },
-            {
-              "value": "28",
-              "label": "28"
-            },
-            {
-              "value": "29",
-              "label": "29"
-            },
-            {
-              "value": "3",
-              "label": "3"
-            },
-            {
-              "value": "30",
-              "label": "30"
-            },
-            {
-              "value": "31",
-              "label": "31"
-            },
-            {
-              "value": "32",
-              "label": "32"
-            },
-            {
-              "value": "4",
-              "label": "4"
-            },
-            {
-              "value": "5",
-              "label": "5"
-            },
-            {
-              "value": "6",
-              "label": "6"
-            },
-            {
-              "value": "7",
-              "label": "7"
-            },
-            {
-              "value": "8",
-              "label": "8"
-            },
-            {
-              "value": "9",
-              "label": "9"
-            }
-          ]
-        }
-      },
-      {
-        "name": "geolPavisningstypeNavn",
-        "type": "string",
-        "cardinality": "0..1",
-        "description": "Hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen."
-      },
-      {
-        "name": "kvalitet",
-        "type": "Posisjonskvalitet",
-        "cardinality": "0..1",
-        "description": "Beskrivelse av kvaliteten på stedfestingen<br/>Merknad: Denne er identisk med ..KVALITET i tidligere versjoner av SOSI.",
-        "attributes": [
-          {
-            "name": "målemetode",
-            "type": "Målemetode",
-            "cardinality": "0..1",
-            "description": "Kode på metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss",
-            "valueDomain": {
-              "type": "enumeration",
-              "listedValues": [
-                {
-                  "value": "10",
-                  "label": "10"
-                },
-                {
-                  "value": "11",
-                  "label": "11"
-                },
-                {
-                  "value": "12",
-                  "label": "12"
-                },
-                {
-                  "value": "13",
-                  "label": "13"
-                },
-                {
-                  "value": "14",
-                  "label": "14"
-                },
-                {
-                  "value": "15",
-                  "label": "15"
-                },
-                {
-                  "value": "18",
-                  "label": "18"
-                },
-                {
-                  "value": "19",
-                  "label": "19"
-                },
-                {
-                  "value": "20",
-                  "label": "20"
-                },
-                {
-                  "value": "21",
-                  "label": "21"
-                },
-                {
-                  "value": "22",
-                  "label": "22"
-                },
-                {
-                  "value": "23",
-                  "label": "23"
-                },
-                {
-                  "value": "24",
-                  "label": "24"
-                },
-                {
-                  "value": "30",
-                  "label": "30"
-                },
-                {
-                  "value": "31",
-                  "label": "31"
-                },
-                {
-                  "value": "32",
-                  "label": "32"
-                },
-                {
-                  "value": "33",
-                  "label": "33"
-                },
-                {
-                  "value": "34",
-                  "label": "34"
-                },
-                {
-                  "value": "35",
-                  "label": "35"
-                },
-                {
-                  "value": "36",
-                  "label": "36"
-                },
-                {
-                  "value": "37",
-                  "label": "37"
-                },
-                {
-                  "value": "38",
-                  "label": "38"
-                },
-                {
-                  "value": "40",
-                  "label": "40"
-                },
-                {
-                  "value": "41",
-                  "label": "41"
-                },
-                {
-                  "value": "42",
-                  "label": "42"
-                },
-                {
-                  "value": "43",
-                  "label": "43"
-                },
-                {
-                  "value": "44",
-                  "label": "44"
-                },
-                {
-                  "value": "45",
-                  "label": "45"
-                },
-                {
-                  "value": "46",
-                  "label": "46"
-                },
-                {
-                  "value": "47",
-                  "label": "47"
-                },
-                {
-                  "value": "48",
-                  "label": "48"
-                },
-                {
-                  "value": "49",
-                  "label": "49"
-                },
-                {
-                  "value": "50",
-                  "label": "50"
-                },
-                {
-                  "value": "51",
-                  "label": "51"
-                },
-                {
-                  "value": "52",
-                  "label": "52"
-                },
-                {
-                  "value": "53",
-                  "label": "53"
-                },
-                {
-                  "value": "54",
-                  "label": "54"
-                },
-                {
-                  "value": "55",
-                  "label": "55"
-                },
-                {
-                  "value": "56",
-                  "label": "56"
-                },
-                {
-                  "value": "60",
-                  "label": "60"
-                },
-                {
-                  "value": "61",
-                  "label": "61"
-                },
-                {
-                  "value": "62",
-                  "label": "62"
-                },
-                {
-                  "value": "63",
-                  "label": "63"
-                },
-                {
-                  "value": "64",
-                  "label": "64"
-                },
-                {
-                  "value": "65",
-                  "label": "65"
-                },
-                {
-                  "value": "66",
-                  "label": "66"
-                },
-                {
-                  "value": "67",
-                  "label": "67"
-                },
-                {
-                  "value": "68",
-                  "label": "68"
-                },
-                {
-                  "value": "69",
-                  "label": "69"
-                },
-                {
-                  "value": "70",
-                  "label": "70"
-                },
-                {
-                  "value": "71",
-                  "label": "71"
-                },
-                {
-                  "value": "72",
-                  "label": "72"
-                },
-                {
-                  "value": "73",
-                  "label": "73"
-                },
-                {
-                  "value": "74",
-                  "label": "74"
-                },
-                {
-                  "value": "77",
-                  "label": "77"
-                },
-                {
-                  "value": "78",
-                  "label": "78"
-                },
-                {
-                  "value": "79",
-                  "label": "79"
-                },
-                {
-                  "value": "80",
-                  "label": "80"
-                },
-                {
-                  "value": "81",
-                  "label": "81"
-                },
-                {
-                  "value": "82",
-                  "label": "82"
-                },
-                {
-                  "value": "90",
-                  "label": "90"
-                },
-                {
-                  "value": "91",
-                  "label": "91"
-                },
-                {
-                  "value": "92",
-                  "label": "92"
-                },
-                {
-                  "value": "93",
-                  "label": "93"
-                },
-                {
-                  "value": "94",
-                  "label": "94"
-                },
-                {
-                  "value": "95",
-                  "label": "95"
-                },
-                {
-                  "value": "96",
-                  "label": "96"
-                },
-                {
-                  "value": "97",
-                  "label": "97"
-                },
-                {
-                  "value": "99",
-                  "label": "99"
-                }
-              ]
-            }
-          },
-          {
-            "name": "målemetodeNavn",
-            "type": "string",
-            "cardinality": "0..1",
-            "description": "Navn på metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss"
-          },
-          {
-            "name": "nøyaktighet",
-            "type": "integer",
-            "cardinality": "0..1",
-            "description": "Punktstandardavviket i grunnriss for punkter samt tverravvik for linjer<br/>Merknad:<br/>Oppgitt i cm"
-          }
-        ]
-      },
-      {
-        "name": "medium",
-        "type": "Medium",
-        "cardinality": "0..1",
-        "description": "Objektets beliggenhet i forhold til jordoverflaten<br/>Eksempel:\r\nPå bro, i tunnel, inne i et bygningsmessig anlegg, etc.",
-        "valueDomain": {
-          "type": "enumeration",
-          "listedValues": [
-            {
-              "value": "B",
-              "label": "B"
-            },
-            {
-              "value": "D",
-              "label": "D"
-            },
-            {
-              "value": "I",
-              "label": "I"
-            },
-            {
-              "value": "J",
-              "label": "J"
-            },
-            {
-              "value": "L",
-              "label": "L"
-            },
-            {
-              "value": "O",
-              "label": "O"
-            },
-            {
-              "value": "S",
-              "label": "S"
-            },
-            {
-              "value": "T",
-              "label": "T"
-            },
-            {
-              "value": "U",
-              "label": "U"
-            },
-            {
-              "value": "V",
-              "label": "V"
-            },
-            {
-              "value": "W",
-              "label": "W"
-            },
-            {
-              "value": "X",
-              "label": "X"
-            }
-          ]
-        }
-      },
-      {
-        "name": "mediumNavn",
-        "type": "string",
-        "cardinality": "0..1",
-        "description": "Objektets beliggenhet i forhold til jordoverflaten<br/>Eksempel:\r\nPå bro, i tunnel, inne i et bygningsmessig anlegg, etc."
-      },
-      {
-        "name": "opphav",
-        "type": "string",
-        "cardinality": "0..1",
-        "description": "Referanse til opphavsmaterialet, kildematerialet, organisasjons/publiseringskilde\r\n<br/>Merknad: <br/>Kan også beskrive navn på person og årsak til oppdatering"
-      }
-    ]
+    "name": "Dataavgrensning"
   },
   {
-    "name": "FiktivDelelinje",
+    "attributes": [
+      {
+        "cardinality": "0..1",
+        "description": "Lokal identifikator for objektet, tildelt av dataleverandør/dataforvalter, og unik innenfor datasettet",
+        "name": "lokalid",
+        "ogcRole": "id",
+        "type": "integer"
+      }
+    ],
     "description": "Linje for å dele opp store flateobjekter<br/>Merknad: <br/>En del produktspesifikasjoner benytter spesifikke fiktive delelinjer.",
     "geometry": {
-      "itemType": "feature",
-      "type": "geometry-linestring",
       "crs": [
         "#/crs"
       ],
-      "storageCrs": "http://www.opengis.net/def/crs/EPSG/0/4258",
       "format": "geometry-linestring",
-      "ogcRole": "primary-geometry"
+      "itemType": "feature",
+      "ogcRole": "primary-geometry",
+      "storageCrs": "http://www.opengis.net/def/crs/EPSG/0/4258",
+      "type": "geometry-linestring"
     },
-    "attributes": [
-      {
-        "name": "lokalid",
-        "type": "integer",
-        "cardinality": "0..1",
-        "ogcRole": "id"
-      }
-    ]
+    "name": "FiktivDelelinje"
   },
   {
-    "name": "GeolAvgrLinje",
+    "attributes": [
+      {
+        "cardinality": "0..1",
+        "description": "Lokal identifikator for objektet, tildelt av dataleverandør/dataforvalter, og unik innenfor datasettet",
+        "name": "lokalid",
+        "ogcRole": "id",
+        "type": "string"
+      },
+      {
+        "attributes": [
+          {
+            "cardinality": "0..1",
+            "description": "Lokal identifikator, tildelt av dataleverendør/dataforvalter. Den lokale identifikatoren er unik innenfor navnerommet, ingen andre objekter har samme identifikator.<br/>NOTE: Det er data leverendørens ansvar å sørge for at denne lokale identifikatoren er unik innenfor navnerommet.",
+            "name": "lokalId",
+            "type": "string"
+          },
+          {
+            "cardinality": "0..1",
+            "description": "Navnerom som unikt identifiserer datakilden til objektet, starter med to bokstavs kode jfr ISO 3166. Benytter understreking  (\"_\") dersom data produsenten ikke er assosiert med bare et land.\r\n<br/>NOTE 1 : Verdien for nanverom vil eies av den dataprodusent som har ansvar for de unike identifikatorene og vil registreres i \"INSPIRE external  Object Identifier Namespaces Register\"<br/>Eksempel: NO for Norge.",
+            "name": "navnerom",
+            "type": "string"
+          },
+          {
+            "cardinality": "0..1",
+            "description": "Identifikasjon av en spesiell versjon av et geografisk objekt (instans), maksimum lengde på 25 karakterers. Dersom spesifikasjonen av et geografisk objekt med en identifikasjon inkludererer livsløpssyklusinformasjon, benyttes denne versjonId for å skille mellom ulike versjoner av samme objekt. versjonId er en unik  identifikasjon av versjonen. <br/>NOTE Maksimum lengde er valgt for å tillate tidsregistrering i henhold til  ISO 8601, slik som  \"2007-02-12T12:12:12+05:30\" som versjonId.",
+            "name": "versjonId",
+            "type": "string"
+          }
+        ],
+        "cardinality": "0..1",
+        "description": "Unik identifikasjon av et objekt",
+        "name": "identifikasjon",
+        "type": "Identifikasjon"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Dato når en representasjon av objektet i digital form første gang ble etablert<br/>Merknad: <br/>FørsteDigitaliseringsdato kan skille seg fra førsteDatafangstdato ved at den første datafangsten skjedde analogt og gjort om til digital form senere i en produksjonsprosess. <br/>Eventuelt at innlegging i databasen skjedde på et senere tidspunkt enn registreringen /observasjonen / målingen av objektet.",
+        "name": "førsteDigitaliseringsdato",
+        "ogcRole": "primary-instant",
+        "type": "date (string)"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Dato for siste endring på objektetdataene <br/>Merknad: \r\nOppdateringsdato kan være forskjellig fra Datafangsdato ved at data som er registrert kan bufres en kortere eller lengre periode før disse legges inn i datasystemet (databasen).<br/>-Definition-<br/>Date and time at which this version of the spatial object was inserted or changed in the spatial data set.",
+        "name": "oppdateringsdato",
+        "type": "date (string)"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Dato for uttak fra en database<br/>Merknad:<br/>Skiller seg fra Kopidato ved at en ikke skiller på om det er uttak fra en originaldatabase eller en kopidatabase.",
+        "name": "datauttaksdato",
+        "type": "date (string)"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Kvaliteten på registrering/kartlegging av tema sett i forhold til faktiske forhold i naturen. Ulik tematisk oppløsning/generaliseringsgrad kan være styrt av temaets samfunnsmessige betydning, områdets arealmessige betydning eller prosjektets økonomi. Med nøyaktighet i denne sammenheng menes hvor korrekt registreringen avspeiler objektets posisjon i naturen og presisjonen i valg av tematisk innhold i forhold til generalisering\r\n<br/>Merknad: Tematisk oppløsning/generaliseringsgrad kan være styrt av temaets samfunnsmessige betydning, områdets arealmessige betydning eller prosjektets målsetning",
+        "name": "temakvalitet",
+        "type": "Temakvalitet",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "description": "Meget lav posisjonell og tematisk nøyaktighet, sterkt generalisert; for nasjonale eller store regionale oversikter i målestokk mindre enn 1:250 000",
+              "label": "Dårlig",
+              "value": "dårlig"
+            },
+            {
+              "description": "God posisjonell og tematisk nøyaktighet (ca. ±100 m), noe generalisert, ofte basert på flyfototolkning; egnet til oversikt i ca. 1:100 000",
+              "label": "God",
+              "value": "god"
+            },
+            {
+              "description": "Høy posisjonell og tematisk nøyaktighet (ca. ±50 m), høy oppløsning, lite generalisert; egnet for arealplaner i ca. 1:50 000",
+              "label": "Meget god",
+              "value": "megetGod"
+            },
+            {
+              "description": "Lav posisjonell og tematisk nøyaktighet, sterkt generalisert; for oversiktskart i liten målestokk",
+              "label": "Noe dårlig",
+              "value": "noeDårlig"
+            },
+            {
+              "description": "Middels nøyaktighet (ca. ±250 m), en god del generalisert; egnet kun til regionale oversikter i ca. 1:250 000",
+              "label": "Nokså god",
+              "value": "noksåGod"
+            },
+            {
+              "description": "Høyest mulig posisjonell og tematisk nøyaktighet (ca. ±20 m); egnet for kommunal planlegging i målestokk større enn 1:20 000",
+              "label": "Særdeles god",
+              "value": "særdelesGod"
+            }
+          ],
+          "type": "enumeration"
+        }
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen.",
+        "name": "geolPavisningstype",
+        "type": "GeolPavisningstype",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "description": "Påvisningsmetode er ikke angitt",
+              "label": "Ikke spesifisert",
+              "value": "0"
+            },
+            {
+              "description": "Avgrensningen eller registreringen av objektet er påvist eller observert i felt",
+              "label": "Sikker påvisning/observasjon",
+              "value": "1"
+            },
+            {
+              "description": "Avgrensning helt eller delvis bestemt av ikke-geologiske forhold, f.eks. administrativ grense eller kystlinje",
+              "label": "Avgrensning ikke basert på geologi",
+              "value": "10"
+            },
+            {
+              "description": "Avgrensning basert på geofysiske data/metoder verifisert ved prøvetaking",
+              "label": "Avgrensning basert på geofysiske data/metoder verifisert ved prøvetaking",
+              "value": "11"
+            },
+            {
+              "description": "Avgrensning basert på tolkning av tilgjengelige geologiske/geofysiske data av varierende oppløsning, litteratur og kart",
+              "label": "Avgrensning basert på tolkning av tilgjengelige geologiske/geofysiske data av varierende oppløsning, litteratur og kart",
+              "value": "12"
+            },
+            {
+              "description": "Avgrensning basert på geologisk observasjon i felt, prøvetaking og analyser",
+              "label": "Avgrensning basert på geologisk observasjon i felt, prøvetaking og analyser",
+              "value": "13"
+            },
+            {
+              "description": "Tolket avgrensning basert på tilgjengelig geologisk kartlegging",
+              "label": "Tolket avgrensning basert på tilgjengelig geologisk kartlegging",
+              "value": "14"
+            },
+            {
+              "description": "Ikke påvist/observert, men antatt avgrensning/registrering av objekt",
+              "label": "Usikker påvisning/observasjon",
+              "value": "2"
+            },
+            {
+              "description": "Avgrensning basert på prøvetaking",
+              "label": "Avgrensning basert på prøvetaking",
+              "value": "21"
+            },
+            {
+              "description": "Avgrensning basert på seismiske data",
+              "label": "Avgrensning basert på seismikk",
+              "value": "22"
+            },
+            {
+              "description": "Avgrensning basert på detaljerte dybdedata, f.eks. multistråleekkolodd og/eller interferometrisk sonar",
+              "label": "Avgrensning basert på detaljerte dybdedata",
+              "value": "23"
+            },
+            {
+              "description": "Avgrensning basert på backscatter-data eller sidescan sonar",
+              "label": "Avgrensning basert på backscatter data/sidescan sonar",
+              "value": "24"
+            },
+            {
+              "description": "Avgrensning basert på prøvetaking kombinert med akustiske data/metoder",
+              "label": "Avgrensning basert på prøvetaking og akustiske data/metoder",
+              "value": "25"
+            },
+            {
+              "description": "Avgrensning basert på akustiske data/metoder",
+              "label": "Avgrensning basert på akustiske data/metoder",
+              "value": "26"
+            },
+            {
+              "description": "Avgrensning basert på flere metoder eller datatyper",
+              "label": "Avgrensning basert på flere metoder/datatyper",
+              "value": "27"
+            },
+            {
+              "description": "Avgrensning basert på undervannsfoto og/eller -video",
+              "label": "Avgrensning basert på undervannsfoto og/eller -video",
+              "value": "28"
+            },
+            {
+              "description": "Avgrensning basert på akustiske metoder verifisert ved prøvetaking, foto eller lignende",
+              "label": "Avgrensning basert på akustiske data/metoder verifisert ved prøvetaking, foto o.l.",
+              "value": "29"
+            },
+            {
+              "description": "Tilfeldig plassert og meget usikker avgrensning; benyttes blant annet under vann- eller breoverflater",
+              "label": "Konstruert avgrensning",
+              "value": "3"
+            },
+            {
+              "description": "Avgrensning tolket ut fra tilgjengelige batymetriske data av varierende oppløsning, litteratur og kart",
+              "label": "Avgrensning basert på tolkning av tilgjengelige batymetriske data, litteratur og kart",
+              "value": "30"
+            },
+            {
+              "label": "31",
+              "value": "31"
+            },
+            {
+              "label": "32",
+              "value": "32"
+            },
+            {
+              "description": "Avgrensning basert på geofysiske indikasjoner",
+              "label": "Geofysisk tolket grense",
+              "value": "4"
+            },
+            {
+              "description": "Basert på generalisert tolkning av objekter med små innbyrdes forskjeller",
+              "label": "Dårlig synlig avgrensning i terrenget",
+              "value": "5"
+            },
+            {
+              "description": "Gradvis overgang mellom to bergarter eller avsetningstyper",
+              "label": "Overgangsmessig grense",
+              "value": "6"
+            },
+            {
+              "description": "Avgrensning fremkommet ved generalisering, sammentolkning eller aggregering",
+              "label": "Tolket avgrensning/registrering",
+              "value": "7"
+            },
+            {
+              "description": "Objekt eller delobjekt tolket fra flybilder",
+              "label": "Flyfototolket objekt eller delobjekt",
+              "value": "8"
+            },
+            {
+              "description": "Observasjon der beliggenheten er usikker",
+              "label": "Observasjon med usikker geografisk beliggenhet",
+              "value": "9"
+            }
+          ],
+          "type": "enumeration"
+        }
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen.",
+        "name": "geolPavisningstypeNavn",
+        "type": "string"
+      },
+      {
+        "attributes": [
+          {
+            "cardinality": "0..1",
+            "description": "Kode på metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss",
+            "name": "målemetode",
+            "type": "Målemetode",
+            "valueDomain": {
+              "listedValues": [
+                {
+                  "description": "Terrengmålt",
+                  "label": "Terrengmålt",
+                  "value": "10"
+                },
+                {
+                  "description": "Totalstasjon",
+                  "label": "Totalstasjon",
+                  "value": "11"
+                },
+                {
+                  "description": "Teodolitt med elektronisk avstandsmåler",
+                  "label": "Teodolitt med elektronisk avstandsmåler",
+                  "value": "12"
+                },
+                {
+                  "description": "Teodolitt med målebånd",
+                  "label": "Teodolitt med målebånd",
+                  "value": "13"
+                },
+                {
+                  "description": "Ortogonalmetoden",
+                  "label": "Ortogonalmetoden",
+                  "value": "14"
+                },
+                {
+                  "description": "Utmål",
+                  "label": "Utmål",
+                  "value": "15"
+                },
+                {
+                  "description": "Tatt fra plan",
+                  "label": "Tatt fra plan",
+                  "value": "18"
+                },
+                {
+                  "description": "Annet",
+                  "label": "Annet",
+                  "value": "19"
+                },
+                {
+                  "description": "Stereoinstrument",
+                  "label": "Stereoinstrument",
+                  "value": "20"
+                },
+                {
+                  "description": "Aerotriangulert",
+                  "label": "Aerotriangulert",
+                  "value": "21"
+                },
+                {
+                  "description": "Analytisk plotter",
+                  "label": "Analytisk plotter",
+                  "value": "22"
+                },
+                {
+                  "description": "Autograf - vanlig registrering",
+                  "label": "Autograf - vanlig registrering",
+                  "value": "23"
+                },
+                {
+                  "description": "Digitalt stereoinstrument",
+                  "label": "Digitalt stereoinstrument",
+                  "value": "24"
+                },
+                {
+                  "description": "Scannet fra kart",
+                  "label": "Scannet fra kart",
+                  "value": "30"
+                },
+                {
+                  "description": "Scannet fra blyantoriginal",
+                  "label": "Scannet fra blyantoriginal",
+                  "value": "31"
+                },
+                {
+                  "description": "Scannet fra rissefolie",
+                  "label": "Scannet fra rissefolie",
+                  "value": "32"
+                },
+                {
+                  "description": "Scannet fra transparent folie - god kvalitet",
+                  "label": "Scannet fra transparent folie - god kvalitet",
+                  "value": "33"
+                },
+                {
+                  "description": "Scannet fra transparent folie - mindre god kvalitet",
+                  "label": "Scannet fra transparent folie - mindre god kvalitet",
+                  "value": "34"
+                },
+                {
+                  "description": "Scannet fra papirkopi",
+                  "label": "Scannet fra papirkopi",
+                  "value": "35"
+                },
+                {
+                  "description": "Flybåren laserscanner",
+                  "label": "Flybåren laserscanner",
+                  "value": "36"
+                },
+                {
+                  "label": "37",
+                  "value": "37"
+                },
+                {
+                  "label": "38",
+                  "value": "38"
+                },
+                {
+                  "description": "Digitalisert på dig.bord fra ortofoto/flybilde",
+                  "label": "Digitalisert på dig.bord fra ortofoto/flybilde",
+                  "value": "40"
+                },
+                {
+                  "description": "Digitalisert fra ortofoto - film",
+                  "label": "Digitalisert fra ortofoto - film",
+                  "value": "41"
+                },
+                {
+                  "description": "Digitalisert fra ortofoto - fotokopi",
+                  "label": "Digitalisert fra ortofoto - fotokopi",
+                  "value": "42"
+                },
+                {
+                  "description": "Digitalisert fra flybilde - monodigitalisert fra film",
+                  "label": "Digitalisert fra flybilde - monodigitalisert fra film",
+                  "value": "43"
+                },
+                {
+                  "description": "Digitalisert fra flybilde - monodigitalisert fra fotokopi",
+                  "label": "Digitalisert fra flybilde - monodigitalisert fra fotokopi",
+                  "value": "44"
+                },
+                {
+                  "description": "Digitalisert fra ortofoto",
+                  "label": "Digitalisert fra ortofoto",
+                  "value": "45"
+                },
+                {
+                  "description": "Digitalisert på skjerm fra satellittbilde",
+                  "label": "Digitalisert på skjerm fra satellittbilde",
+                  "value": "46"
+                },
+                {
+                  "description": "Digitalisert på skjerm fra andre digitale rasterdata",
+                  "label": "Digitalisert på skjerm fra andre digitale rasterdata",
+                  "value": "47"
+                },
+                {
+                  "label": "48",
+                  "value": "48"
+                },
+                {
+                  "label": "49",
+                  "value": "49"
+                },
+                {
+                  "description": "Digitalisert på dig.bord fra strek-kart",
+                  "label": "Digitalisert på dig.bord fra strek-kart",
+                  "value": "50"
+                },
+                {
+                  "description": "Digitalisert på dig.bord fra blyantoriginal",
+                  "label": "Digitalisert på dig.bord fra blyantoriginal",
+                  "value": "51"
+                },
+                {
+                  "description": "Digitalisert på dig.bord fra rissefolie",
+                  "label": "Digitalisert på dig.bord fra rissefolie",
+                  "value": "52"
+                },
+                {
+                  "description": "Digitalisert på dig.bord fra transparent film - god kvalitet",
+                  "label": "Digitalisert på dig.bord fra transparent film - god kvalitet",
+                  "value": "53"
+                },
+                {
+                  "description": "Digitalisert på dig.bord fra transparent film - mindre god kvalitet",
+                  "label": "Digitalisert på dig.bord fra transparent film - mindre god kvalitet",
+                  "value": "54"
+                },
+                {
+                  "description": "Digitalisert på dig.bord fra papirkopi",
+                  "label": "Digitalisert på dig.bord fra papirkopi",
+                  "value": "55"
+                },
+                {
+                  "description": "Digitalisert på skjerm fra scannet samkopi (Raster)",
+                  "label": "Digitalisert på skjerm fra scannet samkopi (Raster)",
+                  "value": "56"
+                },
+                {
+                  "description": "Genererte data (interpolasjon)",
+                  "label": "Genererte data (interpolasjon)",
+                  "value": "60"
+                },
+                {
+                  "description": "Generert i terrengmodell",
+                  "label": "Generert i terrengmodell",
+                  "value": "61"
+                },
+                {
+                  "description": "Vektet middel",
+                  "label": "Vektet middel",
+                  "value": "62"
+                },
+                {
+                  "description": "Generert sirkelgeometri",
+                  "label": "Generert sirkelgeometri",
+                  "value": "63"
+                },
+                {
+                  "description": "Generalisert",
+                  "label": "Generalisert",
+                  "value": "64"
+                },
+                {
+                  "description": "Generert sentralpunkt",
+                  "label": "Generert sentralpunkt",
+                  "value": "65"
+                },
+                {
+                  "description": "Sammenknytningspunkt/randpunkt",
+                  "label": "Sammenknytningspunkt/randpunkt",
+                  "value": "66"
+                },
+                {
+                  "description": "Koordinater hentet fra GAB",
+                  "label": "Koordinater hentet fra GAB",
+                  "value": "67"
+                },
+                {
+                  "description": "Koordinater hentet fra JREG",
+                  "label": "Koordinater hentet fra JREG",
+                  "value": "68"
+                },
+                {
+                  "description": "Beregnet",
+                  "label": "Beregnet",
+                  "value": "69"
+                },
+                {
+                  "description": "Spesielle metoder",
+                  "label": "Spesielle metoder",
+                  "value": "70"
+                },
+                {
+                  "description": "Målt med stikkstang",
+                  "label": "Målt med stikkstang",
+                  "value": "71"
+                },
+                {
+                  "description": "Målt med waterstang",
+                  "label": "Målt med waterstang",
+                  "value": "72"
+                },
+                {
+                  "description": "Målt med målehjul",
+                  "label": "Målt med målehjul",
+                  "value": "73"
+                },
+                {
+                  "description": "Målt med stigningsmåler",
+                  "label": "Målt med stigningsmåler",
+                  "value": "74"
+                },
+                {
+                  "label": "77",
+                  "value": "77"
+                },
+                {
+                  "description": "Fastsatt ved dom eller kongelig resolusjon",
+                  "label": "Fastsatt ved dom eller kongelig resolusjon",
+                  "value": "78"
+                },
+                {
+                  "description": "Annen spesiell metode (spesifiseres i filhode)",
+                  "label": "Annen spesiell metode (spesifiseres i filhode)",
+                  "value": "79"
+                },
+                {
+                  "description": "Frihåndstegning",
+                  "label": "Frihåndstegning",
+                  "value": "80"
+                },
+                {
+                  "description": "Digitalisert fra krokering på kart",
+                  "label": "Digitalisert fra krokering på kart",
+                  "value": "81"
+                },
+                {
+                  "description": "Direkte innlagt på skjerm",
+                  "label": "Direkte innlagt på skjerm",
+                  "value": "82"
+                },
+                {
+                  "description": "Treghetsstedfesting",
+                  "label": "Treghetsstedfesting",
+                  "value": "90"
+                },
+                {
+                  "description": "GPS Kodemåling, relative målinger",
+                  "label": "GPS Kodemåling, relative målinger",
+                  "value": "91"
+                },
+                {
+                  "description": "GPS Kodemåling, enkeltmålinger",
+                  "label": "GPS Kodemåling, enkeltmålinger",
+                  "value": "92"
+                },
+                {
+                  "description": "GPS Fasemåling, statisk måling",
+                  "label": "GPS Fasemåling, statisk måling",
+                  "value": "93"
+                },
+                {
+                  "description": "GPS Fasemåling, andre metoder (utenom RTK)",
+                  "label": "GPS Fasemåling, andre metoder (utenom RTK)",
+                  "value": "94"
+                },
+                {
+                  "description": "Kombinasjon av GPS/Treghet",
+                  "label": "Kombinasjon av GPS/Treghet",
+                  "value": "95"
+                },
+                {
+                  "description": "GPS Fasemåling RTK (Realtids kinematisk måling)",
+                  "label": "GPS Fasemåling RTK (Realtids kinematisk måling)",
+                  "value": "96"
+                },
+                {
+                  "description": "GPS Fasemåling, float-løsning",
+                  "label": "GPS Fasemåling, float-løsning",
+                  "value": "97"
+                },
+                {
+                  "description": "Ukjent målemetode",
+                  "label": "Ukjent målemetode",
+                  "value": "99"
+                }
+              ],
+              "type": "enumeration"
+            }
+          },
+          {
+            "cardinality": "0..1",
+            "description": "Navn på metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss",
+            "name": "målemetodeNavn",
+            "type": "string"
+          },
+          {
+            "cardinality": "0..1",
+            "description": "Punktstandardavviket i grunnriss for punkter samt tverravvik for linjer<br/>Merknad:<br/>Oppgitt i cm",
+            "name": "nøyaktighet",
+            "type": "integer"
+          }
+        ],
+        "cardinality": "0..1",
+        "description": "Beskrivelse av kvaliteten på stedfestingen<br/>Merknad: Denne er identisk med ..KVALITET i tidligere versjoner av SOSI.",
+        "name": "kvalitet",
+        "type": "Posisjonskvalitet"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Objektets beliggenhet i forhold til jordoverflaten<br/>Eksempel:\r\nPå bro, i tunnel, inne i et bygningsmessig anlegg, etc.",
+        "name": "medium",
+        "type": "Medium",
+        "valueDomain": {
+          "listedValues": [
+            {
+              "description": "I bygning/bygningsmessig anlegg",
+              "label": "I bygning/bygningsmessig anlegg",
+              "value": "B"
+            },
+            {
+              "description": "Tidvis under vann",
+              "label": "Tidvis under vann",
+              "value": "D"
+            },
+            {
+              "description": "På isbre",
+              "label": "På isbre",
+              "value": "I"
+            },
+            {
+              "description": "Under isbre",
+              "label": "Under isbre",
+              "value": "J"
+            },
+            {
+              "description": "I luft",
+              "label": "I luft",
+              "value": "L"
+            },
+            {
+              "description": "På vannoverflaten",
+              "label": "På vannoverflaten",
+              "value": "O"
+            },
+            {
+              "description": "På sjøbunnen",
+              "label": "På sjøbunnen",
+              "value": "S"
+            },
+            {
+              "description": "På terrenget/på bakkenivå",
+              "label": "På terrenget/på bakkenivå",
+              "value": "T"
+            },
+            {
+              "description": "Under terrenget",
+              "label": "Under terrenget",
+              "value": "U"
+            },
+            {
+              "description": "Alltid i vann",
+              "label": "Alltid i vann",
+              "value": "V"
+            },
+            {
+              "description": "Under sjøbunnen",
+              "label": "Under sjøbunnen",
+              "value": "W"
+            },
+            {
+              "description": "Ukjent",
+              "label": "Ukjent",
+              "value": "X"
+            }
+          ],
+          "type": "enumeration"
+        }
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Objektets beliggenhet i forhold til jordoverflaten<br/>Eksempel:\r\nPå bro, i tunnel, inne i et bygningsmessig anlegg, etc.",
+        "name": "mediumNavn",
+        "type": "string"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "Referanse til opphavsmaterialet, kildematerialet, organisasjons/publiseringskilde\r\n<br/>Merknad: <br/>Kan også beskrive navn på person og årsak til oppdatering",
+        "name": "opphav",
+        "type": "string"
+      }
+    ],
     "description": "Generell avgrensning av geologisk objekt<br/>-- Definition -- <br/>General delimitation of geological object",
     "geometry": {
-      "itemType": "feature",
-      "type": "geometry-linestring",
       "crs": [
         "#/crs"
       ],
-      "storageCrs": "http://www.opengis.net/def/crs/EPSG/0/4258",
       "format": "geometry-linestring",
-      "ogcRole": "primary-geometry"
+      "itemType": "feature",
+      "ogcRole": "primary-geometry",
+      "storageCrs": "http://www.opengis.net/def/crs/EPSG/0/4258",
+      "type": "geometry-linestring"
     },
-    "attributes": [
-      {
-        "name": "lokalid",
-        "type": "string",
-        "cardinality": "0..1",
-        "description": "lokalid",
-        "ogcRole": "id"
-      },
-      {
-        "name": "identifikasjon",
-        "type": "Identifikasjon",
-        "cardinality": "0..1",
-        "description": "Unik identifikasjon av et objekt",
-        "attributes": [
-          {
-            "name": "lokalId",
-            "type": "string",
-            "cardinality": "0..1",
-            "description": "Lokal identifikator, tildelt av dataleverendør/dataforvalter. Den lokale identifikatoren er unik innenfor navnerommet, ingen andre objekter har samme identifikator.<br/>NOTE: Det er data leverendørens ansvar å sørge for at denne lokale identifikatoren er unik innenfor navnerommet."
-          },
-          {
-            "name": "navnerom",
-            "type": "string",
-            "cardinality": "0..1",
-            "description": "Navnerom som unikt identifiserer datakilden til objektet, starter med to bokstavs kode jfr ISO 3166. Benytter understreking  (\"_\") dersom data produsenten ikke er assosiert med bare et land.\r\n<br/>NOTE 1 : Verdien for nanverom vil eies av den dataprodusent som har ansvar for de unike identifikatorene og vil registreres i \"INSPIRE external  Object Identifier Namespaces Register\"<br/>Eksempel: NO for Norge."
-          },
-          {
-            "name": "versjonId",
-            "type": "string",
-            "cardinality": "0..1",
-            "description": "Identifikasjon av en spesiell versjon av et geografisk objekt (instans), maksimum lengde på 25 karakterers. Dersom spesifikasjonen av et geografisk objekt med en identifikasjon inkludererer livsløpssyklusinformasjon, benyttes denne versjonId for å skille mellom ulike versjoner av samme objekt. versjonId er en unik  identifikasjon av versjonen. <br/>NOTE Maksimum lengde er valgt for å tillate tidsregistrering i henhold til  ISO 8601, slik som  \"2007-02-12T12:12:12+05:30\" som versjonId."
-          }
-        ]
-      },
-      {
-        "name": "førsteDigitaliseringsdato",
-        "type": "date (string)",
-        "cardinality": "0..1",
-        "description": "Dato når en representasjon av objektet i digital form første gang ble etablert<br/>Merknad: <br/>FørsteDigitaliseringsdato kan skille seg fra førsteDatafangstdato ved at den første datafangsten skjedde analogt og gjort om til digital form senere i en produksjonsprosess. <br/>Eventuelt at innlegging i databasen skjedde på et senere tidspunkt enn registreringen /observasjonen / målingen av objektet.",
-        "ogcRole": "primary-instant"
-      },
-      {
-        "name": "oppdateringsdato",
-        "type": "date (string)",
-        "cardinality": "0..1",
-        "description": "Dato for siste endring på objektetdataene <br/>Merknad: \r\nOppdateringsdato kan være forskjellig fra Datafangsdato ved at data som er registrert kan bufres en kortere eller lengre periode før disse legges inn i datasystemet (databasen).<br/>-Definition-<br/>Date and time at which this version of the spatial object was inserted or changed in the spatial data set."
-      },
-      {
-        "name": "datauttaksdato",
-        "type": "date (string)",
-        "cardinality": "0..1",
-        "description": "Dato for uttak fra en database<br/>Merknad:<br/>Skiller seg fra Kopidato ved at en ikke skiller på om det er uttak fra en originaldatabase eller en kopidatabase."
-      },
-      {
-        "name": "temakvalitet",
-        "type": "Temakvalitet",
-        "cardinality": "0..1",
-        "description": "Kvaliteten på registrering/kartlegging av tema sett i forhold til faktiske forhold i naturen. Ulik tematisk oppløsning/generaliseringsgrad kan være styrt av temaets samfunnsmessige betydning, områdets arealmessige betydning eller prosjektets økonomi. Med nøyaktighet i denne sammenheng menes hvor korrekt registreringen avspeiler objektets posisjon i naturen og presisjonen i valg av tematisk innhold i forhold til generalisering\r\n<br/>Merknad: Tematisk oppløsning/generaliseringsgrad kan være styrt av temaets samfunnsmessige betydning, områdets arealmessige betydning eller prosjektets målsetning",
-        "valueDomain": {
-          "type": "enumeration",
-          "listedValues": [
-            {
-              "value": "dårlig",
-              "label": "dårlig"
-            },
-            {
-              "value": "god",
-              "label": "god"
-            },
-            {
-              "value": "megetGod",
-              "label": "megetGod"
-            },
-            {
-              "value": "noeDårlig",
-              "label": "noeDårlig"
-            },
-            {
-              "value": "noksåGod",
-              "label": "noksåGod"
-            },
-            {
-              "value": "særdelesGod",
-              "label": "særdelesGod"
-            }
-          ]
-        }
-      },
-      {
-        "name": "geolPavisningstype",
-        "type": "GeolPavisningstype",
-        "cardinality": "0..1",
-        "description": "Hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen.",
-        "valueDomain": {
-          "type": "enumeration",
-          "listedValues": [
-            {
-              "value": "0",
-              "label": "0"
-            },
-            {
-              "value": "1",
-              "label": "1"
-            },
-            {
-              "value": "10",
-              "label": "10"
-            },
-            {
-              "value": "11",
-              "label": "11"
-            },
-            {
-              "value": "12",
-              "label": "12"
-            },
-            {
-              "value": "13",
-              "label": "13"
-            },
-            {
-              "value": "14",
-              "label": "14"
-            },
-            {
-              "value": "2",
-              "label": "2"
-            },
-            {
-              "value": "21",
-              "label": "21"
-            },
-            {
-              "value": "22",
-              "label": "22"
-            },
-            {
-              "value": "23",
-              "label": "23"
-            },
-            {
-              "value": "24",
-              "label": "24"
-            },
-            {
-              "value": "25",
-              "label": "25"
-            },
-            {
-              "value": "26",
-              "label": "26"
-            },
-            {
-              "value": "27",
-              "label": "27"
-            },
-            {
-              "value": "28",
-              "label": "28"
-            },
-            {
-              "value": "29",
-              "label": "29"
-            },
-            {
-              "value": "3",
-              "label": "3"
-            },
-            {
-              "value": "30",
-              "label": "30"
-            },
-            {
-              "value": "31",
-              "label": "31"
-            },
-            {
-              "value": "32",
-              "label": "32"
-            },
-            {
-              "value": "4",
-              "label": "4"
-            },
-            {
-              "value": "5",
-              "label": "5"
-            },
-            {
-              "value": "6",
-              "label": "6"
-            },
-            {
-              "value": "7",
-              "label": "7"
-            },
-            {
-              "value": "8",
-              "label": "8"
-            },
-            {
-              "value": "9",
-              "label": "9"
-            }
-          ]
-        }
-      },
-      {
-        "name": "geolPavisningstypeNavn",
-        "type": "string",
-        "cardinality": "0..1",
-        "description": "Hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen."
-      },
-      {
-        "name": "kvalitet",
-        "type": "Posisjonskvalitet",
-        "cardinality": "0..1",
-        "description": "Beskrivelse av kvaliteten på stedfestingen<br/>Merknad: Denne er identisk med ..KVALITET i tidligere versjoner av SOSI.",
-        "attributes": [
-          {
-            "name": "målemetode",
-            "type": "Målemetode",
-            "cardinality": "0..1",
-            "description": "Kode på metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss",
-            "valueDomain": {
-              "type": "enumeration",
-              "listedValues": [
-                {
-                  "value": "10",
-                  "label": "10"
-                },
-                {
-                  "value": "11",
-                  "label": "11"
-                },
-                {
-                  "value": "12",
-                  "label": "12"
-                },
-                {
-                  "value": "13",
-                  "label": "13"
-                },
-                {
-                  "value": "14",
-                  "label": "14"
-                },
-                {
-                  "value": "15",
-                  "label": "15"
-                },
-                {
-                  "value": "18",
-                  "label": "18"
-                },
-                {
-                  "value": "19",
-                  "label": "19"
-                },
-                {
-                  "value": "20",
-                  "label": "20"
-                },
-                {
-                  "value": "21",
-                  "label": "21"
-                },
-                {
-                  "value": "22",
-                  "label": "22"
-                },
-                {
-                  "value": "23",
-                  "label": "23"
-                },
-                {
-                  "value": "24",
-                  "label": "24"
-                },
-                {
-                  "value": "30",
-                  "label": "30"
-                },
-                {
-                  "value": "31",
-                  "label": "31"
-                },
-                {
-                  "value": "32",
-                  "label": "32"
-                },
-                {
-                  "value": "33",
-                  "label": "33"
-                },
-                {
-                  "value": "34",
-                  "label": "34"
-                },
-                {
-                  "value": "35",
-                  "label": "35"
-                },
-                {
-                  "value": "36",
-                  "label": "36"
-                },
-                {
-                  "value": "37",
-                  "label": "37"
-                },
-                {
-                  "value": "38",
-                  "label": "38"
-                },
-                {
-                  "value": "40",
-                  "label": "40"
-                },
-                {
-                  "value": "41",
-                  "label": "41"
-                },
-                {
-                  "value": "42",
-                  "label": "42"
-                },
-                {
-                  "value": "43",
-                  "label": "43"
-                },
-                {
-                  "value": "44",
-                  "label": "44"
-                },
-                {
-                  "value": "45",
-                  "label": "45"
-                },
-                {
-                  "value": "46",
-                  "label": "46"
-                },
-                {
-                  "value": "47",
-                  "label": "47"
-                },
-                {
-                  "value": "48",
-                  "label": "48"
-                },
-                {
-                  "value": "49",
-                  "label": "49"
-                },
-                {
-                  "value": "50",
-                  "label": "50"
-                },
-                {
-                  "value": "51",
-                  "label": "51"
-                },
-                {
-                  "value": "52",
-                  "label": "52"
-                },
-                {
-                  "value": "53",
-                  "label": "53"
-                },
-                {
-                  "value": "54",
-                  "label": "54"
-                },
-                {
-                  "value": "55",
-                  "label": "55"
-                },
-                {
-                  "value": "56",
-                  "label": "56"
-                },
-                {
-                  "value": "60",
-                  "label": "60"
-                },
-                {
-                  "value": "61",
-                  "label": "61"
-                },
-                {
-                  "value": "62",
-                  "label": "62"
-                },
-                {
-                  "value": "63",
-                  "label": "63"
-                },
-                {
-                  "value": "64",
-                  "label": "64"
-                },
-                {
-                  "value": "65",
-                  "label": "65"
-                },
-                {
-                  "value": "66",
-                  "label": "66"
-                },
-                {
-                  "value": "67",
-                  "label": "67"
-                },
-                {
-                  "value": "68",
-                  "label": "68"
-                },
-                {
-                  "value": "69",
-                  "label": "69"
-                },
-                {
-                  "value": "70",
-                  "label": "70"
-                },
-                {
-                  "value": "71",
-                  "label": "71"
-                },
-                {
-                  "value": "72",
-                  "label": "72"
-                },
-                {
-                  "value": "73",
-                  "label": "73"
-                },
-                {
-                  "value": "74",
-                  "label": "74"
-                },
-                {
-                  "value": "77",
-                  "label": "77"
-                },
-                {
-                  "value": "78",
-                  "label": "78"
-                },
-                {
-                  "value": "79",
-                  "label": "79"
-                },
-                {
-                  "value": "80",
-                  "label": "80"
-                },
-                {
-                  "value": "81",
-                  "label": "81"
-                },
-                {
-                  "value": "82",
-                  "label": "82"
-                },
-                {
-                  "value": "90",
-                  "label": "90"
-                },
-                {
-                  "value": "91",
-                  "label": "91"
-                },
-                {
-                  "value": "92",
-                  "label": "92"
-                },
-                {
-                  "value": "93",
-                  "label": "93"
-                },
-                {
-                  "value": "94",
-                  "label": "94"
-                },
-                {
-                  "value": "95",
-                  "label": "95"
-                },
-                {
-                  "value": "96",
-                  "label": "96"
-                },
-                {
-                  "value": "97",
-                  "label": "97"
-                },
-                {
-                  "value": "99",
-                  "label": "99"
-                }
-              ]
-            }
-          },
-          {
-            "name": "målemetodeNavn",
-            "type": "string",
-            "cardinality": "0..1",
-            "description": "Navn på metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss"
-          },
-          {
-            "name": "nøyaktighet",
-            "type": "integer",
-            "cardinality": "0..1",
-            "description": "Punktstandardavviket i grunnriss for punkter samt tverravvik for linjer<br/>Merknad:<br/>Oppgitt i cm"
-          }
-        ]
-      },
-      {
-        "name": "medium",
-        "type": "Medium",
-        "cardinality": "0..1",
-        "description": "Objektets beliggenhet i forhold til jordoverflaten<br/>Eksempel:\r\nPå bro, i tunnel, inne i et bygningsmessig anlegg, etc.",
-        "valueDomain": {
-          "type": "enumeration",
-          "listedValues": [
-            {
-              "value": "B",
-              "label": "B"
-            },
-            {
-              "value": "D",
-              "label": "D"
-            },
-            {
-              "value": "I",
-              "label": "I"
-            },
-            {
-              "value": "J",
-              "label": "J"
-            },
-            {
-              "value": "L",
-              "label": "L"
-            },
-            {
-              "value": "O",
-              "label": "O"
-            },
-            {
-              "value": "S",
-              "label": "S"
-            },
-            {
-              "value": "T",
-              "label": "T"
-            },
-            {
-              "value": "U",
-              "label": "U"
-            },
-            {
-              "value": "V",
-              "label": "V"
-            },
-            {
-              "value": "W",
-              "label": "W"
-            },
-            {
-              "value": "X",
-              "label": "X"
-            }
-          ]
-        }
-      },
-      {
-        "name": "mediumNavn",
-        "type": "string",
-        "cardinality": "0..1",
-        "description": "Objektets beliggenhet i forhold til jordoverflaten<br/>Eksempel:\r\nPå bro, i tunnel, inne i et bygningsmessig anlegg, etc."
-      },
-      {
-        "name": "opphav",
-        "type": "string",
-        "cardinality": "0..1",
-        "description": "Referanse til opphavsmaterialet, kildematerialet, organisasjons/publiseringskilde\r\n<br/>Merknad: <br/>Kan også beskrive navn på person og årsak til oppdatering"
-      }
-    ]
+    "name": "GeolAvgrLinje"
   },
   {
-    "name": "LosmasseFlate",
-    "description": "Areal hvor løsmasser/sedimenter har samme kornstørrelse<br/>Merknad: <br/>Kornstørrelseflate må ha enten sedKornstorrelse eller losmKornstorrelse, sedKornstorrelse gjelder for kartlegging marint/i sjø - mens losmKornstorrelse gjelder for kartlegging på land.",
-    "geometry": {
-      "itemType": "feature",
-      "type": "geometry-polygon",
-      "crs": [
-        "#/crs",
-        "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
-      ],
-      "storageCrs": "http://www.opengis.net/def/crs/EPSG/0/4258",
-      "format": "geometry-polygon",
-      "ogcRole": "primary-geometry"
-    },
     "attributes": [
       {
-        "name": "lokalid",
-        "type": "string",
         "cardinality": "0..1",
-        "description": "lokalid",
-        "ogcRole": "id"
+        "description": "Lokal identifikator for objektet, tildelt av dataleverandør/dataforvalter, og unik innenfor datasettet",
+        "name": "lokalid",
+        "ogcRole": "id",
+        "type": "string"
       },
       {
-        "name": "identifikasjon",
-        "type": "Identifikasjon",
-        "cardinality": "0..1",
-        "description": "Unik identifikasjon av et objekt",
         "attributes": [
           {
+            "cardinality": "0..1",
+            "description": "Lokal identifikator, tildelt av dataleverendør/dataforvalter. Den lokale identifikatoren er unik innenfor navnerommet, ingen andre objekter har samme identifikator.<br/>NOTE: Det er data leverendørens ansvar å sørge for at denne lokale identifikatoren er unik innenfor navnerommet.",
             "name": "lokalId",
-            "type": "string",
-            "cardinality": "0..1",
-            "description": "Lokal identifikator, tildelt av dataleverendør/dataforvalter. Den lokale identifikatoren er unik innenfor navnerommet, ingen andre objekter har samme identifikator.<br/>NOTE: Det er data leverendørens ansvar å sørge for at denne lokale identifikatoren er unik innenfor navnerommet."
+            "type": "string"
           },
           {
+            "cardinality": "0..1",
+            "description": "Navnerom som unikt identifiserer datakilden til objektet, starter med to bokstavs kode jfr ISO 3166. Benytter understreking  (\"_\") dersom data produsenten ikke er assosiert med bare et land.\r\n<br/>NOTE 1 : Verdien for nanverom vil eies av den dataprodusent som har ansvar for de unike identifikatorene og vil registreres i \"INSPIRE external  Object Identifier Namespaces Register\"<br/>Eksempel: NO for Norge.",
             "name": "navnerom",
-            "type": "string",
-            "cardinality": "0..1",
-            "description": "Navnerom som unikt identifiserer datakilden til objektet, starter med to bokstavs kode jfr ISO 3166. Benytter understreking  (\"_\") dersom data produsenten ikke er assosiert med bare et land.\r\n<br/>NOTE 1 : Verdien for nanverom vil eies av den dataprodusent som har ansvar for de unike identifikatorene og vil registreres i \"INSPIRE external  Object Identifier Namespaces Register\"<br/>Eksempel: NO for Norge."
+            "type": "string"
           },
           {
-            "name": "versjonId",
-            "type": "string",
             "cardinality": "0..1",
-            "description": "Identifikasjon av en spesiell versjon av et geografisk objekt (instans), maksimum lengde på 25 karakterers. Dersom spesifikasjonen av et geografisk objekt med en identifikasjon inkludererer livsløpssyklusinformasjon, benyttes denne versjonId for å skille mellom ulike versjoner av samme objekt. versjonId er en unik  identifikasjon av versjonen. <br/>NOTE Maksimum lengde er valgt for å tillate tidsregistrering i henhold til  ISO 8601, slik som  \"2007-02-12T12:12:12+05:30\" som versjonId."
+            "description": "Identifikasjon av en spesiell versjon av et geografisk objekt (instans), maksimum lengde på 25 karakterers. Dersom spesifikasjonen av et geografisk objekt med en identifikasjon inkludererer livsløpssyklusinformasjon, benyttes denne versjonId for å skille mellom ulike versjoner av samme objekt. versjonId er en unik  identifikasjon av versjonen. <br/>NOTE Maksimum lengde er valgt for å tillate tidsregistrering i henhold til  ISO 8601, slik som  \"2007-02-12T12:12:12+05:30\" som versjonId.",
+            "name": "versjonId",
+            "type": "string"
           }
-        ]
+        ],
+        "cardinality": "0..1",
+        "description": "Unik identifikasjon av et objekt",
+        "name": "identifikasjon",
+        "type": "Identifikasjon"
       },
       {
-        "name": "datauttaksdato",
-        "type": "date (string)",
         "cardinality": "1..1",
         "description": "Dato for uttak fra en database<br/>Merknad:<br/>Skiller seg fra Kopidato ved at en ikke skiller på om det er uttak fra en originaldatabase eller en kopidatabase.",
-        "ogcRole": "primary-instant"
+        "name": "datauttaksdato",
+        "ogcRole": "primary-instant",
+        "type": "date (string)"
       },
       {
-        "name": "førsteDigitaliseringsdato",
-        "type": "date (string)",
         "cardinality": "0..1",
-        "description": "Dato når en representasjon av objektet i digital form første gang ble etablert<br/>Merknad: <br/>FørsteDigitaliseringsdato kan skille seg fra førsteDatafangstdato ved at den første datafangsten skjedde analogt og gjort om til digital form senere i en produksjonsprosess. <br/>Eventuelt at innlegging i databasen skjedde på et senere tidspunkt enn registreringen /observasjonen / målingen av objektet."
+        "description": "Dato når en representasjon av objektet i digital form første gang ble etablert<br/>Merknad: <br/>FørsteDigitaliseringsdato kan skille seg fra førsteDatafangstdato ved at den første datafangsten skjedde analogt og gjort om til digital form senere i en produksjonsprosess. <br/>Eventuelt at innlegging i databasen skjedde på et senere tidspunkt enn registreringen /observasjonen / målingen av objektet.",
+        "name": "førsteDigitaliseringsdato",
+        "type": "date (string)"
       },
       {
-        "name": "losmassetype",
-        "type": "Losmassetype",
         "cardinality": "1..1",
         "description": "Kvartærgeologiske løsmassetyper (jordartstyper)",
+        "name": "losmassetype",
+        "type": "Losmassetype",
         "valueDomain": {
-          "type": "enumeration",
           "listedValues": [
             {
-              "value": "1",
-              "label": "1"
+              "description": "Avsetning der genetisk opprinnelse ikke er påvist",
+              "label": "Løsmasser/berggrunn under vann, uspesifisert",
+              "value": "1"
             },
             {
-              "value": "10",
-              "label": "10"
+              "description": "Dårlig sortert morene; brukes i kart i svært små målestokker",
+              "label": "Morenemateriale, uspesifisert",
+              "value": "10"
             },
             {
-              "value": "100",
-              "label": "100"
+              "description": "Tynt lag av vegetasjon og nedbrutte planterester direkte på berggrunn",
+              "label": "Tynt dekke av organisk materiale over berggrunn",
+              "value": "100"
             },
             {
-              "value": "101",
-              "label": "101"
+              "description": "Tynt dekke av ulike sedimenter, uten skille mellom typene",
+              "label": "Usammenhengende eller tynt løsmassedekke over berggrunnen, flere løsmassetyper, uspesifisert",
+              "value": "101"
             },
             {
-              "value": "102",
-              "label": "102"
+              "description": "Blandet materiale der jordartene ikke kan skilles",
+              "label": "Sammenhengende løsmassedekke av flere jordarter",
+              "value": "102"
             },
             {
-              "value": "11",
-              "label": "11"
+              "description": "Dårlig sortert morene med sammenhengende dekke; lokalt mange ti-meter tykt",
+              "label": "Morenemateriale, sammenhengende dekke, stedvis med stor mektighet",
+              "value": "11"
             },
             {
-              "value": "110",
-              "label": "110"
+              "description": "Brukes når bart fjell og humus- eller torvdekke ikke skilles",
+              "label": "Bart fjell/fjell med tynt torvdekke, uspesifisert",
+              "value": "110"
             },
             {
-              "value": "12",
-              "label": "12"
+              "description": "Dårlig sortert morene med tynt dekke og hyppige fjellblotninger",
+              "label": "Morenemateriale, usammenhengende eller tynt dekke over berggrunnen",
+              "value": "12"
             },
             {
-              "value": "120",
-              "label": "120"
+              "description": "Masser transportert og avsatt av mennesker, f.eks. ved bygg- og veganlegg",
+              "label": "Fyllmasse (antropogent materiale)",
+              "value": "120"
             },
             {
-              "value": "121",
-              "label": "121"
+              "description": "Sprengt fjell flyttet og avsatt av mennesker, ofte fra gruvedrift",
+              "label": "Steintipp",
+              "value": "121"
             },
             {
-              "value": "122",
-              "label": "122"
+              "description": "Omarbeidet overflatemasse der opprinnelig løsmassetype ikke kan gjenkjennes",
+              "label": "Menneskepåvirket materiale, ikke nærmere spesifisert",
+              "value": "122"
             },
             {
-              "value": "13",
-              "label": "13"
+              "description": "Morene med høyt leir- og siltinnhold; ofte meget kompakt",
+              "label": "Moreneleire",
+              "value": "13"
             },
             {
-              "value": "130",
-              "label": "130"
+              "description": "Fjelloverflate uten løsmassedekke",
+              "label": "Bart fjell",
+              "value": "130"
             },
             {
-              "value": "14",
-              "label": "14"
+              "description": "Løst lagret morene fra passiv isnedsmelting (dødis)",
+              "label": "Avsmeltningsmorene (Ablasjonsmorene)",
+              "value": "14"
             },
             {
-              "value": "140",
-              "label": "140"
+              "description": "Bart fjell slått sammen med tynt eller usammenhengende dekke (oversiktskart)",
+              "label": "Bart fjell/fjell med usammenhengende eller tynt løsmassedekke",
+              "value": "140"
             },
             {
-              "value": "15",
-              "label": "15"
+              "description": "Rygger eller områder med morene avsatt langs en brefront",
+              "label": "Randmorene/randmorenesone",
+              "value": "15"
             },
             {
-              "value": "150",
-              "label": "150"
+              "description": "Konsoliderte sedimenter eller sedimentære bergarter på havbunnen",
+              "label": "Harde sedimenter eller sedimentære bergarter (maringeologi)",
+              "value": "150"
             },
             {
-              "value": "16",
-              "label": "16"
+              "description": "Strømlinjeformet rygg, vanligvis i morene, parallell med tidligere isbevegelse",
+              "label": "Drumlin",
+              "value": "16"
             },
             {
-              "value": "17",
-              "label": "17"
+              "description": "Bølgende rygger av morenemateriale på tvers av brebevegelsen",
+              "label": "Rogenmorene",
+              "value": "17"
             },
             {
-              "value": "20",
-              "label": "20"
+              "description": "Sorterte, lagdelte breelvsedimenter; ofte flere ti-meter tykke",
+              "label": "Breelvavsetning (Glasifluvial avsetning)",
+              "value": "20"
             },
             {
-              "value": "200",
-              "label": "200"
+              "description": "Finkornet leire og silt avsatt fra suspensjon, drapert over underliggende sedimenter",
+              "label": "Marin suspensjonsavsetning (maringeologi)",
+              "value": "200"
             },
             {
-              "value": "201",
-              "label": "201"
+              "description": "Hovedsakelig sand og grus avsatt av bunnstrømmer",
+              "label": "Marin bunnstrømavsetning (maringeologi)",
+              "value": "201"
             },
             {
-              "value": "202",
-              "label": "202"
+              "description": "Finkornede suspensjonsavsetninger avsatt nær is; dekker sokkel og fjorder",
+              "label": "Glasimarin avsetning (maringeologi)",
+              "value": "202"
             },
             {
-              "value": "203",
-              "label": "203"
+              "description": "Sedimenter avsatt i kontakt med is; varierende kornstørrelse",
+              "label": "Iskontaktavsetning (maringeologi)",
+              "value": "203"
             },
             {
-              "value": "204",
-              "label": "204"
+              "description": "Sand og grus som ligger igjen etter at finstoffet er vasket bort",
+              "label": "Utvaskingslag (maringeologi)",
+              "value": "204"
             },
             {
-              "value": "205",
-              "label": "205"
+              "description": "Breelvsedimenter avsatt i hav, bresjø eller innsjø",
+              "label": "Glasifluvial deltaavsetning (maringeologi)",
+              "value": "205"
             },
             {
-              "value": "206",
-              "label": "206"
+              "description": "Sedimenter avsatt ved elveutløp i fjord, innsjø eller hav",
+              "label": "Fluvial deltaavsetning (maringeologi)",
+              "value": "206"
             },
             {
-              "value": "207",
-              "label": "207"
+              "description": "Kystnære, sandige til leirholdige avsetninger med tidevannsstrukturer",
+              "label": "Tidevannsavsetning (maringeologi)",
+              "value": "207"
             },
             {
-              "value": "208",
-              "label": "208"
+              "description": "Finkornet brakkvannssediment blandet med terrestrisk organisk materiale",
+              "label": "Estuarin avsetning (maringeologi)",
+              "value": "208"
             },
             {
-              "value": "209",
-              "label": "209"
+              "description": "Forhøyning langs siden av undersjøisk kanal; leire til sand",
+              "label": "Levé avsetning (maringeologi)",
+              "value": "209"
             },
             {
-              "value": "21",
-              "label": "21"
+              "description": "Sorterte lag fra breelver eller elver der disse ikke skilles",
+              "label": "Breelv- og elveavsetning",
+              "value": "21"
             },
             {
-              "value": "210",
-              "label": "210"
+              "description": "Sand, grus og stein avsatt i turbulent grunt sjøvann",
+              "label": "Grunnmarin avsetning (maringeologi)",
+              "value": "210"
             },
             {
-              "value": "211",
-              "label": "211"
+              "description": "Finsortert materiale avsatt av konturstrømmer langs kontinentalskråningen",
+              "label": "Konturittavsetning (maringeologi)",
+              "value": "211"
             },
             {
-              "value": "212",
-              "label": "212"
+              "description": "Avsetning fra turbiditetsstrøm; leire til sand, normalgradert",
+              "label": "Turbidittavsetning (maringeologi)",
+              "value": "212"
             },
             {
-              "value": "213",
-              "label": "213"
+              "description": "Usortert avsetning fra flytende masse av stein, jord og slam",
+              "label": "Debrisstrømavsetning (maringeologi)",
+              "value": "213"
             },
             {
-              "value": "214",
-              "label": "214"
+              "description": "Vifteformet avsetning ved utløpet av undersjøisk kløft; mest finkornet",
+              "label": "Undersjøisk vifteavsetning (maringeologi)",
+              "value": "214"
             },
             {
-              "value": "215",
-              "label": "215"
+              "description": "Avsetning i kanal; vanligvis grovt materiale (sand, grus)",
+              "label": "Kanalsavsetning (maringeologi)",
+              "value": "215"
             },
             {
-              "value": "216",
-              "label": "216"
+              "description": "Dyphavssedimenter, hovedsakelig leire og pelagiske rester",
+              "label": "Dypmarin avsetning (maringeologi)",
+              "value": "216"
             },
             {
-              "value": "217",
-              "label": "217"
+              "description": "Sediment av biologisk opprinnelse (skjell, koraller)",
+              "label": "Bioklastisk avsetning (maringeologi)",
+              "value": "217"
             },
             {
-              "value": "218",
-              "label": "218"
+              "description": "Materiale av vulkansk opprinnelse: aske, lapilli og breksje",
+              "label": "Vulkanosedimentær avsetning (maringeologi)",
+              "value": "218"
             },
             {
-              "value": "219",
-              "label": "219"
+              "description": "Lagdelte sedimenter over 1 m tykke over debrisstrømavsetning",
+              "label": "Lagdelte sedimenter (>1 m) over debrisstrøm (maringeologi)",
+              "value": "219"
             },
             {
-              "value": "22",
-              "label": "22"
+              "description": "Sorterte, lagdelte rygger avsatt i tunneler eller sprekker i isen",
+              "label": "Ryggformet breelvavsetning (Esker)",
+              "value": "22"
             },
             {
-              "value": "220",
-              "label": "220"
+              "description": "Karbonatsementerte sedimenter som danner skorper på havbunnen",
+              "label": "Karbonatskorpe (maringeologi)",
+              "value": "220"
             },
             {
-              "value": "23",
-              "label": "23"
+              "description": "Hauger av breelvmateriale",
+              "label": "Haugformet breelvavsetning (Kame)",
+              "value": "23"
             },
             {
-              "value": "230",
-              "label": "230"
+              "description": "Morene med under 1–2 m dekke av glasimarine sedimenter",
+              "label": "Morene med tynt dekke av glasimarine sedimenter (maringeologi)",
+              "value": "230"
             },
             {
-              "value": "231",
-              "label": "231"
+              "description": "Morene med under 1–2 m dekke av finkornige sedimenter",
+              "label": "Morene med tynt dekke av finkornige sedimenter (maringeologi)",
+              "value": "231"
             },
             {
-              "value": "240",
-              "label": "240"
+              "description": "Skredmateriale dekket av yngre sedimenter",
+              "label": "Skredmateriale, dekket av yngre sedimenter (maringeologi)",
+              "value": "240"
             },
             {
-              "value": "241",
-              "label": "241"
+              "description": "Skredmateriale delvis dekket av yngre sedimenter",
+              "label": "Skredmateriale, delvis dekket av yngre sedimenter (maringeologi)",
+              "value": "241"
             },
             {
-              "value": "242",
-              "label": "242"
+              "description": "Veksling mellom skredavsetninger og finkornede hemipelagiske avsetninger",
+              "label": "Skredmateriale og hemipelagiske avsetninger (maringeologi)",
+              "value": "242"
             },
             {
-              "value": "250",
-              "label": "250"
+              "description": "Marin avsetning med ukjent opprinnelse",
+              "label": "Uspesifisert marin avsetning (maringeologi)",
+              "value": "250"
             },
             {
-              "value": "30",
-              "label": "30"
+              "description": "Sortert, ofte finkornet materiale avsatt i bresjø; over 0,5 m tykt",
+              "label": "Bresjø- eller brekammeravsetning (Glasilakustrin avsetning)",
+              "value": "30"
             },
             {
-              "value": "301",
-              "label": "301"
+              "description": "Avsetning fra løsmasseskred (ikke leirskred); danner rygger, lober eller vifter",
+              "label": "Jord- og flomskredavsetning",
+              "value": "301"
             },
             {
-              "value": "302",
-              "label": "302"
+              "description": "Løsmasseskredmateriale (ikke leirskred) med tynt dekke",
+              "label": "Jord- og flomskredavsetning, usammenhengende eller tynt dekke",
+              "value": "302"
             },
             {
-              "value": "303",
-              "label": "303"
+              "description": "Leirholdige sedimenter som har løsnet og glidd ut; lokalt tykt",
+              "label": "Leirskredavsetning, stedvis med stor mektighet",
+              "value": "303"
             },
             {
-              "value": "304",
-              "label": "304"
+              "description": "Leirskredmateriale med tynt eller usammenhengende dekke",
+              "label": "Leirskredavsetning, usammenhengende eller tynt dekke over berggrunnen",
+              "value": "304"
             },
             {
-              "value": "305",
-              "label": "305"
+              "description": "Fjellskredmateriale med stor utstrekning, ofte kantete blokker på overflaten",
+              "label": "Fjellskredavsetning, stedvis med stor mektighet",
+              "value": "305"
             },
             {
-              "value": "306",
-              "label": "306"
+              "description": "Fjellskredmateriale med tynt eller usammenhengende dekke",
+              "label": "Fjellskredavsetning, usammenhengende eller tynt dekke",
+              "value": "306"
             },
             {
-              "value": "307",
-              "label": "307"
+              "description": "Usortert materiale under bratt fjellkant; lokalt tykt",
+              "label": "Steinsprangavsetning, stedvis med stor mektighet",
+              "value": "307"
             },
             {
-              "value": "308",
-              "label": "308"
+              "description": "Usortert steinsprangmateriale under bratt fjellkant; tynt dekke",
+              "label": "Steinsprangavsetning, usammenhengende eller tynt dekke",
+              "value": "308"
             },
             {
-              "value": "309",
-              "label": "309"
+              "description": "Usortert snøskredmateriale; lokalt tykt, kan danne vifter",
+              "label": "Snøskredavsetning, stedvis med stor mektighet",
+              "value": "309"
             },
             {
-              "value": "31",
-              "label": "31"
+              "description": "Avsetninger fra breelv og bresjø/brekammer der disse ikke skilles",
+              "label": "Breelv- og bresjø-/brekammeravsetning (Glasifluvial og glasilakustrin avsetning)",
+              "value": "31"
             },
             {
-              "value": "310",
-              "label": "310"
+              "description": "Usortert snøskredmateriale med tynt eller usammenhengende dekke",
+              "label": "Snøskredavsetning, usammenhengende eller tynt dekke",
+              "value": "310"
             },
             {
-              "value": "311",
-              "label": "311"
+              "description": "Steinskredmateriale; lokalt tykt",
+              "label": "Steinskredavsetning, stedvis med stor mektighet",
+              "value": "311"
             },
             {
-              "value": "312",
-              "label": "312"
+              "description": "Steinskredmateriale med større blokker enn steinsprang; tynt dekke",
+              "label": "Steinskredavsetning, usammenhengende eller tynt dekke",
+              "value": "312"
             },
             {
-              "value": "313",
-              "label": "313"
+              "description": "Usortert materiale fra snø- og jordskred; lokalt tykt",
+              "label": "Snø- og jordskredavsetning, stedvis med stor mektighet",
+              "value": "313"
             },
             {
-              "value": "314",
-              "label": "314"
+              "description": "Usortert snø- og jordskredmateriale med tynt dekke",
+              "label": "Snø- og jordskredavsetning, usammenhengende eller tynt dekke",
+              "value": "314"
             },
             {
-              "value": "315",
-              "label": "315"
+              "description": "Jordskred- og steinsprangmateriale; lokalt tykt",
+              "label": "Jordskred- og steinsprangavsetning, stedvis med stor mektighet",
+              "value": "315"
             },
             {
-              "value": "316",
-              "label": "316"
+              "description": "Jordskred- og steinsprangmateriale med tynt eller usammenhengende dekke",
+              "label": "Jordskred- og steinsprangavsetning, usammenhengende eller tynt dekke",
+              "value": "316"
             },
             {
-              "value": "317",
-              "label": "317"
+              "description": "Snø- og steinsprangmateriale med varierende sortering; lokalt tykt",
+              "label": "Snø- og steinsprangavsetning, stedvis med stor mektighet",
+              "value": "317"
             },
             {
-              "value": "318",
-              "label": "318"
+              "description": "Snø- og steinsprangmateriale med tynt eller usammenhengende dekke",
+              "label": "Snø- og steinsprangavsetning, usammenhengende eller tynt dekke",
+              "value": "318"
             },
             {
-              "value": "320",
-              "label": "320"
+              "description": "Frostpåvirket blandingsmateriale som sakte glir nedover slake skråninger",
+              "label": "Sigejord med høyt organisk innhold",
+              "value": "320"
             },
             {
-              "value": "321",
-              "label": "321"
+              "description": "Grovkornet, frostpåvirket materiale som sakte glir nedover skråninger",
+              "label": "Steinrikt, sigende skråningsmateriale",
+              "value": "321"
             },
             {
-              "value": "35",
-              "label": "35"
+              "description": "Sortert, ofte finkornet og organisk rikt materiale avsatt i innsjø",
+              "label": "Innsjøavsetning (Lakustrin avsetning)",
+              "value": "35"
             },
             {
-              "value": "36",
-              "label": "36"
+              "description": "Brukes når bresjø- og innsjøavsetninger ikke skilles",
+              "label": "Bresjø-/brekammer- og innsjøavsetning (Glasilakustrin og lakustrin avsetning)",
+              "value": "36"
             },
             {
-              "value": "37",
-              "label": "37"
+              "description": "Sortert, rundet materiale fra bølgeaktivitet i innsjø eller bresjø",
+              "label": "Strandavsetning innsjø og/eller bresjø",
+              "value": "37"
             },
             {
-              "value": "40",
-              "label": "40"
+              "description": "Finkornet marin avsetning uten inndeling etter tykkelse",
+              "label": "Hav- og fjordavsetning, uspesifisert",
+              "value": "40"
             },
             {
-              "value": "41",
-              "label": "41"
+              "description": "Finkornet marin avsetning, opptil mange ti-meter tykk; kan inkludere kvikkleireskredmasser",
+              "label": "Hav- og fjordavsetning, sammenhengende dekke, stedvis med stor mektighet",
+              "value": "41"
             },
             {
-              "value": "42",
-              "label": "42"
+              "description": "Strandvasket marint materiale; ofte tynt dekke",
+              "label": "Marin strandavsetning, sammenhengende dekke",
+              "value": "42"
             },
             {
-              "value": "43",
-              "label": "43"
+              "description": "Ulike marine avsetninger, normalt under 0,5 m tykke",
+              "label": "Hav-, fjord- og strandavsetning, usammenhengende eller tynt dekke over berggrunnen",
+              "value": "43"
             },
             {
-              "value": "44",
-              "label": "44"
+              "description": "Avsetning av hovedsakelig knuste skjell",
+              "label": "Skjellsand (maringeologi)",
+              "value": "44"
             },
             {
-              "value": "45",
-              "label": "45"
+              "description": "Finkornet sediment med høyt organisk innhold avsatt i saltvann",
+              "label": "Marin gytje",
+              "value": "45"
             },
             {
-              "value": "50",
-              "label": "50"
+              "description": "Sortert sand og grus avsatt av elver og bekker; varierende mektighet",
+              "label": "Elve- og bekkeavsetning (Fluvial avsetning)",
+              "value": "50"
             },
             {
-              "value": "51",
-              "label": "51"
+              "description": "Sand og grus avsatt av elver; brukes kun i spesielle tilfeller",
+              "label": "Elveavsetning, sammenhengende dekke",
+              "value": "51"
             },
             {
-              "value": "52",
-              "label": "52"
+              "description": "Sortert sand og grus fra elver og bekker; tynt dekke",
+              "label": "Elve- og bekkeavsetning, usammenhengende eller tynt dekke",
+              "value": "52"
             },
             {
-              "value": "53",
-              "label": "53"
+              "description": "Sedimenter fra plutselig uttapping av bresjøer",
+              "label": "Flomavsetning fra bresjøtapping, uspesifisert",
+              "value": "53"
             },
             {
-              "value": "54",
-              "label": "54"
+              "description": "Avsetning fra katastrofal tapping av bresjø; sammenhengende dekke",
+              "label": "Flomavsetning fra bresjøtapping, sammenhengende",
+              "value": "54"
             },
             {
-              "value": "55",
-              "label": "55"
+              "description": "Avsetning fra brå tapping av bresjø; under 0,5 m tykk",
+              "label": "Flomavsetning fra bresjøtapping, usammenhengende eller tynt dekke over berggrunnen",
+              "value": "55"
             },
             {
-              "value": "56",
-              "label": "56"
+              "description": "Flomavsetning fra elver og bekker; uspesifisert tykkelse",
+              "label": "Flomavsetning",
+              "value": "56"
             },
             {
-              "value": "57",
-              "label": "57"
+              "description": "Flomavsetning fra elver ved unormalt høy vannføring; tynt dekke",
+              "label": "Flomavsetning, usammenhengende eller tynt dekke",
+              "value": "57"
             },
             {
-              "value": "60",
-              "label": "60"
+              "description": "Godt sortert sand og grov silt avsatt av vind (flygesand)",
+              "label": "Vindavsetning (Eolisk avsetning)",
+              "value": "60"
             },
             {
-              "value": "70",
-              "label": "70"
+              "description": "Forvitringsmateriale uten inndeling etter tykkelse",
+              "label": "Forvitringsmateriale, ikke inndelt etter mektighet",
+              "value": "70"
             },
             {
-              "value": "71",
-              "label": "71"
+              "description": "Usortert materiale dannet på stedet, over 0,5 m tykt",
+              "label": "Forvitringsmateriale",
+              "value": "71"
             },
             {
-              "value": "72",
-              "label": "72"
+              "description": "Forvitringsmateriale med tynt eller usammenhengende dekke",
+              "label": "Forvitringsmateriale, usammenhengende eller tynt dekke over berggrunnen",
+              "value": "72"
             },
             {
-              "value": "73",
-              "label": "73"
+              "description": "Blokkrike forvitringsavsetninger (blokkhav), mest i høyfjellet",
+              "label": "Forvitringsmateriale, stein- og blokkrikt (blokkhav)",
+              "value": "73"
             },
             {
-              "value": "80",
-              "label": "80"
+              "description": "Skredavsetninger med uspesifisert tykkelse",
+              "label": "Skredmateriale, ikke inndelt etter mektighet",
+              "value": "80"
             },
             {
-              "value": "81",
-              "label": "81"
+              "description": "Skredmateriale fra bratte dalsider; sammenhengende dekke",
+              "label": "Skredmateriale, sammenhengende dekke",
+              "value": "81"
             },
             {
-              "value": "82",
-              "label": "82"
+              "description": "Skredmateriale fra steinsprang, fjellskred, snø- eller løsmasseskred; tynt dekke",
+              "label": "Skredmateriale, usammenhengende eller tynt dekke",
+              "value": "82"
             },
             {
-              "value": "88",
-              "label": "88"
+              "description": "Tungeformet, usortert materiale som har inneholdt is; dannes i permafrost",
+              "label": "Steinbreavsetning",
+              "value": "88"
             },
             {
-              "value": "90",
-              "label": "90"
+              "description": "Organisk materiale av planterester dannet etter siste istid; torvtyper skilles ikke",
+              "label": "Torv og myr",
+              "value": "90"
             }
-          ]
+          ],
+          "type": "enumeration"
         }
       },
       {
-        "name": "losmassetypeNavn",
-        "type": "string",
         "cardinality": "1..1",
-        "description": "Kvartærgeologiske løsmassetyper (jordartstyper)"
+        "description": "Kvartærgeologiske løsmassetyper (jordartstyper)",
+        "name": "losmassetypeNavn",
+        "type": "string"
       }
-    ]
-  },
-  {
-    "name": "LosmasseGrense",
-    "description": "Avgrensning av ulike typer løsmasser (jordarter)",
+    ],
+    "description": "Areal hvor løsmasser/sedimenter har samme kornstørrelse<br/>Merknad: <br/>Kornstørrelseflate må ha enten sedKornstorrelse eller losmKornstorrelse, sedKornstorrelse gjelder for kartlegging marint/i sjø - mens losmKornstorrelse gjelder for kartlegging på land.",
     "geometry": {
-      "itemType": "feature",
-      "type": "geometry-linestring",
       "crs": [
         "#/crs",
         "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
       ],
+      "format": "geometry-polygon",
+      "itemType": "feature",
+      "ogcRole": "primary-geometry",
       "storageCrs": "http://www.opengis.net/def/crs/EPSG/0/4258",
-      "format": "geometry-linestring",
-      "ogcRole": "primary-geometry"
+      "type": "geometry-polygon"
     },
+    "name": "LosmasseFlate"
+  },
+  {
     "attributes": [
       {
-        "name": "lokalid",
-        "type": "string",
         "cardinality": "0..1",
-        "description": "lokalid",
-        "ogcRole": "id"
+        "description": "Lokal identifikator for objektet, tildelt av dataleverandør/dataforvalter, og unik innenfor datasettet",
+        "name": "lokalid",
+        "ogcRole": "id",
+        "type": "string"
       },
       {
-        "name": "identifikasjon",
-        "type": "Identifikasjon",
+        "attributes": [
+          {
+            "cardinality": "0..1",
+            "description": "Lokal identifikator, tildelt av dataleverendør/dataforvalter. Den lokale identifikatoren er unik innenfor navnerommet, ingen andre objekter har samme identifikator.<br/>NOTE: Det er data leverendørens ansvar å sørge for at denne lokale identifikatoren er unik innenfor navnerommet.",
+            "name": "lokalId",
+            "type": "string"
+          },
+          {
+            "cardinality": "0..1",
+            "description": "Navnerom som unikt identifiserer datakilden til objektet, starter med to bokstavs kode jfr ISO 3166. Benytter understreking  (\"_\") dersom data produsenten ikke er assosiert med bare et land.\r\n<br/>NOTE 1 : Verdien for nanverom vil eies av den dataprodusent som har ansvar for de unike identifikatorene og vil registreres i \"INSPIRE external  Object Identifier Namespaces Register\"<br/>Eksempel: NO for Norge.",
+            "name": "navnerom",
+            "type": "string"
+          },
+          {
+            "cardinality": "0..1",
+            "description": "Identifikasjon av en spesiell versjon av et geografisk objekt (instans), maksimum lengde på 25 karakterers. Dersom spesifikasjonen av et geografisk objekt med en identifikasjon inkludererer livsløpssyklusinformasjon, benyttes denne versjonId for å skille mellom ulike versjoner av samme objekt. versjonId er en unik  identifikasjon av versjonen. <br/>NOTE Maksimum lengde er valgt for å tillate tidsregistrering i henhold til  ISO 8601, slik som  \"2007-02-12T12:12:12+05:30\" som versjonId.",
+            "name": "versjonId",
+            "type": "string"
+          }
+        ],
         "cardinality": "0..1",
         "description": "Unik identifikasjon av et objekt",
-        "attributes": [
-          {
-            "name": "lokalId",
-            "type": "string",
-            "cardinality": "0..1",
-            "description": "Lokal identifikator, tildelt av dataleverendør/dataforvalter. Den lokale identifikatoren er unik innenfor navnerommet, ingen andre objekter har samme identifikator.<br/>NOTE: Det er data leverendørens ansvar å sørge for at denne lokale identifikatoren er unik innenfor navnerommet."
-          },
-          {
-            "name": "navnerom",
-            "type": "string",
-            "cardinality": "0..1",
-            "description": "Navnerom som unikt identifiserer datakilden til objektet, starter med to bokstavs kode jfr ISO 3166. Benytter understreking  (\"_\") dersom data produsenten ikke er assosiert med bare et land.\r\n<br/>NOTE 1 : Verdien for nanverom vil eies av den dataprodusent som har ansvar for de unike identifikatorene og vil registreres i \"INSPIRE external  Object Identifier Namespaces Register\"<br/>Eksempel: NO for Norge."
-          },
-          {
-            "name": "versjonId",
-            "type": "string",
-            "cardinality": "0..1",
-            "description": "Identifikasjon av en spesiell versjon av et geografisk objekt (instans), maksimum lengde på 25 karakterers. Dersom spesifikasjonen av et geografisk objekt med en identifikasjon inkludererer livsløpssyklusinformasjon, benyttes denne versjonId for å skille mellom ulike versjoner av samme objekt. versjonId er en unik  identifikasjon av versjonen. <br/>NOTE Maksimum lengde er valgt for å tillate tidsregistrering i henhold til  ISO 8601, slik som  \"2007-02-12T12:12:12+05:30\" som versjonId."
-          }
-        ]
+        "name": "identifikasjon",
+        "type": "Identifikasjon"
       },
       {
-        "name": "førsteDigitaliseringsdato",
-        "type": "date (string)",
         "cardinality": "0..1",
         "description": "Dato når en representasjon av objektet i digital form første gang ble etablert<br/>Merknad: <br/>FørsteDigitaliseringsdato kan skille seg fra førsteDatafangstdato ved at den første datafangsten skjedde analogt og gjort om til digital form senere i en produksjonsprosess. <br/>Eventuelt at innlegging i databasen skjedde på et senere tidspunkt enn registreringen /observasjonen / målingen av objektet.",
-        "ogcRole": "primary-instant"
+        "name": "førsteDigitaliseringsdato",
+        "ogcRole": "primary-instant",
+        "type": "date (string)"
       },
       {
+        "cardinality": "0..1",
+        "description": "Dato for siste endring på objektetdataene <br/>Merknad: \r\nOppdateringsdato kan være forskjellig fra Datafangsdato ved at data som er registrert kan bufres en kortere eller lengre periode før disse legges inn i datasystemet (databasen).<br/>-Definition-<br/>Date and time at which this version of the spatial object was inserted or changed in the spatial data set.",
         "name": "oppdateringsdato",
-        "type": "date (string)",
-        "cardinality": "0..1",
-        "description": "Dato for siste endring på objektetdataene <br/>Merknad: \r\nOppdateringsdato kan være forskjellig fra Datafangsdato ved at data som er registrert kan bufres en kortere eller lengre periode før disse legges inn i datasystemet (databasen).<br/>-Definition-<br/>Date and time at which this version of the spatial object was inserted or changed in the spatial data set."
+        "type": "date (string)"
       },
       {
+        "cardinality": "0..1",
+        "description": "Dato for uttak fra en database<br/>Merknad:<br/>Skiller seg fra Kopidato ved at en ikke skiller på om det er uttak fra en originaldatabase eller en kopidatabase.",
         "name": "datauttaksdato",
-        "type": "date (string)",
-        "cardinality": "0..1",
-        "description": "Dato for uttak fra en database<br/>Merknad:<br/>Skiller seg fra Kopidato ved at en ikke skiller på om det er uttak fra en originaldatabase eller en kopidatabase."
+        "type": "date (string)"
       },
       {
-        "name": "temakvalitet",
-        "type": "Temakvalitet",
         "cardinality": "0..1",
         "description": "Kvaliteten på registrering/kartlegging av tema sett i forhold til faktiske forhold i naturen. Ulik tematisk oppløsning/generaliseringsgrad kan være styrt av temaets samfunnsmessige betydning, områdets arealmessige betydning eller prosjektets økonomi. Med nøyaktighet i denne sammenheng menes hvor korrekt registreringen avspeiler objektets posisjon i naturen og presisjonen i valg av tematisk innhold i forhold til generalisering\r\n<br/>Merknad: Tematisk oppløsning/generaliseringsgrad kan være styrt av temaets samfunnsmessige betydning, områdets arealmessige betydning eller prosjektets målsetning",
+        "name": "temakvalitet",
+        "type": "Temakvalitet",
         "valueDomain": {
-          "type": "enumeration",
           "listedValues": [
             {
-              "value": "dårlig",
-              "label": "dårlig"
+              "description": "Meget lav posisjonell og tematisk nøyaktighet, sterkt generalisert; for nasjonale eller store regionale oversikter i målestokk mindre enn 1:250 000",
+              "label": "Dårlig",
+              "value": "dårlig"
             },
             {
-              "value": "god",
-              "label": "god"
+              "description": "God posisjonell og tematisk nøyaktighet (ca. ±100 m), noe generalisert, ofte basert på flyfototolkning; egnet til oversikt i ca. 1:100 000",
+              "label": "God",
+              "value": "god"
             },
             {
-              "value": "megetGod",
-              "label": "megetGod"
+              "description": "Høy posisjonell og tematisk nøyaktighet (ca. ±50 m), høy oppløsning, lite generalisert; egnet for arealplaner i ca. 1:50 000",
+              "label": "Meget god",
+              "value": "megetGod"
             },
             {
-              "value": "noeDårlig",
-              "label": "noeDårlig"
+              "description": "Lav posisjonell og tematisk nøyaktighet, sterkt generalisert; for oversiktskart i liten målestokk",
+              "label": "Noe dårlig",
+              "value": "noeDårlig"
             },
             {
-              "value": "noksåGod",
-              "label": "noksåGod"
+              "description": "Middels nøyaktighet (ca. ±250 m), en god del generalisert; egnet kun til regionale oversikter i ca. 1:250 000",
+              "label": "Nokså god",
+              "value": "noksåGod"
             },
             {
-              "value": "særdelesGod",
-              "label": "særdelesGod"
+              "description": "Høyest mulig posisjonell og tematisk nøyaktighet (ca. ±20 m); egnet for kommunal planlegging i målestokk større enn 1:20 000",
+              "label": "Særdeles god",
+              "value": "særdelesGod"
             }
-          ]
+          ],
+          "type": "enumeration"
         }
       },
       {
-        "name": "geolPavisningstype",
-        "type": "GeolPavisningstype",
         "cardinality": "0..1",
         "description": "Hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen.",
+        "name": "geolPavisningstype",
+        "type": "GeolPavisningstype",
         "valueDomain": {
-          "type": "enumeration",
           "listedValues": [
             {
-              "value": "0",
-              "label": "0"
+              "description": "Påvisningsmetode er ikke angitt",
+              "label": "Ikke spesifisert",
+              "value": "0"
             },
             {
-              "value": "1",
-              "label": "1"
+              "description": "Avgrensningen eller registreringen av objektet er påvist eller observert i felt",
+              "label": "Sikker påvisning/observasjon",
+              "value": "1"
             },
             {
-              "value": "10",
-              "label": "10"
+              "description": "Avgrensning helt eller delvis bestemt av ikke-geologiske forhold, f.eks. administrativ grense eller kystlinje",
+              "label": "Avgrensning ikke basert på geologi",
+              "value": "10"
             },
             {
-              "value": "11",
-              "label": "11"
+              "description": "Avgrensning basert på geofysiske data/metoder verifisert ved prøvetaking",
+              "label": "Avgrensning basert på geofysiske data/metoder verifisert ved prøvetaking",
+              "value": "11"
             },
             {
-              "value": "12",
-              "label": "12"
+              "description": "Avgrensning basert på tolkning av tilgjengelige geologiske/geofysiske data av varierende oppløsning, litteratur og kart",
+              "label": "Avgrensning basert på tolkning av tilgjengelige geologiske/geofysiske data av varierende oppløsning, litteratur og kart",
+              "value": "12"
             },
             {
-              "value": "13",
-              "label": "13"
+              "description": "Avgrensning basert på geologisk observasjon i felt, prøvetaking og analyser",
+              "label": "Avgrensning basert på geologisk observasjon i felt, prøvetaking og analyser",
+              "value": "13"
             },
             {
-              "value": "14",
-              "label": "14"
+              "description": "Tolket avgrensning basert på tilgjengelig geologisk kartlegging",
+              "label": "Tolket avgrensning basert på tilgjengelig geologisk kartlegging",
+              "value": "14"
             },
             {
-              "value": "2",
-              "label": "2"
+              "description": "Ikke påvist/observert, men antatt avgrensning/registrering av objekt",
+              "label": "Usikker påvisning/observasjon",
+              "value": "2"
             },
             {
-              "value": "21",
-              "label": "21"
+              "description": "Avgrensning basert på prøvetaking",
+              "label": "Avgrensning basert på prøvetaking",
+              "value": "21"
             },
             {
-              "value": "22",
-              "label": "22"
+              "description": "Avgrensning basert på seismiske data",
+              "label": "Avgrensning basert på seismikk",
+              "value": "22"
             },
             {
-              "value": "23",
-              "label": "23"
+              "description": "Avgrensning basert på detaljerte dybdedata, f.eks. multistråleekkolodd og/eller interferometrisk sonar",
+              "label": "Avgrensning basert på detaljerte dybdedata",
+              "value": "23"
             },
             {
-              "value": "24",
-              "label": "24"
+              "description": "Avgrensning basert på backscatter-data eller sidescan sonar",
+              "label": "Avgrensning basert på backscatter data/sidescan sonar",
+              "value": "24"
             },
             {
-              "value": "25",
-              "label": "25"
+              "description": "Avgrensning basert på prøvetaking kombinert med akustiske data/metoder",
+              "label": "Avgrensning basert på prøvetaking og akustiske data/metoder",
+              "value": "25"
             },
             {
-              "value": "26",
-              "label": "26"
+              "description": "Avgrensning basert på akustiske data/metoder",
+              "label": "Avgrensning basert på akustiske data/metoder",
+              "value": "26"
             },
             {
-              "value": "27",
-              "label": "27"
+              "description": "Avgrensning basert på flere metoder eller datatyper",
+              "label": "Avgrensning basert på flere metoder/datatyper",
+              "value": "27"
             },
             {
-              "value": "28",
-              "label": "28"
+              "description": "Avgrensning basert på undervannsfoto og/eller -video",
+              "label": "Avgrensning basert på undervannsfoto og/eller -video",
+              "value": "28"
             },
             {
-              "value": "29",
-              "label": "29"
+              "description": "Avgrensning basert på akustiske metoder verifisert ved prøvetaking, foto eller lignende",
+              "label": "Avgrensning basert på akustiske data/metoder verifisert ved prøvetaking, foto o.l.",
+              "value": "29"
             },
             {
-              "value": "3",
-              "label": "3"
+              "description": "Tilfeldig plassert og meget usikker avgrensning; benyttes blant annet under vann- eller breoverflater",
+              "label": "Konstruert avgrensning",
+              "value": "3"
             },
             {
-              "value": "30",
-              "label": "30"
+              "description": "Avgrensning tolket ut fra tilgjengelige batymetriske data av varierende oppløsning, litteratur og kart",
+              "label": "Avgrensning basert på tolkning av tilgjengelige batymetriske data, litteratur og kart",
+              "value": "30"
             },
             {
-              "value": "31",
-              "label": "31"
+              "label": "31",
+              "value": "31"
             },
             {
-              "value": "32",
-              "label": "32"
+              "label": "32",
+              "value": "32"
             },
             {
-              "value": "4",
-              "label": "4"
+              "description": "Avgrensning basert på geofysiske indikasjoner",
+              "label": "Geofysisk tolket grense",
+              "value": "4"
             },
             {
-              "value": "5",
-              "label": "5"
+              "description": "Basert på generalisert tolkning av objekter med små innbyrdes forskjeller",
+              "label": "Dårlig synlig avgrensning i terrenget",
+              "value": "5"
             },
             {
-              "value": "6",
-              "label": "6"
+              "description": "Gradvis overgang mellom to bergarter eller avsetningstyper",
+              "label": "Overgangsmessig grense",
+              "value": "6"
             },
             {
-              "value": "7",
-              "label": "7"
+              "description": "Avgrensning fremkommet ved generalisering, sammentolkning eller aggregering",
+              "label": "Tolket avgrensning/registrering",
+              "value": "7"
             },
             {
-              "value": "8",
-              "label": "8"
+              "description": "Objekt eller delobjekt tolket fra flybilder",
+              "label": "Flyfototolket objekt eller delobjekt",
+              "value": "8"
             },
             {
-              "value": "9",
-              "label": "9"
+              "description": "Observasjon der beliggenheten er usikker",
+              "label": "Observasjon med usikker geografisk beliggenhet",
+              "value": "9"
             }
-          ]
+          ],
+          "type": "enumeration"
         }
       },
       {
-        "name": "geolPavisningstypeNavn",
-        "type": "string",
         "cardinality": "0..1",
-        "description": "Hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen."
+        "description": "Hvor sikkert et geologisk objekt er påvist i terrenget, eller hvilken metode som ligger til grunn for å påvisningen/registreringen.",
+        "name": "geolPavisningstypeNavn",
+        "type": "string"
       },
       {
-        "name": "kvalitet",
-        "type": "Posisjonskvalitet",
-        "cardinality": "0..1",
-        "description": "Beskrivelse av kvaliteten på stedfestingen<br/>Merknad: Denne er identisk med ..KVALITET i tidligere versjoner av SOSI.",
         "attributes": [
           {
-            "name": "målemetode",
-            "type": "Målemetode",
             "cardinality": "0..1",
             "description": "Kode på metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss",
+            "name": "målemetode",
+            "type": "Målemetode",
             "valueDomain": {
-              "type": "enumeration",
               "listedValues": [
                 {
-                  "value": "10",
-                  "label": "10"
+                  "description": "Terrengmålt",
+                  "label": "Terrengmålt",
+                  "value": "10"
                 },
                 {
-                  "value": "11",
-                  "label": "11"
+                  "description": "Totalstasjon",
+                  "label": "Totalstasjon",
+                  "value": "11"
                 },
                 {
-                  "value": "12",
-                  "label": "12"
+                  "description": "Teodolitt med elektronisk avstandsmåler",
+                  "label": "Teodolitt med elektronisk avstandsmåler",
+                  "value": "12"
                 },
                 {
-                  "value": "13",
-                  "label": "13"
+                  "description": "Teodolitt med målebånd",
+                  "label": "Teodolitt med målebånd",
+                  "value": "13"
                 },
                 {
-                  "value": "14",
-                  "label": "14"
+                  "description": "Ortogonalmetoden",
+                  "label": "Ortogonalmetoden",
+                  "value": "14"
                 },
                 {
-                  "value": "15",
-                  "label": "15"
+                  "description": "Utmål",
+                  "label": "Utmål",
+                  "value": "15"
                 },
                 {
-                  "value": "18",
-                  "label": "18"
+                  "description": "Tatt fra plan",
+                  "label": "Tatt fra plan",
+                  "value": "18"
                 },
                 {
-                  "value": "19",
-                  "label": "19"
+                  "description": "Annet",
+                  "label": "Annet",
+                  "value": "19"
                 },
                 {
-                  "value": "20",
-                  "label": "20"
+                  "description": "Stereoinstrument",
+                  "label": "Stereoinstrument",
+                  "value": "20"
                 },
                 {
-                  "value": "21",
-                  "label": "21"
+                  "description": "Aerotriangulert",
+                  "label": "Aerotriangulert",
+                  "value": "21"
                 },
                 {
-                  "value": "22",
-                  "label": "22"
+                  "description": "Analytisk plotter",
+                  "label": "Analytisk plotter",
+                  "value": "22"
                 },
                 {
-                  "value": "23",
-                  "label": "23"
+                  "description": "Autograf - vanlig registrering",
+                  "label": "Autograf - vanlig registrering",
+                  "value": "23"
                 },
                 {
-                  "value": "24",
-                  "label": "24"
+                  "description": "Digitalt stereoinstrument",
+                  "label": "Digitalt stereoinstrument",
+                  "value": "24"
                 },
                 {
-                  "value": "30",
-                  "label": "30"
+                  "description": "Scannet fra kart",
+                  "label": "Scannet fra kart",
+                  "value": "30"
                 },
                 {
-                  "value": "31",
-                  "label": "31"
+                  "description": "Scannet fra blyantoriginal",
+                  "label": "Scannet fra blyantoriginal",
+                  "value": "31"
                 },
                 {
-                  "value": "32",
-                  "label": "32"
+                  "description": "Scannet fra rissefolie",
+                  "label": "Scannet fra rissefolie",
+                  "value": "32"
                 },
                 {
-                  "value": "33",
-                  "label": "33"
+                  "description": "Scannet fra transparent folie - god kvalitet",
+                  "label": "Scannet fra transparent folie - god kvalitet",
+                  "value": "33"
                 },
                 {
-                  "value": "34",
-                  "label": "34"
+                  "description": "Scannet fra transparent folie - mindre god kvalitet",
+                  "label": "Scannet fra transparent folie - mindre god kvalitet",
+                  "value": "34"
                 },
                 {
-                  "value": "35",
-                  "label": "35"
+                  "description": "Scannet fra papirkopi",
+                  "label": "Scannet fra papirkopi",
+                  "value": "35"
                 },
                 {
-                  "value": "36",
-                  "label": "36"
+                  "description": "Flybåren laserscanner",
+                  "label": "Flybåren laserscanner",
+                  "value": "36"
                 },
                 {
-                  "value": "37",
-                  "label": "37"
+                  "label": "37",
+                  "value": "37"
                 },
                 {
-                  "value": "38",
-                  "label": "38"
+                  "label": "38",
+                  "value": "38"
                 },
                 {
-                  "value": "40",
-                  "label": "40"
+                  "description": "Digitalisert på dig.bord fra ortofoto/flybilde",
+                  "label": "Digitalisert på dig.bord fra ortofoto/flybilde",
+                  "value": "40"
                 },
                 {
-                  "value": "41",
-                  "label": "41"
+                  "description": "Digitalisert fra ortofoto - film",
+                  "label": "Digitalisert fra ortofoto - film",
+                  "value": "41"
                 },
                 {
-                  "value": "42",
-                  "label": "42"
+                  "description": "Digitalisert fra ortofoto - fotokopi",
+                  "label": "Digitalisert fra ortofoto - fotokopi",
+                  "value": "42"
                 },
                 {
-                  "value": "43",
-                  "label": "43"
+                  "description": "Digitalisert fra flybilde - monodigitalisert fra film",
+                  "label": "Digitalisert fra flybilde - monodigitalisert fra film",
+                  "value": "43"
                 },
                 {
-                  "value": "44",
-                  "label": "44"
+                  "description": "Digitalisert fra flybilde - monodigitalisert fra fotokopi",
+                  "label": "Digitalisert fra flybilde - monodigitalisert fra fotokopi",
+                  "value": "44"
                 },
                 {
-                  "value": "45",
-                  "label": "45"
+                  "description": "Digitalisert fra ortofoto",
+                  "label": "Digitalisert fra ortofoto",
+                  "value": "45"
                 },
                 {
-                  "value": "46",
-                  "label": "46"
+                  "description": "Digitalisert på skjerm fra satellittbilde",
+                  "label": "Digitalisert på skjerm fra satellittbilde",
+                  "value": "46"
                 },
                 {
-                  "value": "47",
-                  "label": "47"
+                  "description": "Digitalisert på skjerm fra andre digitale rasterdata",
+                  "label": "Digitalisert på skjerm fra andre digitale rasterdata",
+                  "value": "47"
                 },
                 {
-                  "value": "48",
-                  "label": "48"
+                  "label": "48",
+                  "value": "48"
                 },
                 {
-                  "value": "49",
-                  "label": "49"
+                  "label": "49",
+                  "value": "49"
                 },
                 {
-                  "value": "50",
-                  "label": "50"
+                  "description": "Digitalisert på dig.bord fra strek-kart",
+                  "label": "Digitalisert på dig.bord fra strek-kart",
+                  "value": "50"
                 },
                 {
-                  "value": "51",
-                  "label": "51"
+                  "description": "Digitalisert på dig.bord fra blyantoriginal",
+                  "label": "Digitalisert på dig.bord fra blyantoriginal",
+                  "value": "51"
                 },
                 {
-                  "value": "52",
-                  "label": "52"
+                  "description": "Digitalisert på dig.bord fra rissefolie",
+                  "label": "Digitalisert på dig.bord fra rissefolie",
+                  "value": "52"
                 },
                 {
-                  "value": "53",
-                  "label": "53"
+                  "description": "Digitalisert på dig.bord fra transparent film - god kvalitet",
+                  "label": "Digitalisert på dig.bord fra transparent film - god kvalitet",
+                  "value": "53"
                 },
                 {
-                  "value": "54",
-                  "label": "54"
+                  "description": "Digitalisert på dig.bord fra transparent film - mindre god kvalitet",
+                  "label": "Digitalisert på dig.bord fra transparent film - mindre god kvalitet",
+                  "value": "54"
                 },
                 {
-                  "value": "55",
-                  "label": "55"
+                  "description": "Digitalisert på dig.bord fra papirkopi",
+                  "label": "Digitalisert på dig.bord fra papirkopi",
+                  "value": "55"
                 },
                 {
-                  "value": "56",
-                  "label": "56"
+                  "description": "Digitalisert på skjerm fra scannet samkopi (Raster)",
+                  "label": "Digitalisert på skjerm fra scannet samkopi (Raster)",
+                  "value": "56"
                 },
                 {
-                  "value": "60",
-                  "label": "60"
+                  "description": "Genererte data (interpolasjon)",
+                  "label": "Genererte data (interpolasjon)",
+                  "value": "60"
                 },
                 {
-                  "value": "61",
-                  "label": "61"
+                  "description": "Generert i terrengmodell",
+                  "label": "Generert i terrengmodell",
+                  "value": "61"
                 },
                 {
-                  "value": "62",
-                  "label": "62"
+                  "description": "Vektet middel",
+                  "label": "Vektet middel",
+                  "value": "62"
                 },
                 {
-                  "value": "63",
-                  "label": "63"
+                  "description": "Generert sirkelgeometri",
+                  "label": "Generert sirkelgeometri",
+                  "value": "63"
                 },
                 {
-                  "value": "64",
-                  "label": "64"
+                  "description": "Generalisert",
+                  "label": "Generalisert",
+                  "value": "64"
                 },
                 {
-                  "value": "65",
-                  "label": "65"
+                  "description": "Generert sentralpunkt",
+                  "label": "Generert sentralpunkt",
+                  "value": "65"
                 },
                 {
-                  "value": "66",
-                  "label": "66"
+                  "description": "Sammenknytningspunkt/randpunkt",
+                  "label": "Sammenknytningspunkt/randpunkt",
+                  "value": "66"
                 },
                 {
-                  "value": "67",
-                  "label": "67"
+                  "description": "Koordinater hentet fra GAB",
+                  "label": "Koordinater hentet fra GAB",
+                  "value": "67"
                 },
                 {
-                  "value": "68",
-                  "label": "68"
+                  "description": "Koordinater hentet fra JREG",
+                  "label": "Koordinater hentet fra JREG",
+                  "value": "68"
                 },
                 {
-                  "value": "69",
-                  "label": "69"
+                  "description": "Beregnet",
+                  "label": "Beregnet",
+                  "value": "69"
                 },
                 {
-                  "value": "70",
-                  "label": "70"
+                  "description": "Spesielle metoder",
+                  "label": "Spesielle metoder",
+                  "value": "70"
                 },
                 {
-                  "value": "71",
-                  "label": "71"
+                  "description": "Målt med stikkstang",
+                  "label": "Målt med stikkstang",
+                  "value": "71"
                 },
                 {
-                  "value": "72",
-                  "label": "72"
+                  "description": "Målt med waterstang",
+                  "label": "Målt med waterstang",
+                  "value": "72"
                 },
                 {
-                  "value": "73",
-                  "label": "73"
+                  "description": "Målt med målehjul",
+                  "label": "Målt med målehjul",
+                  "value": "73"
                 },
                 {
-                  "value": "74",
-                  "label": "74"
+                  "description": "Målt med stigningsmåler",
+                  "label": "Målt med stigningsmåler",
+                  "value": "74"
                 },
                 {
-                  "value": "77",
-                  "label": "77"
+                  "label": "77",
+                  "value": "77"
                 },
                 {
-                  "value": "78",
-                  "label": "78"
+                  "description": "Fastsatt ved dom eller kongelig resolusjon",
+                  "label": "Fastsatt ved dom eller kongelig resolusjon",
+                  "value": "78"
                 },
                 {
-                  "value": "79",
-                  "label": "79"
+                  "description": "Annen spesiell metode (spesifiseres i filhode)",
+                  "label": "Annen spesiell metode (spesifiseres i filhode)",
+                  "value": "79"
                 },
                 {
-                  "value": "80",
-                  "label": "80"
+                  "description": "Frihåndstegning",
+                  "label": "Frihåndstegning",
+                  "value": "80"
                 },
                 {
-                  "value": "81",
-                  "label": "81"
+                  "description": "Digitalisert fra krokering på kart",
+                  "label": "Digitalisert fra krokering på kart",
+                  "value": "81"
                 },
                 {
-                  "value": "82",
-                  "label": "82"
+                  "description": "Direkte innlagt på skjerm",
+                  "label": "Direkte innlagt på skjerm",
+                  "value": "82"
                 },
                 {
-                  "value": "90",
-                  "label": "90"
+                  "description": "Treghetsstedfesting",
+                  "label": "Treghetsstedfesting",
+                  "value": "90"
                 },
                 {
-                  "value": "91",
-                  "label": "91"
+                  "description": "GPS Kodemåling, relative målinger",
+                  "label": "GPS Kodemåling, relative målinger",
+                  "value": "91"
                 },
                 {
-                  "value": "92",
-                  "label": "92"
+                  "description": "GPS Kodemåling, enkeltmålinger",
+                  "label": "GPS Kodemåling, enkeltmålinger",
+                  "value": "92"
                 },
                 {
-                  "value": "93",
-                  "label": "93"
+                  "description": "GPS Fasemåling, statisk måling",
+                  "label": "GPS Fasemåling, statisk måling",
+                  "value": "93"
                 },
                 {
-                  "value": "94",
-                  "label": "94"
+                  "description": "GPS Fasemåling, andre metoder (utenom RTK)",
+                  "label": "GPS Fasemåling, andre metoder (utenom RTK)",
+                  "value": "94"
                 },
                 {
-                  "value": "95",
-                  "label": "95"
+                  "description": "Kombinasjon av GPS/Treghet",
+                  "label": "Kombinasjon av GPS/Treghet",
+                  "value": "95"
                 },
                 {
-                  "value": "96",
-                  "label": "96"
+                  "description": "GPS Fasemåling RTK (Realtids kinematisk måling)",
+                  "label": "GPS Fasemåling RTK (Realtids kinematisk måling)",
+                  "value": "96"
                 },
                 {
-                  "value": "97",
-                  "label": "97"
+                  "description": "GPS Fasemåling, float-løsning",
+                  "label": "GPS Fasemåling, float-løsning",
+                  "value": "97"
                 },
                 {
-                  "value": "99",
-                  "label": "99"
+                  "description": "Ukjent målemetode",
+                  "label": "Ukjent målemetode",
+                  "value": "99"
                 }
-              ]
+              ],
+              "type": "enumeration"
             }
           },
           {
-            "name": "målemetodeNavn",
-            "type": "string",
             "cardinality": "0..1",
-            "description": "Navn på metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss"
+            "description": "Navn på metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss",
+            "name": "målemetodeNavn",
+            "type": "string"
           },
           {
-            "name": "nøyaktighet",
-            "type": "integer",
             "cardinality": "0..1",
-            "description": "Punktstandardavviket i grunnriss for punkter samt tverravvik for linjer<br/>Merknad:<br/>Oppgitt i cm"
+            "description": "Punktstandardavviket i grunnriss for punkter samt tverravvik for linjer<br/>Merknad:<br/>Oppgitt i cm",
+            "name": "nøyaktighet",
+            "type": "integer"
           }
-        ]
+        ],
+        "cardinality": "0..1",
+        "description": "Beskrivelse av kvaliteten på stedfestingen<br/>Merknad: Denne er identisk med ..KVALITET i tidligere versjoner av SOSI.",
+        "name": "kvalitet",
+        "type": "Posisjonskvalitet"
       },
       {
-        "name": "medium",
-        "type": "Medium",
         "cardinality": "0..1",
         "description": "Objektets beliggenhet i forhold til jordoverflaten<br/>Eksempel:\r\nPå bro, i tunnel, inne i et bygningsmessig anlegg, etc.",
+        "name": "medium",
+        "type": "Medium",
         "valueDomain": {
-          "type": "enumeration",
           "listedValues": [
             {
-              "value": "B",
-              "label": "B"
+              "description": "I bygning/bygningsmessig anlegg",
+              "label": "I bygning/bygningsmessig anlegg",
+              "value": "B"
             },
             {
-              "value": "D",
-              "label": "D"
+              "description": "Tidvis under vann",
+              "label": "Tidvis under vann",
+              "value": "D"
             },
             {
-              "value": "I",
-              "label": "I"
+              "description": "På isbre",
+              "label": "På isbre",
+              "value": "I"
             },
             {
-              "value": "J",
-              "label": "J"
+              "description": "Under isbre",
+              "label": "Under isbre",
+              "value": "J"
             },
             {
-              "value": "L",
-              "label": "L"
+              "description": "I luft",
+              "label": "I luft",
+              "value": "L"
             },
             {
-              "value": "O",
-              "label": "O"
+              "description": "På vannoverflaten",
+              "label": "På vannoverflaten",
+              "value": "O"
             },
             {
-              "value": "S",
-              "label": "S"
+              "description": "På sjøbunnen",
+              "label": "På sjøbunnen",
+              "value": "S"
             },
             {
-              "value": "T",
-              "label": "T"
+              "description": "På terrenget/på bakkenivå",
+              "label": "På terrenget/på bakkenivå",
+              "value": "T"
             },
             {
-              "value": "U",
-              "label": "U"
+              "description": "Under terrenget",
+              "label": "Under terrenget",
+              "value": "U"
             },
             {
-              "value": "V",
-              "label": "V"
+              "description": "Alltid i vann",
+              "label": "Alltid i vann",
+              "value": "V"
             },
             {
-              "value": "W",
-              "label": "W"
+              "description": "Under sjøbunnen",
+              "label": "Under sjøbunnen",
+              "value": "W"
             },
             {
-              "value": "X",
-              "label": "X"
+              "description": "Ukjent",
+              "label": "Ukjent",
+              "value": "X"
             }
-          ]
+          ],
+          "type": "enumeration"
         }
       },
       {
-        "name": "mediumNavn",
-        "type": "string",
         "cardinality": "0..1",
-        "description": "Objektets beliggenhet i forhold til jordoverflaten<br/>Eksempel:\r\nPå bro, i tunnel, inne i et bygningsmessig anlegg, etc."
+        "description": "Objektets beliggenhet i forhold til jordoverflaten<br/>Eksempel:\r\nPå bro, i tunnel, inne i et bygningsmessig anlegg, etc.",
+        "name": "mediumNavn",
+        "type": "string"
       },
       {
-        "name": "opphav",
-        "type": "string",
         "cardinality": "0..1",
-        "description": "Referanse til opphavsmaterialet, kildematerialet, organisasjons/publiseringskilde\r\n<br/>Merknad: <br/>Kan også beskrive navn på person og årsak til oppdatering"
+        "description": "Referanse til opphavsmaterialet, kildematerialet, organisasjons/publiseringskilde\r\n<br/>Merknad: <br/>Kan også beskrive navn på person og årsak til oppdatering",
+        "name": "opphav",
+        "type": "string"
       }
-    ]
+    ],
+    "description": "Avgrensning av ulike typer løsmasser (jordarter)",
+    "geometry": {
+      "crs": [
+        "#/crs",
+        "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+      ],
+      "format": "geometry-linestring",
+      "itemType": "feature",
+      "ogcRole": "primary-geometry",
+      "storageCrs": "http://www.opengis.net/def/crs/EPSG/0/4258",
+      "type": "geometry-linestring"
+    },
+    "name": "LosmasseGrense"
   }
 ]
