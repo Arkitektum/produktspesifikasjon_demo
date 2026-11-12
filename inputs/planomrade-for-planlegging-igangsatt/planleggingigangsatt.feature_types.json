@@ -303,37 +303,101 @@
     "attributes": [
       {
         "cardinality": "1",
-        "description": "type plandokument, for eksempel planbeskrivelse, plankart eller varsel om oppstart (forslag – må verifiseres)",
+        "description": "type plandokument etter kodelisten Plandokumenttype i SOSI Planregister 5.0. For dokumenter ved varsel om oppstart brukes normalt KORR (planinitiativ, referat fra oppstartsmøte, varsel om oppstart, liste over varslede parter), KART (planavgrensning), PLANPROG (planprogram) og VEDTAK (vedtak om planoppstart), jf. KS/Geointegrasjon «Dokumenttyper for ePlansak»",
         "name": "dokumenttype",
         "type": "Plandokumenttype",
         "valueDomain": {
           "asDictionary": "true",
           "codeList": "https://register.geonorge.no/sosi-kodelister/plan/planregister/plandokumenttype",
-          "definition": "plandokument må tilhøre en gyldig dokumentkategori. Dokumenttyper for plansaker",
+          "definition": "Dokumenttyper for plansaker",
           "kind": "codelist"
         }
       },
       {
+        "cardinality": "0..1",
+        "description": "vedleggstype dokumentet ble innsendt med i Fellestjenester PLAN (planvarsel), f.eks. Planvarsel, PlanomraadeSosi, PlanomraadePdf, Planinitiativ, ReferatOppstartsmoete, Planprogram eller Annet. Gir finere inndeling enn dokumenttype (forslag – må verifiseres)",
+        "name": "vedleggstype",
+        "type": "Vedleggstype",
+        "valueDomain": {
+          "definition": "vedleggstyper i Fellestjenester PLAN (DiBK) for varsel om oppstart av planarbeid. Ingen publisert kodeliste funnet – verdier hentet fra plandata.ft.dibk.no (forslag – må verifiseres)",
+          "kind": "codelist",
+          "values": [
+            {
+              "code": "Planvarsel",
+              "definition": "varselbrev/annonse om oppstart av planarbeid"
+            },
+            {
+              "code": "PlanomraadeSosi",
+              "definition": "planavgrensning i SOSI-format"
+            },
+            {
+              "code": "PlanomraadePdf",
+              "definition": "kart over planavgrensning i PDF"
+            },
+            {
+              "code": "Planinitiativ",
+              "definition": "planinitiativ (forskrift om behandling av private forslag til detaljregulering § 1)"
+            },
+            {
+              "code": "ReferatOppstartsmoete",
+              "definition": "referat fra oppstartsmøte (pbl. § 12-8)"
+            },
+            {
+              "code": "Planprogram",
+              "definition": "planprogram (pbl. § 4-1)"
+            },
+            {
+              "code": "Annet",
+              "definition": "annet vedlegg"
+            }
+          ]
+        }
+      },
+      {
+        "cardinality": "0..1",
+        "description": "dokumentets tittel eller filnavn",
+        "name": "tittel",
+        "type": "CharacterString"
+      },
+      {
         "cardinality": "1",
-        "description": "referanse (URI eller arkivnøkkel) til dokumentet i arkivsystem eller dokumentlager (forslag – må verifiseres)",
+        "description": "referanse (URI eller arkivnøkkel) til dokumentet i arkivsystem eller dokumentlager. I OGC API-tjenesten for planlegging igangsatt formidles dette som nedlastingslenke (referanseDokumentfil)",
         "name": "arkivreferanse",
         "type": "CharacterString"
       },
       {
         "cardinality": "0..1",
-        "description": "dato da dokumentet ble datert eller godkjent (forslag – må verifiseres)",
+        "description": "dokumentets egen dato (datert eller godkjent), ikke dato for innsending eller registrering",
         "name": "dokumentdato",
         "type": "Date"
       },
       {
         "cardinality": "0..1",
-        "description": "fritekst som beskriver dokumentets innhold (forslag – må verifiseres)",
+        "description": "filformat angitt som medietype (MIME-type) etter IANA, f.eks. application/pdf",
+        "name": "mimeType",
+        "type": "CharacterString"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "sjekksum for dokumentfilen, brukt til å kontrollere at filen er uendret (forslag – må verifiseres)",
+        "name": "sjekksum",
+        "type": "CharacterString"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "algoritmen sjekksummen er beregnet med, f.eks. SHA-256 (forslag – må verifiseres)",
+        "name": "sjekksumAlgoritme",
+        "type": "CharacterString"
+      },
+      {
+        "cardinality": "0..1",
+        "description": "fritekst som beskriver dokumentets innhold",
         "name": "beskrivelse",
         "type": "CharacterString"
       },
       {
         "cardinality": "0..1",
-        "description": "navn på arkivet eller systemet der dokumentet er lagret (forslag – må verifiseres)",
+        "description": "navn på arkivet eller systemet der dokumentet er lagret",
         "name": "arkivnavn",
         "type": "CharacterString"
       }
