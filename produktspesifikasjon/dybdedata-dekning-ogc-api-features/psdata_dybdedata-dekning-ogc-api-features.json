@@ -1,0 +1,184 @@
+{
+  "overview": "Denne produktspesifikasjonen er autogenerert fra metadata i Geonorge og datamodell fra SOSI modellregister og/eller OGC API Features. Noe ekstra informasjon kan ha blitt lagt til gjennom manuell prosess. Produktspesifikasjonen er i henhold til standarden: 'Geografisk informasjon - Dataproduktspesifikasjoner' (ISO19131:2022)",
+  "title": "Dybdedata - dekning OGC API Features",
+  "format": "text/html",
+  "date": {
+    "creation": "2025-02-14",
+    "revision": "2026-05-20"
+  },
+  "contact": {
+    "individualName": "Matilde Skjæveland Skår",
+    "organizationName": "Kartverket",
+    "logo": "https://register.geonorge.no/data/organizations/971040238_Kartverket_liten.png",
+    "electronicMailAddress": "kundesenteret@kartverket.no",
+    "role": "owner"
+  },
+  "identificationSection": {
+    "title": "Dybdedata - dekning OGC API Features",
+    "abstract": "Tjenesten viser en oversikt over hvilke norske sjøområder som har blitt dybdekartlagt/sjømålt. Dybdedata er samlet inn over en lang tidsperiode, av ulike aktører og med ulikt utstyr. I egenskapstabellen til datasettet finnes det opplysninger som måleårstall, kartleggingsmetode, dataeier/hvilken aktør som har samlet inn dataene, utstyr, ekkolodd-type, spesifikasjon og oppløsning. \nInnholdet i tjenesten er basert på tilgjengelig data hos Kartverket.\n\nKvalitet på data oppgis som en egenskap i egenskapstabellen, med en kategorisering på 1-4, hvor 1 er best kvalitet og 4 er dårligst. Disse er kategorisert etter dybdesensor (i hovedsak ekkoloddtype, men andre dybdesensorer kan forekomme, eks. laser). Kategori 1 er moderne multistråle, kategori 2 er relativt gode data, men inneholder mer støy og hull en kategori 1, Kategori 3 er eldre multistråle, vanlig før år 2000, og kategori 4 er enkeltstråledata eller andre innsamlingsmetoder med lav kvalitet. \n\nTjenesten har to verdier som beskriver oppløsning: resolution og target_resolution. Resolution viser hvilken oppløsning Kartverket allerede har griddet målingen til, beregnet med søkeradius-metoden. target_resolution er et automatisk beregnet estimat som viser hvor grovt datasettet maksimalt bør griddes for at kvaliteten skal være tilfredsstillende over hele måleoppdraget. Beregningen gjøres ved å analysere punkttettheten i datasettet (binning-metoden) og ta utgangspunkt i de 5 % av områdene som har lavest punkttetthet. Verdien gir dermed en konservativ og helhetlig anbefalt grid-oppløsning for hele datasettet.\n\nDenne tjenesten er basert på OGC-API Features. OGC-API er en gruppe nye standarder som blir utviklet av Open Geospatial Consortium (OGC) for lettere å kunne tilgjengeliggjøre geografiske data på web. \nIkke alle GIS-programvarer har etablert støtte til de nye standarder, som gjør at funksjonaliteten kan oppleves som noe tregt i enkelte klienter, som f.eks. QGIS.\n\nTjenesten har en egen landingsside for forhåndsvisning og filtrering av innhold: https://hybasapi-portal.atgcp1-prod.kartverket.cloud/",
+    "purpose": {
+      "summary": "Formålet med tjenesten er å gi en oversikt over innsamlede og tilgjengelige dybdedata.",
+      "useCase": {
+        "name": "Bruksområde",
+        "summary": "Tjenesten kan benyttes til å få en oversikt over tilgjengelige dybdedata, f.eks. i forbindelse med planlagte aktiviteter i et spesifikt område. Ved hjelp av informasjon tilgjengelig i egenskapstabellen, vil man kunne få et innblikk i kvalitet og egnethet av dybdedata. Nyere data er å anse av best kvalitet, da det har hovedsakelig blitt samlet inn ved bruk av multistråle ekkolodd, mens eldre data er samlet inn med enkeltstråle ekkolodd eller annet eldre utstyr.  \nTjenesten kan også benyttes til kart, presentasjoner, ulike analyser eller som beslutningsgrunnlag."
+      }
+    },
+    "uniqueId": "58a262c2-4903-4dea-9490-10065fda6756",
+    "keyword": [
+      "MAREANO",
+      "batymetri",
+      "dybdedata",
+      "DTM",
+      "sjømåling",
+      "ekkolodd",
+      "Marine grunnkart",
+      "Høyde",
+      "Høydedata"
+    ],
+    "restriction": {
+      "legalConstraints": {
+        "accessConstraints": "Åpne data",
+        "useConstraints": "Lisens",
+        "license": "Creative Commons BY 4.0 (CC BY 4.0)",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "securityConstraints": {
+        "classification": "Ugradert"
+      }
+    },
+    "contact": [
+      {
+        "individualName": "Matilde Skjæveland Skår",
+        "organizationName": "Kartverket",
+        "electronicMailAddress": "kundesenteret@kartverket.no",
+        "role": "owner"
+      },
+      {
+        "individualName": "Matilde Skjæveland Skår",
+        "organizationName": "Kartverket",
+        "electronicMailAddress": "kundesenteret@kartverket.no",
+        "role": "pointOfContact"
+      },
+      {
+        "organizationName": "Kartverket",
+        "electronicMailAddress": "kundesenteret@kartverket.no",
+        "role": "publisher"
+      }
+    ],
+    "maintenance": "Kontinuerlig",
+    "extent": {
+      "geographicDescription": [
+        "Nordsjøen",
+        "Barentshavet",
+        "Havområde",
+        "Hav",
+        "Sjømåling",
+        "MAREANO",
+        "Norge",
+        "Svalbard",
+        "Dybdedata",
+        "Batymetri"
+      ],
+      "temporalElement": {
+        "timePeriod": {
+          "beginPosition": "2025-02-14",
+          "endPosition": "2026-05-20"
+        }
+      }
+    },
+    "date": {
+      "creation": "2025-02-14",
+      "publication": "2025-02-14",
+      "revision": "2026-05-20"
+    }
+  },
+  "scopeSection": [
+    {
+      "specificationScope": {
+        "scopeIdentification": "Hele datasettet",
+        "level": "dataset",
+        "levelDescription": "Gjelder hele datasettet. Hvis omfang ikke er oppgitt under en overskrift, gjelder teksten for hele datasettet og alle leveranser"
+      }
+    },
+    {
+      "specificationScope": {
+        "scopeIdentification": "Hybasapi.atgcp1-prod.kartverket.cloud",
+        "level": "dataset",
+        "levelDescription": "OGC API-Features fra Kartverket"
+      }
+    }
+  ],
+  "dataQualitySection": {
+    "scope": {
+      "level": "service"
+    }
+  },
+  "maintenanceSection": {
+    "maintenanceAndUpdateFrequency": "Kontinuerlig",
+    "maintenanceAndUpdateStatement": "Kontinuerlig oppdatert"
+  },
+  "dataCaptureAndProductionSection": {
+    "DataAcquisitionAndProcessing": {
+      "dataCaptureStatement": "Tjenesten tar utgangspunkt i Kartverkets oversikt over dekning sjømålte områder. Datasettet er delt inn i polygoner, hvor hvert polygon representerer et måleoppdrag (et oppdrag, tokt eller datasett med dybdedata) og viser utstrekningen av sjømålt område. Måleoppdragene er identifisert med en unik og persistent ID, som benyttes som identifikator for det bestemte måleoppdraget/toktet."
+    }
+  },
+  "deliverySection": [
+    {
+      "delivery": {
+        "deliveryMedium": {
+          "unitsOfDelivery": "landsfiler",
+          "deliveryMediumName": "OGC API-Features",
+          "deliveryService": {
+            "serviceEndpoint": "https://hybasapi.atgcp1-prod.kartverket.cloud/",
+            "serviceProperty": {
+              "type": "OGC API-Features",
+              "value": "OGC:API-Features"
+            }
+          }
+        },
+        "deliveryFormat": [
+          {
+            "formatName": "GeoJSON"
+          }
+        ]
+      }
+    }
+  ],
+  "metadataSection": {
+    "metadataStandard": "ISO19115",
+    "metadataStandardVersion": "2003",
+    "metadataDate": "2026-07-02",
+    "language": "nor",
+    "contact": {
+      "organizationName": "Kartverket",
+      "individualName": "Matilde Skjæveland Skår",
+      "logo": "https://register.geonorge.no/data/organizations/971040238_Kartverket_liten.png",
+      "electronicMailAddress": "kundesenteret@kartverket.no",
+      "role": "pointOfContact"
+    },
+    "metadataIdentifier": {
+      "authority": "Geonorge",
+      "code": "58a262c2-4903-4dea-9490-10065fda6756",
+      "codeSpace": "https://kartkatalog.geonorge.no/metadata/",
+      "metadataLinkage": "https://kartkatalog.geonorge.no/metadata/58a262c2-4903-4dea-9490-10065fda6756"
+    }
+  },
+  "chapterAutofill": {
+    "om_spesifikasjonen": 9,
+    "om_produktet": 333,
+    "formaal": 13,
+    "bruksomraade": 85,
+    "omfang": 28,
+    "datainnhold_og_struktur": 0,
+    "referansesystem": 0,
+    "datakvalitet": 1,
+    "datafangst_og_produksjon": 52,
+    "vedlikehold": 3,
+    "presentasjon": 0,
+    "leveranse": 8,
+    "metadata": 15,
+    "tilleggsinformasjon": 0,
+    "datamodell": 92
+  },
+  "specificationContact": "Kartverket, [kundesenteret@kartverket.no](mailto:kundesenteret@kartverket.no)"
+}
