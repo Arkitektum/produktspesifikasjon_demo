@@ -1,0 +1,57 @@
+@startuml
+' For wide diagrams, render with: plantuml -DPLANTUML_LIMIT_SIZE=16384 ...
+' The 'scale max' directive below caps the rendered output to prevent the
+' default PlantUML 4096px size limit from cropping the diagram.
+scale max 4000*4000
+
+title Dybdedata - dekning OGC API Features - Hybasapi.atgcp1-prod.kartverket.cloud - Objekttyper
+
+skinparam backgroundColor #F5F5F5
+skinparam shadowing false
+skinparam RoundCorner 6
+skinparam ArrowColor #6C8198
+skinparam wrapWidth 200
+skinparam class {
+  BackgroundColor #FBF2E8
+  BorderColor #9C8578
+  FontColor #2D201A
+  HeaderBackgroundColor #EFE1D6
+  HeaderFontColor #2D201A
+  AttributeIconSize 0
+}
+skinparam note {
+  BackgroundColor #FFFFFF
+  BorderColor #6C8198
+  FontColor #2D201A
+}
+skinparam stereotypeCBackgroundColor #EAD9CE
+skinparam stereotypeCBorderColor #9C8578
+skinparam stereotypeCFontColor #2D201A
+
+package "Objekttyper" {
+
+  class "Survey coverages" as Survey_coverages <<featureType>> {
+    + survey_id [0..1] : CharacterString
+    + data_owner [0..1] : CharacterString
+    + year [0..1] : Integer
+    + date_start [0..1] : Date
+    + date_end [0..1] : Date
+    + depth_sensor [0..1] : CharacterString
+    + logged_backscatter [0..1] : Boolean
+    + logged_water_column [0..1] : Boolean
+    + survey_method [0..1] : CharacterString
+    + total_area [0..1] : Real
+    + normalised_area [0..1] : Real
+    + quality_specification [0..1] : CharacterString
+    + resolution [0..1] : CharacterString
+    + modeled [0..1] : Boolean
+    + financier [0..1] : CharacterString
+    + data_quality [0..1] : CharacterString
+    + target_resolution [0..1] : CharacterString
+
+    ..Geometri..
+    + geometry [1] : GM_Object
+  }
+}
+
+@enduml
