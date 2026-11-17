@@ -1,0 +1,9 @@
+metadataId: 58a262c2-4903-4dea-9490-10065fda6756
+output_directory: produktspesifikasjon
+product_slug: dybdedata_dekning_ogc_api_features
+updated: '2026-11-17'
+scopes:
+- name: Hybasapi.atgcp1-prod.kartverket.cloud
+  url: https://hybasapi.atgcp1-prod.kartverket.cloud/
+  generator: ogc_feature_api
+  description: OGC API-Features fra Kartverket
