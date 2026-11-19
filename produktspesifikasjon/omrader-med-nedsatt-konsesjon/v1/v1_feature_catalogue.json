@@ -1,0 +1,104 @@
+[
+  {
+    "name": "Bopliktområde",
+    "description": "Bopliktområder",
+    "geometry": {
+      "itemType": "feature",
+      "type": "geometry-any",
+      "crs": [
+        "http://www.opengis.net/def/crs/EPSG/0/25833",
+        "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+      ],
+      "storageCrs": "http://www.opengis.net/def/crs/EPSG/0/25833",
+      "format": "geometry-any",
+      "ogcRole": "primary-geometry"
+    },
+    "attributes": [
+      {
+        "name": "lokalId",
+        "type": "string",
+        "cardinality": "0..1",
+        "description": "lokalId",
+        "ogcRole": "id"
+      },
+      {
+        "name": "kommunenavn",
+        "type": "object",
+        "cardinality": "0..1",
+        "description": "kommunenavn"
+      },
+      {
+        "name": "kommunenummer",
+        "type": "string",
+        "cardinality": "0..1",
+        "description": "kommunenummer"
+      },
+      {
+        "name": "forskriftsreferanse",
+        "type": "string",
+        "cardinality": "0..1",
+        "description": "forskriftsreferanse"
+      },
+      {
+        "name": "ikrafttredelse",
+        "type": "date-time (string)",
+        "cardinality": "0..1",
+        "description": "ikrafttredelse"
+      },
+      {
+        "name": "opphevelse",
+        "type": "date-time (string)",
+        "cardinality": "0..1",
+        "description": "opphevelse"
+      },
+      {
+        "name": "oppdateringsdato",
+        "type": "date-time (string)",
+        "cardinality": "0..1",
+        "description": "oppdateringsdato"
+      },
+      {
+        "name": "malemetode",
+        "type": "string",
+        "cardinality": "0..1",
+        "description": "malemetode"
+      },
+      {
+        "name": "gjelderKunDelAvKommunen",
+        "type": "boolean",
+        "cardinality": "0..1",
+        "description": "gjelderKunDelAvKommunen"
+      },
+      {
+        "name": "gjelderForBruktSomHelarsbolig",
+        "type": "boolean",
+        "cardinality": "0..1",
+        "description": "gjelderForBruktSomHelarsbolig"
+      },
+      {
+        "name": "gjelderForBoligIkkeTattIBruk",
+        "type": "boolean",
+        "cardinality": "0..1",
+        "description": "gjelderForBoligIkkeTattIBruk"
+      },
+      {
+        "name": "gjelderForUbebygdBoligtomt",
+        "type": "boolean",
+        "cardinality": "0..1",
+        "description": "gjelderForUbebygdBoligtomt"
+      },
+      {
+        "name": "harUnntakFraSlektskapsunntak",
+        "type": "boolean",
+        "cardinality": "0..1",
+        "description": "harUnntakFraSlektskapsunntak"
+      },
+      {
+        "name": "andreLokaleAvgrensninger",
+        "type": "string",
+        "cardinality": "0..1",
+        "description": "andreLokaleAvgrensninger"
+      }
+    ]
+  }
+]
