@@ -1,0 +1,54 @@
+@startuml
+' For wide diagrams, render with: plantuml -DPLANTUML_LIMIT_SIZE=16384 ...
+' The 'scale max' directive below caps the rendered output to prevent the
+' default PlantUML 4096px size limit from cropping the diagram.
+scale max 4000*4000
+
+title Områder med nedsatt konsesjon - V1 - Objekttyper
+
+skinparam backgroundColor #F5F5F5
+skinparam shadowing false
+skinparam RoundCorner 6
+skinparam ArrowColor #6C8198
+skinparam wrapWidth 200
+skinparam class {
+  BackgroundColor #FBF2E8
+  BorderColor #9C8578
+  FontColor #2D201A
+  HeaderBackgroundColor #EFE1D6
+  HeaderFontColor #2D201A
+  AttributeIconSize 0
+}
+skinparam note {
+  BackgroundColor #FFFFFF
+  BorderColor #6C8198
+  FontColor #2D201A
+}
+skinparam stereotypeCBackgroundColor #EAD9CE
+skinparam stereotypeCBorderColor #9C8578
+skinparam stereotypeCFontColor #2D201A
+
+package "Objekttyper" {
+
+  class "Bopliktområde" as Bopliktomr_de <<featureType>> {
+    + lokalId [0..1] : CharacterString
+    + kommunenavn [0..1] : Object
+    + kommunenummer [0..1] : CharacterString
+    + forskriftsreferanse [0..1] : CharacterString
+    + ikrafttredelse [0..1] : DateTime
+    + opphevelse [0..1] : DateTime
+    + oppdateringsdato [0..1] : DateTime
+    + malemetode [0..1] : CharacterString
+    + gjelderKunDelAvKommunen [0..1] : Boolean
+    + gjelderForBruktSomHelarsbolig [0..1] : Boolean
+    + gjelderForBoligIkkeTattIBruk [0..1] : Boolean
+    + gjelderForUbebygdBoligtomt [0..1] : Boolean
+    + harUnntakFraSlektskapsunntak [0..1] : Boolean
+    + andreLokaleAvgrensninger [0..1] : CharacterString
+
+    ..Geometri..
+    + geometry [1] : GM_Object
+  }
+}
+
+@enduml
