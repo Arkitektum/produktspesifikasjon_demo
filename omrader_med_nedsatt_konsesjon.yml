@@ -4,6 +4,6 @@ product_slug: omrader_med_nedsatt_konsesjon
 updated: '2026-11-19'
 scopes:
 - name: V1
-  url: https://inndelinger.api.kartverket.no/v1
-  generator: ogc_feature_api
+  url: inputs/omrader-med-nedsatt-konsesjon/v1.feature_types.json
+  generator: custom
   description: OGC API-Features fra Landbruksdirektoratet
