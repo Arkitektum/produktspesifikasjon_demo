@@ -1,0 +1,9 @@
+metadataId: 49415185-d99f-4546-b976-18cfbf167827
+output_directory: produktspesifikasjon
+product_slug: omrader_med_nedsatt_konsesjon
+updated: '2026-11-19'
+scopes:
+- name: V1
+  url: https://inndelinger.api.kartverket.no/v1
+  generator: ogc_feature_api
+  description: OGC API-Features fra Landbruksdirektoratet
