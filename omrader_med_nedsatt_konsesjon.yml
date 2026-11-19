@@ -7,3 +7,9 @@ scopes:
   url: inputs/omrader-med-nedsatt-konsesjon/v1.feature_types.json
   generator: custom
   description: OGC API-Features fra Landbruksdirektoratet
+- name: Ny datakilde
+  url: https://sosi.geonorge.no/svn/SOSI/SOSI%20Del%202/under%20arbeid/Plan%204.5.2.xml
+  generator: xmi
+  description: ''
+  package: EAPK_864BE9CF_73BB_40cd_81CA_D21C6BCD2FE0
+  package_name: EnkeltSaker
